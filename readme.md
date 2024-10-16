@@ -1,3 +1,8 @@
+## Python Generator - Django
+
+- Django 5.1
+
+
 ### Crear un entorno virtual
 
 ```sh
@@ -20,6 +25,8 @@ pip install django
 django-admin --version
 
 ```
+
+
 
 ### Instalación adicional
 

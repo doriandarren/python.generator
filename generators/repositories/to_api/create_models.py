@@ -3,51 +3,56 @@
 import os
 
 
-def create_model(base_path):
-    # Ruta completa para la carpeta 'models'
-    models_path = os.path.join(base_path, 'models')
+def create_model(base_path, plural_name):
+    # Ruta completa para la carpeta con el nombre plural
+    model_folder_path = os.path.join(base_path, plural_name.lower())
 
-    # Verificar si la carpeta 'models' ya existe
-    if not os.path.exists(models_path):
+    # Verificar si la carpeta ya existe, si no, crearla
+    if not os.path.exists(model_folder_path):
         try:
-            os.makedirs(models_path)
-            print(f"Carpeta 'models' creada exitosamente en: {models_path}")
+            os.makedirs(model_folder_path)
+            print(f"Carpeta '{plural_name}' creada exitosamente en: {model_folder_path}")
 
-            # Crear un archivo '__init__.py' dentro de 'models' para que sea un paquete de Python
-            init_file_path = os.path.join(models_path, '__init__.py')
+            # Crear un archivo '__init__.py' dentro de la carpeta plural
+            init_file_path = os.path.join(model_folder_path, '__init__.py')
             with open(init_file_path, 'w') as init_file:
-                init_file.write('# Este archivo convierte a la carpeta models en un módulo de Python')
+                init_file.write('# Este archivo convierte a la carpeta en un módulo de Python')
                 print(f"Archivo '__init__.py' creado en: {init_file_path}")
 
         except Exception as e:
-            print(f"Error al crear la carpeta 'models' o el archivo '__init__.py': {e}")
+            print(f"Error al crear la carpeta '{plural_name}' o el archivo '__init__.py': {e}")
     else:
-        print(f"La carpeta 'models' ya existe en: {models_path}")
+        print(f"La carpeta '{plural_name}' ya existe en: {model_folder_path}")
 
         # Verificar si '__init__.py' existe, si no, crearlo
-        init_file_path = os.path.join(models_path, '__init__.py')
+        init_file_path = os.path.join(model_folder_path, '__init__.py')
         if not os.path.exists(init_file_path):
             with open(init_file_path, 'w') as init_file:
-                init_file.write('# Este archivo convierte a la carpeta models en un módulo de Python')
+                init_file.write('# Este archivo convierte a la carpeta en un módulo de Python')
                 print(f"Archivo '__init__.py' creado en: {init_file_path}")
         else:
             print(f"El archivo '__init__.py' ya existe en: {init_file_path}")
 
+    return model_folder_path
 
-def generate_model_file(models_path, singular_name, plural_name):
+
+def generate_model_file(models_path, singular_name, plural_name, columns):
+    # Crear la carpeta plural_name y obtener su ruta
+    model_folder_path = create_model(models_path, plural_name)
+
     # Nombre del archivo de modelo
     model_filename = f"{singular_name.lower()}.py"
-    model_filepath = os.path.join(models_path, model_filename)
+    model_filepath = os.path.join(model_folder_path, model_filename)
+
+    # Generar las líneas para las columnas
+    column_lines = "\n    ".join([f"{col['name']} = models.{col['type']}" for col in columns])
 
     # Contenido del archivo de modelo
     model_content = f"""
 from django.db import models
 
 class {singular_name.capitalize()}(models.Model):
-    # Define your fields here
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    {column_lines}
 
     class Meta:
         verbose_name = '{singular_name}'
