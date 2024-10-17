@@ -1,1 +1,0 @@
-# Este archivo convierte a la carpeta urls en un módulo de Python

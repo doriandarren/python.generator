@@ -26,11 +26,11 @@ if __name__ == "__main__":
     ruta = os.path.join(base_path, 'api_project/invoices')
 
     # Definir el nombre singular y plural de la tabla
-    # singular_name = 'InvoiceHeader'
-    # plural_name = 'InvoiceHeaders'
+    singular_name = 'InvoiceHeader'
+    plural_name = 'InvoiceHeaders'
 
-    singular_name = 'Invoice'
-    plural_name = 'Invoices'
+    # singular_name = 'Invoice'
+    # plural_name = 'Invoices'
 
 
 
@@ -53,7 +53,9 @@ if __name__ == "__main__":
 
     # Verificar si la ruta proporcionada es válida
     if os.path.isdir(ruta):
-        generate_model_file(ruta, singular_name, plural_name, columns)
+        generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+
+
         generate_repository_file(ruta, singular_name, plural_name, columns)
         generate_controller_list_file(ruta, singular_name, plural_name)
 
