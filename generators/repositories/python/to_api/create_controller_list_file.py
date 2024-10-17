@@ -24,7 +24,7 @@ def create_controllers_structure(base_path, plural_name_snake):
 
     return specific_controller_path
 
-def generate_controller_list_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake):
+def generate_controller_list_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name):
     # Crear la estructura de carpetas para los controladores
     controller_path = create_controllers_structure(base_path, plural_name_snake)
 
@@ -33,9 +33,9 @@ def generate_controller_list_file(base_path, singular_name, plural_name, singula
 
     # Construir el contenido del archivo del controlador
     controller_content = f"""
+from {namespace}.shared.base_controller import BaseController
+from {namespace}.{app_name}.repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
 from rest_framework.views import APIView
-from shared.base_controller import BaseController
-from repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
 
 class {singular_name}ListController(BaseController, APIView):
 

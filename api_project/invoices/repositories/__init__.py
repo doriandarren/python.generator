@@ -1,1 +1,1 @@
-# Este archivo convierte a la carpeta repositories en un módulo de Python
+# Este archivo convierte a la carpeta en un módulo de Python

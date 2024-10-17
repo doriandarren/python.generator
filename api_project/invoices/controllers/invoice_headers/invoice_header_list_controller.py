@@ -1,6 +1,6 @@
+from api_project.shared.base_controller import BaseController
+from api_project.invoices.repositories.invoice_headers.invoice_header_repository import InvoiceHeaderRepository
 from rest_framework.views import APIView
-from shared.base_controller import BaseController
-from repositories.invoice_headers.invoice_header_repository import InvoiceHeaderRepository
 
 class InvoiceHeaderListController(BaseController, APIView):
 

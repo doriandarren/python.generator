@@ -59,9 +59,9 @@ if __name__ == "__main__":
     if os.path.isdir(ruta):
         generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
 
-        generate_repository_file(ruta, singular_name, plural_name, columns)
+        generate_repository_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
-        generate_controller_list_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+        generate_controller_list_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
         create_url_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
