@@ -33,7 +33,7 @@ def generate_repository_file(base_path, singular_name, plural_name, singular_nam
 
     # Construir el contenido del archivo del repositorio
     repository_content = f"""
-from {namespace}.{app_name}.models.{plural_name_snake}.{singular_name_snake} import {singular_name}
+from {app_name}.models.{plural_name_snake}.{singular_name_snake} import {singular_name}
 
 class {singular_name}Repository:
 

@@ -90,6 +90,10 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': 'localhost',  # O la dirección de tu servidor de MySQL
         'PORT': '3306',       # Puerto predeterminado de MySQL
+        'OPTIONS': {
+            'charset': 'utf8mb4',  # Establecer el conjunto de caracteres a utf8mb4
+            'init_command': "SET collation_connection = 'utf8mb4_unicode_ci'"  # Collation predeterminado
+        },
     }
 }
 

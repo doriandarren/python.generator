@@ -35,13 +35,21 @@ def generate_controller_list_file(base_path, singular_name, plural_name, singula
     controller_content = f"""
 from django.http import JsonResponse
 from django.views import View
+from ...repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
+
 
 class {singular_name}ListController(View):
 
     def get(self, request):
+        # Crear una instancia del repositorio
+        repository = {singular_name}Repository()
+            
+        # Obtener los datos del repositorio
+        data = repository.list()
+        
         data = {{
             'message': '{plural_name} list',
-            'data': [],
+            'data': data,
             'success': True
         }}
         return JsonResponse(data, status=200)

@@ -61,6 +61,17 @@ python manage.py createsuperuser
 python manage.py runserver 8001
 
 
+Para models
+
+python manage.py makemigrations shop
+// Y luego para aplicar
+python manage.py migrate
+
+python manage.py showmigrations
+python manage.py makemigrations
+python manage.py migrate
+
+
 ```
 
 
