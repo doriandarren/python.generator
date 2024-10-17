@@ -33,16 +33,18 @@ def generate_controller_list_file(base_path, singular_name, plural_name, singula
 
     # Construir el contenido del archivo del controlador
     controller_content = f"""
-from {namespace}.shared.base_controller import BaseController
-from {namespace}.{app_name}.repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
-from rest_framework.views import APIView
+from django.http import JsonResponse
+from django.views import View
 
-class {singular_name}ListController(BaseController, APIView):
+class {singular_name}ListController(View):
 
     def get(self, request):
-        repository = {singular_name}Repository()
-        data = repository.list()
-        return self.respond_with_data('{plural_name} list', data)
+        data = {{
+            'message': '{plural_name} list',
+            'data': [],
+            'success': True
+        }}
+        return JsonResponse(data, status=200)
 """
 
     # Escribir el archivo del controlador

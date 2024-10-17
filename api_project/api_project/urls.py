@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('invoices/', include('api_project.invoices.urls.url_invoices')),  # Incluye las URLs de la app 'invoices'
+    path('shop/', include('shop.urls.url_shop')),
+    path('invoice-headers/', include('invoices.urls.url_invoice_headers')),
 ]

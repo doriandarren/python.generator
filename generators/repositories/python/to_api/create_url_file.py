@@ -26,11 +26,11 @@ def create_url_file(base_path, singular_name, plural_name, singular_name_kebab, 
     # Contenido del archivo de URLs utilizando el namespace, app_name y los controladores
     url_content = f"""
 from django.urls import path
-from {namespace}.{app_name}.controllers.{plural_name_snake}.{singular_name_snake}_list_controller import {singular_name}ListController
-from {namespace}.{app_name}.controllers.{plural_name_snake}.{singular_name_snake}_show_controller import {singular_name}ShowController
-from {namespace}.{app_name}.controllers.{plural_name_snake}.{singular_name_snake}_store_controller import {singular_name}StoreController
-from {namespace}.{app_name}.controllers.{plural_name_snake}.{singular_name_snake}_update_controller import {singular_name}UpdateController
-from {namespace}.{app_name}.controllers.{plural_name_snake}.{singular_name_snake}_delete_controller import {singular_name}DeleteController
+from ..controllers.{plural_name_snake}.{singular_name_snake}_list_controller import {singular_name}ListController
+from ..controllers.{plural_name_snake}.{singular_name_snake}_show_controller import {singular_name}ShowController
+from ..controllers.{plural_name_snake}.{singular_name_snake}_store_controller import {singular_name}StoreController
+from ..controllers.{plural_name_snake}.{singular_name_snake}_update_controller import {singular_name}UpdateController
+from ..controllers.{plural_name_snake}.{singular_name_snake}_delete_controller import {singular_name}DeleteController
 
 urlpatterns = [
     path('list/', {singular_name}ListController.as_view(), name='{singular_name_kebab}-list'),
