@@ -1,82 +1,54 @@
 import os
 
-
-def create_controller(base_path, plural_name):
-    # Ruta completa para la carpeta 'controllers' y luego la subcarpeta con el nombre plural
+def create_controllers_structure(base_path, plural_name_snake):
+    # Crear la carpeta 'controllers' si no existe
     controllers_path = os.path.join(base_path, 'controllers')
-    controller_folder_path = os.path.join(controllers_path, plural_name.lower())
-
-    # Verificar si la carpeta 'controllers' ya existe, si no, crearla y agregar __init__.py
     if not os.path.exists(controllers_path):
-        try:
-            os.makedirs(controllers_path)
-            print(f"Carpeta 'controllers' creada exitosamente en: {controllers_path}")
+        os.makedirs(controllers_path)
+        print(f"Carpeta 'controllers' creada en: {controllers_path}")
 
-            # Crear un archivo '__init__.py' dentro de la carpeta 'controllers'
-            init_file_path = os.path.join(controllers_path, '__init__.py')
-            with open(init_file_path, 'w') as init_file:
-                init_file.write('# Este archivo convierte a la carpeta controllers en un módulo de Python')
-                print(f"Archivo '__init__.py' creado en: {init_file_path}")
+    # Crear la carpeta con el nombre plural_name_snake dentro de 'controllers'
+    specific_controller_path = os.path.join(controllers_path, plural_name_snake)
+    if not os.path.exists(specific_controller_path):
+        os.makedirs(specific_controller_path)
+        print(f"Carpeta '{plural_name_snake}' creada en: {specific_controller_path}")
 
-        except Exception as e:
-            print(f"Error al crear la carpeta 'controllers' o el archivo '__init__.py': {e}")
+    # Crear el archivo '__init__.py' en cada carpeta para que sean módulos de Python
+    init_paths = [controllers_path, specific_controller_path]
+    for path in init_paths:
+        init_file = os.path.join(path, '__init__.py')
+        if not os.path.exists(init_file):
+            with open(init_file, 'w') as f:
+                f.write('# Este archivo convierte a la carpeta en un módulo de Python')
+                print(f"Archivo '__init__.py' creado en: {init_file}")
 
-    # Verificar si la subcarpeta con el nombre plural ya existe, si no, crearla y agregar __init__.py
-    if not os.path.exists(controller_folder_path):
-        try:
-            os.makedirs(controller_folder_path)
-            print(f"Carpeta 'controllers/{plural_name}' creada exitosamente en: {controller_folder_path}")
+    return specific_controller_path
 
-            # Crear un archivo '__init__.py' dentro de la subcarpeta plural
-            init_file_path = os.path.join(controller_folder_path, '__init__.py')
-            with open(init_file_path, 'w') as init_file:
-                init_file.write('# Este archivo convierte a la carpeta en un módulo de Python')
-                print(f"Archivo '__init__.py' creado en: {init_file_path}")
+def generate_controller_list_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake):
+    # Crear la estructura de carpetas para los controladores
+    controller_path = create_controllers_structure(base_path, plural_name_snake)
 
-        except Exception as e:
-            print(f"Error al crear la carpeta 'controllers/{plural_name}' o el archivo '__init__.py': {e}")
-    else:
-        # print(f"La carpeta 'controllers/{plural_name}' ya existe en: {controller_folder_path}")
+    # Nombre del archivo del controlador (en singular y en snake_case)
+    controller_file_path = os.path.join(controller_path, f'{singular_name_snake}_list_controller.py')
 
-        # Verificar si '__init__.py' existe en la subcarpeta, si no, crearlo
-        init_file_path = os.path.join(controller_folder_path, '__init__.py')
-        if not os.path.exists(init_file_path):
-            with open(init_file_path, 'w') as init_file:
-                init_file.write('# Este archivo convierte a la carpeta en un módulo de Python')
-                print(f"Archivo '__init__.py' creado en: {init_file_path}")
-        # else:
-        #     print(f"El archivo '__init__.py' ya existe en: {init_file_path}")
-
-    return controller_folder_path
-
-
-def generate_controller_list_file(base_path, singular_name, plural_name):
-    # Crear la carpeta 'controllers/plural_name' y obtener su ruta
-    controller_folder_path = create_controller(base_path, plural_name)
-
-    # Nombre del archivo del controlador
-    controller_filename = f"{singular_name.lower()}_list_controller.py"
-    controller_filepath = os.path.join(controller_folder_path, controller_filename)
-
-    # Contenido básico del controlador que extiende de BaseController en shared
+    # Construir el contenido del archivo del controlador
     controller_content = f"""
+from rest_framework.views import APIView
 from shared.base_controller import BaseController
-from repositories.{plural_name.lower()}.{singular_name.lower()}_repository import {singular_name}Repository
+from repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
 
-class {singular_name}ListController(BaseController):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.repository = {singular_name}Repository()
+class {singular_name}ListController(BaseController, APIView):
 
     def get(self, request):
-        data = self.repository.list()
+        repository = {singular_name}Repository()
+        data = repository.list()
         return self.respond_with_data('{plural_name} list', data)
 """
 
     # Escribir el archivo del controlador
     try:
-        with open(controller_filepath, 'w') as controller_file:
+        with open(controller_file_path, 'w') as controller_file:
             controller_file.write(controller_content.strip())
-            print(f"Controlador '{singular_name}_list_controller.py' creado exitosamente en: {controller_filepath}")
+            print(f"Archivo de controlador '{singular_name_snake}_list_controller.py' creado en: {controller_file_path}")
     except Exception as e:
-        print(f"Error al crear el archivo del controlador '{singular_name}': {e}")
+        print(f"Error al crear el archivo de controlador '{singular_name_snake}_list_controller.py': {e}")

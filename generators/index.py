@@ -25,6 +25,10 @@ if __name__ == "__main__":
     base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
     ruta = os.path.join(base_path, 'api_project/invoices')
 
+    # Settings :
+    namespace = "api_project"
+    app_name = 'invoices'
+
     # Definir el nombre singular y plural de la tabla
     singular_name = 'InvoiceHeader'
     plural_name = 'InvoiceHeaders'
@@ -55,11 +59,11 @@ if __name__ == "__main__":
     if os.path.isdir(ruta):
         generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
 
-
         generate_repository_file(ruta, singular_name, plural_name, columns)
-        generate_controller_list_file(ruta, singular_name, plural_name)
 
-        create_url_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+        generate_controller_list_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+
+        create_url_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
     else:
         print("La ruta proporcionada no es válida o no existe. Por favor, verifica y vuelve a intentarlo.")
