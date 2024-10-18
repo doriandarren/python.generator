@@ -33,11 +33,11 @@ from ..controllers.{plural_name_snake}.{singular_name_snake}_update_controller i
 from ..controllers.{plural_name_snake}.{singular_name_snake}_delete_controller import {singular_name}DeleteController
 
 urlpatterns = [
-    path('list/', {singular_name}ListController.as_view(), name='{singular_name_kebab}-list'),
-    path('show/<int:{singular_name_snake}_id>/', {singular_name}ShowController.as_view(), name='{singular_name_kebab}-show'),
-    path('store/', {singular_name}StoreController.as_view(), name='{singular_name_kebab}-store'),
-    path('update/<int:{singular_name_snake}_id>/', {singular_name}UpdateController.as_view(), name='{singular_name_kebab}-update'),
-    path('delete/<int:{singular_name_snake}_id>/', {singular_name}DeleteController.as_view(), name='{singular_name_kebab}-delete'),
+    path('list', {singular_name}ListController.as_view(), name='{singular_name_kebab}-list'),
+    path('show/<int:{singular_name_snake}_id>', {singular_name}ShowController.as_view(), name='{singular_name_kebab}-show'),
+    path('store', {singular_name}StoreController.as_view(), name='{singular_name_kebab}-store'),
+    path('update/<int:{singular_name_snake}_id>', {singular_name}UpdateController.as_view(), name='{singular_name_kebab}-update'),
+    path('delete/<int:{singular_name_snake}_id>', {singular_name}DeleteController.as_view(), name='{singular_name_kebab}-delete'),
 ]
 """
 

@@ -74,6 +74,30 @@ python manage.py migrate
 
 ```
 
+### Extensions - Install
+
+```sh
+
+pip install django-extensions
+
+// Agregar:
+INSTALLED_APPS = [
+  ...
+  'django_extensions', ## Extensions -> python manage.py show_urls
+  ...
+]
+python manage.py show_urls.     // muestras las routes
+
+```
+
+### Extensions - Quitar Slash al final de las routes
+
+```sh
+
+// settings.py add:
+APPEND_SLASH = False
+
+```
 
 
 

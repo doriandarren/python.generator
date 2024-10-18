@@ -50,6 +50,7 @@ class {singular_name}Repository:
         {singular_name_snake}s = {singular_name}.objects.all()
         data = list({singular_name_snake}s.values(*columns))
         return data
+        
 
     def show(self, {singular_name_snake}_id):
         try:
@@ -58,11 +59,21 @@ class {singular_name}Repository:
             return model_to_dict(obj)
         except {singular_name}.DoesNotExist:
             return None
+            
 
     def store(self, data):
         {singular_name_snake} = {singular_name}(**data)
         {singular_name_snake}.save()
-        return {singular_name_snake}
+        
+        invoice_header_dict = model_to_dict({singular_name_snake}, fields=[field.name for field in {singular_name_snake}._meta.fields])
+    
+        if 'created_at' not in {singular_name_snake}_dict:
+            {singular_name_snake}_dict['created_at'] = {singular_name_snake}.created_at
+        if 'updated_at' not in {singular_name_snake}_dict:
+            {singular_name_snake}_dict['updated_at'] = {singular_name_snake}.updated_at
+            
+        return {singular_name_snake}_dict
+        
 
     def update(self, {singular_name_snake}_id, data):
         {singular_name_snake} = self.show({singular_name_snake}_id)
@@ -70,7 +81,18 @@ class {singular_name}Repository:
             for key, value in data.items():
                 setattr({singular_name_snake}, key, value)
             {singular_name_snake}.save()
-        return {singular_name_snake}
+            
+            # Convertir el objeto actualizado en un diccionario
+            {singular_name_snake}_dict = model_to_dict({singular_name_snake}, fields=[field.name for field in {singular_name_snake}._meta.fields])
+
+            if 'created_at' not in {singular_name_snake}_dict:
+                {singular_name_snake}_dict['created_at'] = {singular_name_snake}.created_at
+            if 'updated_at' not in {singular_name_snake}_dict:
+                {singular_name_snake}_dict['updated_at'] = {singular_name_snake}.updated_at
+            
+            return {singular_name_snake}_dict
+        return None
+        
 
     def delete(self, {singular_name_snake}_id):
         {singular_name_snake} = self.show({singular_name_snake}_id)

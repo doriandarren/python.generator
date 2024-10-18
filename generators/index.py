@@ -6,6 +6,8 @@ from repositories.python.to_api.create_url_file import create_url_file
 from repositories.python.to_api.create_controller_list_file import generate_controller_list_file
 from repositories.python.to_api.create_controller_show_file import generate_controller_show_file
 from repositories.python.to_api.create_controller_store_file import generate_controller_store_file
+from repositories.python.to_api.create_controller_update_file import generate_controller_update_file
+
 
 
 import os
@@ -62,12 +64,13 @@ if __name__ == "__main__":
     # Verificar si la ruta proporcionada es válida
     if os.path.isdir(ruta):
         generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
-        generate_repository_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name, columns)  # Pasa las columnas aquí
+        generate_repository_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name, columns)
         create_url_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
         generate_controller_list_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
-        generate_controller_show_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)  # Nueva línea para el controlador 'show'
-        generate_controller_store_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)  # Nueva línea para el controlador 'store'
+        generate_controller_show_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
+        generate_controller_store_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
+        generate_controller_update_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
 
 
 

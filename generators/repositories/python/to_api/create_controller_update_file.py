@@ -25,12 +25,12 @@ def create_controllers_structure(base_path, plural_name_snake):
     return specific_controller_path
 
 
-def generate_controller_store_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name):
+def generate_controller_update_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name):
     # Crear la estructura de carpetas para los controladores
     controller_path = create_controllers_structure(base_path, plural_name_snake)
 
     # Nombre del archivo del controlador (en singular y en snake_case)
-    controller_file_path = os.path.join(controller_path, f'{singular_name_snake}_store_controller.py')
+    controller_file_path = os.path.join(controller_path, f'{singular_name_snake}_update_controller.py')
 
     # Construir el contenido del archivo del controlador
     controller_content = f"""
@@ -41,10 +41,10 @@ from django.views.decorators.csrf import csrf_exempt
 from ...repositories.{plural_name_snake}.{singular_name_snake}_repository import {singular_name}Repository
 import json
 
-@method_decorator(csrf_exempt, name='dispatch')  # Excluir CSRF para simplificar
-class {singular_name}StoreController(View):
+@method_decorator(csrf_exempt, name='dispatch')
+class {singular_name}UpdateController(View):
 
-    def post(self, request):
+    def post(self, request, {singular_name_snake}_id):
         # Obtener los datos del cuerpo de la solicitud
         try:
             data = json.loads(request.body)
@@ -55,19 +55,25 @@ class {singular_name}StoreController(View):
             }}, status=400)
 
         repository = {singular_name}Repository()
-        new_record = repository.store(data)
-        
-        return JsonResponse({{
-            'success': True,
-            'message': '{singular_name} created successfully',
-            'data': new_record
-        }}, status=201)
+        updated_record = repository.update({singular_name_snake}_id, data)
+
+        if updated_record:
+            return JsonResponse({{
+                'success': True,
+                'message': '{singular_name} updated successfully',
+                'data': updated_record 
+            }}, status=200)
+        else:
+            return JsonResponse({{
+                'success': False,
+                'message': '{singular_name} not found'
+            }}, status=404)
     """
 
     # Escribir el archivo del controlador
     try:
         with open(controller_file_path, 'w') as controller_file:
             controller_file.write(controller_content.strip())
-            print(f"Archivo de controlador '{singular_name_snake}_store_controller.py' creado en: {controller_file_path}")
+            print(f"Archivo de controlador '{singular_name_snake}_update_controller.py' creado en: {controller_file_path}")
     except Exception as e:
-        print(f"Error al crear el archivo de controlador '{singular_name_snake}_store_controller.py': {e}")
+        print(f"Error al crear el archivo de controlador '{singular_name_snake}_update_controller.py': {e}")
