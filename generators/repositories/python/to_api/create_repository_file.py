@@ -1,4 +1,5 @@
 import os
+from django.forms.models import model_to_dict  # Importar model_to_dict para convertir los objetos en diccionarios
 
 def create_repositories_structure(base_path, plural_name_snake):
     # Crear la carpeta 'repositories' si no existe
@@ -24,35 +25,47 @@ def create_repositories_structure(base_path, plural_name_snake):
 
     return specific_repository_path
 
-def generate_repository_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name):
+
+def generate_repository_file(base_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name, columns):
     # Crear la estructura de carpetas para los repositorios
     repository_path = create_repositories_structure(base_path, plural_name_snake)
 
     # Nombre del archivo del repositorio (en singular y en snake_case)
     repository_file_path = os.path.join(repository_path, f'{singular_name_snake}_repository.py')
 
+    # Obtener los nombres de las columnas dinámicamente
+    column_names = ['id'] + [column["name"] for column in columns] + ['created_at', 'updated_at']
+
     # Construir el contenido del archivo del repositorio
     repository_content = f"""
 from {app_name}.models.{plural_name_snake}.{singular_name_snake} import {singular_name}
+from django.forms.models import model_to_dict
 
 class {singular_name}Repository:
 
-    def list(self):
-        return {singular_name}.objects.all()
+    def list(self, columns=None):
+        # Usar columnas proporcionadas o columnas predeterminadas
+        if columns is None:
+            columns = {column_names}
+        {singular_name_snake}s = {singular_name}.objects.all()
+        data = list({singular_name_snake}s.values(*columns))
+        return data
 
-    def get(self, {singular_name_snake}_id):
+    def show(self, {singular_name_snake}_id):
         try:
-            return {singular_name}.objects.get(id={singular_name_snake}_id)
+            # Obtener el objeto y convertirlo a un diccionario serializable
+            obj = {singular_name}.objects.get(id={singular_name_snake}_id)
+            return model_to_dict(obj)
         except {singular_name}.DoesNotExist:
             return None
 
-    def create(self, data):
+    def store(self, data):
         {singular_name_snake} = {singular_name}(**data)
         {singular_name_snake}.save()
         return {singular_name_snake}
 
     def update(self, {singular_name_snake}_id, data):
-        {singular_name_snake} = self.get({singular_name_snake}_id)
+        {singular_name_snake} = self.show({singular_name_snake}_id)
         if {singular_name_snake}:
             for key, value in data.items():
                 setattr({singular_name_snake}, key, value)
@@ -60,7 +73,7 @@ class {singular_name}Repository:
         return {singular_name_snake}
 
     def delete(self, {singular_name_snake}_id):
-        {singular_name_snake} = self.get({singular_name_snake}_id)
+        {singular_name_snake} = self.show({singular_name_snake}_id)
         if {singular_name_snake}:
             {singular_name_snake}.delete()
         return {singular_name_snake}

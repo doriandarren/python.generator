@@ -34,10 +34,10 @@ from ..controllers.{plural_name_snake}.{singular_name_snake}_delete_controller i
 
 urlpatterns = [
     path('list/', {singular_name}ListController.as_view(), name='{singular_name_kebab}-list'),
-    path('show/<int:{singular_name_kebab}_id>/', {singular_name}ShowController.as_view(), name='{singular_name_kebab}-show'),
+    path('show/<int:{singular_name_snake}_id>/', {singular_name}ShowController.as_view(), name='{singular_name_kebab}-show'),
     path('store/', {singular_name}StoreController.as_view(), name='{singular_name_kebab}-store'),
-    path('update/<int:{singular_name_kebab}_id>/', {singular_name}UpdateController.as_view(), name='{singular_name_kebab}-update'),
-    path('delete/<int:{singular_name_kebab}_id>/', {singular_name}DeleteController.as_view(), name='{singular_name_kebab}-delete'),
+    path('update/<int:{singular_name_snake}_id>/', {singular_name}UpdateController.as_view(), name='{singular_name_kebab}-update'),
+    path('delete/<int:{singular_name_snake}_id>/', {singular_name}DeleteController.as_view(), name='{singular_name_kebab}-delete'),
 ]
 """
 
