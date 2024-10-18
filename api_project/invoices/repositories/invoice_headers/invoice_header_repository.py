@@ -4,7 +4,6 @@ from django.forms.models import model_to_dict
 class InvoiceHeaderRepository:
 
     def list(self, columns=None):
-        # Usar columnas proporcionadas o columnas predeterminadas
         if columns is None:
             columns = ['id', 'name', 'amount', 'description', 'created_at', 'updated_at']
         invoice_headers = InvoiceHeader.objects.all()
@@ -36,13 +35,12 @@ class InvoiceHeaderRepository:
         
 
     def update(self, invoice_header_id, data):
-        invoice_header = self.show(invoice_header_id)
+        invoice_header = InvoiceHeader.objects.get(id=invoice_header_id)
         if invoice_header:
             for key, value in data.items():
                 setattr(invoice_header, key, value)
             invoice_header.save()
             
-            # Convertir el objeto actualizado en un diccionario
             invoice_header_dict = model_to_dict(invoice_header, fields=[field.name for field in invoice_header._meta.fields])
 
             if 'created_at' not in invoice_header_dict:

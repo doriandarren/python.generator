@@ -44,7 +44,6 @@ from django.forms.models import model_to_dict
 class {singular_name}Repository:
 
     def list(self, columns=None):
-        # Usar columnas proporcionadas o columnas predeterminadas
         if columns is None:
             columns = {column_names}
         {singular_name_snake}s = {singular_name}.objects.all()
@@ -76,13 +75,12 @@ class {singular_name}Repository:
         
 
     def update(self, {singular_name_snake}_id, data):
-        {singular_name_snake} = self.show({singular_name_snake}_id)
+        {singular_name_snake} = {singular_name}.objects.get(id={singular_name_snake}_id)
         if {singular_name_snake}:
             for key, value in data.items():
                 setattr({singular_name_snake}, key, value)
             {singular_name_snake}.save()
             
-            # Convertir el objeto actualizado en un diccionario
             {singular_name_snake}_dict = model_to_dict({singular_name_snake}, fields=[field.name for field in {singular_name_snake}._meta.fields])
 
             if 'created_at' not in {singular_name_snake}_dict:

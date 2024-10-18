@@ -8,8 +8,7 @@ import json
 @method_decorator(csrf_exempt, name='dispatch')
 class InvoiceHeaderUpdateController(View):
 
-    def post(self, request, invoice_header_id):
-        # Obtener los datos del cuerpo de la solicitud
+    def put(self, request, invoice_header_id):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -25,7 +24,7 @@ class InvoiceHeaderUpdateController(View):
             return JsonResponse({
                 'success': True,
                 'message': 'InvoiceHeader updated successfully',
-                'data': updated_record 
+                'data': updated_record
             }, status=200)
         else:
             return JsonResponse({

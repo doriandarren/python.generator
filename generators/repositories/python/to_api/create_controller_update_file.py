@@ -44,8 +44,7 @@ import json
 @method_decorator(csrf_exempt, name='dispatch')
 class {singular_name}UpdateController(View):
 
-    def post(self, request, {singular_name_snake}_id):
-        # Obtener los datos del cuerpo de la solicitud
+    def put(self, request, {singular_name_snake}_id):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -61,7 +60,7 @@ class {singular_name}UpdateController(View):
             return JsonResponse({{
                 'success': True,
                 'message': '{singular_name} updated successfully',
-                'data': updated_record 
+                'data': updated_record
             }}, status=200)
         else:
             return JsonResponse({{
