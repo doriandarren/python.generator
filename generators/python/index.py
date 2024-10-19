@@ -1,14 +1,13 @@
 # generator/index.py
 
-from repositories.python.to_api.create_model_file import generate_model_file
-from repositories.python.to_api.create_repository_file import generate_repository_file
-from repositories.python.to_api.create_url_file import create_url_file
-from repositories.python.to_api.create_controller_list_file import generate_controller_list_file
-from repositories.python.to_api.create_controller_show_file import generate_controller_show_file
-from repositories.python.to_api.create_controller_store_file import generate_controller_store_file
-from repositories.python.to_api.create_controller_update_file import generate_controller_update_file
-
-
+from to_api.create_model_file import generate_model_file
+from to_api.create_repository_file import generate_repository_file
+from to_api.create_url_file import create_url_file
+from to_api.create_controller_list_file import generate_controller_list_file
+from to_api.create_controller_show_file import generate_controller_show_file
+from to_api.create_controller_store_file import generate_controller_store_file
+from to_api.create_controller_update_file import generate_controller_update_file
+from to_api.create_controller_delete_file import generate_controller_delete_file
 
 import os
 import re
@@ -28,14 +27,20 @@ def camel_to_snake(name):
 
 if __name__ == "__main__":
     # Obtener la ruta base automáticamente
-    base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
-    ruta = os.path.join(base_path, 'api_project/invoices')
+    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
+    ## ruta = os.path.join(base_path, 'api_project/invoices')
 
-    # Settings :
+
+    # Namespace
     namespace = "api_project"
+    # Nombre App
     app_name = 'invoices'
+    # Ruta del proyecto
+    ruta = "/Users/dorian/PythonProjects/python.generator/" + namespace + "/" + app_name
 
-    # Definir el nombre singular y plural de la tabla
+
+
+    # Definir tabla
     singular_name = 'InvoiceHeader'
     plural_name = 'InvoiceHeaders'
 
@@ -61,6 +66,9 @@ if __name__ == "__main__":
     plural_name_snake = camel_to_snake(plural_name)
 
 
+
+    print(ruta)
+
     # Verificar si la ruta proporcionada es válida
     if os.path.isdir(ruta):
         generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
@@ -71,7 +79,7 @@ if __name__ == "__main__":
         generate_controller_show_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
         generate_controller_store_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
         generate_controller_update_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
-
+        generate_controller_delete_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab,singular_name_snake, plural_name_snake, namespace,app_name)
 
 
     else:

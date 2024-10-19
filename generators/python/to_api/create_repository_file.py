@@ -93,7 +93,7 @@ class {singular_name}Repository:
         
 
     def delete(self, {singular_name_snake}_id):
-        {singular_name_snake} = self.show({singular_name_snake}_id)
+        {singular_name_snake} = {singular_name}.objects.get(id={singular_name_snake}_id)
         if {singular_name_snake}:
             {singular_name_snake}.delete()
         return {singular_name_snake}

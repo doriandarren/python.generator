@@ -53,7 +53,7 @@ class InvoiceHeaderRepository:
         
 
     def delete(self, invoice_header_id):
-        invoice_header = self.show(invoice_header_id)
+        invoice_header = InvoiceHeader.objects.get(id=invoice_header_id)
         if invoice_header:
             invoice_header.delete()
         return invoice_header
