@@ -35,6 +35,7 @@ def generate_repository_file(base_ruta, path_model, singular_name, plural_name, 
 
 namespace App\\Repositories\\{plural_name};
 
+use App\\Enums\\EnumApiSetup;
 use App\\Models\\{plural_name}\\{singular_name};
 
 class {singular_name}Repository
@@ -48,7 +49,7 @@ class {singular_name}Repository
     public function list(): mixed
     {{
         return {singular_name}::latest()
-                    ->limit(100)
+                    ->limit(EnumApiSetup::QUERY_LIMIT)
                     ->get();
     }}
 
