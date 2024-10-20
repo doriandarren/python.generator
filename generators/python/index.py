@@ -8,6 +8,8 @@ from to_api.create_controller_show_file import generate_controller_show_file
 from to_api.create_controller_store_file import generate_controller_store_file
 from to_api.create_controller_update_file import generate_controller_update_file
 from to_api.create_controller_delete_file import generate_controller_delete_file
+from to_api.create_seeder_file import generate_seeder_file  # Importar el generador de seeders
+
 
 import os
 import re
@@ -66,9 +68,6 @@ if __name__ == "__main__":
     plural_name_snake = camel_to_snake(plural_name)
 
 
-
-    print(ruta)
-
     # Verificar si la ruta proporcionada es válida
     if os.path.isdir(ruta):
         generate_model_file(ruta, singular_name, plural_name, columns, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
@@ -80,6 +79,8 @@ if __name__ == "__main__":
         generate_controller_store_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
         generate_controller_update_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name)
         generate_controller_delete_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab,singular_name_snake, plural_name_snake, namespace,app_name)
+
+        ##generate_seeder_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, namespace, app_name, columns)
 
 
     else:

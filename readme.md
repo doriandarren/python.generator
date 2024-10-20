@@ -74,7 +74,7 @@ python manage.py migrate
 
 ```
 
-### Extensions - Install
+### Extensions - URLs
 
 ```sh
 
@@ -100,15 +100,20 @@ APPEND_SLASH = False
 ```
 
 
+### Extensions - Faker
 
-Carpetas a crear:
+```sh
 
-core:
+pip install faker
 
-controllers
-models
-repositories
-urls
-views
+ python manage.py shell < invoices/database/seeders/InvoiceHeaderSeeder.py
+
+
+```
+
+
+
+
+
 
 
