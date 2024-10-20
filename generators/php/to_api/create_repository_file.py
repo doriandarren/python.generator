@@ -1,6 +1,5 @@
 import os
 
-
 def create_repository_structure(base_ruta, path_model):
     """
     Crea la estructura de carpetas 'base_ruta/app/path_model' en la ruta especificada.
@@ -17,8 +16,7 @@ def create_repository_structure(base_ruta, path_model):
     return repository_folder_path
 
 
-def generate_repository_file(base_ruta, path_model, singular_name, plural_name, singular_name_snake, plural_name_snake,
-                             columns):
+def generate_repository_file(base_ruta, path_model, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
     Genera un archivo de repositorio PHP basado en los nombres proporcionados y crea la estructura app/path_model dentro de base_ruta.
     """
@@ -44,7 +42,7 @@ class {singular_name}Repository
     const WITH = [];
 
     /**
-    * By Admin
+    * List
     * @return mixed
     */
     public function list(): mixed
@@ -54,6 +52,22 @@ class {singular_name}Repository
                     ->get();
     }}
 
+    /**
+    * Show
+    * @param $id
+    * @return {singular_name}|null
+    */
+    public function show($id): ?{singular_name}
+    {{
+        return {singular_name}::find($id);
+    }}
+
+
+    /**
+    * Store
+    * @param $data
+    * @return {singular_name}
+    */
     public function store($data): {singular_name}
     {{
         $objNew = new {singular_name}();
@@ -67,21 +81,40 @@ class {singular_name}Repository
         $objNew->save();
         return $objNew;
     }}
+    
 
+    /**
+    * Update
+    * @param $id
+    * @param $data
+    * @return {singular_name}
+    */
     public function update($id, $data): mixed
     {{
-        $obj = {singular_name}::find($id);
+        $objOld = {singular_name}::find($id);
 
-        foreach ($data as $key => $value) {{
-            if (!empty($value)) {{
-                $obj->$key = $value;
+"""
+
+    # Separar las columnas dinámicamente en el método `update`
+    for column in column_names:
+        repository_content += f"""        if (isset($data->{column})) {{
+            if ($data->{column} != '' && !empty($data->{column})) {{
+                $objOld->{column} = $data->{column};
             }}
         }}
 
-        $obj->save();
-        return $obj;
+"""
+    repository_content += f"""
+        $objOld->save();
+        return $objOld;
     }}
 
+
+    /**
+    * Destroy
+    * @param $id
+    * @return bool
+    */
     public function destroy($id): bool
     {{
         $obj = {singular_name}::find($id);
@@ -89,10 +122,16 @@ class {singular_name}Repository
         return true;
     }}
 
+
     /**
     * Set {singular_name}
-    * @param {', '.join([f'${column}' for column in column_names])}
-    * @return {singular_name}
+"""
+
+    # Agregar los `@param` dinámicos para cada columna
+    for column in column_names:
+        repository_content += f"    * @param ${column}\n"
+
+    repository_content += f"""    * @return {singular_name}
     */
     public function set{singular_name}({', '.join([f'${column}' for column in column_names])}): {singular_name}
     {{
