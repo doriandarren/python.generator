@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+
 from .string_helpers import get_plural  # Importar el helper de pluralización
 
 def create_migration_structure(base_ruta, path_migration):
@@ -47,9 +48,9 @@ return new class extends Migration
     */
     public function up()
     {{
-        if (!Schema::connection('api')->hasTable('{singular_name_snake}')) {{
+        if (!Schema::connection('api')->hasTable('{plural_name_snake}')) {{
 
-            Schema::connection('api')->create('{singular_name_snake}', function (Blueprint $table) {{
+            Schema::connection('api')->create('{plural_name_snake}', function (Blueprint $table) {{
 
                 $table->id();
 """

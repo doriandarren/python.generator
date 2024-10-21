@@ -44,6 +44,8 @@ use Illuminate\\Support\\Facades\\Route;
 */
 
 Route::get(EnumApiSetup::API_VERSION. 'invoice-headers/list', [InvoiceHeaderListController::class, '__invoke']);
+Route::get(EnumApiSetup::API_VERSION. 'invoice-headers/show/{{invoice_header:id}}', [InvoiceHeaderShowController::class, '__invoke']);
+Route::post(EnumApiSetup::API_VERSION. 'invoice-headers/store', [InvoiceHeaderShowController::class, '__invoke']);
 
 
 Route::group(['prefix' => EnumApiSetup::API_VERSION . '{plural_name_kebab}/'], function () {{
