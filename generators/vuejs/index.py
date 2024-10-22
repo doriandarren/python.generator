@@ -1,11 +1,11 @@
 # generator/index.py
-
 import os
 import re
 
 from to_front.create_list_file import generate_list_file
 from to_front.create_store_file import generate_store_file
 from to_front.create_update_file import generate_update_file
+from to_front.create_composable_file import generate_composable_file
 
 
 
@@ -34,15 +34,12 @@ if __name__ == "__main__":
 
 
 
-
-
     # Definir tabla
     singular_name = 'InvoiceHeader'
     plural_name = 'InvoiceHeaders'
 
     # singular_name = 'Invoice'
     # plural_name = 'Invoices'
-
 
 
 
@@ -55,6 +52,7 @@ if __name__ == "__main__":
     # Path model
     path_views = "src/modules/" + namespace + "/views/" + plural_name_snake
     path_component = "src/modules/" + namespace + "/components/" + plural_name_snake
+    path_composable = "src/modules/" + namespace + "/composables/"
 
 
     ## invoice_counter_id own_company_id customer_id total_with_vat description
@@ -66,10 +64,13 @@ if __name__ == "__main__":
         {"name": "description"}
     ]
 
+
+
     if os.path.isdir(ruta):
         generate_list_file(ruta, path_views, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
         generate_store_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
         generate_update_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+        generate_composable_file(ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
 
 
     else:

@@ -39,7 +39,7 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
                 <div class="col-span-12 md:col-span-6 lg:col-span-4">
                     <div class="input-form">
                         <label for="{field_name}" class="form-label w-full">
-                            {{ $t("{field_name}") }} *
+                            {{{{ $t("{field_name}") }}}} *
                         </label>
                         <input
                             v-model.trim="validate.{field_name}.$model"
@@ -51,7 +51,7 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
                         />
                         <template v-if="validate.{field_name}.$error">
                             <div v-for="(error, index) in validate.{field_name}.$errors" :key="index" class="text-danger mt-2">
-                                {{ error.$message }}
+                                {{{{ error.$message }}}}
                             </div>
                         </template>
                     </div>
@@ -64,7 +64,7 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
         }},
         """
 
-        reactive_data += f"{field_name}: '',\n"
+        reactive_data += f"        {field_name}: '',\n"
 
     # Contenido del archivo Vue.js
     component_content = f"""
@@ -84,13 +84,13 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
                         <button type="submit" class="btn btn-primary mr-5">
                             <div class="flex">
                                 <IconSave />
-                                {{ $t("save") }}
+                                {{{{ $t("save") }}}}
                             </div>
                         </button>
                         <button @click.prevent="emit('cancelCreate')" class="btn btn-danger">
                             <div class="flex">
                                 <IconCancel />
-                                {{ $t("cancel") }}
+                                {{{{ $t("cancel") }}}}
                             </div>
                         </button>
                     </div>
