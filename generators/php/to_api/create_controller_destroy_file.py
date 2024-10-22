@@ -15,23 +15,16 @@ def create_controller_structure(base_ruta, path_controller):
 
     return controller_folder_path
 
-def generate_controller_update_file(base_ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def generate_controller_destroy_file(base_ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
     """
-    Genera el archivo de controlador PHP para el método Update.
+    Genera el archivo de controlador PHP para el método Destroy, incluyendo las columnas.
     """
     # Crear la estructura de carpetas llamando a create_controller_structure
     controller_folder_path = create_controller_structure(base_ruta, path_controller)
 
     # Nombre del archivo PHP será igual a singular_name
-    file_name = f'{singular_name}UpdateController.php'
+    file_name = f'{singular_name}DestroyController.php'
     controller_file_path = os.path.join(controller_folder_path, file_name)
-
-    # Crear comentarios dinámicos para @bodyParam
-    body_param_comments = ""
-    for i, column in enumerate(columns):
-        body_param_comments += f"    * @bodyParam {column['name']} string required"
-        if i < len(columns) - 1:
-            body_param_comments += "\n"
 
     # Contenido del archivo PHP del controlador adaptado
     controller_content = f"""<?php
@@ -42,11 +35,9 @@ use App\\Models\\{plural_name}\\{singular_name};
 use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
 use App\\Http\\Controllers\\Controller;
-use Illuminate\\Support\\Facades\\Validator;
-use Illuminate\\Validation\\Rule;
 use App\\Repositories\\{plural_name}\\{singular_name}Repository;
 
-class {singular_name}UpdateController extends Controller
+class {singular_name}DestroyController extends Controller
 {{
     private {singular_name}Repository $repository;
 
@@ -59,7 +50,6 @@ class {singular_name}UpdateController extends Controller
     * @header Authorization Bearer TOKEN 
     * @urlParam id required The ID of the table.
     *
-{body_param_comments}
     *
     * @param Request $request
     * @param {singular_name} ${singular_name_snake}
@@ -69,36 +59,18 @@ class {singular_name}UpdateController extends Controller
     {{
 
         if($this->isAdmin(auth()->user()->roles)){{
-            // By Admin
 
-            $validator = Validator::make($request->all(), [
-{generate_validation_rules(columns)}
-            ]);
+            $data = $this->repository->destroy(${singular_name_snake}->id);
 
-            if($validator->fails()){{
-                return $this->respondWithError('Error', $validator->errors());
-            }}
-
-            $data = $this->repository->update(${singular_name_snake}->id, $request->all());
-            return $this->respondWithData('{singular_name} updated', $data);
+            return $this->respondWithData('{singular_name} deleted', $data);
 
         }}else{{
 
-            // By Role Manager & User
-
-            $validator = Validator::make($request->all(), [
-{generate_validation_rules(columns)}
-            ]);
-
-            if($validator->fails()){{
-                return $this->respondWithError('Error', $validator->errors());
-            }}
-
             if(${singular_name_snake}->company_id == auth()->user()->employee->company_id){{
 
-                $data = $this->repository->update(${singular_name_snake}->id, $request->all());
+                $data = $this->repository->destroy(${singular_name_snake}->id);
 
-                return $this->respondWithData('{singular_name} updated', $data);
+                return $this->respondWithData('{singular_name} deleted', $data);
 
             }}else{{
 
@@ -119,10 +91,3 @@ class {singular_name}UpdateController extends Controller
             print(f"Archivo PHP controlador '{file_name}' creado en: {controller_folder_path}")
     except Exception as e:
         print(f"Error al crear el archivo de controlador '{file_name}': {e}")
-
-# Función auxiliar para generar reglas de validación
-def generate_validation_rules(columns):
-    validation_rules = ""
-    for column in columns:
-        validation_rules += f"                '{column['name']}' => 'required',\n"
-    return validation_rules
