@@ -36,20 +36,29 @@ if __name__ == "__main__":
 
 
     # Namespace
-    namespace = "API"
+    namespace = "INVOICES"
+
     # Ruta del proyecto
-    ruta = "/Users/dorian/PhpstormProjects81/php84/api-kitchen.famindex.com/"
-
-
-
-
+    #ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
+    ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
 
     # Definir tabla
-    singular_name = 'InvoiceHeader'
-    plural_name = 'InvoiceHeaders'
+    singular_name = 'Provider'
+    plural_name = 'Providers'
 
-    # singular_name = 'Invoice'
-    # plural_name = 'Invoices'
+    # Definir las columnas:
+
+
+
+
+    columns = [
+        {"name": "service_id"},
+        {"name": "code"},
+        {"name": "name"},
+    ]
+
+
+
 
     # Path model
     path_model = "Models/" + plural_name
@@ -69,16 +78,6 @@ if __name__ == "__main__":
     plural_name_snake = camel_to_snake(plural_name)
 
 
-    ## invoice_counter_id own_company_id customer_id total_with_vat description
-
-    columns = [
-        {"name": "invoice_counter_id"},
-        {"name": "own_company_id"},
-        {"name": "customer_id"},
-        {"name": "total_with_vat"},
-        {"name": "description"}
-    ]
-
     if os.path.isdir(ruta):
         generate_model_file(ruta, path_model, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
         generate_repository_file(ruta, path_repository, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
@@ -92,7 +91,6 @@ if __name__ == "__main__":
 
         generate_seeder_file(ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
         generate_factory_file(ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
-
         generate_postman_file(ruta, singular_name, plural_name, singular_name_kebab, columns)
 
     else:

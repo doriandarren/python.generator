@@ -39,26 +39,20 @@ use App\\Http\\Controllers\\{namespace}\\{plural_name}\\{singular_name}UpdateCon
 use App\\Http\\Controllers\\{namespace}\\{plural_name}\\{singular_name}DestroyController;
 use Illuminate\\Support\\Facades\\Route;
 
+
+
 /**
 * {plural_name}
 */
-
-Route::get(EnumApiSetup::API_VERSION. 'invoice-headers/list', [InvoiceHeaderListController::class, '__invoke']);
-Route::get(EnumApiSetup::API_VERSION. 'invoice-headers/show/{{invoice_header:id}}', [InvoiceHeaderShowController::class, '__invoke']);
-Route::post(EnumApiSetup::API_VERSION. 'invoice-headers/store', [InvoiceHeaderShowController::class, '__invoke']);
-
-
 Route::group(['prefix' => EnumApiSetup::API_VERSION . '{plural_name_kebab}/'], function () {{
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {{
         
-        /*
 		Route::get('list', [{singular_name}ListController::class, '__invoke'])->middleware('abilities:{plural_name_snake}' . EnumAbilitySuffix::LIST);
 		Route::get('show/{{{singular_name_snake}:id}}', [{singular_name}ShowController::class, '__invoke'])->middleware('abilities:{plural_name_snake}' . EnumAbilitySuffix::SHOW);
 		Route::post('store', [{singular_name}StoreController::class, '__invoke'])->middleware('abilities:{plural_name_snake}' . EnumAbilitySuffix::STORE);
 		Route::put('update/{{{singular_name_snake}:id}}', [{singular_name}UpdateController::class, '__invoke'])->middleware('abilities:{plural_name_snake}' . EnumAbilitySuffix::UPDATE);
 		Route::delete('delete/{{{singular_name_snake}:id}}', [{singular_name}DestroyController::class, '__invoke'])->middleware('abilities:{plural_name_snake}' . EnumAbilitySuffix::DESTROY);
-		*/
 		
 	}});
 }});
