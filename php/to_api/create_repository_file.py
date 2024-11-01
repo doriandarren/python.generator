@@ -43,24 +43,74 @@ class {singular_name}Repository
     const WITH = [];
 
     /**
-    * List
+    * List by Admin
     * @return mixed
     */
     public function list(): mixed
     {{
         return {singular_name}::latest()
-                    ->limit(EnumApiSetup::QUERY_LIMIT)
-                    ->get();
+                            ->limit(EnumApiSetup::QUERY_LIMIT)
+                            ->get();
+    }}
+    
+    
+    /**
+    * List by Manager
+    * @return mixed
+    */
+    public function listByRoleManager(): mixed
+    {{
+        return {singular_name}::latest()
+                            ->limit(EnumApiSetup::QUERY_LIMIT)
+                            ->get();
+    }}
+    
+    
+    /**
+    * List by User
+    * @return mixed
+    */
+    public function listByRoleUser(): mixed
+    {{
+        return {singular_name}::latest()
+                            ->limit(EnumApiSetup::QUERY_LIMIT)
+                            ->get();
     }}
 
+
     /**
-    * Show
-    * @param $id
-    * @return {singular_name}|null
-    */
-    public function show($id): ?{singular_name}
+    * Show by Admin
+	* @param $id
+	* @return mixed
+	*/
+    public function show($id): mixed
     {{
-        return {singular_name}::find($id);
+        return {singular_name}::where('id', $id)
+                            ->first();
+    }}
+    
+    
+    /**
+    * Show by Manager
+	* @param $id
+	* @return mixed
+	*/
+    public function showByRoleManager($id): mixed
+    {{
+        return {singular_name}::where('id', $id)
+                            ->first();
+    }}
+    
+    
+    /**
+    * Show by User
+	* @param $id
+	* @return mixed
+	*/
+    public function showByRoleUser($id): mixed
+    {{
+        return {singular_name}::where('id', $id)
+                            ->first();
     }}
 
 
