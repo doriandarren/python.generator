@@ -53,7 +53,6 @@ class {singular_name}ListController extends Controller
     */
     public function __invoke(Request $request): JsonResponse
     {{
-        /*
         if ($this->isAdmin(auth()->user()->roles)) {{
             $data = $this->repository->list();
         }} elseif ($this->isManager(auth()->user()->roles)) {{
@@ -61,9 +60,6 @@ class {singular_name}ListController extends Controller
         }} else {{
             $data = $this->repository->listByRoleUser(auth()->user()->employee->company_id, auth()->user()->employee->id);
         }}
-        */
-        
-        $data = $this->repository->list();
         
         return $this->respondWithData('{plural_name} list', $data);
     }}
