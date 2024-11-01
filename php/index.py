@@ -47,13 +47,11 @@ if __name__ == "__main__":
     plural_name = 'RemittanceTypes'
 
     # Definir las columnas:
-
-
-
-
     columns = [
         {"name": "name"},
     ]
+
+
 
 
 
