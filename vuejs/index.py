@@ -49,6 +49,8 @@ if __name__ == "__main__":
     plural_name_kebab = camel_to_kebab(plural_name)
     singular_name_snake = camel_to_snake(singular_name)
     plural_name_snake = camel_to_snake(plural_name)
+    singular_name_first_lower = singular_name[0].lower() + singular_name[1:]
+    plural_name_first_lower = plural_name[0].lower() + plural_name[1:]
 
     # Path model
     path_views = "src/modules/" + namespace.lower() + "/views/" + plural_name_snake
@@ -68,10 +70,10 @@ if __name__ == "__main__":
 
 
     if os.path.isdir(ruta):
-        generate_list_file(ruta, path_views, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+        generate_list_file(ruta, path_views, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
         generate_store_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
         generate_update_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-        generate_composable_file(ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+        generate_composable_file(ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
 
 
     else:

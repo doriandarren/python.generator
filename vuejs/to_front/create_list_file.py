@@ -15,7 +15,7 @@ def create_list_structure(base_ruta, path_views):
 
     return list_folder_path
 
-def generate_list_file(base_ruta, path_views, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def generate_list_file(base_ruta, path_views, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower):
     """
     Genera un archivo de lista de Vue.js basado en los nombres proporcionados y crea la estructura dentro de base_ruta/path_views.
     """
@@ -118,7 +118,7 @@ const isEdit = ref(false);
 const {singular_name_snake}Id = ref(0);
 
 const {{ t }} = useI18n();
-const {{ {singular_name_snake}s, {singular_name_snake}Errors, get{plural_name}, store{singular_name}, update{singular_name}, destroy{singular_name} }} = use{singular_name}();
+const {{ {singular_name_snake}s, {singular_name_first_lower}Errors, get{plural_name}, store{singular_name}, update{singular_name}, destroy{singular_name} }} = use{singular_name}();
 
 const findData = async () => {{
     await get{plural_name}();
@@ -150,10 +150,10 @@ const save{singular_name}Form = async (form) => {{
     isCreate.value = false;
     div_table.style.display = 'block';
     await store{singular_name}({{ ...form }});
-    if ({singular_name_snake}Errors.value.length === 0) {{
+    if ({singular_name_first_lower}Errors.value.length === 0) {{
         await Toast(t("message.record_saved"), 'success');
     }} else {{
-        const errorMessages = {singular_name_snake}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
+        const errorMessages = {singular_name_first_lower}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
         await Toast(errorMessages, 'error');
     }}
     rows.value = await findData();
@@ -175,10 +175,10 @@ const update{singular_name}Form = async (id, data) => {{
     isEdit.value = false;
     div_table.style.display = 'block';
     await update{singular_name}(id, data);
-    if ({singular_name_snake}Errors.value.length === 0) {{
+    if ({singular_name_first_lower}Errors.value.length === 0) {{
         await Toast(t("message.record_updated"), 'success');
     }} else {{
-        const errorMessages = {singular_name_snake}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
+        const errorMessages = {singular_name_first_lower}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
         await Toast(errorMessages, 'error');
     }}
     rows.value = await findData();
@@ -196,10 +196,10 @@ const showDelete{singular_name} = async (id, description = '') => {{
     }}).then(async (result) => {{
         if (result.isConfirmed) {{
             await destroy{singular_name}(id);
-            if ({singular_name_snake}Errors.value.length === 0) {{
+            if ({singular_name_first_lower}Errors.value.length === 0) {{
                 await Toast(t("message.record_deleted"), 'success');
             }} else {{
-                const errorMessages = {singular_name_snake}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
+                const errorMessages = {singular_name_first_lower}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
                 await Toast(errorMessages, 'error');
             }}
             rows.value = await findData();

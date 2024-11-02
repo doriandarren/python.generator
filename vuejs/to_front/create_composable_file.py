@@ -16,7 +16,7 @@ def create_composable_structure(base_ruta, path_composable):
     return composable_folder_path
 
 
-def generate_composable_file(base_ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def generate_composable_file(base_ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower):
     """
     Genera un archivo de composable en Vue.js basado en los nombres proporcionados y crea la estructura base_ruta/path_composable.
     """
@@ -43,13 +43,13 @@ import {{ useI18n }} from 'vue-i18n';
 
 export default function use{singular_name}() {{
 
-    const {singular_name_snake} = ref();
-    const {plural_name_snake} = ref([]);
-    const {singular_name_snake}Errors = ref([]);
+    const {singular_name_first_lower} = ref();
+    const {plural_name_first_lower} = ref([]);
+    const {singular_name_first_lower}Errors = ref([]);
     const {{ t }} = useI18n();
 
     const get{plural_name} = async () => {{
-        {singular_name_snake}Errors.value = [];
+        {singular_name_first_lower}Errors.value = [];
         await fetch(`{{{{import.meta.env.VITE_API_URL}}}}{plural_name_kebab}/list`,{{
             method: 'GET',
             headers: {{
@@ -60,19 +60,19 @@ export default function use{singular_name}() {{
         .then(res => res.json())
         .then((res) => {{
             if (!res.success) {{
-                {singular_name_snake}Errors.value = res.errors;
+                {singular_name_first_lower}Errors.value = res.errors;
             }} else {{
-                {plural_name_snake}.value = res.data;
+                {plural_name_first_lower}.value = res.data;
             }}
         }})
         .catch((e) => {{
-            {singular_name_snake}Errors.value.push(t("errors.error_internal"));
+            {singular_name_first_lower}Errors.value.push(t("errors.error_internal"));
         }});
     }}
 
 
     const get{singular_name} = async (id) => {{
-        {singular_name_snake}Errors.value = [];
+        {singular_name_first_lower}Errors.value = [];
         await fetch(`{{{{import.meta.env.VITE_API_URL}}}}{plural_name_kebab}/show/${{id}}`,{{
             method: 'GET',
             headers: {{
@@ -83,9 +83,9 @@ export default function use{singular_name}() {{
         .then(res => res.json())
         .then((res) => {{
             if (!res.success) {{
-                {singular_name_snake}Errors.value = res.errors;
+                {singular_name_first_lower}Errors.value = res.errors;
             }} else {{
-                {singular_name_snake}.value = res.data;
+                {singular_name_first_lower}.value = res.data;
             }}
         }})
         .catch((e) => {{
@@ -95,7 +95,7 @@ export default function use{singular_name}() {{
 
 
     const store{singular_name} = async (data) => {{
-        {singular_name_snake}Errors.value = [];
+        {singular_name_first_lower}Errors.value = [];
         await fetch(`{{{{import.meta.env.VITE_API_URL}}}}{plural_name_kebab}/store`,{{
             method: 'POST',
             headers: {{
@@ -107,19 +107,19 @@ export default function use{singular_name}() {{
         .then(res => res.json())
         .then((res) => {{
             if (!res.success) {{
-                {singular_name_snake}Errors.value = res.errors;
+                {singular_name_first_lower}Errors.value = res.errors;
             }} else {{
-                {singular_name_snake}.value = res.data;
+                {singular_name_first_lower}.value = res.data;
             }}
         }})
         .catch((e) => {{
-            {singular_name_snake}Errors.value.push(t("errors.error_internal"));
+            {singular_name_first_lower}Errors.value.push(t("errors.error_internal"));
         }});
     }}
 
 
     const update{singular_name} = async (id, data) => {{
-        {singular_name_snake}Errors.value = [];
+        {singular_name_first_lower}Errors.value = [];
         await fetch(`{{{{import.meta.env.VITE_API_URL}}}}{plural_name_kebab}/update/${{id}}`,{{
             method: 'PUT',
             headers: {{
@@ -131,19 +131,19 @@ export default function use{singular_name}() {{
         .then(res => res.json())
         .then((res) => {{
             if (!res.success) {{
-                {singular_name_snake}Errors.value = res.errors;
+                {singular_name_first_lower}Errors.value = res.errors;
             }} else {{
-                {singular_name_snake}.value = res.data;
+                {singular_name_first_lower}.value = res.data;
             }}
         }})
         .catch((e) => {{
-            {singular_name_snake}Errors.value.push(t("errors.error_internal"));
+            {singular_name_first_lower}Errors.value.push(t("errors.error_internal"));
         }});
     }}
 
 
     const destroy{singular_name} = async (id) => {{
-        {singular_name_snake}Errors.value = [];
+        {singular_name_first_lower}Errors.value = [];
         await fetch(`{{{{import.meta.env.VITE_API_URL}}}}{plural_name_kebab}/delete/${{id}}`,{{
             method: 'DELETE',
             headers: {{
@@ -154,21 +154,21 @@ export default function use{singular_name}() {{
         .then(res => res.json())
         .then((res) => {{
             if (!res.success) {{
-                {singular_name_snake}Errors.value = res.errors;
+                {singular_name_first_lower}Errors.value = res.errors;
             }} else {{
-                {singular_name_snake}.value = res.data;
+                {singular_name_first_lower}.value = res.data;
             }}
         }})
         .catch((e) => {{
-            {singular_name_snake}Errors.value.push(t("errors.error_internal"));
+            {singular_name_first_lower}Errors.value.push(t("errors.error_internal"));
         }});
     }}
 
 
     return {{
-        {singular_name_snake}Errors,
-        {singular_name_snake},
-        {plural_name_snake},
+        {singular_name_first_lower}Errors,
+        {singular_name_first_lower},
+        {plural_name_first_lower},
         get{singular_name},
         get{plural_name},
         store{singular_name},
