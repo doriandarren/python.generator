@@ -35,12 +35,10 @@ if __name__ == "__main__":
 
 
 
-    # Definir tabla
+    # Definir tabla Mayúsculas
     singular_name = 'InvoiceHeader'
     plural_name = 'InvoiceHeaders'
 
-    # singular_name = 'Invoice'
-    # plural_name = 'Invoices'
 
 
 
