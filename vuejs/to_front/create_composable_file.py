@@ -89,7 +89,7 @@ export default function use{singular_name}() {{
             }}
         }})
         .catch((e) => {{
-            {singular_name_snake}Errors.value.push(t("errors.error_internal"));
+            {singular_name_first_lower}Errors.value.push(t("errors.error_internal"));
         }});
     }}
 
