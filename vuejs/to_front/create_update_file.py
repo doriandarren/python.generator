@@ -16,7 +16,7 @@ def create_component_structure(base_ruta, path_component):
     return component_folder_path
 
 
-def generate_update_file(base_ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def generate_update_file(base_ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower):
     """
     Genera un archivo de actualización en Vue.js basado en los nombres proporcionados y crea la estructura en base_ruta/path_component.
     """
@@ -129,9 +129,9 @@ def generate_update_file(base_ruta, path_component, singular_name, plural_name, 
     import IconSave from '@/components/icons/IconSave.vue';
     import IconCancel from '@/components/icons/IconCancel.vue';
 
-    const {{ {singular_name_snake}, get{singular_name} }} = use{plural_name}();
+    const {{ {singular_name_first_lower}, get{singular_name} }} = use{plural_name}();
     const {{ t }} = useI18n();
-    const props = defineProps(['{singular_name_snake}Id']);
+    const props = defineProps(['{singular_name_first_lower}Id']);
     const emit = defineEmits(['cancelEdit', 'update{singular_name}Form']);
 
     const rules = {{
@@ -149,12 +149,12 @@ def generate_update_file(base_ruta, path_component, singular_name, plural_name, 
         if (validate.value.$invalid) {{
             //TODO: manejar validación
         }} else {{
-            emit('update{singular_name}Form', {singular_name_snake}.value.id, formData);
+            emit('update{singular_name}Form', {singular_name_first_lower}.value.id, formData);
         }}
     }};
 
     onMounted(async () => {{
-        await get{singular_name}(props.{singular_name_snake}Id);
+        await get{singular_name}(props.{singular_name_first_lower}Id);
 {on_mounted_data}
     }});
 

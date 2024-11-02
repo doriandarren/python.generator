@@ -17,7 +17,7 @@ def create_component_structure(base_ruta, path_component):
     return component_folder_path
 
 
-def generate_store_file(base_ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def generate_store_file(base_ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower):
     """
     Genera un archivo Vue.js basado en los nombres proporcionados y crea la estructura de la carpeta src/modules/path_component dentro de base_ruta.
     """
@@ -119,7 +119,7 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
     import IconSave from '@/components/icons/IconSave.vue';
     import IconCancel from '@/components/icons/IconCancel.vue';
 
-    const { singular_name_snake } = reactive({{
+    const formData = reactive({{
 {reactive_data}
     }});
 
@@ -127,14 +127,14 @@ def generate_store_file(base_ruta, path_component, singular_name, plural_name, s
         {validation_rules}
     }};
 
-    const validate = useVuelidate(rules, {{ {singular_name_snake} }});
+    const validate = useVuelidate(rules, toRefs(formData));
 
     const save = () => {{
         validate.value.$touch();
         if (validate.value.$invalid) {{
             // TODO: handle invalid form
         }} else {{
-            emit('saveInvoiceHeaderForm', {{ ...{singular_name_snake} }});
+            emit('save{singular_name}Form', formData);
         }}
     }};
 
