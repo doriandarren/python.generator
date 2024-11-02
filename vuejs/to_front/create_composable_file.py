@@ -24,7 +24,7 @@ def generate_composable_file(base_ruta, path_composable, singular_name, plural_n
     composable_folder_path = create_composable_structure(base_ruta, path_composable)
 
     # Nombre del archivo JS será igual a singular_name en snake_case
-    file_name = f'use{singular_name}.js'
+    file_name = f'{plural_name_snake}.js'
     composable_file_path = os.path.join(composable_folder_path, file_name)
 
     # Construir la lista de campos de las columnas

@@ -31,6 +31,7 @@ if __name__ == "__main__":
     namespace = "Invoices"
     # Ruta del proyecto
     ruta = "/Users/dorian/VueJsProjects/example"
+    #ruta = "/Users/dorian/VueJsProjects/splytin.com"
 
 
 
@@ -50,9 +51,9 @@ if __name__ == "__main__":
     plural_name_snake = camel_to_snake(plural_name)
 
     # Path model
-    path_views = "src/modules/" + namespace + "/views/" + plural_name_snake
-    path_component = "src/modules/" + namespace + "/components/" + plural_name_snake
-    path_composable = "src/modules/" + namespace + "/composables/"
+    path_views = "src/modules/" + namespace.lower() + "/views/" + plural_name_snake
+    path_component = "src/modules/" + namespace.lower() + "/components/" + plural_name_snake
+    path_composable = "src/modules/" + namespace.lower() + "/composables/"
 
 
     ## invoice_counter_id own_company_id customer_id total_with_vat description

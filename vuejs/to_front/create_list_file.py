@@ -196,8 +196,13 @@ const showDelete{singular_name} = async (id, description = '') => {{
     }}).then(async (result) => {{
         if (result.isConfirmed) {{
             await destroy{singular_name}(id);
+            if ({singular_name_snake}Errors.value.length === 0) {{
+                await Toast(t("message.record_deleted"), 'success');
+            }} else {{
+                const errorMessages = {singular_name_snake}Errors.value.flatMap(errorObj => Object.values(errorObj).flat()).join(', ');
+                await Toast(errorMessages, 'error');
+            }}
             rows.value = await findData();
-            await Toast(t("message.record_deleted"), 'success');
         }}
     }});
 }}
