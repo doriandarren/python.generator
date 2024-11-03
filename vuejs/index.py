@@ -6,6 +6,7 @@ from to_front.create_list_file import generate_list_file
 from to_front.create_store_file import generate_store_file
 from to_front.create_update_file import generate_update_file
 from to_front.create_composable_file import generate_composable_file
+from to_front.create_route_file import generate_route_file
 
 
 
@@ -54,6 +55,7 @@ if __name__ == "__main__":
     path_views = "src/modules/" + namespace.lower() + "/views/" + plural_name_snake
     path_component = "src/modules/" + namespace.lower() + "/components/" + plural_name_snake
     path_composable = "src/modules/" + namespace.lower() + "/composables/"
+    path_route = "src/modules/" + namespace.lower() + "/router/"
 
 
     ## invoice_counter_id own_company_id customer_id total_with_vat description
@@ -72,6 +74,7 @@ if __name__ == "__main__":
         generate_store_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
         generate_update_file(ruta, path_component, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
         generate_composable_file(ruta, path_composable, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
+        generate_route_file(ruta, namespace, path_route, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns, singular_name_first_lower, plural_name_first_lower)
 
 
     else:
