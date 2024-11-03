@@ -31,10 +31,10 @@ if __name__ == "__main__":
     # Namespace
     namespace = "Invoices"
     # Ruta del proyecto
-    #ruta = "/Users/dorian/VueJsProjects/example"
+    ruta = "/Users/dorian/VueJsProjects/example"
     #ruta = "/Users/dorian/VueJsProjects/splytin.com"
 
-    ruta = r"C:\Users\miled\Desktop\WorkspaceJS\PROYECTOS\example"
+    #ruta = r"C:\Users\miled\Desktop\WorkspaceJS\PROYECTOS\example"
 
 
 
