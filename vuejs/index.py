@@ -30,14 +30,25 @@ if __name__ == "__main__":
     # Namespace
     namespace = "Invoices"
     # Ruta del proyecto
-    ruta = "/Users/dorian/VueJsProjects/example"
+    #ruta = "/Users/dorian/VueJsProjects/example"
     #ruta = "/Users/dorian/VueJsProjects/splytin.com"
+
+    ruta = r"C:\Users\miled\Desktop\WorkspaceJS\PROYECTOS\example"
 
 
 
     # Definir tabla Mayúsculas
-    singular_name = 'InvoiceHeader'
-    plural_name = 'InvoiceHeaders'
+    singular_name = 'InvoiceLine'
+    plural_name = 'InvoiceLines'
+
+    ## invoice_counter_id own_company_id customer_id total_with_vat description
+    columns = [
+        {"name": "invoice_header_id"},
+        {"name": "vat"},
+        {"name": "unit_prices"},
+        {"name": "total"},
+        {"name": "description"}
+    ]
 
 
 
@@ -56,14 +67,7 @@ if __name__ == "__main__":
     path_composable = "src/modules/" + namespace.lower() + "/composables/"
 
 
-    ## invoice_counter_id own_company_id customer_id total_with_vat description
-    columns = [
-        {"name": "invoice_counter_id"},
-        {"name": "own_company_id"},
-        {"name": "customer_id"},
-        {"name": "total_with_vat"},
-        {"name": "description"}
-    ]
+    
 
 
 
