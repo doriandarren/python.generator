@@ -142,15 +142,22 @@ class {singular_name}Repository
     */
     public function update($id, $data): mixed
     {{
-        $objOld = {singular_name}::find($id);
+    
+        if(is_array($data)){{
+			$obj = json_decode(json_encode($data), FALSE);
+		}}else{{
+			$obj = $data;
+		}}
+        
+        $objOld = {singular_name}::where('id', $id)->first();
 
 """
 
     # Separar las columnas dinámicamente en el método `update`
     for column in column_names:
-        repository_content += f"""        if (isset($data->{column})) {{
-            if ($data->{column} != '' && !empty($data->{column})) {{
-                $objOld->{column} = $data->{column};
+        repository_content += f"""        if (isset($obj->{column})) {{
+            if ($obj->{column} != '' && !empty($obj->{column})) {{
+                $objOld->{column} = $obj->{column};
             }}
         }}
 

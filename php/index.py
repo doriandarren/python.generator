@@ -43,11 +43,13 @@ if __name__ == "__main__":
     ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
 
     # Definir tabla
-    singular_name = 'RemittanceType'
-    plural_name = 'RemittanceTypes'
+    singular_name = 'Provider'
+    plural_name = 'Providers'
 
     # Definir las columnas:
     columns = [
+        {"name": "service_id"},
+        {"name": "code"},
         {"name": "name"},
     ]
 
