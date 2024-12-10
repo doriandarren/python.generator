@@ -18,7 +18,7 @@ def create_postman_structure(base_ruta):
     return postman_folder_path
 
 
-def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_kebab, columns):
+def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, columns):
     """
     Genera un archivo de colección Postman JSON basado en los nombres proporcionados y crea la estructura public/Scripts dentro de base_ruta.
     """
@@ -56,8 +56,8 @@ def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_k
                                 {"key": "Authorization", "value": "Bearer {{token_api}}", "type": "text"}
                             ],
                             "url": {
-                                "raw": f"{{{{base_url}}}}/{singular_name_kebab}/list",
-                                "host": [f"{{{{base_url}}}}/{singular_name_kebab}"],
+                                "raw": f"{{{{base_url}}}}{plural_name_kebab}/list",
+                                "host": [f"{{{{base_url}}}}{plural_name_kebab}"],
                                 "path": ["list"]
                             }
                         },
@@ -75,8 +75,8 @@ def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_k
                                 {"key": "Authorization", "value": "Bearer {{token_api}}", "type": "text"}
                             ],
                             "url": {
-                                "raw": f"{{{{base_url}}}}/{singular_name_kebab}/show/1",
-                                "host": [f"{{{{base_url}}}}/{singular_name_kebab}"],
+                                "raw": f"{{{{base_url}}}}{plural_name_kebab}/show/1",
+                                "host": [f"{{{{base_url}}}}{plural_name_kebab}"],
                                 "path": ["show", "1"]
                             }
                         },
@@ -98,8 +98,8 @@ def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_k
                                 ]
                             },
                             "url": {
-                                "raw": f"{{{{base_url}}}}/{singular_name_kebab}/store",
-                                "host": [f"{{{{base_url}}}}/{singular_name_kebab}"],
+                                "raw": f"{{{{base_url}}}}{plural_name_kebab}/store",
+                                "host": [f"{{{{base_url}}}}{plural_name_kebab}"],
                                 "path": ["store"]
                             }
                         },
@@ -121,8 +121,8 @@ def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_k
                                 ]
                             },
                             "url": {
-                                "raw": f"{{{{base_url}}}}/{singular_name_kebab}/update/1",
-                                "host": [f"{{{{base_url}}}}/{singular_name_kebab}"],
+                                "raw": f"{{{{base_url}}}}{plural_name_kebab}/update/1",
+                                "host": [f"{{{{base_url}}}}{plural_name_kebab}"],
                                 "path": ["update", "1"]
                             }
                         },
@@ -137,8 +137,8 @@ def generate_postman_file(base_ruta, singular_name, plural_name, singular_name_k
                                 {"key": "Authorization", "value": "Bearer {{token_api}}", "type": "text"}
                             ],
                             "url": {
-                                "raw": f"{{{{base_url}}}}/{singular_name_kebab}/delete/1",
-                                "host": [f"{{{{base_url}}}}/{singular_name_kebab}"],
+                                "raw": f"{{{{base_url}}}}{plural_name_kebab}/delete/1",
+                                "host": [f"{{{{base_url}}}}{plural_name_kebab}"],
                                 "path": ["delete", "1"]
                             }
                         },

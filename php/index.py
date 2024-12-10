@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
         generate_seeder_file(ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
         generate_factory_file(ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
-        generate_postman_file(ruta, singular_name, plural_name, singular_name_kebab, columns)
+        generate_postman_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, columns)
 
     else:
         print("La ruta proporcionada no es válida o no existe. Por favor, verifica y vuelve a intentarlo.")
