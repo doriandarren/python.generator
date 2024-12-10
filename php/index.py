@@ -36,24 +36,26 @@ if __name__ == "__main__":
 
 
     # Namespace
-    namespace = "INVOICES"
+    #namespace = "INVOICES"
+    namespace = "API"
 
     # Ruta del proyecto
     #ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
-    ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
+    ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
+
+
 
     # Definir tabla
-    singular_name = 'Provider'
-    plural_name = 'Providers'
+    ##singular_name = 'AgendaUnloading'
+    singular_name = 'AgendaUnloading'
+    plural_name = 'AgendaUnloadings'
 
     # Definir las columnas:
     columns = [
-        {"name": "service_id"},
-        {"name": "code"},
+        {"name": "transporeon_code"},
         {"name": "name"},
+        {"name": "msoft_code"},
     ]
-
-
 
 
 

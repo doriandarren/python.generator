@@ -65,7 +65,7 @@ return new class extends Migration
 """
         else:
             # Si es una columna normal
-            migration_content += f"                $table->string('{column['name']}');\n"
+            migration_content += f"                $table->string('{column['name']}')->nullable();\n"
 
     # Agregar las líneas $table->timestamps() y $table->softDeletes() después de las columnas
     migration_content += f"""
