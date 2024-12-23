@@ -1,6 +1,11 @@
 import os
 
 
+def first_letter_lower(name):
+    """Convierte la primera letra de un string a minúscula."""
+    return name[0].lower() + name[1:]
+
+
 def create_controller_structure(base_ruta, path_controller):
     """
     Crea la estructura de carpetas 'base_ruta/app/path_controller' en la ruta especificada.
@@ -78,11 +83,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
+            ${ first_letter_lower(singular_name)} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store(${singular_name.capitalize()});
+            $data = $this->repository->store(${first_letter_lower(singular_name)});
             return $this->respondWithData('{singular_name} created', $data);
 
         }} else if($this->isManager(auth()->user()->roles)){{
@@ -98,11 +103,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
+            ${first_letter_lower(singular_name)} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store(${singular_name.capitalize()});
+            $data = $this->repository->store(${first_letter_lower(singular_name)});
             return $this->respondWithData('{singular_name} created', $data);
 
         }} else {{
@@ -118,11 +123,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
+            ${first_letter_lower(singular_name)} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store(${singular_name.capitalize()});
+            $data = $this->repository->store(${first_letter_lower(singular_name)});
             return $this->respondWithData('{singular_name} created', $data);
         }}
     }}
