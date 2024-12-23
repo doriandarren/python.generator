@@ -29,34 +29,10 @@ def camel_to_snake(name):
 
 
 
-if __name__ == "__main__":
+def generate(namespace, ruta, singular_name, plural_name, columns):
     # Obtener la ruta base automáticamente
     ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
     ## ruta = os.path.join(base_path, 'api_project/invoices')
-
-
-    # Namespace
-    #namespace = "INVOICES"
-    namespace = "API"
-
-    # Ruta del proyecto
-    #ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
-    ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
-
-
-
-    # Definir tabla
-    ##singular_name = 'AgendaUnloading'
-    singular_name = 'AgendaUnloading'
-    plural_name = 'AgendaUnloadings'
-
-    # Definir las columnas:
-    columns = [
-        {"name": "transporeon_code"},
-        {"name": "name"},
-        {"name": "msoft_code"},
-    ]
-
 
 
 
@@ -95,3 +71,49 @@ if __name__ == "__main__":
 
     else:
         print("La ruta proporcionada no es válida o no existe. Por favor, verifica y vuelve a intentarlo.")
+
+
+
+
+if __name__ == "__main__":
+
+    # Namespace
+    # namespace = "INVOICES"
+    # namespace = "API"
+    namespace = "ERP"
+
+
+    # Ruta del proyecto
+    # ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
+    # ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
+    ruta = "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/"
+
+
+    # Definir tabla
+    ##singular_name = 'AgendaUnloading'
+    singular_name = 'Device'
+    plural_name = 'Devices'
+
+
+    # Definir las columnas:
+    # columns = [
+    #     {"name": "transporeon_code"},
+    #     {"name": "name"},
+    #     {"name": "msoft_code"},
+    # ]
+
+    columns = [
+        {"name": "company_id"},
+        {"name": "box_id"},
+        {"name": "unit_id"},
+        {"name": "model"},
+        {"name": "model_ver"},
+        {"name": "installed"},
+        {"name": "imei"},
+        {"name": "serial"},
+        {"name": "phone"},
+    ]
+
+
+
+    generate(namespace, ruta, singular_name, plural_name, columns)

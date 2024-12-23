@@ -78,11 +78,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            $invoiceHeader = $this->repository->set{singular_name}(
+            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store($invoiceHeader);
+            $data = $this->repository->store(${singular_name.capitalize()});
             return $this->respondWithData('{singular_name} created', $data);
 
         }} else if($this->isManager(auth()->user()->roles)){{
@@ -98,11 +98,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            $invoiceHeader = $this->repository->set{singular_name}(
+            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store($invoiceHeader);
+            $data = $this->repository->store(${singular_name.capitalize()});
             return $this->respondWithData('{singular_name} created', $data);
 
         }} else {{
@@ -118,11 +118,11 @@ class {singular_name}StoreController extends Controller
             if($validator->fails()){{
                 return $this->respondWithError('Error', $validator->errors());
             }}
-            $invoiceHeader = $this->repository->set{singular_name}(
+            ${singular_name.capitalize()} = $this->repository->set{singular_name}(
                 {', '.join([f'$request->{column["name"]}' for column in columns])}
             );
 
-            $data = $this->repository->store($invoiceHeader);
+            $data = $this->repository->store(${singular_name.capitalize()});
             return $this->respondWithData('{singular_name} created', $data);
         }}
     }}
