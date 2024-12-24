@@ -1,0 +1,36 @@
+project/
+├── app/
+│   ├── api/                  # Rutas de tu API
+│   │   ├── v1/
+│   │   │   ├── endpoints/    # Endpoints organizados por recursos
+│   │   │   │   ├── users.py
+│   │   │   │   ├── items.py
+│   │   │   │   └── __init__.py
+│   ├── core/                 # Configuración central del proyecto
+│   │   ├── config.py         # Variables de configuración
+│   │   └── __init__.py
+│   ├── db/                   # Base de datos
+│   │   ├── base.py           # Inicialización del ORM
+│   │   ├── models.py         # Modelos de la base de datos
+│   │   ├── session.py        # Sesión de la base de datos
+│   │   └── __init__.py
+│   ├── schemas/              # Validación de datos con Pydantic
+│   │   ├── users.py
+│   │   ├── items.py
+│   │   └── __init__.py
+│   ├── services/             # Lógica de negocio
+│   │   ├── users.py
+│   │   ├── items.py
+│   │   └── __init__.py
+│   ├── integrations/         # Conexiones con APIs externas
+│   │   ├── third_party_api.py
+│   │   └── __init__.py
+│   ├── main.py               # Punto de entrada de la aplicación
+│   └── __init__.py
+├── tests/                    # Tests del proyecto
+│   ├── test_users.py
+│   ├── test_items.py
+│   └── __init__.py
+├── .env                      # Variables de entorno
+├── requirements.txt          # Dependencias del proyecto
+└── README.md                 # Documentación del proyecto
