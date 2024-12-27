@@ -75,7 +75,7 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
 
-if __name__ == "__main__":
+def load():
 
     # Namespace
     # namespace = "INVOICES"
@@ -94,16 +94,9 @@ if __name__ == "__main__":
     singular_name = 'Device'
     plural_name = 'Devices'
 
-
-    # Definir las columnas:
-    # columns = [
-    #     {"name": "transporeon_code"},
-    #     {"name": "name"},
-    #     {"name": "msoft_code"},
-    # ]
-
     columns = [
         {"name": "company_id"},
+        {"name": "vehicle_id"},
         {"name": "box_id"},
         {"name": "unit_id"},
         {"name": "model"},
@@ -114,6 +107,45 @@ if __name__ == "__main__":
         {"name": "phone"},
     ]
 
+    generate(namespace, ruta, singular_name, plural_name, columns)
+
+
+
+
+
+# Función para manejar input con validación y valores por defecto
+def input_with_validation(prompt, default_value=None):
+    while True:  # Bucle para solicitar una entrada válida
+        if default_value:  # Si hay un valor por defecto, se muestra
+            user_input = input(f"{prompt} [{default_value}]: ").strip()
+            if user_input:  # Si el usuario escribe algo, lo retorna
+                return user_input
+            return default_value  # Si presiona Enter, usa el valor por defecto
+        else:  # Si no hay un valor por defecto
+            user_input = input(f"{prompt}").strip()
+            if user_input:  # Si el usuario escribe algo, lo retorna
+                return user_input
+            print("La entrada no puede estar en blanco. Por favor, inténtalo de nuevo.")
+
+
+
+
+
+# company_id vehicle_id unit_id box_id ims_company_id country_code label number shortcut vehicle_title car_reg_certificate vin type icon lat lng direction speed mileage last_update ignition_total_time fuel_type state_name state_start state_duration movement_state_name movement_state_start movement_state_duration avg_fuel_consumption_norm avg_fuel_consumption_norm_measurement ims_created_at
+
+
+if __name__ == "__main__":
+
+    namespace = input_with_validation("Namespace ( ERP / API / INVOICES ) ", "API")
+    ruta = input_with_validation("Ruta proyecto ( /Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/ ) ", "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/")
+    singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", None)
+    plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", None)
+
+    input_columns = input_with_validation("Columnas: ", None)
+
+    columns = [{"name": column} for column in input_columns.split()]
 
 
     generate(namespace, ruta, singular_name, plural_name, columns)
+
+
