@@ -74,45 +74,6 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
 
-
-def load():
-
-    # Namespace
-    # namespace = "INVOICES"
-    # namespace = "API"
-    namespace = "ERP"
-
-
-    # Ruta del proyecto
-    # ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
-    # ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
-    ruta = "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/"
-
-
-    # Definir tabla
-    ##singular_name = 'AgendaUnloading'
-    singular_name = 'Device'
-    plural_name = 'Devices'
-
-    columns = [
-        {"name": "company_id"},
-        {"name": "vehicle_id"},
-        {"name": "box_id"},
-        {"name": "unit_id"},
-        {"name": "model"},
-        {"name": "model_ver"},
-        {"name": "installed"},
-        {"name": "imei"},
-        {"name": "serial"},
-        {"name": "phone"},
-    ]
-
-    generate(namespace, ruta, singular_name, plural_name, columns)
-
-
-
-
-
 # Función para manejar input con validación y valores por defecto
 def input_with_validation(prompt, default_value=None):
     while True:  # Bucle para solicitar una entrada válida
@@ -130,10 +91,6 @@ def input_with_validation(prompt, default_value=None):
 
 
 
-
-# company_id vehicle_id unit_id box_id ims_company_id country_code label number shortcut vehicle_title car_reg_certificate vin type icon lat lng direction speed mileage last_update ignition_total_time fuel_type state_name state_start state_duration movement_state_name movement_state_start movement_state_duration avg_fuel_consumption_norm avg_fuel_consumption_measurement ims_created_at
-
-
 if __name__ == "__main__":
 
     namespace = input_with_validation("Namespace ( ERP / API / INVOICES ) ", "API")
@@ -147,5 +104,43 @@ if __name__ == "__main__":
 
 
     generate(namespace, ruta, singular_name, plural_name, columns)
+
+
+
+
+# def load():
+#
+#     # Namespace
+#     # namespace = "INVOICES"
+#     # namespace = "API"
+#     namespace = "ERP"
+#
+#
+#     # Ruta del proyecto
+#     # ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
+#     # ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
+#     ruta = "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/"
+#
+#
+#     # Definir tabla
+#     ##singular_name = 'AgendaUnloading'
+#     singular_name = 'Device'
+#     plural_name = 'Devices'
+#
+#     columns = [
+#         {"name": "company_id"},
+#         {"name": "vehicle_id"},
+#         {"name": "box_id"},
+#         {"name": "unit_id"},
+#         {"name": "model"},
+#         {"name": "model_ver"},
+#         {"name": "installed"},
+#         {"name": "imei"},
+#         {"name": "serial"},
+#         {"name": "phone"},
+#     ]
+#
+#     generate(namespace, ruta, singular_name, plural_name, columns)
+
 
 
