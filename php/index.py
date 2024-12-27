@@ -131,7 +131,7 @@ def input_with_validation(prompt, default_value=None):
 
 
 
-# company_id vehicle_id unit_id box_id ims_company_id country_code label number shortcut vehicle_title car_reg_certificate vin type icon lat lng direction speed mileage last_update ignition_total_time fuel_type state_name state_start state_duration movement_state_name movement_state_start movement_state_duration avg_fuel_consumption_norm avg_fuel_consumption_norm_measurement ims_created_at
+# company_id vehicle_id unit_id box_id ims_company_id country_code label number shortcut vehicle_title car_reg_certificate vin type icon lat lng direction speed mileage last_update ignition_total_time fuel_type state_name state_start state_duration movement_state_name movement_state_start movement_state_duration avg_fuel_consumption_norm avg_fuel_consumption_measurement ims_created_at
 
 
 if __name__ == "__main__":
