@@ -1,4 +1,3 @@
-# generator/index.py
 import os
 import re
 
@@ -31,9 +30,8 @@ def camel_to_snake(name):
 
 def generate(namespace, ruta, singular_name, plural_name, columns):
     # Obtener la ruta base automáticamente
-    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
+    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'main.py'
     ## ruta = os.path.join(base_path, 'api_project/invoices')
-
 
 
     # Path model
@@ -74,6 +72,9 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
 
+
+
+
 # Función para manejar input con validación y valores por defecto
 def input_with_validation(prompt, default_value=None):
     while True:  # Bucle para solicitar una entrada válida
@@ -91,6 +92,10 @@ def input_with_validation(prompt, default_value=None):
 
 
 
+"""
+Activar directamente. Si no usar el "mainTK" para activar la interfaz gráfica.
+"""
+
 if __name__ == "__main__":
 
     namespace = input_with_validation("Namespace ( ERP / API / INVOICES ) ", "API")
@@ -101,7 +106,6 @@ if __name__ == "__main__":
     input_columns = input_with_validation("Columnas: ", None)
 
     columns = [{"name": column} for column in input_columns.split()]
-
 
     generate(namespace, ruta, singular_name, plural_name, columns)
 

@@ -2,5 +2,5 @@
 
 ```sh
 cd generators
-python3 index.py
+python3 main.py
 ```

@@ -1,4 +1,4 @@
-# generator/index.py
+# generator/main.py
 
 from to_api.create_model_file import generate_model_file
 from to_api.create_repository_file import generate_repository_file
@@ -29,7 +29,7 @@ def camel_to_snake(name):
 
 if __name__ == "__main__":
     # Obtener la ruta base automáticamente
-    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'index.py'
+    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'main.py'
     ## ruta = os.path.join(base_path, 'api_project/invoices')
 
 
