@@ -1,6 +1,13 @@
-import os
-from to_create_project.create_project import create_project, install_dependencies, setup_react_router, setup_tailwind, setup_index_css, setup_app_jsx, update_main_jsx, delete_app_css
+# import sys
+# import os
+# print("Rutas en sys.path:", sys.path)
+# print("Ruta actual:", os.getcwd())
+
+from to_create_project.generate_by_command_line import *
 from to_create_project.utils import print_message, GREEN, CYAN
+from to_create_project.generate_project_structure import generate_project_structure
+
+
 
 def start():
     # Ruta predeterminada
@@ -25,6 +32,10 @@ def start():
     setup_app_jsx(full_path)
     update_main_jsx(full_path)
     delete_app_css(full_path)
+
+
+    generate_project_structure(full_path)
+
 
     # Mensaje final
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
