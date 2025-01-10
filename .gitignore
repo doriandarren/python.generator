@@ -81,14 +81,8 @@ coverage.xml
 
 # virtualenv
 .venv/
-venv/
-ENV/
-env/
-env.bak/
-venv.bak/
 
 # macOS files
-.DS_Store
 .AppleDouble
 .LSOverride
 
