@@ -2,10 +2,13 @@
 # import os
 # print("Rutas en sys.path:", sys.path)
 # print("Ruta actual:", os.getcwd())
-
+from react.to_create_project.generate_file_routes import generate_file_routes
 from to_create_project.generate_by_command_line import *
 from to_create_project.utils import print_message, GREEN, CYAN
 from to_create_project.generate_project_structure import generate_project_structure
+from to_create_project.generate_styles import generate_styles
+from to_create_project.generate_layouts import generate_layouts
+from to_create_project.generate_public_pages import generate_pages
 
 
 
@@ -28,13 +31,28 @@ def start():
     install_dependencies(full_path)
     setup_react_router(full_path)
     setup_tailwind(full_path)
-    setup_index_css(full_path)
     setup_app_jsx(full_path)
     update_main_jsx(full_path)
-    delete_app_css(full_path)
+    delete_app_and_index_css(full_path)
 
 
     generate_project_structure(full_path)
+
+    generate_styles(full_path)
+
+    ## generate MainLayout
+    generate_layouts(full_path)
+
+    ## generate HomePages
+    generate_pages(full_path)
+
+    ## generate Routes
+    generate_file_routes(full_path)
+
+
+
+
+
 
 
     # Mensaje final
