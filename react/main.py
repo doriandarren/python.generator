@@ -12,6 +12,7 @@ from to_create_project.generate_public_pages import generate_pages
 
 
 
+
 def start():
     # Ruta predeterminada
     default_path = "/Users/dorian/ReactProjects"
@@ -31,6 +32,10 @@ def start():
     install_dependencies(full_path)
     setup_react_router(full_path)
     setup_tailwind(full_path)
+    setup_headlessui(full_path)             ## Estilos UI
+    setup_heroicons(full_path)              ## Icons
+    setup_clsx(full_path)                   ## utilidad para construir cadenas de clases condicionalmente
+    setup_framer_motion(full_path)          ## utilidad para construir cadenas de clases condicionalmente
     setup_app_jsx(full_path)
     update_main_jsx(full_path)
     delete_app_and_index_css(full_path)

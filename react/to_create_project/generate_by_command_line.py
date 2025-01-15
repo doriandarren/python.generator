@@ -87,15 +87,44 @@ export default {
     print_message("Tailwind CSS configurado correctamente.", GREEN)
 
 
+def setup_headlessui(full_path):
+    """Instala Headlessui."""
+    print_message("Instalando Headlessui...", CYAN)
+    run_command("npm install @headlessui/react", cwd=full_path)
+    print_message("Headlessui instalado correctamente.", GREEN)
+
+
+def setup_heroicons(full_path):
+    """Instala Heroicons."""
+    print_message("Instalando Heroicons...", CYAN)
+    run_command("npm install @heroicons/react", cwd=full_path)
+    print_message("Heroicons instalado correctamente.", GREEN)
+
+def setup_clsx(full_path):
+    """Instala Clsx."""
+    print_message("Instalando Clsx...", CYAN)
+    run_command("npm install clsx", cwd=full_path)
+    print_message("Clsx instalado correctamente.", GREEN)
+
+
+def setup_framer_motion(full_path):
+    """Instala FramerMotion."""
+    print_message("Instalando FramerMotion...", CYAN)
+    run_command("npm install framer-motion", cwd=full_path)
+    print_message("React FramerMotion instalado correctamente.", GREEN)
+
 
 def setup_app_jsx(full_path):
     """Reemplaza el contenido de src/App.jsx."""
-    app_jsx_content = """import { AppRoutes } from './modules/public/routes/AppRoutes';
+    app_jsx_content = """import { BrowserRouter } from 'react-router-dom';
+import { PublicRoutes } from './modules/public/routes/PublicRoutes';
 
 export const App = () => {
   return (
     <>
-      <PublicRoutes />
+       <BrowserRouter>
+          <PublicRoutes />
+       </BrowserRouter>
     </>
   );
 }
@@ -133,20 +162,19 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import {App} from './App.jsx'\nimport { BrowserRouter } from 'react-router-dom'"
+            "import { App } from './App.jsx'\n"
         )
-
 
 
         # Actualizar el bloque de renderizado
-        content = content.replace(
-            """createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)""",
-            "createRoot(document.getElementById('root')).render(\n  <BrowserRouter>\n    <StrictMode>\n      <App />\n    </StrictMode>\n  </BrowserRouter>\n)"
-        )
+#         content = content.replace(
+#             """createRoot(document.getElementById('root')).render(
+#   <StrictMode>
+#     <App />
+#   </StrictMode>,
+# )""",
+#             "createRoot(document.getElementById('root')).render(\n  <BrowserRouter>\n    <StrictMode>\n      <App />\n    </StrictMode>\n  </BrowserRouter>\n)"
+#         )
 
         # Escribir el contenido actualizado
         with open(main_jsx_path, "w") as f:

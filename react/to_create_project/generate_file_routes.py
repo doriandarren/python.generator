@@ -18,8 +18,8 @@ def generate_module_public_routes(project_path):
     Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.
     """
     # Define la ruta del archivo
-    routes_dir = os.path.join(project_path, "src", "modules", "auth", "routes")
-    file_path = os.path.join(routes_dir, "AppRoutes.jsx")
+    routes_dir = os.path.join(project_path, "src", "modules", "public", "routes")
+    file_path = os.path.join(routes_dir, "PublicRoutes.jsx")
 
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
@@ -27,19 +27,22 @@ def generate_module_public_routes(project_path):
     # Contenido del archivo AppRoutes.jsx
     app_routes_content = """import { Navigate, Route, Routes } from \"react-router-dom\";
 import { HomePage } from \"../pages/HomePage\";
-import { MainLayout } from \"../../layouts/MainLayout\";
+import { MainLayout } from \"../../../layouts/MainLayout\";
 
-export const App = () => {
+export const PublicRoutes = () => {
   return (
     <>
-      <h1>MainApp</h1>
-      <hr />
-      
+    
       <Routes>
-      
-        <Route element={<MainLayout />}>
-            <Route path=\"/\" element={<HomePage />} />
-        </Route>
+        
+        <Route 
+          path=\"/\" 
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          } 
+        />
 
         {/* <Route path=\"/*\" element={ <LoginPage /> } /> */}
         <Route path=\"/*\" element={ <Navigate to=\"/login\" /> } />
