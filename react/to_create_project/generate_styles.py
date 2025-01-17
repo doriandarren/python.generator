@@ -73,7 +73,7 @@ def generate_styles(full_path, file_name="globals.css", content=None):
     }
 
     .btn-danger {
-        @apply py-2 px-4 pl-4 bg-red-500 text-white font-semibold rounded-lg shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75;
+        @apply py-2 px-4 pl-4 bg-error text-white font-semibold rounded-lg shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75;
     }
 
     .form-control{

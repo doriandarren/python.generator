@@ -31,7 +31,7 @@ export const MainLayout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
-      <header className="bg-gray-800 text-white">
+      <header className="bg-primary-dark text-neutral-light">
         <nav className="container mx-auto flex justify-between items-center p-4">
           {/* Logo */}
           <div className="text-2xl font-bold">
@@ -49,17 +49,20 @@ export const MainLayout = ({ children }) => {
           {/* Links (visibles en pantallas medianas y grandes) */}
           <ul className="hidden md:flex md:space-x-4">
             <li>
-              <a href="/" className="hover:text-blue-400 transition">
+              <a href="/" className="hover:text-primary-light transition">
                 Home
               </a>
             </li>
             <li>
-              <a href="/about" className="hover:text-blue-400 transition">
+              <a href="/about" className="hover:text-primary-light transition">
                 About
               </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-blue-400 transition">
+              <a
+                href="/contact"
+                className="hover:text-primary-light transition"
+              >
                 Contact
               </a>
             </li>
@@ -77,7 +80,7 @@ export const MainLayout = ({ children }) => {
 
       {/* Side Menu (visible solo en pantallas pequeñas) */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 text-white transform ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-primary-dark text-neutral-light transform ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
@@ -89,17 +92,17 @@ export const MainLayout = ({ children }) => {
         </button>
         <ul className="flex flex-col space-y-4 p-6">
           <li>
-            <a href="/" className="hover:text-blue-400 transition">
+            <a href="/" className="hover:text-primary-light transition">
               Home
             </a>
           </li>
           <li>
-            <a href="/about" className="hover:text-blue-400 transition">
+            <a href="/about" className="hover:text-primary-light transition">
               About
             </a>
           </li>
           <li>
-            <a href="/contact" className="hover:text-blue-400 transition">
+            <a href="/contact" className="hover:text-primary-light transition">
               Contact
             </a>
           </li>
@@ -110,17 +113,17 @@ export const MainLayout = ({ children }) => {
       <main className="flex-grow container mx-auto p-6">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
+      <footer className="bg-primary-dark text-neutral-light">
         <div className="container mx-auto py-4 flex flex-col md:flex-row justify-between items-center">
           <p>© 2025 MyApp. All rights reserved.</p>
           <div className="flex space-x-4 mt-2 md:mt-0">
-            <a href="#" className="hover:text-blue-400 transition">
+            <a href="#" className="hover:text-primary-light transition">
               Twitter
             </a>
-            <a href="#" className="hover:text-blue-400 transition">
+            <a href="#" className="hover:text-primary-light transition">
               Facebook
             </a>
-            <a href="#" className="hover:text-blue-400 transition">
+            <a href="#" className="hover:text-primary-light transition">
               Instagram
             </a>
           </div>
