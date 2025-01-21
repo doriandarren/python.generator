@@ -312,6 +312,14 @@ img {
 }
 
 
+@media (min-width: 768px) { 
+    .navbar__bar {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
 /** Navigation **/
 
 .navigation {
