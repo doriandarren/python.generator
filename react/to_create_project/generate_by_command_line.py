@@ -139,12 +139,12 @@ def setup_framer_motion(full_path):
 
 def setup_app_jsx(full_path):
     """Reemplaza el contenido de src/App.jsx."""
-    app_jsx_content = """import { AppRouter } from './router/AppRouter';
+    app_jsx_content = """import { AppRoute } from './router/AppRoute';
 
 export const App = () => {
   return (
     <>
-        <AppRouter />
+        <AppRoute />
     </>
   );
 }
@@ -175,7 +175,7 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import { App } from './App.jsx;'\nimport { BrowserRouter } from \"react-router\";\n"
+            "import { App } from './App.jsx';\nimport { BrowserRouter } from \"react-router\";\n"
         )
 
         # Reemplazos

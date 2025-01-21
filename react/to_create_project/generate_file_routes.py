@@ -14,11 +14,11 @@ def generate_file_routes(project_path):
 
 def generate_app_route(project_path):
     """
-    Genera el archivo AppRouter.jsx
+    Genera el archivo AppRoute.jsx
     """
     # Define la ruta del archivo
-    routes_dir = os.path.join(project_path, "src", "router")
-    file_path = os.path.join(routes_dir, "AppRouter.jsx")
+    routes_dir = os.path.join(project_path, "src", "routes")
+    file_path = os.path.join(routes_dir, "AppRoute.jsx")
 
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
@@ -26,7 +26,7 @@ def generate_app_route(project_path):
     # Contenido del archivo AppRoutes.jsx
     app_routes_content = """import { PublicRoutes } from \"../modules/public/routes/PublicRoutes\";
 
-export const AppRouter = () => {
+export const AppRoute = () => {
   return (
     <>
         <PublicRoutes />
@@ -115,7 +115,7 @@ export const PublicRoutes = () => {
 
 
 
-
+## TODO pendiente por hacer
 def generate_module_auth_routes(project_path):
     """
     Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.

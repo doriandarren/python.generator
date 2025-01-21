@@ -22,7 +22,7 @@ def generate_project_structure(project_path):
         "src/assets/images",
         "src/assets/fonts",
         "src/components/Button",
-        "src/router",
+        "src/routes",
         "src/hooks",
         "src/layouts",
         "src/layouts/components",
