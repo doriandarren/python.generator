@@ -139,12 +139,12 @@ def setup_framer_motion(full_path):
 
 def setup_app_jsx(full_path):
     """Reemplaza el contenido de src/App.jsx."""
-    app_jsx_content = """import { AppRoute } from './router/AppRoute';
+    app_jsx_content = """import { AppRouter } from './router/AppRouter';
 
 export const App = () => {
   return (
     <>
-        <AppRoute />
+        <AppRouter />
     </>
   );
 }

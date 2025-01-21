@@ -8,17 +8,17 @@ def create_folder(path):
 
 
 def generate_file_routes(project_path):
-    generate_app_route(project_path)
+    generate_app_router(project_path)
     generate_module_public_routes(project_path)
 
 
-def generate_app_route(project_path):
+def generate_app_router(project_path):
     """
     Genera el archivo AppRoute.jsx
     """
     # Define la ruta del archivo
-    routes_dir = os.path.join(project_path, "src", "routes")
-    file_path = os.path.join(routes_dir, "AppRoute.jsx")
+    routes_dir = os.path.join(project_path, "src", "router")
+    file_path = os.path.join(routes_dir, "AppRouter.jsx")
 
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)

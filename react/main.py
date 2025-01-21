@@ -1,8 +1,5 @@
-# import sys
-# import os
-# print("Rutas en sys.path:", sys.path)
-# print("Ruta actual:", os.getcwd())
 from react.to_create_project.generate_file_routes import generate_file_routes
+from react.to_create_project.generate_images import generate_images
 from to_create_project.generate_by_command_line import *
 from to_create_project.utils import print_message, GREEN, CYAN
 from to_create_project.generate_project_structure import generate_project_structure
@@ -45,6 +42,8 @@ def start():
 
     generate_styles(full_path)
 
+    generate_images(full_path)
+
     ## generate MainLayout
     generate_layouts(full_path)
 
@@ -53,11 +52,6 @@ def start():
 
     ## generate Routes
     generate_file_routes(full_path)
-
-
-
-
-
 
 
 
