@@ -139,15 +139,12 @@ def setup_framer_motion(full_path):
 
 def setup_app_jsx(full_path):
     """Reemplaza el contenido de src/App.jsx."""
-    app_jsx_content = """import { BrowserRouter } from 'react-router-dom';
-import { PublicRoutes } from './modules/public/routes/PublicRoutes';
+    app_jsx_content = """import { AppRouter } from './router/AppRouter';
 
 export const App = () => {
   return (
     <>
-       <BrowserRouter>
-          <PublicRoutes />
-       </BrowserRouter>
+        <AppRouter />
     </>
   );
 }
@@ -159,9 +156,7 @@ export const App = () => {
 
 def update_main_jsx(full_path):
     """
-    Actualiza el archivo src/main.jsx:
-    1. Reemplaza la línea de importación de App.
-    2. Envuelve el contenido de `<StrictMode>` con `<BrowserRouter>`.
+    Actualiza el archivo src/main.jsx
     """
     main_jsx_path = os.path.join(full_path, "src", "main.jsx")
 
@@ -176,28 +171,30 @@ def update_main_jsx(full_path):
         with open(main_jsx_path, "r") as f:
             content = f.read()
 
-        # Reemplazos
-        content = content.replace(
-            "import './index.css'",
-            "import './styles/globals.css'"
-        )
 
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import { App } from './App.jsx'\n"
+            "import { App } from './App.jsx;'\nimport { BrowserRouter } from \"react-router\";\n"
+        )
+
+        # Reemplazos
+        content = content.replace(
+            "import './index.css'",
+            "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';"
         )
 
 
-        # Actualizar el bloque de renderizado
-#         content = content.replace(
-#             """createRoot(document.getElementById('root')).render(
-#   <StrictMode>
-#     <App />
-#   </StrictMode>,
-# )""",
-#             "createRoot(document.getElementById('root')).render(\n  <BrowserRouter>\n    <StrictMode>\n      <App />\n    </StrictMode>\n  </BrowserRouter>\n)"
-#         )
+        # Reemplazos
+        content = content.replace(
+            "<App />",
+            """<BrowserRouter>
+      <App />
+    </BrowserRouter>"""
+        )
+
+
+        ## "createRoot(document.getElementById('root')).render(\n  <BrowserRouter>\n    <StrictMode>\n      <App />\n    </StrictMode>\n  </BrowserRouter>\n)"
 
         # Escribir el contenido actualizado
         with open(main_jsx_path, "w") as f:

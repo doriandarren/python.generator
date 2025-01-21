@@ -8,9 +8,40 @@ def create_folder(path):
 
 
 def generate_file_routes(project_path):
+    generate_app_route(project_path)
     generate_module_public_routes(project_path)
 
 
+def generate_app_route(project_path):
+    """
+    Genera el archivo AppRouter.jsx
+    """
+    # Define la ruta del archivo
+    routes_dir = os.path.join(project_path, "src", "router")
+    file_path = os.path.join(routes_dir, "AppRouter.jsx")
+
+    # Crear la carpeta routes si no existe
+    create_folder(routes_dir)
+
+    # Contenido del archivo AppRoutes.jsx
+    app_routes_content = """import { PublicRoutes } from \"../modules/public/routes/PublicRoutes\";
+
+export const AppRouter = () => {
+  return (
+    <>
+        <PublicRoutes />
+    </>
+  )
+}
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(app_routes_content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
 
 
 def generate_module_public_routes(project_path):
@@ -27,6 +58,8 @@ def generate_module_public_routes(project_path):
     # Contenido del archivo AppRoutes.jsx
     app_routes_content = """import { Navigate, Route, Routes } from \"react-router-dom\";
 import { HomePage } from \"../pages/HomePage\";
+import { AboutPage } from \"../pages/AboutPage\";
+import { ContactPage } from \"../pages/ContactPage\";
 import { MainLayout } from \"../../../layouts/MainLayout\";
 
 export const PublicRoutes = () => {
@@ -40,6 +73,24 @@ export const PublicRoutes = () => {
           element={
             <MainLayout>
               <HomePage />
+            </MainLayout>
+          } 
+        />
+        
+         <Route 
+          path="/about" 
+          element={
+            <MainLayout>
+              <AboutPage />
+            </MainLayout>
+          } 
+        />
+
+        <Route 
+          path="/contact" 
+          element={
+            <MainLayout>
+              <ContactPage />
             </MainLayout>
           } 
         />
