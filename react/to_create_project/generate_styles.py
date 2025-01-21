@@ -28,14 +28,13 @@ def generate_tailwind_styles(full_path, file_name):
 
     # Contenido por defecto
 
-    content = """\
-/*
+    content = """/*
 |--------------------------------------------------------------------------
 | Font
 |--------------------------------------------------------------------------
 |
 */ 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap'); */
 
 
 
@@ -65,6 +64,7 @@ def generate_tailwind_styles(full_path, file_name):
 */
 @layer components {
     
+    /* Button  */
     .btn{
         @apply py-2 px-4 font-semibold rounded-lg shadow-md;
     }
@@ -93,29 +93,28 @@ def generate_tailwind_styles(full_path, file_name):
         @apply  border border-red-500 rounded-lg;
     }
     
-    .card{
-        @apply border rounded-md shadow-sm p-5;
+
+    /* Archivo global.css */
+    .card {
+        @apply shadow border p-4 rounded bg-white;
+    }
+    
+    .card--featured {
+        @apply bg-primary-alpha70 border-primary;
+    }
+    
+    .card__title {
+        @apply text-2xl font-bold text-gray-800;
+    }
+    
+    .card__description {
+        @apply text-gray-600;
+    }
+    
+    .card__button {
+        @apply bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark;
     }
 
-    body {
-        @apply bg-gray-100 text-gray-800;
-    }
-
-    h1{
-        @apply text-3xl text-primary mt-5;
-    }
-
-    h2{
-        @apply text-2xl text-primary mt-5;
-    }
-
-    h3{
-        @apply text-xl text-primary mt-5;
-    }
-
-    p{
-        @apply text-justify mt-5;
-    }
     
 }
 """
@@ -149,7 +148,7 @@ def generate_css_styles(full_path, file_name):
 
     # Contenido por defecto
     content = """:root {
-    --primary: #6834a6;
+    --primary: #6834a6;  /* #6834a6 */
     --white: #FFF;
     --black: #000000;
     --mainFont: 'Poppins', sans-serif;
@@ -206,30 +205,30 @@ img {
 /** Header **/
 
 .header {
-    background-image: url(../assets/images/header_bg.svg);
+    /* background-image: url(../assets/images/header_bg.svg);
     background-repeat: no-repeat;
     background-position: top right;
-    background-size: 45rem;
+    background-size: 45rem; */
     padding: 5rem 0;
 }
 
-@media (min-width: 768px) { 
+/* @media (min-width: 768px) { 
     .header {
         background-size: 50rem;
     }
-}
+} */
 
-@media (min-width: 992px) { 
+/* @media (min-width: 992px) { 
     .header {
         background-size: 60rem;
     }
-}
+} */
 
-@media (min-width: 1280px) { 
+/* @media (min-width: 1280px) { 
     .header {
         background-size: 110rem;
     }
-}
+} */
 
 @media (min-width: 768px) { 
     .header__bar {
@@ -290,6 +289,29 @@ img {
     }
 }
 
+
+/** Navbar **/
+
+.navbar__bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.navbar__logo {
+    width: 15rem;
+    margin: 0 auto 3rem auto;
+}
+
+@media (min-width: 768px) { 
+    .navbar__logo {
+        margin: 0;
+    }
+}
+
+
 /** Navigation **/
 
 .navigation {
@@ -317,7 +339,7 @@ img {
 
 @media (min-width: 768px) { 
     .navigation__link {
-        color: var(--white);
+        color: var(--primary);
     }
 }
 
@@ -504,8 +526,9 @@ img {
 /** Footer **/
 
 .footer {
-    background-color: #5A30A0;
+    background-color: var(--primary);
     padding: 3rem 0;
+    margin-top: 3rem;
 }
 
 @media (min-width: 768px) { 

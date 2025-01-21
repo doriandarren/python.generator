@@ -44,6 +44,9 @@ export const AppRoute = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
+
+
+
 def generate_module_public_routes(project_path):
     """
     Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.
@@ -56,49 +59,32 @@ def generate_module_public_routes(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """import { Navigate, Route, Routes } from \"react-router-dom\";
+    app_routes_content = """import { Navigate, Route, Routes } from \"react-router\";
 import { HomePage } from \"../pages/HomePage\";
 import { AboutPage } from \"../pages/AboutPage\";
 import { ContactPage } from \"../pages/ContactPage\";
-import { MainLayout } from \"../../../layouts/MainLayout\";
+import { HeaderLayout } from \"../../../layouts/components/HeaderLayout\";
+import { FooterLayout } from \"../../../layouts/components/FooterLayout\";
+
 
 export const PublicRoutes = () => {
   return (
     <>
     
+      <HeaderLayout />
+    
       <Routes>
         
-        <Route 
-          path=\"/\" 
-          element={
-            <MainLayout>
-              <HomePage />
-            </MainLayout>
-          } 
-        />
+        <Route path=\"/\" element={<HomePage />} />
+        <Route path=\"/about\" element={<AboutPage />} />
+        <Route path=\"/contact\" element={<ContactPage />} />
         
-         <Route 
-          path="/about" 
-          element={
-            <MainLayout>
-              <AboutPage />
-            </MainLayout>
-          } 
-        />
-
-        <Route 
-          path="/contact" 
-          element={
-            <MainLayout>
-              <ContactPage />
-            </MainLayout>
-          } 
-        />
-
         {/* <Route path=\"/*\" element={ <LoginPage /> } /> */}
         <Route path=\"/*\" element={ <Navigate to=\"/login\" /> } />
         
       </Routes>
+      
+      <FooterLayout />
       
     </>
   )

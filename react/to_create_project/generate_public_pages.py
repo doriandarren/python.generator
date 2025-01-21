@@ -30,30 +30,47 @@ def generate_home_page(project_path):
     home_page_content = """export const HomePage = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="text-center py-16 bg-gradient-to-r from-primary to-secondary text-white p-8 rounded">
-        <h2 className="text-black text-4xl font-bold mb-4">Desarrollo de Software a Medida</h2>
-        <p className="text-lg">Creamos soluciones específicas para tus necesidades.</p>
-      </section>
+      <header className="header">
+          <div className="header__container">
+              <div className="header__grid">
+                  <div className="header__text">
+                      <h1 className="header__heading">Recibe y realiza pagos en tu móvil con nucleus</h1>
+                      <a className="header__button" href="#">Obtener cuenta</a>
+                  </div>
+                  <div className="header__grafico">
+                      <img className="header__image" src={app1} alt="imagen nucleus app" />
+                  </div>
+              </div>
+          </div>
+      </header>
 
-      {/* Services Section */}
-      <section id="services" className="py-16">
-        <h3 className="text-3xl font-semibold text-center mb-8 text-primary-dark">Nuestros Servicios</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 bg-neutral-light rounded-lg shadow">
-            <h4 className="text-xl font-bold mb-2 text-primary">Desarrollo Web</h4>
-            <p>Diseñamos aplicaciones web modernas y personalizadas.</p>
-          </div>
-          <div className="p-6 bg-neutral-light rounded-lg shadow">
-            <h4 className="text-xl font-bold mb-2 text-primary">Apps Móviles</h4>
-            <p>Creamos apps para iOS y Android adaptadas a tu negocio.</p>
-          </div>
-          <div className="p-6 bg-neutral-light rounded-lg shadow">
-            <h4 className="text-xl font-bold mb-2 text-primary">Sistemas Empresariales</h4>
-            <p>Desarrollamos software ERP/CRM adaptado a tus procesos.</p>
-          </div>
+
+      <section className="bg-primary-dark text-white py-16">
+        <div className="container mx-auto text-center px-6">
+          <h2 className="text-4xl font-bold mb-4">Bienvenido a Nucleus</h2>
+          <p className="text-lg mb-6">Creamos soluciones específicas para tus necesidades.</p>
+          <a
+            href="#"
+            className="bg-white text-primary-dark font-medium py-3 px-6 rounded-lg shadow-md hover:bg-gray-100 transition duration-300"
+          >
+            Contáctanos
+          </a>
         </div>
       </section>
+
+
+
+      <div className="card card--featured bg-yellow-100 border-yellow-500">
+        <h2 className="card__title text-2xl font-bold text-gray-800">Título Destacado</h2>
+        <p className="card__description text-gray-600">
+          Este es el contenido destacado de la tarjeta.
+        </p>
+        <button className="btn btn-primary">
+          Leer Más
+        </button>
+      </div>
+
+
     </>
   );
 };
