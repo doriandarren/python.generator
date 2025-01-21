@@ -26,7 +26,7 @@ def generate_app_router(project_path):
     # Contenido del archivo AppRoutes.jsx
     app_routes_content = """import { PublicRoutes } from \"../modules/public/routes/PublicRoutes\";
 
-export const AppRoute = () => {
+export const AppRouter = () => {
   return (
     <>
         <PublicRoutes />

@@ -27,7 +27,8 @@ def generate_home_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo HomePage.jsx
-    home_page_content = """export const HomePage = () => {
+    home_page_content = """import app1 from '../../../assets/images/app_1.svg';\n
+export const HomePage = () => {
   return (
     <>
       <header className="header">

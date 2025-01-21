@@ -12,55 +12,9 @@ def create_folder(path):
 
 
 def generate_layouts(project_path):
-    ##generate_main_layouts(project_path)
     generate_header_layouts(project_path)
     generate_footer_layouts(project_path)
 
-
-
-def generate_main_layouts(project_path):
-    """
-    Genera el archivo MainLayout.jsx dentro de la carpeta layouts.
-    """
-    print_message("Generando MainLayout.jsx...", CYAN)
-
-    # Define la ruta del archivo
-    layouts_dir = os.path.join(project_path, "src", "layouts")
-    file_path = os.path.join(layouts_dir, "MainLayout.jsx")
-
-    # Crear la carpeta layouts si no existe
-    create_folder(layouts_dir)
-
-    # Contenido del archivo MainLayout.jsx
-    main_layout_content = """import { HeaderLayout } from "./components/HeaderLayout";
-import { FooterLayout } from "./components/FooterLayout";
-
-
-export const MainLayout = ({ children }) => {
-
-  return (
-
-    <>
-      
-      <HeaderLayout />
-
-      <main>{children}</main>
-
-      <FooterLayout />
-
-    </>
-
-  );
-};
-"""
-
-    # Crear el archivo y escribir el contenido
-    try:
-        with open(file_path, "w") as file:
-            file.write(main_layout_content)
-        print_message(f"Archivo creado: {file_path}", GREEN)
-    except Exception as e:
-        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
 
 
 def generate_header_layouts(project_path):
