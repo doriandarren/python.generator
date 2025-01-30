@@ -32,10 +32,17 @@ def generate_header_layouts(project_path):
 
     # Contenido del archivo MainLayout.jsx
     main_layout_content = """import { Link, NavLink } from "react-router";
+import classNames from "classnames";
 import logo from '../../assets/images/logo.svg';
 
 
 export const HeaderLayout = () => {
+
+    const navLinks = [
+        { to: "/", label: "Inicio" },
+        { to: "/about", label: "Quienes somos" },
+        { to: "/contact", label: "Contacto" },
+    ];
 
     return (
         <>
@@ -49,26 +56,20 @@ export const HeaderLayout = () => {
                     </div>
 
                     <nav className="navigation">
-                        <NavLink 
-                            className={({ isActive }) => `navigation__link ${ isActive ? 'navigation__link--active' : '' }`}
-                            to="/" 
-                        >
-                            Inicio
-                        </NavLink>
-
-                        <NavLink 
-                            className={({ isActive }) => `navigation__link ${ isActive ? 'navigation__link--active' : '' }`}
-                            to="/about"
-                        >
-                            Quienes somos
-                        </NavLink>
-
-                        <NavLink 
-                            className={({ isActive }) => `navigation__link ${ isActive ? 'navigation__link--active' : '' }`}
-                            to="/contact"
-                        >
-                            Contacto
-                        </NavLink>
+                        {navLinks.map(({ to, label }) => (
+                          <li key={to} className="navigation__item">
+                              <NavLink
+                                to={to}
+                                className={({ isActive }) =>
+                                  classNames("navigation__link", {
+                                    "navigation__link--active": isActive,
+                                  })
+                                }
+                              >
+                                {label}
+                              </NavLink>
+                          </li>
+                        ))}
                         
                     </nav>
 

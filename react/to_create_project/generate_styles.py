@@ -8,6 +8,7 @@ def generate_styles(full_path):
     generate_tailwind_styles(full_path, "globals.css")
     generate_css_styles(full_path, "styles.css")
     generate_normalize_styles(full_path, "normalize.css")
+    generate_scss(full_path, "style.scss")
 
 
 
@@ -1054,6 +1055,221 @@ def generate_normalize_styles(full_path, file_name):
   [hidden] {
     display: none;
   }
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def generate_scss(full_path, file_name):
+    """
+    Genera un archivo CSS en la carpeta src/styles.
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+        file_name (str): Nombre del archivo a generar (por defecto, 'globals.css').
+    """
+    styles_path = os.path.join(full_path, "src", "styles")
+
+    # Crear la carpeta src/styles si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, file_name)
+
+    # Contenido por defecto
+    content = """/*================================
+🎨 Variables Globales 
+================================ */
+:root {
+    --primary: #6834a6; /* Color Principal */
+    --primary-light: #8b5cf6;
+    --primary-dark: #4a1d85;
+  
+    --secondary: #ff8c42;
+    --secondary-light: #ffa866;
+    --secondary-dark: #cc702f;
+  
+    --white: #ffffff;
+    --black: #000000;
+  
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+  
+    /* 🎨 Estados */
+    --success: #28a745;
+    --warning: #ffc107;
+    --error: #dc3545;
+  
+    /* 🎨 Fondo */
+    --background: var(--gray-100);
+    --navbar: var(--primary);
+  
+    /* 🎨 Tipografías */
+    --mainFont: 'Poppins', sans-serif;
+    --secondaryFont: 'Lato', sans-serif;
+}
+  
+/* ================================
+ ✨ Reset & Global Styles
+ ================================ */
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: var(--mainFont);
+    font-size: 2.6rem;
+    line-height: 1.8;
+    background-color: var(--background);
+    color: var(--gray-900);
+}
+  
+/* ================================
+ 🏗️ Tipografía
+ ================================ */
+h1, h2, h3 {
+    font-weight: 900;
+    margin: 2rem 0;
+}
+  
+h1 { font-size: 5rem; }
+h2 { font-size: 4.6rem; }
+h3 { font-size: 3rem; }
+  
+a {
+    text-decoration: none;
+    color: var(--primary);
+    transition: all 0.3s ease-in-out;
+    
+    &:hover {
+      color: var(--primary-dark);
+    }
+}
+  
+/* ================================
+ 🏗️ Layout (Contenedor base)
+ ================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* ================================
+ 🔗 Navegación
+ ================================ */
+.navbar {
+    padding: 1rem;
+    background-color: var(--navbar);
+    
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    &__logo img {
+        height: 50px;
+        width: auto;
+    }
+}
+    
+.navigation {
+    &__list {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+    }
+    
+    &__item {
+        margin: 0;
+    }
+    
+    &__link {
+        color: var(--black);
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s ease-in-out;
+        
+        &:hover {
+            color: var(--primary-light);
+        }
+        
+        &--active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+    }
+}
+  
+/* ================================
+ 🎨 Botones
+ ================================ */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+}
+  
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+  
+.btn-secondary {
+    background-color: var(--secondary);
+    color: var(--white);
+    
+    &:hover {
+        background-color: var(--secondary-dark);
+    }
+}
+  
+/* ================================
+ 📱 Responsive Design
+ ================================ */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .navigation__list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
 """
 
     try:
