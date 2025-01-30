@@ -113,7 +113,7 @@ def update_main_jsx(full_path):
         ## "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';"
         content = content.replace(
             "import './index.css'",
-            "import 'import './styles/normalize.css';\nimport './styles/style.css';"
+            "import './styles/normalize.css';\nimport './styles/style.css';"
         )
 
 
