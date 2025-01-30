@@ -445,6 +445,8 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    list-style: none;
 }
 
 @media (min-width: 768px) { 
