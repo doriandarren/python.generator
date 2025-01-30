@@ -1,10 +1,93 @@
 import os
-from .utils import print_message, GREEN, CYAN
+
+from .utils import print_message, GREEN, CYAN, run_command
+
 
 def generate_styles(full_path):
+    generate_tailwind(full_path)
     generate_tailwind_styles(full_path, "globals.css")
     generate_css_styles(full_path, "styles.css")
     generate_normalize_styles(full_path, "normalize.css")
+
+
+
+
+def generate_tailwind(full_path):
+    """Instala y configura Tailwind CSS."""
+    print_message("Instalando Tailwind CSS...", CYAN)
+    run_command("npm install tailwindcss @tailwindcss/postcss postcss", cwd=full_path)
+
+    tailwind_config = """const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+"""
+
+
+    # Configurar tailwind.config.js
+#     tailwind_config = """\
+# /** @type {import('tailwindcss').Config} */
+# export default {
+#   content: [
+#     "./index.html",
+#     "./src/**/*.{js,ts,jsx,tsx}", // Asegúrate de incluir las extensiones que uses
+#   ],
+#   theme: {
+#     extend: {
+#       fontFamily: {
+#         'sans': ['Lato', 'sans-serif'], // Usar Lato como fuente sans
+#       },
+#       colors: {
+#         primary: {
+#           DEFAULT: '#4f9da6', // Color sólido principal
+#           light: '#7dbdc8',
+#           dark: '#35757d',
+#           alpha10: 'rgba(79, 157, 166, 0.1)', // Transparencia 10%
+#           alpha30: 'rgba(79, 157, 166, 0.3)', // Transparencia 30%
+#           alpha50: 'rgba(79, 157, 166, 0.5)', // Transparencia 50%
+#           alpha70: 'rgba(79, 157, 166, 0.7)', // Transparencia 70%
+#           alpha90: 'rgba(79, 157, 166, 0.9)', // Transparencia 90%
+#         },
+#         secondary: {
+#           DEFAULT: '#78c800',
+#           light: '#a4e542',
+#           dark: '#569300',
+#           alpha10: 'rgba(120, 200, 0, 0.1)',
+#           alpha30: 'rgba(120, 200, 0, 0.3)',
+#           alpha50: 'rgba(120, 200, 0, 0.5)',
+#           alpha70: 'rgba(120, 200, 0, 0.7)',
+#           alpha90: 'rgba(120, 200, 0, 0.9)',
+#         },
+#         accent: {
+#           DEFAULT: '#ff8c42',
+#           light: '#ffa866',
+#           dark: '#cc702f',
+#           alpha10: 'rgba(255, 140, 66, 0.1)',
+#           alpha30: 'rgba(255, 140, 66, 0.3)',
+#           alpha50: 'rgba(255, 140, 66, 0.5)',
+#           alpha70: 'rgba(255, 140, 66, 0.7)',
+#           alpha90: 'rgba(255, 140, 66, 0.9)',
+#         },
+#         neutral: {
+#           DEFAULT: '#eaeaea',
+#           light: '#f7f7f7',
+#           dark: '#bfbfbf',
+#         },
+#         error: '#f44336',
+#         success: '#4caf50',
+#         navbar: '#222831',
+#         background: '#f8fafc',
+#       },
+#     },
+#   },
+#   plugins: [],
+# }
+# """
+    with open(os.path.join(full_path, "postcss.config.mjs"), "w") as f:
+        f.write(tailwind_config)
+    print_message("Tailwind CSS configurado correctamente.", GREEN)
 
 
 
@@ -47,9 +130,37 @@ def generate_tailwind_styles(full_path, file_name):
 | the styles it generates based on your configured design system.
 |
 */ 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Tailwind Theme Variables
+|--------------------------------------------------------------------------
+|
+| Definir variables personalizadas utilizando `@theme`.
+|
+*/
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --color-primary: #4f9da6;
+  --color-primary-light: #7dbdc8;
+  --color-primary-dark: #35757d;
+  --color-primary-alpha70: rgba(79, 157, 166, 0.7);
+  
+  --color-secondary: #78c800;
+  --color-secondary-light: #a4e542;
+  --color-secondary-dark: #569300;
+  
+  --color-error: #f44336;
+  --color-success: #4caf50;
+  --color-navbar: #222831;
+  --color-background: #f8fafc;
+  
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
 
 
 
@@ -64,58 +175,65 @@ def generate_tailwind_styles(full_path, file_name):
 */
 @layer components {
     
-    /* Button  */
-    .btn{
-        @apply py-2 px-4 font-semibold rounded-lg shadow-md;
+    /* Botones */
+    .btn {
+        @apply py-2 px-4 font-semibold rounded-lg shadow-md transition duration-300 ease-in-out;
     }
-    
+
     .btn-primary {
-        @apply py-2 px-4 pl-4 bg-primary text-white font-semibold rounded-lg shadow-sm hover:bg-primary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-75;
+        background-color: var(--color-primary);
+        color: white;
+        @apply shadow-sm hover:bg-[var(--color-primary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
     }
 
     .btn-secondary {
-        @apply py-2 px-4 pl-4 bg-secondary text-white font-semibold rounded-lg shadow-sm hover:bg-secondary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-75;
+        background-color: var(--color-secondary);
+        color: white;
+        @apply shadow-sm hover:bg-[var(--color-secondary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)];
     }
 
     .btn-danger {
-        @apply py-2 px-4 pl-4 bg-error text-white font-semibold rounded-lg shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75;
+        background-color: var(--color-error);
+        color: white;
+        @apply shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400;
     }
 
-    .form-control{
-        @apply w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:outline;
+    /* Inputs */
+    .form-control {
+        @apply w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
     }
 
-    .text-danger{
-        @apply text-red-600;
+    .text-danger {
+        color: var(--color-error);
     }
 
-    .border-danger{
-        @apply  border border-red-500 rounded-lg;
+    .border-danger {
+        border-color: var(--color-error);
+        @apply border rounded-lg;
     }
-    
 
-    /* Archivo global.css */
     .card {
         @apply shadow border p-4 rounded bg-white;
     }
-    
+
     .card--featured {
-        @apply bg-primary-alpha70 border-primary;
+        background-color: var(--color-primary-alpha70);
+        border-color: var(--color-primary);
     }
-    
+
     .card__title {
         @apply text-2xl font-bold text-gray-800;
     }
-    
+
     .card__description {
         @apply text-gray-600;
     }
-    
-    .card__button {
-        @apply bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark;
-    }
 
-    
+    .card__button {
+        background-color: var(--color-primary);
+        color: white;
+        @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
+    }
 }
 """
 
