@@ -27,54 +27,103 @@ def generate_home_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo HomePage.jsx
-    home_page_content = """import app1 from '../../../assets/images/app_1.svg';\n
+    home_page_content = """import app1 from "../../../assets/images/app_1.svg";
+
 export const HomePage = () => {
   return (
     <>
-      <header className="header">
-          <div className="header__container">
-              <div className="header__grid">
-                  <div className="header__text">
-                      <h1 className="header__heading">Recibe y realiza pagos en tu móvil con nucleus</h1>
-                      <a className="header__button" href="#">Obtener cuenta</a>
-                  </div>
-                  <div className="header__grafico">
-                      <img className="header__image" src={app1} alt="imagen nucleus app" />
-                  </div>
-              </div>
+      <main className="main">
+        <div className="main__container">
+          <div className="main__grid">
+            <div className="main__text">
+              <h1 className="main__heading">
+                Recibe y realiza pagos en tu móvil con nucleus
+              </h1>
+              <a className="main__button" href="#">
+                Obtener cuenta
+              </a>
+            </div>
+            <div className="main__graphic">
+              <img
+                className="main__image"
+                src={app1}
+                alt="imagen nucleus app"
+              />
+            </div>
           </div>
-      </header>
+        </div>
+      </main>
 
+      <section className="nucleus">
+        <h2 className="nucleus__heading">¿Qué es?</h2>
+        <div className="nucleus__container">
+          <div className="nucleus__grid">
+            <div className="list__item">
+              <h2 className="list__heading">Fácil</h2>
+              <p className="list__text">
+                Crea una cuenta, envía tu documentación y comienza a utilizar
+                nucleus en un par de horas
+              </p>
+            </div>
 
-      <section className="bg-primary-dark text-white py-16">
-        <div className="container mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-4">Bienvenido a Nucleus</h2>
-          <p className="text-lg mb-6">Creamos soluciones específicas para tus necesidades.</p>
-          <a
-            href="#"
-            className="bg-white text-primary-dark font-medium py-3 px-6 rounded-lg shadow-md hover:bg-gray-100 transition duration-300"
-          >
-            Contáctanos
-          </a>
+            <div className="list__item">
+              <h2 className="list__heading">Seguro</h2>
+              <p className="list__text">
+                Por su tecnología digital nucleus es imposible de hackear o
+                robar
+              </p>
+            </div>
+
+            <div className="list__item">
+              <h2 className="list__heading">Administrable</h2>
+              <p className="list__text">
+                Añade o tranfiere fondos a tu banco, añade limites o controla
+                tus gastos
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
+      <section className="commissions">
+        <div className="commissions__container">
+          <h2 className="commissions__heading">Commissions</h2>
 
+          <div className="commissions__grid">
+            <div className="commissions__content">
+              <p className="commissions__text">
+                The more you use Nucleus, the less you pay:
+              </p>
 
-      <div className="card card--featured bg-yellow-100 border-yellow-500">
-        <h2 className="card__title text-2xl font-bold text-gray-800">Título Destacado</h2>
-        <p className="card__description text-gray-600">
-          Este es el contenido destacado de la tarjeta.
-        </p>
-        <button className="btn btn-primary">
-          Leer Más
-        </button>
-      </div>
+              <div className="list">
+                <div className="list__item list__item--2col">
+                  <p className="list__number">3%</p>
+                  <p className="list__text">
+                    of all your transactions if your total transactions are less
+                    than $999 USD.
+                  </p>
+                </div>
 
+                <div className="list__item list__item--2col">
+                  <p className="list__number">2.5%</p>
+                  <p className="list__text">
+                    of all your transactions if your total transactions exceed
+                    $999 USD.
+                  </p>
+                </div>
+              </div>
+            </div>
 
+            <div className="commissions__image">
+              {/* <img src="img/app_3.svg" alt="App image" /> */}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
+
 """
 
     # Crear el archivo y escribir el contenido

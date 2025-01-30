@@ -46,23 +46,26 @@ export const HeaderLayout = () => {
 
     return (
         <>
-            <div className="navbar__container">
-                <div className="navbar__bar">
+            <header className="header__container">
+                <div className="header__bar">
 
-                    <div className="navbar__logo">
+                    <div className="header__logo">
                         <Link to="/">
                             <img src={logo} alt="logo nucleus" />
                         </Link>
                     </div>
 
-                    <nav className="navigation">
+                    <nav className="navbar">
                         {navLinks.map(({ to, label }) => (
-                          <li key={to} className="navigation__item">
+                          <li 
+                            key={to} 
+                            className="navbar__item"
+                          >
                               <NavLink
                                 to={to}
                                 className={({ isActive }) =>
-                                  classNames("navigation__link", {
-                                    "navigation__link--active": isActive,
+                                  classNames("navbar__link", {
+                                    "navbar__link--active": isActive,
                                   })
                                 }
                               >
@@ -74,7 +77,7 @@ export const HeaderLayout = () => {
                     </nav>
 
                 </div>
-            </div>
+            </header>
         </>
     )
 }
