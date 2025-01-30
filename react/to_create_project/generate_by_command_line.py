@@ -33,6 +33,14 @@ def setup_react_router(full_path):
     print_message("React Router instalado correctamente.", GREEN)
 
 
+
+def setup_classname(full_path):
+    """Instala React Router."""
+    print_message("Instalando React Router...", CYAN)
+    run_command("npm install classnames", cwd=full_path)
+    print_message("ClassNames instalado correctamente.", GREEN)
+
+
 def setup_headlessui(full_path):
     """Instala Headlessui."""
     print_message("Instalando Headlessui...", CYAN)

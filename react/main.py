@@ -28,6 +28,7 @@ def start():
     create_project(full_path)
     install_dependencies(full_path)
     setup_react_router(full_path)
+    setup_classname(full_path)
     setup_headlessui(full_path)             ## Estilos UI
     setup_heroicons(full_path)              ## Icons
     setup_clsx(full_path)                   ## utilidad para construir cadenas de clases condicionalmente
