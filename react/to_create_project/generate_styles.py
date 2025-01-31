@@ -678,9 +678,24 @@ def generate_scss(full_path, file_name):
     content = """/* ================================
    🌍 Variables Globales
 ================================ */
-$primary: #6834a6;
+/* Primary Color */
+$primary: #6834A6;
+$primary-light: #8C5CD1;
+$primary-dark: #4A2375;
+
+/* Secondary Color */
+$secondary: #FF7F50;
+$secondary-light: #FFA07A;
+$secondary-dark: #E65C2F;
+
+/* Neutral Colors */
 $white: #ffffff;
 $black: #000000;
+$gray-light: #EAEAEA;
+$gray-dark: #1A1A1A;
+
+/* Error Color */
+$error: #E63946;  // Rojo vibrante para errores
 $mainFont: "Poppins", sans-serif;
 $maxWidth: 120rem;
 
@@ -715,6 +730,17 @@ h3 { font-size: 3rem; }
 
 a { text-decoration: none; }
 img { max-width: 100%; display: block; }
+
+button, a{
+  border-radius: 10px;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.3s ease-in-out;
+  &:hover{
+    background-color: $primary-dark;
+  }
+}
+
+
 
 /* ================================
    🏗️ Layout (Contenedor base)
@@ -772,11 +798,28 @@ img { max-width: 100%; display: block; }
     color: $primary;
     transition: color 0.3s ease;
 
-    &:hover { color: $black; }
-    &--white { color: $white; }
-    &--active { color: $black; }
+    &:hover { 
+      color: $secondary; 
+    }
+    &--white { 
+      color: $white; 
+    }
+    &--active {
+      color: $secondary; 
+    }
   }
 }
+
+/* Evitar el efecto en los enlaces del navbar */
+.navbar a {
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+
 
 /* ================================
    📌 Main
@@ -913,22 +956,6 @@ img { max-width: 100%; display: block; }
 /* ================================
    📌 Commissions Section
 ================================ */
-
-@media (min-width: 768px) {
-    .commissions__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 5rem;
-      align-items: flex-end;
-    }
-  }
-  
-    @media (min-width: 998px) {
-    .commissions__grid {
-        align-items: flex-end;
-    }
-}
-
 .commissions__text {
     text-align: center;
     font-size: 2.4rem;

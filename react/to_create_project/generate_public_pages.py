@@ -87,7 +87,7 @@ export const HomePage = () => {
 
       <section className="commissions">
         <div className="commissions__container">
-          <h2 className="commissions__heading">Commissions</h2>
+          <h2 className="commissions__heading">Comisiones</h2>
 
           <div className="commissions__grid">
             <div className="commissions__content">
@@ -99,16 +99,14 @@ export const HomePage = () => {
                 <div className="list__item list__item--2col">
                   <p className="list__number">3%</p>
                   <p className="list__text">
-                    of all your transactions if your total transactions are less
-                    than $999 USD.
+                    de todas tus transacciones si tus movimientos son menores a $999 USD
                   </p>
                 </div>
 
                 <div className="list__item list__item--2col">
                   <p className="list__number">2.5%</p>
                   <p className="list__text">
-                    of all your transactions if your total transactions exceed
-                    $999 USD.
+                    de todas tus transacciones si tus movimientos son mayores a $999 USD.
                   </p>
                 </div>
               </div>
