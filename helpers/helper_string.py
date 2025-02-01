@@ -5,7 +5,8 @@ p = inflect.engine()
 def convert_word(word):
     """
     Convierte una palabra o frase a su forma singular y plural,
-    manejando guiones bajos al inicio y al final.
+    limpiando guiones bajos al inicio y al final pero conservando
+    los guiones bajos internos.
 
     Args:
         word (str): La palabra o frase a convertir.
@@ -13,18 +14,12 @@ def convert_word(word):
     Returns:
         dict: Un diccionario con las formas singular y plural.
     """
-    # Guardar los guiones bajos al inicio y al final
-    prefix = ''
-    suffix = ''
-    if word.startswith('_'):
-        prefix = '_'
-    if word.endswith('_'):
-        suffix = '_'
-
-    # Remover guiones bajos para procesar
+    # Limpiar guiones bajos al inicio y al final
     clean_word = word.strip('_')
-    words = clean_word.split('_')  # Separar por guiones bajos
-    last_word = words[-1]          # Última palabra para singular/plural
+
+    # Separar por guiones bajos internos
+    words = clean_word.split('_')
+    last_word = words[-1]  # Tomar la última palabra para pluralizar o singularizar
 
     # Verificar si la última palabra está en plural
     singular_last = p.singular_noun(last_word)
@@ -39,15 +34,10 @@ def convert_word(word):
         singular_form = clean_word  # La palabra original es singular
         plural_form = '_'.join(words[:-1] + [plural_last])
 
-    # Restaurar los guiones bajos originales
-    singular_form = f"{prefix}{singular_form}{suffix}"
-    plural_form = f"{prefix}{plural_form}{suffix}"
-
     return {
         "singular": singular_form,
         "plural": plural_form
     }
-
 
 
 

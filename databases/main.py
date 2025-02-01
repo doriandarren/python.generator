@@ -4,6 +4,7 @@ import sys
 
 from database_connection import get_connection
 ##from php.main import generate
+from helpers.helper_string import convert_word
 
 
 def dd(data):
@@ -33,8 +34,6 @@ def list_tables_and_columns(host, user, password, database):
         tables = cursor.fetchall()
 
 
-        db_structure = {}
-
         # Loop through each table to get its columns
         for (table_name,) in tables:
             print(f"\nTable: {table_name}")
@@ -49,15 +48,22 @@ def list_tables_and_columns(host, user, password, database):
 
             cols = [{"name":column[0]} for column in columns]
 
-            ##dd(cols)
+
+            table_name_format = convert_word(table_name)
+
+            print(table_name_format['singular'])
+
+
 
             # generate(
             #     "API",
             #     "/Users/dorian/PhpstormProjects81/laravel_test/",
-            #     "AgendaUnloading",
-            #     "AgendaUnloadings",
+            #     table_name_format['singular'],
+            #     table_name_format['plural'],
             #     cols
             # )
+
+            dd("OK")
 
 
 
