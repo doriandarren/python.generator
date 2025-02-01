@@ -1,3 +1,4 @@
+from react.to_create_project.generate_components import generate_components
 from react.to_create_project.generate_file_routes import generate_file_routes
 from react.to_create_project.generate_images import generate_images
 from to_create_project.generate_by_command_line import *
@@ -52,6 +53,11 @@ def start():
 
     ## generate Routes
     generate_file_routes(full_path)
+
+    generate_components(full_path)
+
+
+
 
 
 

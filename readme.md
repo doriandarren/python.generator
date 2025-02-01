@@ -27,6 +27,7 @@ python3 main.py
 
 ```sh
 
-
+pip install mysql-connector-python 
+pip install inflect
 
 ```

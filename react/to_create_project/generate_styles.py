@@ -3,13 +3,26 @@ import os
 from .utils import print_message, GREEN, CYAN, run_command
 
 
+
+
+
+
 def generate_styles(full_path):
     ##generate_tailwind(full_path)
     ##generate_tailwind_styles(full_path, "globals.css")
     ##generate_css_styles(full_path, "styles.css")
     generate_normalize_styles(full_path, "normalize.css")
     generate_scss(full_path, "style.scss")
+    setup_sass(full_path)
 
+
+
+def setup_sass(full_path):
+    """Compila SASS."""
+    print_message("Compilando SASS...", CYAN)
+    ##run_command("npm install sass --save-dev", cwd=full_path)
+    run_command("npx sass src/styles/style.scss src/styles/style.css", cwd=full_path)
+    print_message("SASS compilado correctamente.", GREEN)
 
 
 
@@ -675,7 +688,8 @@ def generate_scss(full_path, file_name):
     file_path = os.path.join(styles_path, file_name)
 
     # Contenido por defecto
-    content = """/* ================================
+    content = """@use "sass:color";
+/* ================================
    🌍 Variables Globales
 ================================ */
 /* Primary Color */
@@ -694,9 +708,12 @@ $black: #000000;
 $gray-light: #EAEAEA;
 $gray-dark: #1A1A1A;
 
+$backgroundColor: #fff;
+
+
 /* Error Color */
 $error: #E63946;  // Rojo vibrante para errores
-$mainFont: "Poppins", sans-serif;
+$mainFont: "Popins", sans-serif;
 $maxWidth: 120rem;
 
 /* ================================
@@ -717,6 +734,7 @@ body {
   font-family: $mainFont;
   font-size: 2.6rem;
   line-height: 1.8;
+  background-color: $backgroundColor;
 }
 
 h1, h2, h3 {
@@ -730,16 +748,6 @@ h3 { font-size: 3rem; }
 
 a { text-decoration: none; }
 img { max-width: 100%; display: block; }
-
-button, a{
-  border-radius: 10px;
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.3s ease-in-out;
-  &:hover{
-    background-color: $primary-dark;
-  }
-}
-
 
 
 /* ================================
@@ -779,6 +787,7 @@ button, a{
   }
 }
 
+
 /* ================================
    🔗 Navbar
 ================================ */
@@ -810,15 +819,6 @@ button, a{
   }
 }
 
-/* Evitar el efecto en los enlaces del navbar */
-.navbar a {
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  background-color: transparent !important;
-  box-shadow: none;
-}
-
 
 
 /* ================================
@@ -826,6 +826,7 @@ button, a{
 ================================ */
 .main {
   padding: 5rem 0;
+  color: $primary;
 
   @media (min-width: 768px) {
     &__bar { display: flex; justify-content: space-between; }
@@ -861,20 +862,52 @@ button, a{
     text-align: center;
     color: $white;
     margin-bottom: 4rem;
+    border-radius: 10px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.25);
   }
 }
+
 
 /* ================================
-   📌 Section General
+   📌 Generic Section Styles
 ================================ */
 .section {
-  padding: 4rem 0;
+  padding: 6rem 0;
+  text-align: center;
 
-  &__text {
-    text-align: center;
-    color: #555;
+  &__container {
+    max-width: 120rem;
+    margin: 0 auto;
+    width: 90%;
   }
+
+  &__heading {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: $primary;
+  }
+
+  &__subtitle {
+    font-size: 1.8rem;
+    color: $gray-dark;
+    margin-bottom: 3rem;
+  }
+
+  /* Background Variants */
+  &.bg-primary {
+    background-color: $primary;
+    color: $white;
+  }
+
+  &.bg-secondary {
+    background-color: $secondary;
+    color: $white;
+  }
+
+  
 }
+
 
 /* ================================
    📌 Section - Nucleus
@@ -905,11 +938,15 @@ button, a{
     width: 120%;
     position: absolute;
     transform: rotate(3deg);
+    background-color: $backgroundColor;
   }
 
   &::before { top: -10rem; left: 0; }
-  &::after { bottom: -10rem; left: -1rem; }
+  &::after { bottom: -10rem; left: -1rem; 
+  }
+
 }
+
 
 /* ================================
    📌 List Items
@@ -942,8 +979,6 @@ button, a{
     margin: 0;
   }
 
-  
-
   &__text {
     margin: 0;
     font-size: 2rem;
@@ -956,6 +991,11 @@ button, a{
 /* ================================
    📌 Commissions Section
 ================================ */
+
+.commissions__heading{
+  color: $primary;
+}
+
 .commissions__text {
     text-align: center;
     font-size: 2.4rem;
@@ -965,7 +1005,6 @@ button, a{
         text-align: left;
     }
 }
-
 
 
 
@@ -991,6 +1030,62 @@ button, a{
 
     @media (min-width: 768px) { margin: 0; }
   }
+}
+
+
+
+/* ================================
+   🔘 Button Styles
+================================ */
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 2rem;
+  margin-bottom: 4rem;
+  font-size: 1.8rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+/* 🎨 Button Variants */
+.btn-primary {
+  background-color: $primary;
+  color: $white;
+
+  &:hover {
+    background-color: color.adjust($primary, $lightness: -10%);
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  color: $white;
+
+  &:hover {
+    background-color: color.adjust($secondary, $lightness: -10%);
+  }
+}
+
+.btn-error {
+  background-color: $error;
+  color: $white;
+
+  &:hover {
+    background-color: color.adjust($error, $lightness: -10%);
+  }
+}
+
+/* 🚫 Disabled Button */
+.btn-disabled {
+  background-color: $gray-light;
+  color: $gray-dark;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 """
 
