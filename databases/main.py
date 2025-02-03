@@ -1,15 +1,18 @@
-import json
 import pprint
 import sys
+import os  # Importar os para trabajar con rutas
+
+# Añadir la carpeta raíz del proyecto al sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from database_connection import get_connection
-##from php.main import generate
 from helpers.helper_string import convert_word
+from helpers.helpers import dd
+
+from php.main import generate
 
 
-def dd(data):
-    pprint.pprint(data)
-    sys.exit()
+
 
 
 
@@ -53,17 +56,14 @@ def list_tables_and_columns(host, user, password, database):
 
             print(table_name_format['singular'])
 
+            generate(
+                "API",
+                "/Users/dorian/PhpstormProjects81/laravel_test/",
+                table_name_format['singular'],
+                table_name_format['plural'],
+                cols
+            )
 
-
-            # generate(
-            #     "API",
-            #     "/Users/dorian/PhpstormProjects81/laravel_test/",
-            #     table_name_format['singular'],
-            #     table_name_format['plural'],
-            #     cols
-            # )
-
-            dd("OK")
 
 
 
@@ -83,6 +83,7 @@ def list_tables_and_columns(host, user, password, database):
 
 
 if __name__ == "__main__":
+
     # Your credentials
     host = "127.0.0.1"
     user = "root"

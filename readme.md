@@ -1,5 +1,6 @@
 ## Project Generators
 
+
 ```sh
 cd generators
 python3 main.py
@@ -29,5 +30,34 @@ python3 main.py
 
 pip install mysql-connector-python 
 pip install inflect
+
+
+pip install aiohttp
+
+```
+
+
+
+
+### Ejecucion del programa
+
+databases: proyecto que ejecuta desde una base datos se conecta y genera las tablas. Se ejecuata PHP - OK
+
+
+helpers: carpeta de 
+
+
+
+
+
+### Ollama
+
+```sh
+
+ollama serve
+ollama run llama2
+
+pip install aiohttp
+
 
 ```

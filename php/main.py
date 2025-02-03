@@ -1,18 +1,20 @@
 import os
 import re
 
-from to_api.create_model_file import generate_model_file
-from to_api.create_repository_file import generate_repository_file
-from to_api.create_routes_file import generate_routes_file
-from to_api.create_migration_file import generate_migration_file
-from to_api.create_controller_list_file import generate_controller_list_file
-from to_api.create_controller_show_file import generate_controller_show_file
-from to_api.create_controller_store_file import generate_controller_store_file
-from to_api.create_controller_update_file import generate_controller_update_file
-from to_api.create_controller_destroy_file import generate_controller_destroy_file
-from to_api.create_seeder_file import generate_seeder_file
-from to_api.create_factory_file import generate_factory_file
-from to_api.create_postman_file import generate_postman_file
+## Agregue "php." por si acaso no funciona esto con el kt:
+
+from php.to_api.create_model_file import generate_model_file
+from php.to_api.create_repository_file import generate_repository_file
+from php.to_api.create_routes_file import generate_routes_file
+from php.to_api.create_migration_file import generate_migration_file
+from php.to_api.create_controller_list_file import generate_controller_list_file
+from php.to_api.create_controller_show_file import generate_controller_show_file
+from php.to_api.create_controller_store_file import generate_controller_store_file
+from php.to_api.create_controller_update_file import generate_controller_update_file
+from php.to_api.create_controller_destroy_file import generate_controller_destroy_file
+from php.to_api.create_seeder_file import generate_seeder_file
+from php.to_api.create_factory_file import generate_factory_file
+from php.to_api.create_postman_file import generate_postman_file
 
 
 
@@ -32,6 +34,7 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
     # Obtener la ruta base automáticamente
     ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'main.py'
     ## ruta = os.path.join(base_path, 'api_project/invoices')
+
 
 
     # Path model
