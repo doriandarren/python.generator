@@ -7,7 +7,7 @@ async def query_ollama(prompt):
     ##url = "http://localhost:11434/api/generate"
     url = "http://192.168.1.100:11434/api/generate"
     payload = {
-        "model": "llama2",  # Puedes cambiar por cualquier modelo que tengas instalado
+        "model": "llama3",  # Puedes cambiar por cualquier modelo que tengas instalado
         "prompt": prompt,
         "stream": False
     }
