@@ -21,6 +21,10 @@ python3 main.py
 - python3.exe -m pip install --upgrade pip  // Windows
 - deactivate                                // Deactivate
 
+// Instala los requirimientos:
+pip freeze > requirements.txt     // Crear archivo requerimientos
+pip install -r requirements.txt   // Instalar requerimientos 
+
 ```
 
 
