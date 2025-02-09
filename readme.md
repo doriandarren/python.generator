@@ -58,10 +58,15 @@ helpers: carpeta de
 
 ```sh
 
+OLLAMA_HOST=192.168.1.100:11434 ollama serve
+
 ollama serve
 ollama run llama2
 
 pip install aiohttp
+
+
+
 
 
 ```
