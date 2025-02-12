@@ -5,14 +5,12 @@ from .utils import print_message, GREEN, CYAN, run_command
 
 
 
-
-
 def generate_styles(full_path):
-    ##generate_tailwind(full_path)
-    ##generate_tailwind_styles(full_path, "globals.css")
-    ##generate_css_styles(full_path, "styles.css")
+
+    generate_tailwind(full_path)
+    generate_tailwind_styles(full_path, "globals.css")
     generate_normalize_styles(full_path, "normalize.css")
-    generate_scss(full_path, "style.scss")
+    generate_scss(full_path, "styles.scss")
     setup_sass(full_path)
 
 
@@ -20,8 +18,7 @@ def generate_styles(full_path):
 def setup_sass(full_path):
     """Compila SASS."""
     print_message("Compilando SASS...", CYAN)
-    ##run_command("npm install sass --save-dev", cwd=full_path)
-    run_command("npx sass src/styles/style.scss src/styles/style.css", cwd=full_path)
+    run_command("npx sass src/styles/styles.scss src/styles/styles.css", cwd=full_path)
     print_message("SASS compilado correctamente.", GREEN)
 
 
@@ -248,37 +245,6 @@ def generate_tailwind_styles(full_path, file_name):
         @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
     }
 }
-"""
-
-    try:
-        # Crear o sobrescribir el archivo con el contenido
-        with open(file_path, "w") as f:
-            f.write(content)
-        print_message(f"Archivo generado: {file_path}", GREEN)
-    except Exception as e:
-        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
-
-
-def generate_css_styles(full_path, file_name):
-    """
-    Genera un archivo CSS en la carpeta src/styles.
-
-    Args:
-        full_path (str): Ruta completa del proyecto.
-        file_name (str): Nombre del archivo a generar (por defecto, 'globals.css').
-    """
-    styles_path = os.path.join(full_path, "src", "styles")
-
-    # Crear la carpeta src/styles si no existe
-    if not os.path.exists(styles_path):
-        os.makedirs(styles_path)
-        print_message(f"Carpeta creada: {styles_path}", GREEN)
-
-    # Ruta completa del archivo
-    file_path = os.path.join(styles_path, file_name)
-
-    # Contenido por defecto
-    content = """
 """
 
     try:
@@ -719,6 +685,7 @@ $maxWidth: 120rem;
 /* ================================
    ✨ Reset & Global Styles
 ================================ */
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -736,6 +703,7 @@ body {
   line-height: 1.8;
   background-color: $backgroundColor;
 }
+
 
 h1, h2, h3 {
   font-weight: 900;

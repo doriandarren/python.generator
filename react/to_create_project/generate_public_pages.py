@@ -8,11 +8,64 @@ def create_folder(path):
 
 
 
-def generate_pages(project_path):
+def generate_public_pages(project_path):
+    generate_routes(project_path)
     generate_home_page(project_path)
     generate_contact_page(project_path)
     generate_about_page(project_path)
 
+
+def generate_routes(project_path):
+    """
+    Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.
+    """
+    # Define la ruta del archivo
+    routes_dir = os.path.join(project_path, "src", "modules", "public", "routes")
+    file_path = os.path.join(routes_dir, "PublicRoutes.jsx")
+
+    # Crear la carpeta routes si no existe
+    create_folder(routes_dir)
+
+    # Contenido del archivo AppRoutes.jsx
+    app_routes_content = """import { Navigate, Route, Routes } from \"react-router\";
+import { HomePage } from \"../pages/HomePage\";
+import { AboutPage } from \"../pages/AboutPage\";
+import { ContactPage } from \"../pages/ContactPage\";
+import { HeaderLayout } from \"../../../layouts/components/HeaderLayout\";
+import { FooterLayout } from \"../../../layouts/components/FooterLayout\";
+
+
+export const PublicRoutes = () => {
+  return (
+    <>
+
+      <HeaderLayout />
+
+      <Routes>
+
+        <Route path=\"/home\" element={<HomePage />} />
+        <Route path=\"/about\" element={<AboutPage />} />
+        <Route path=\"/contact\" element={<ContactPage />} />
+
+        {/* <Route path=\"/*\" element={ <LoginPage /> } /> */}
+        <Route path=\"/*\" element={ <Navigate to=\"/auth/login\" /> } />
+
+      </Routes>
+
+      <FooterLayout />
+
+    </>
+  )
+}
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(app_routes_content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
 
 
 def generate_home_page(project_path):
@@ -305,3 +358,5 @@ export const AboutPage = () => {
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
+
+

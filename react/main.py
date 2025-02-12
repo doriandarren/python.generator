@@ -1,12 +1,14 @@
 from react.to_create_project.generate_components import generate_components
-from react.to_create_project.generate_file_routes import generate_file_routes
+from react.to_create_project.generate_file_router import generate_file_router
 from react.to_create_project.generate_images import generate_images
 from to_create_project.generate_by_command_line import *
 from to_create_project.utils import print_message, GREEN, CYAN
 from to_create_project.generate_project_structure import generate_project_structure
 from to_create_project.generate_styles import generate_styles
 from to_create_project.generate_layouts import generate_layouts
-from to_create_project.generate_public_pages import generate_pages
+from to_create_project.generate_public_pages import generate_public_pages
+from to_create_project.generate_dashboard_pages import generate_dashboard_pages
+from to_create_project.generate_auth_pages import generate_auth_pages
 
 
 
@@ -45,20 +47,24 @@ def start():
 
     generate_images(full_path)
 
+
     ## generate MainLayout
     generate_layouts(full_path)
 
-    ## generate HomePages
-    generate_pages(full_path)
+    ## generate Public
+    generate_public_pages(full_path)
 
-    ## generate Routes
-    generate_file_routes(full_path)
+    ## Main Routes
+    generate_file_router(full_path)
 
     generate_components(full_path)
 
 
+    # Dashboard
+    generate_dashboard_pages(full_path)
 
-
+    # Auth
+    generate_auth_pages(full_path)
 
 
 
