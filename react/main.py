@@ -1,14 +1,15 @@
+from to_create_project.utils import print_message, GREEN, CYAN
 from react.to_create_project.generate_components import generate_components
 from react.to_create_project.generate_file_router import generate_file_router
 from react.to_create_project.generate_images import generate_images
-from to_create_project.generate_by_command_line import *
-from to_create_project.utils import print_message, GREEN, CYAN
+from to_create_project.generate_by_command_line import generate_by_command_line
 from to_create_project.generate_project_structure import generate_project_structure
 from to_create_project.generate_styles import generate_styles
 from to_create_project.generate_layouts import generate_layouts
 from to_create_project.generate_public_pages import generate_public_pages
 from to_create_project.generate_dashboard_pages import generate_dashboard_pages
 from to_create_project.generate_auth_pages import generate_auth_pages
+from to_create_project.generate_redux import generate_redux
 
 
 
@@ -27,19 +28,8 @@ def start():
     # Combinar la ruta y el nombre del proyecto
     full_path = f"{project_path}/{project_name}"
 
-    # Crear proyecto y configurar
-    create_project(full_path)
-    install_dependencies(full_path)
-    setup_react_router(full_path)
-    setup_classname(full_path)
-    setup_headlessui(full_path)             ## Estilos UI
-    setup_heroicons(full_path)              ## Icons
-    setup_clsx(full_path)                   ## utilidad para construir cadenas de clases condicionalmente
-    setup_framer_motion(full_path)          ## utilidad para construir cadenas de clases condicionalmente
-    setup_app_jsx(full_path)
-    update_main_jsx(full_path)
-    delete_app_and_index_css(full_path)
 
+    generate_by_command_line(full_path)
 
     generate_project_structure(full_path)
 
@@ -66,12 +56,18 @@ def start():
     # Auth
     generate_auth_pages(full_path)
 
+    # Redux
+    generate_redux(full_path)
+
 
 
 
     # Mensaje final
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
     print_message(f"Para empezar: cd {full_path} && npm run dev", CYAN)
+
+
+
 
 
 if __name__ == "__main__":

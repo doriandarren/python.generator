@@ -5,7 +5,7 @@ import aiohttp
 # Función asíncrona para consultar el modelo
 async def query_ollama(prompt):
     ##url = "http://localhost:11434/api/generate"
-    url = "http://192.168.1.100:11434/api/generate"
+    url = "http://192.168.1.100:11434/v1/completions"
     payload = {
         "model": "llama3",  # Puedes cambiar por cualquier modelo que tengas instalado
         "prompt": prompt,
@@ -16,7 +16,7 @@ async def query_ollama(prompt):
         async with session.post(url, json=payload) as response:
             if response.status == 200:
                 data = await response.json()
-                return data.get("response")
+                return data.get("choices")
             else:
                 return f"Error: {response.status}"
 
@@ -25,9 +25,9 @@ async def query_ollama(prompt):
 # Función principal para ejecutar múltiples consultas asíncronas
 async def main():
     prompts = [
-        "¿dame un código que sume 2 números en pyhton?",
+        # "¿dame un código que sume 2 números en pyhton?",
         # "Explica la teoría de la relatividad de forma simple.",
-        # "¿Cuál es el significado de la vida?"
+        "¿Cuál es el significado de la vida?"
     ]
 
     tasks = [query_ollama(prompt) for prompt in prompts]

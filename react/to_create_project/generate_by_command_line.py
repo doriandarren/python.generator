@@ -3,6 +3,19 @@ from .utils import print_message, GREEN, CYAN, run_command
 
 
 
+def generate_by_command_line(full_path):
+    # Crear proyecto y configurar
+    create_project(full_path)
+    install_dependencies(full_path)
+    setup_classname(full_path)
+    setup_headlessui(full_path)  ## Estilos UI
+    setup_heroicons(full_path)  ## Icons
+    setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
+    setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
+    setup_app_jsx(full_path)
+    update_main_jsx(full_path)
+    delete_app_and_index_css(full_path)
+
 
 
 
@@ -26,17 +39,11 @@ def install_dependencies(full_path):
     run_command("npm install", cwd=full_path)
 
 
-def setup_react_router(full_path):
-    """Instala React Router."""
-    print_message("Instalando React Router...", CYAN)
-    run_command("npm install react-router-dom", cwd=full_path)
-    print_message("React Router instalado correctamente.", GREEN)
-
 
 
 def setup_classname(full_path):
-    """Instala React Router."""
-    print_message("Instalando React Router...", CYAN)
+    """Instala ClassNames."""
+    print_message("Instalando ClassNames...", CYAN)
     run_command("npm install classnames", cwd=full_path)
     print_message("ClassNames instalado correctamente.", GREEN)
 
@@ -106,7 +113,7 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import { App } from './App.jsx';\nimport { BrowserRouter } from \"react-router\";\n"
+            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';"
         )
 
         # Reemplazos
@@ -121,9 +128,11 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "<App />",
-            """<BrowserRouter>
-      <App />
-    </BrowserRouter>"""
+            """<Provider store={store}>
+      <BrowserRouter>
+        <JournalApp />
+      </BrowserRouter>
+    </Provider>"""
         )
 
 

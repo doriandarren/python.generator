@@ -26,16 +26,21 @@ def generate_routes(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo jsx
-    app_routes_content = """import { Route, Routes } from "react-router";
+    app_routes_content = """import { Navigate, Route, Routes } from "react-router";
 import { DashboardPage } from "../pages/DashboardPage";
 
 export const DashboardRoutes = () => {
   return (
     <Routes>
+      
       <Route path="/" element={ <DashboardPage /> } />
+
+      <Route path="/*" element={ <Navigate to="/" /> } />
+      
     </Routes>
   )
 }
+
 """
 
     # Crear el archivo y escribir el contenido

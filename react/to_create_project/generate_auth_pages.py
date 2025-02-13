@@ -31,21 +31,19 @@ def generate_routes(project_path):
 
     # Contenido del archivo jsx
     app_routes_content = """import { Navigate, Route, Routes } from "react-router";
-import { HomePage } from "../../public/pages/HomePage";
-import { LoginPage } from "../pages/LoginPage";
-import { RegisterPage } from "../pages/RegisterPage";
+import { LoginPage, RegisterPage } from "../pages";
 
 export const AuthRoutes = () => {
   return (
     <Routes>
+    
+      <Route path="login" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
 
-        <Route path="/home" element={<HomePage />} />
-        <Route path="auth/login" element={<LoginPage />} />
-        <Route path="auth/register" element={<RegisterPage />} />
-
-        <Route path="/*" element={ <Navigate to="/auth/login" /> } />
-
+      <Route path="/*" element={ <Navigate to="/auth/login" /> } />
+    
     </Routes>
+    
   );
 };
 """

@@ -23,23 +23,25 @@ def generate_app_router(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """import { Navigate, Route, Routes } from "react-router";
-import { HomePage } from "../modules/public/pages/HomePage";
-import { RegisterPage, LoginPage } from "../modules/auth/pages";
+    app_routes_content = """import { Route, Routes } from "react-router";
+import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
+import { DashboardRoutes } from "../modules/dashboard/routes/DashboardRoutes";
+import { PublicRoutes } from "../modules/public/routes/PublicRoutes";
 
 
 export const AppRouter = () => {
   return (
     <Routes>
+    
+      {/* Routes Public */}
+      <Route path="/*" element={ <PublicRoutes /> } />
+      
+      {/* Login y Register */}
+      <Route path="auth/*" element={ <AuthRoutes /> } />
 
-      {/* Login y Registro */}
-      <Route path="/" element={ <HomePage />} />
-      <Route path="auth/login" element={ <LoginPage />} />
-      <Route path="auth/register" element={ <RegisterPage />} />
 
-
-      {/* Routes private */}
-      <Route path="/*" element={ <Navigate to="/auth/login" /> } />
+      {/* Routes Private */}
+      <Route path="/admin/*" element={ <DashboardRoutes /> } />
       
     </Routes>
   )

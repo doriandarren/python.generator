@@ -27,12 +27,12 @@ def generate_routes(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """import { Navigate, Route, Routes } from \"react-router\";
-import { HomePage } from \"../pages/HomePage\";
-import { AboutPage } from \"../pages/AboutPage\";
-import { ContactPage } from \"../pages/ContactPage\";
-import { HeaderLayout } from \"../../../layouts/components/HeaderLayout\";
-import { FooterLayout } from \"../../../layouts/components/FooterLayout\";
+    app_routes_content = """import { Navigate, Route, Routes } from "react-router";
+import { HomePage } from "../pages/HomePage";
+import { AboutPage } from "../pages/AboutPage";
+import { ContactPage } from "../pages/ContactPage";
+import { HeaderLayout } from "../../../layouts/components/HeaderLayout";
+import { FooterLayout } from "../../../layouts/components/FooterLayout";
 
 
 export const PublicRoutes = () => {
@@ -43,12 +43,11 @@ export const PublicRoutes = () => {
 
       <Routes>
 
-        <Route path=\"/home\" element={<HomePage />} />
-        <Route path=\"/about\" element={<AboutPage />} />
-        <Route path=\"/contact\" element={<ContactPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contact" element={<ContactPage />} />
 
-        {/* <Route path=\"/*\" element={ <LoginPage /> } /> */}
-        <Route path=\"/*\" element={ <Navigate to=\"/auth/login\" /> } />
+        <Route path="/*" element={ <Navigate to="/" /> } />
 
       </Routes>
 
