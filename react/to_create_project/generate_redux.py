@@ -40,11 +40,15 @@ def create_file_storejs(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """import { configureStore } from '@reduxjs/toolkit'
+    app_routes_content = """import { configureStore } from "@reduxjs/toolkit";
+import { authSlice } from "./auth";
+
 
 export const store = configureStore({
-  reducer: {},
-})    
+    reducer: {
+        auth: authSlice.reducer,
+    },
+}); 
 """
 
     # Crear el archivo y escribir el contenido
