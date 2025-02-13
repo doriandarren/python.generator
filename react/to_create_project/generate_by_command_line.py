@@ -7,6 +7,7 @@ def generate_by_command_line(full_path):
     # Crear proyecto y configurar
     create_project(full_path)
     install_dependencies(full_path)
+    setup_react_router(full_path)
     setup_classname(full_path)
     setup_headlessui(full_path)  ## Estilos UI
     setup_heroicons(full_path)  ## Icons
@@ -38,6 +39,13 @@ def install_dependencies(full_path):
     print_message("Instalando dependencias...", CYAN)
     run_command("npm install", cwd=full_path)
 
+
+
+def setup_react_router(full_path):
+    """Instala React Router."""
+    print_message("Instalando React Router...", CYAN)
+    run_command("npm install react-router", cwd=full_path)
+    print_message("React Router instalado correctamente.", GREEN)
 
 
 
@@ -130,7 +138,7 @@ def update_main_jsx(full_path):
             "<App />",
             """<Provider store={store}>
       <BrowserRouter>
-        <JournalApp />
+        <App />
       </BrowserRouter>
     </Provider>"""
         )
