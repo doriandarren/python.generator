@@ -1,6 +1,6 @@
 from to_create_project.utils import print_message, GREEN, CYAN
 from react.to_create_project.generate_components import generate_components
-from react.to_create_project.generate_file_router import generate_file_router
+from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
 from to_create_project.generate_by_command_line import generate_by_command_line
 from to_create_project.generate_project_structure import generate_project_structure
@@ -34,8 +34,8 @@ def start():
     generate_project_structure(full_path)
 
     generate_styles(full_path)
-
     generate_images(full_path)
+
 
 
     ## generate MainLayout
@@ -44,8 +44,9 @@ def start():
     ## generate Public
     generate_public_pages(full_path)
 
-    ## Main Routes
-    generate_file_router(full_path)
+    ## React Router
+    generate_react_router(full_path)
+
 
     generate_components(full_path)
 

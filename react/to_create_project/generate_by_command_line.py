@@ -7,14 +7,11 @@ def generate_by_command_line(full_path):
     # Crear proyecto y configurar
     create_project(full_path)
     install_dependencies(full_path)
-    setup_react_router(full_path)
     setup_classname(full_path)
     setup_headlessui(full_path)  ## Estilos UI
     setup_heroicons(full_path)  ## Icons
     setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
-    setup_app_jsx(full_path)
-    update_main_jsx(full_path)
     delete_app_and_index_css(full_path)
 
 
@@ -38,14 +35,6 @@ def install_dependencies(full_path):
     """Instala las dependencias del proyecto."""
     print_message("Instalando dependencias...", CYAN)
     run_command("npm install", cwd=full_path)
-
-
-
-def setup_react_router(full_path):
-    """Instala React Router."""
-    print_message("Instalando React Router...", CYAN)
-    run_command("npm install react-router", cwd=full_path)
-    print_message("React Router instalado correctamente.", GREEN)
 
 
 
@@ -82,78 +71,6 @@ def setup_framer_motion(full_path):
     run_command("npm install framer-motion", cwd=full_path)
     print_message("React FramerMotion instalado correctamente.", GREEN)
 
-
-def setup_app_jsx(full_path):
-    """Reemplaza el contenido de src/App.jsx."""
-    app_jsx_content = """import { AppRouter } from './router/AppRouter';
-
-export const App = () => {
-  return (
-    <>
-        <AppRouter />
-    </>
-  );
-}
-"""
-    with open(os.path.join(full_path, "src", "App.jsx"), "w") as f:
-        f.write(app_jsx_content)
-    print_message("App.jsx configurado correctamente.", GREEN)
-
-
-def update_main_jsx(full_path):
-    """
-    Actualiza el archivo src/main.jsx
-    """
-    main_jsx_path = os.path.join(full_path, "src", "main.jsx")
-
-    # Verificar si el archivo existe
-    if not os.path.exists(main_jsx_path):
-        print_message(f"Error: {main_jsx_path} no existe.", CYAN)
-        return
-
-    try:
-
-        # Leer el contenido del archivo
-        with open(main_jsx_path, "r") as f:
-            content = f.read()
-
-
-        # Reemplazos
-        content = content.replace(
-            "import App from './App.jsx'",
-            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';"
-        )
-
-        # Reemplazos
-        ## "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';" --> Para Tailwind
-        ## "import './styles/normalize.css';\nimport './styles/style.css';"  ---> Para SASS
-        content = content.replace(
-            "import './index.css'",
-            "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';"
-        )
-
-
-        # Reemplazos
-        content = content.replace(
-            "<App />",
-            """<Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>"""
-        )
-
-
-        ## "createRoot(document.getElementById('root')).render(\n  <BrowserRouter>\n    <StrictMode>\n      <App />\n    </StrictMode>\n  </BrowserRouter>\n)"
-
-        # Escribir el contenido actualizado
-        with open(main_jsx_path, "w") as f:
-            f.write(content)
-
-        print_message("main.jsx configurado correctamente.", GREEN)
-
-    except Exception as e:
-        print_message(f"Error al actualizar {main_jsx_path}: {e}", CYAN)
 
 
 
