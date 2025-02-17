@@ -15,8 +15,11 @@ def generate_redux(project_path):
     create_file_storejs(project_path)
     create_barrel_file_storejs(project_path)
 
-    create_slice_file(project_path)
+    create_file_auth_slice(project_path)
     create_barrel_file_slice(project_path)
+
+
+    create_file_thunks_auth(project_path)
 
 
 
@@ -39,7 +42,7 @@ def create_file_storejs(project_path):
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
 
-    # Contenido del archivo AppRoutes.jsx
+    # Contenido del archivo
     app_routes_content = """import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth";
 
@@ -72,7 +75,7 @@ def create_barrel_file_storejs(project_path):
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
 
-    # Contenido del archivo AppRoutes.jsx
+    # Contenido del archivo
     app_routes_content = """export * from \'./store\';"""
 
     # Crear el archivo y escribir el contenido
@@ -86,7 +89,7 @@ def create_barrel_file_storejs(project_path):
 
 
 
-def create_slice_file(project_path):
+def create_file_auth_slice(project_path):
     """
     Genera el archivo
     """
@@ -97,13 +100,13 @@ def create_slice_file(project_path):
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
 
-    # Contenido del archivo AppRoutes.jsx
+    # Contenido del archivo
     app_routes_content = """import { createSlice } from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        status: 'checking', // 'checking', 'not-authenticated', 'authenticated' 
+        status: 'not-authenticated', // 'checking', 'not-authenticated', 'authenticated' 
         uid: null,
         email: null,
         displayName: null,
@@ -149,8 +152,35 @@ def create_barrel_file_slice(project_path):
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
 
-    # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """export * from \'./authSlice\';"""
+    # Contenido del archivo
+    app_routes_content = """export * from \'./authSlice\';
+export * from \'./thunks\';"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(app_routes_content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+
+
+def create_file_thunks_auth(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    routes_dir = os.path.join(project_path, "src", "store", "auth")
+    file_path = os.path.join(routes_dir, "thunks.js")
+
+    # Crear la carpeta routes si no existe
+    create_folder(routes_dir)
+
+    # Contenido del archivo
+    app_routes_content = """
+"""
 
     # Crear el archivo y escribir el contenido
     try:
