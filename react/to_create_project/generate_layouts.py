@@ -74,6 +74,10 @@ export const HeaderLayout = () => {
                           </li>
                         ))}
                         
+                        <li>
+                          <NavLink to="/auth/login" className="btn btn-primary">Login</NavLink>
+                        </li>
+                        
                     </nav>
 
                 </div>

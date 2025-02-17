@@ -27,14 +27,16 @@ async def main():
     prompts = [
         # "¿dame un código que sume 2 números en pyhton?",
         # "Explica la teoría de la relatividad de forma simple.",
-        "¿Cuál es el significado de la vida?"
+        # "¿Cuál es el significado de la vida?"
+        "¿que día es hoy?"
     ]
 
     tasks = [query_ollama(prompt) for prompt in prompts]
     results = await asyncio.gather(*tasks)
 
     for idx, result in enumerate(results):
-        print(f"Respuesta {idx + 1}: {result}")
+        ## print(type(result))
+        print(f"Respuesta {idx + 1}: {result[0]['text']}")
 
 # Ejecutar el bucle de eventos
 if __name__ == "__main__":

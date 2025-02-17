@@ -10,10 +10,37 @@ def create_folder(path):
         print_message(f"Carpeta ya existe: {path}", CYAN)
 
 def generate_images(project_path):
+    generate_icon(project_path)
     generate_image_header_bg(project_path)
     generate_image_logo_svg(project_path)
     generate_image_app_1(project_path)
     generate_image_logo_blanco(project_path)
+
+
+def generate_icon(project_path):
+    """
+    Genera el archivo
+    """
+    print_message("Generando vite.svg...", CYAN)
+
+    # Define la ruta del archivo
+    layouts_dir = os.path.join(project_path, "src", "public")
+    file_path = os.path.join(layouts_dir, "vite.svg")
+
+    # Crear la carpeta layouts si no existe
+    create_folder(layouts_dir)
+
+    # Contenido del archivo
+    main_layout_content = """
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(main_layout_content)
+        print_message(f"Archivo creado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
 
 
 def generate_image_header_bg(project_path):
@@ -126,7 +153,6 @@ def generate_image_logo_svg(project_path):
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
-
 
 
 def generate_image_app_1(project_path):
@@ -1020,11 +1046,6 @@ def generate_image_app_1(project_path):
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
-
-
-
-
-
 
 
 def generate_image_logo_blanco(project_path):
