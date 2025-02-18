@@ -58,6 +58,17 @@ def setup_heroicons(full_path):
     run_command("npm install @heroicons/react", cwd=full_path)
     print_message("Heroicons instalado correctamente.", GREEN)
 
+
+
+def setup_lucide_react(full_path):
+    """Instala Heroicons."""
+    print_message("Instalando LucideReact...", CYAN)
+    run_command("npm install lucide-react", cwd=full_path)
+    print_message("Heroicons instalado correctamente.", GREEN)
+
+
+
+
 def setup_clsx(full_path):
     """Instala Clsx."""
     print_message("Instalando Clsx...", CYAN)

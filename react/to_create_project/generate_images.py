@@ -16,6 +16,15 @@ def generate_images(project_path):
     generate_image_app_1(project_path)
     generate_image_logo_blanco(project_path)
 
+    ## Logo
+    generate_logo_white(project_path)
+    generate_eye_off(project_path)
+    generate_eye_on(project_path)
+
+
+
+
+
 
 def generate_icon(project_path):
     """
@@ -1063,6 +1072,143 @@ def generate_image_logo_blanco(project_path):
 
     # Contenido del archivo
     main_layout_content = """<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525.33 100.53"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M87.43,112.29H61.62V73.06q0-5.16-2.37-7.49a7.64,7.64,0,0,0-5.5-2.32,10.39,10.39,0,0,0-4.62,1.22,15.68,15.68,0,0,0-4.49,3.41,17.32,17.32,0,0,0-3.26,5v39.4H15.57V41.79H38.8V52.45A23,23,0,0,1,45.32,46,30.17,30.17,0,0,1,54.42,42,45.5,45.5,0,0,1,65.7,40.7q7.33,0,11.68,2.54a16.85,16.85,0,0,1,6.52,6.54,25.69,25.69,0,0,1,2.85,8.35,50.9,50.9,0,0,1,.68,7.95Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M99.25,88.18V41.79h25.81V82.18a11,11,0,0,0,2.11,7.14,7.07,7.07,0,0,0,5.78,2.6A16.76,16.76,0,0,0,137,91.4a12,12,0,0,0,4.14-2.06A19.79,19.79,0,0,0,145.31,85V41.79h25.81v42.1q0,3.6,1.08,5A5.23,5.23,0,0,0,176,90.56v21.73c-2.27.46-4.3.8-6.12,1a38.15,38.15,0,0,1-4.75.34q-6.51,0-10.33-2.42a11.11,11.11,0,0,1-4.88-7.37l-.55-2.55a29,29,0,0,1-12,9.46,41.28,41.28,0,0,1-15.83,2.88q-10.73,0-16.51-6.56T99.25,88.18Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M221.92,113.65a44.43,44.43,0,0,1-16.77-2.94,35.4,35.4,0,0,1-12.3-8.08,34.91,34.91,0,0,1-7.61-11.7,37.86,37.86,0,0,1,2-31.73,34.57,34.57,0,0,1,13.32-13.43q8.76-5.07,21.39-5.07,12.92,0,21.74,5.44a34.76,34.76,0,0,1,13.18,14l-25.13,7.62a12.26,12.26,0,0,0-4.28-3.95,11.65,11.65,0,0,0-5.64-1.36,11.83,11.83,0,0,0-6.38,1.77,12.43,12.43,0,0,0-4.56,5,17.12,17.12,0,0,0-1.7,8,17.12,17.12,0,0,0,1.7,7.88,12.41,12.41,0,0,0,4.56,5.1,11.91,11.91,0,0,0,6.38,1.76,12.2,12.2,0,0,0,3.94-.61,11.89,11.89,0,0,0,3.33-1.84,12.16,12.16,0,0,0,2.65-2.85l25.13,7.61a33,33,0,0,1-7.81,10,37.68,37.68,0,0,1-11.68,6.86A44.07,44.07,0,0,1,221.92,113.65Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M264.44,13.12h25.82V83.9a9.38,9.38,0,0,0,1.7,6,6,6,0,0,0,5,2.1,13.09,13.09,0,0,0,3.54-.54A16.07,16.07,0,0,0,304,90l3.26,19a47.26,47.26,0,0,1-10.39,3.4,53.33,53.33,0,0,1-10.94,1.22q-10.32,0-15.89-5.36T264.44,93Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M348.4,113.65a45.66,45.66,0,0,1-16.71-2.87A35.56,35.56,0,0,1,319.4,103a33.48,33.48,0,0,1-7.54-11.38,35.67,35.67,0,0,1-2.59-13.52,39.15,39.15,0,0,1,4.49-18.6,34.18,34.18,0,0,1,13.18-13.61q8.69-5.15,21.46-5.14t21.47,5.08A34.31,34.31,0,0,1,383,59.16a37.4,37.4,0,0,1,4.49,18.06c0,1.34-.08,2.7-.21,4.08s-.3,2.61-.47,3.69H336.71a10.39,10.39,0,0,0,2.11,5.87,10.57,10.57,0,0,0,4.62,3.28,16.19,16.19,0,0,0,5.77,1,17.38,17.38,0,0,0,8-1.9,9.56,9.56,0,0,0,5-5.31L384,94.23a32,32,0,0,1-7.94,10,38.9,38.9,0,0,1-12,6.86A45.74,45.74,0,0,1,348.4,113.65ZM336.17,69.5h23.64a12.53,12.53,0,0,0-2-5.61,10.66,10.66,0,0,0-4.07-3.58,13.77,13.77,0,0,0-11.55,0,10.69,10.69,0,0,0-4.08,3.58A12.53,12.53,0,0,0,336.17,69.5Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M395.27,88.18V41.79h25.81V82.18a11,11,0,0,0,2.11,7.14,7,7,0,0,0,5.77,2.6A16.78,16.78,0,0,0,433,91.4a12,12,0,0,0,4.14-2.06A19.76,19.76,0,0,0,441.32,85V41.79h25.81v42.1c0,2.4.37,4.07,1.09,5A5.23,5.23,0,0,0,472,90.56v21.73c-2.27.46-4.3.8-6.12,1a38.15,38.15,0,0,1-4.75.34q-6.53,0-10.33-2.42a11.08,11.08,0,0,1-4.88-7.37l-.55-2.55a29,29,0,0,1-12,9.46,41.19,41.19,0,0,1-15.82,2.88q-10.73,0-16.51-6.56T395.27,88.18Z" transform="translate(-15.57 -13.12)"/><path class="cls-1" d="M511.28,113.65a56.73,56.73,0,0,1-18.4-3.06,41.45,41.45,0,0,1-15.29-8.89l8.84-15.9a71.25,71.25,0,0,0,12.83,6.79A30.68,30.68,0,0,0,510.47,95a10,10,0,0,0,4.21-.66,2.25,2.25,0,0,0,1.36-2.2,2.51,2.51,0,0,0-.95-2,11,11,0,0,0-3.06-1.6q-2.1-.8-5.36-1.74-8.43-2.93-14.06-5.46a21.3,21.3,0,0,1-8.43-6.2c-1.86-2.44-2.78-5.72-2.78-9.81a22.47,22.47,0,0,1,3.67-12.73A24.77,24.77,0,0,1,495.6,43.9a38.82,38.82,0,0,1,16.5-3.2,49.05,49.05,0,0,1,14.47,2.24A39.56,39.56,0,0,1,540.63,51l-9.78,15.77a68.37,68.37,0,0,0-11.48-6A23.83,23.83,0,0,0,511,59a10.25,10.25,0,0,0-3.05.4,4,4,0,0,0-2,1.19,3.17,3.17,0,0,0-.68,2.12,2.79,2.79,0,0,0,.95,2.19,8.8,8.8,0,0,0,3,1.59c1.36.49,3.07,1,5.16,1.65a106,106,0,0,1,15.08,5.37,21.77,21.77,0,0,1,8.63,6.56C540,82.67,540.9,86,540.9,90.19q0,11-7.95,17.23T511.28,113.65Z" transform="translate(-15.57 -13.12)"/></svg>"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(main_layout_content)
+        print_message(f"Archivo creado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
+
+
+
+
+
+
+def generate_logo_white(project_path):
+    """
+    Genera el archivo
+    """
+    print_message("Generando logo-white.svg...", CYAN)
+
+    # Define la ruta del archivo
+    layouts_dir = os.path.join(project_path, "src", "public")
+    file_path = os.path.join(layouts_dir, "logo-white.svg")
+
+    # Crear la carpeta layouts si no existe
+    create_folder(layouts_dir)
+
+    # Contenido del archivo
+    main_layout_content = """<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.7;}
+	.st1{fill:#FFFFFF;}
+	.st2{opacity:0.8;}
+	.st3{opacity:0.72;}
+	.st4{opacity:0.77;}
+	.st5{opacity:0.9;}
+	.st6{opacity:0.4;}
+	.st7{opacity:0.56;}
+</style>
+<g>
+	<g>
+		<g class="st0">
+			<polygon class="st1" points="955.7329,0.0008 819.1995,34.1339 887.466,170.6672 			"/>
+		</g>
+		<g class="st2">
+			<polygon class="st1" points="101.6444,442.8317 136.534,580.2665 238.9339,512 			"/>
+		</g>
+		<g class="st0">
+			<polygon class="st1" points="375.4669,102.4003 409.6003,204.8002 614.4001,307.2002 546.1332,102.4003 			"/>
+		</g>
+		<g>
+			<polygon class="st1" points="136.534,580.2665 0.0006,1023.9987 238.9339,512 			"/>
+		</g>
+		<g class="st3">
+			<polygon class="st1" points="238.9339,512 0.0006,1023.9987 34.1341,1023.9987 375.4669,750.9329 614.4001,409.6001 			"/>
+		</g>
+		<g class="st4">
+			<polygon class="st1" points="375.4669,750.9329 682.6666,750.9329 614.4001,409.6001 			"/>
+		</g>
+		<g>
+			<polygon class="st1" points="887.466,170.6672 682.6666,750.9329 785.0661,1023.9987 819.1995,1023.9987 989.8659,580.2665 			
+				"/>
+		</g>
+		<g class="st5">
+			<polygon class="st1" points="614.4001,409.6001 682.6666,750.9329 887.466,170.6672 			"/>
+		</g>
+		<g class="st6">
+			<polygon class="st1" points="614.4001,307.2002 614.4001,409.6001 887.466,170.6672 			"/>
+		</g>
+		<g>
+			<path class="st1" d="M819.1995,34.1339H614.4001l-68.2669,68.2665l68.2669,204.7998L887.466,170.6672L819.1995,34.1339z
+				 M648.5331,136.5338c-18.8513,0-34.133-15.2821-34.133-34.1335s15.2817-34.133,34.133-34.133s34.1335,15.2817,34.1335,34.133
+				S667.3845,136.5338,648.5331,136.5338z"/>
+		</g>
+		<g class="st7">
+			<polygon class="st1" points="246.1182,921.5992 341.3334,1023.9987 375.4669,1023.9987 364.7987,819.1993 			"/>
+		</g>
+		<g class="st7">
+			<polygon class="st1" points="997.036,700.0521 921.5994,921.5988 989.8659,1023.9987 1023.9994,1023.9991 			"/>
+		</g>
+	</g>
+</g>
+</svg>
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(main_layout_content)
+        print_message(f"Archivo creado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
+
+
+def generate_eye_off(project_path):
+    """
+    Genera el archivo
+    """
+    print_message("Generando eye_off.svg...", CYAN)
+
+    # Define la ruta del archivo
+    layouts_dir = os.path.join(project_path, "src", "public")
+    file_path = os.path.join(layouts_dir, "eye_off.svg")
+
+    # Crear la carpeta si no existe
+    create_folder(layouts_dir)
+
+    # Contenido del archivo
+    main_layout_content = """<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M2.854 2.146a.5.5 0 1 0-.708.708l3.5 3.498a8.1 8.1 0 0 0-3.366 5.046a.5.5 0 1 0 .98.204a7.1 7.1 0 0 1 3.107-4.528L7.953 8.66a3.5 3.5 0 1 0 4.886 4.886l4.307 4.308a.5.5 0 0 0 .708-.708zm9.265 10.68A2.5 2.5 0 1 1 8.673 9.38zm-1.995-4.824l3.374 3.374a3.5 3.5 0 0 0-3.374-3.374M10 6c-.57 0-1.129.074-1.666.213l-.803-.803A7.7 7.7 0 0 1 10 5c3.693 0 6.942 2.673 7.72 6.398a.5.5 0 0 1-.98.204C16.058 8.327 13.207 6 10 6"/></svg>"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(main_layout_content)
+        print_message(f"Archivo creado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
+
+
+def generate_eye_on(project_path):
+    """
+    Genera el archivo
+    """
+    print_message("Generando eye_on.svg...", CYAN)
+
+    # Define la ruta del archivo
+    layouts_dir = os.path.join(project_path, "src", "public")
+    file_path = os.path.join(layouts_dir, "eye_on.svg")
+
+    # Crear la carpeta
+    create_folder(layouts_dir)
+
+    # Contenido del archivo
+    main_layout_content = """<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><path fill="currentColor" d="M2.984 8.625v.003a.5.5 0 0 1-.612.355c-.431-.114-.355-.611-.355-.611l.018-.062s.026-.084.047-.145a6.7 6.7 0 0 1 1.117-1.982C4.096 5.089 5.605 4 8 4s3.904 1.089 4.802 2.183a6.7 6.7 0 0 1 1.117 1.982a4 4 0 0 1 .06.187l.003.013v.004l.001.002a.5.5 0 0 1-.966.258l-.001-.004l-.008-.025l-.035-.109a5.7 5.7 0 0 0-.945-1.674C11.286 5.912 10.045 5 8 5s-3.285.912-4.028 1.817a5.7 5.7 0 0 0-.945 1.674l-.035.109zM5.5 9.5a2.5 2.5 0 1 1 5 0a2.5 2.5 0 0 1-5 0"/></svg>"""
 
     # Crear el archivo y escribir el contenido
     try:

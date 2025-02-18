@@ -21,7 +21,7 @@ def generate_project_structure(project_path):
     structure = [
         "src/assets/images",
         "src/assets/fonts",
-        "src/components/Button",
+        "src/components",
         "src/router",
         "src/store",
         "src/hooks",
