@@ -28,7 +28,8 @@ async def main():
         # "¿dame un código que sume 2 números en pyhton?",
         # "Explica la teoría de la relatividad de forma simple.",
         # "¿Cuál es el significado de la vida?"
-        "¿que día es hoy?"
+        #"¿que día es hoy?"
+        "Me puedes crear una historia de un dectective en la edad medieval?"
     ]
 
     tasks = [query_ollama(prompt) for prompt in prompts]
@@ -36,7 +37,14 @@ async def main():
 
     for idx, result in enumerate(results):
         ## print(type(result))
-        print(f"Respuesta {idx + 1}: {result[0]['text']}")
+
+        ##print(f"Respuesta {idx + 1}: {result[0]['text']}")
+
+        for r in result:
+            print(f"Respuesta {idx + 1}: {r['text']}")
+            print(f"----")
+
+
 
 # Ejecutar el bucle de eventos
 if __name__ == "__main__":
