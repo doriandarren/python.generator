@@ -20,7 +20,7 @@ def generate_auth_pages(project_path):
 
 def generate_routes(project_path):
     """
-    Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.
+    Genera el archivo
     """
     # Define la ruta del archivo
     routes_dir = os.path.join(project_path, "src", "modules", "auth", "routes")
@@ -59,7 +59,7 @@ export const AuthRoutes = () => {
 
 def generate_login_page(project_path):
     """
-    Genera el archivo HomePage.jsx dentro de la carpeta modules/public/pages.
+    Genera el archivo
     """
     # Define la ruta del archivo
     pages_dir = os.path.join(project_path, "src", "modules", "auth", "pages")
@@ -72,6 +72,8 @@ def generate_login_page(project_path):
     home_page_content = """import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo-white.svg";
+import EyeOff from '../../../assets/images/eye_off.svg';
+import EyeOn from '../../../assets/images/eye_on.svg';
 import { useState } from "react";
 import { Preloader } from "../../../components/Preloader/Preloader";
 

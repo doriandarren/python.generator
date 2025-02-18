@@ -71,7 +71,7 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';"
+            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';\nimport 'animate.css';"
         )
 
         # Reemplazos

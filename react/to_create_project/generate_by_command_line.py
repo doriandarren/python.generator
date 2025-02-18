@@ -10,6 +10,8 @@ def generate_by_command_line(full_path):
     setup_classname(full_path)
     setup_headlessui(full_path)  ## Estilos UI
     setup_heroicons(full_path)  ## Icons
+    setup_lucide_react(full_path)
+    setup_animate_css(full_path)
     setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     delete_app_and_index_css(full_path)
@@ -64,9 +66,14 @@ def setup_lucide_react(full_path):
     """Instala Heroicons."""
     print_message("Instalando LucideReact...", CYAN)
     run_command("npm install lucide-react", cwd=full_path)
-    print_message("Heroicons instalado correctamente.", GREEN)
+    print_message("LucideReact instalado correctamente.", GREEN)
 
 
+def setup_animate_css(full_path):
+    """Instala FramerMotion."""
+    print_message("Instalando AnimateCss...", CYAN)
+    run_command("npm install animate.css --save", cwd=full_path)
+    print_message("AnimateCss instalado correctamente.", GREEN)
 
 
 def setup_clsx(full_path):
@@ -81,6 +88,9 @@ def setup_framer_motion(full_path):
     print_message("Instalando FramerMotion...", CYAN)
     run_command("npm install framer-motion", cwd=full_path)
     print_message("React FramerMotion instalado correctamente.", GREEN)
+
+
+
 
 
 

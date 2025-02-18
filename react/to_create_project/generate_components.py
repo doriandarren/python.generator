@@ -15,6 +15,10 @@ def generate_components(full_path):
     generate_preloader(full_path)
     generate_preloader_css(full_path)
 
+    #DataTable
+    generate_datatable(full_path)
+
+
 
 
 
@@ -202,7 +206,7 @@ def generate_preloader_css(full_path):
 
 
 
-def generate_preloader_css(full_path):
+def generate_datatable(full_path):
     """
     Genera un archivo
 
