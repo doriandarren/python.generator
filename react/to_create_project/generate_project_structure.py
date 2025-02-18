@@ -41,7 +41,7 @@ def generate_project_structure(project_path):
         "src/modules/public/routes",
         ##"src/services",
         ##"src/store/slices",
-        ##"src/utils",
+        "src/helpers",
         "src/styles",
     ]
 

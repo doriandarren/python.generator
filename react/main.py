@@ -10,6 +10,7 @@ from to_create_project.generate_public_pages import generate_public_pages
 from to_create_project.generate_dashboard_pages import generate_dashboard_pages
 from to_create_project.generate_auth_pages import generate_auth_pages
 from to_create_project.generate_redux import generate_redux
+from to_create_project.generate_helpers import generate_helpers
 
 
 
@@ -59,6 +60,10 @@ def start():
 
     # Redux
     generate_redux(full_path)
+
+
+    # Helpers
+    generate_helpers(full_path)
 
 
 
