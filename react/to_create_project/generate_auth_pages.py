@@ -85,7 +85,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -96,10 +96,11 @@ export const LoginPage = () => {
     }
 
     try {
-      await dispatch(login({ email, password }));
+      //await dispatch(login({ email, password }));
       setLoading(false);
-      navigate("/dashboard");
+      navigate("/admin/dashboard");
     } catch (error) {
+      console.log(error);
       setLoading(false);
       alert("Credenciales incorrectas");
     }
@@ -123,7 +124,7 @@ export const LoginPage = () => {
 
         <div className="h-screen xl:h-auto flex xl:py-0 my-10 xl:my-0 bg-white ">
           <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto animate__animated animate__bounceInRight">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <h2 className="intro-x text-2xl xl:text-3xl text-center xl:text-left">
                 Login
               </h2>
@@ -153,7 +154,7 @@ export const LoginPage = () => {
                     >
                       <img
                         className="w-6 h-6"
-                        src={showPassword ? "/eye_off.svg" : "/eye_on.svg"}
+                        src={showPassword ?  EyeOff : EyeOn }
                         alt="Show/Hide password"
                       />
                     </button>

@@ -31,8 +31,8 @@ def generate_routes(project_path):
 import { HomePage } from "../pages/HomePage";
 import { AboutPage } from "../pages/AboutPage";
 import { ContactPage } from "../pages/ContactPage";
-import { HeaderLayout } from "../../../layouts/components/HeaderLayout";
-import { FooterLayout } from "../../../layouts/components/FooterLayout";
+import { HeaderLayout } from "../../../layouts/public/HeaderLayout";
+import { FooterLayout } from "../../../layouts/public/FooterLayout";
 
 
 export const PublicRoutes = () => {
@@ -197,8 +197,8 @@ def generate_contact_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo HomePage.jsx
-    home_page_content = """import { Button } from "../../../layouts/components/Button";
-import { Section } from "../../../layouts/components/Section";
+    home_page_content = """import { Section } from "../../../components/Sections/Section";
+import { Button } from "../../../components/Buttons/Button";
 
 export const ContactPage = () => {
   return (
@@ -291,7 +291,7 @@ def generate_about_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo AboutPage.jsx
-    home_page_content = """import { Section } from "../../../layouts/components/Section";
+    home_page_content = """import { Section } from "../../../components/Sections/Section";
 
 export const AboutPage = () => {
   return (

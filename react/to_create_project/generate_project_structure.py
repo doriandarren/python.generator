@@ -26,7 +26,6 @@ def generate_project_structure(project_path):
         "src/store",
         "src/hooks",
         "src/layouts",
-        "src/layouts/components",
         "src/modules/dashboard/components",
         "src/modules/dashboard/pages",
         "src/modules/dashboard/hooks",
