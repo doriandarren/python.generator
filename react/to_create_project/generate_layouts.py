@@ -208,10 +208,6 @@ export const SessionLayout = ({ children }) => {
 
   const location = useLocation();
 
-  console.log(location.pathname);
-
-
-  // Mapeamos el array de navegación para actualizar 'current' dinámicamente
   const updatedNavigation = navigation.map((item) => ({
     ...item,
     current: location.pathname === item.href, // Marca como activo si la ruta coincide
