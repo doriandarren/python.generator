@@ -98,7 +98,7 @@ def generate_team_page(project_path):
     """
     # Define la ruta del archivo
     pages_dir = os.path.join(project_path, "src", "modules", "dashboard", "pages")
-    file_path = os.path.join(pages_dir, "DashboardPage.jsx")
+    file_path = os.path.join(pages_dir, "TeamPage.jsx")
 
     # Crear la carpeta pages si no existe
     create_folder(pages_dir)
@@ -106,7 +106,7 @@ def generate_team_page(project_path):
     # Contenido de file
     home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
 
-export const DashboardPage = () => {
+export const TeamPage = () => {
 
   return (
     <SessionLayout>
