@@ -103,8 +103,6 @@ def setup_framer_motion(full_path):
 
 
 
-
-
 def delete_app_and_index_css(full_path):
     """
     Elimina los archivos src/App.css y src/index.css si existen.

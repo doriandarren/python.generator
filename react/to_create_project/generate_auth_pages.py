@@ -76,6 +76,7 @@ import EyeOff from '../../../assets/images/eye_off.svg';
 import EyeOn from '../../../assets/images/eye_on.svg';
 import { useState } from "react";
 import { Preloader } from "../../../components/Preloader/Preloader";
+import { useTranslation } from "react-i18next";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -84,6 +85,8 @@ export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -116,8 +119,13 @@ export const LoginPage = () => {
               alt="GlobalFleet - Office"
               src={ImgLogo}
             />
-            <div className="-intro-x font-light text-4xl leading-tight mt-10">
+            <div className="-intro-x font-light text-4xl leading-tight mt-10 text-white">
               The driver’s fellow
+            </div>
+            <div
+              className="-intro-x font-light text-2xl leading-tight text-white"
+            >
+              ERP Edition
             </div>
           </div>
         </div>
@@ -125,8 +133,8 @@ export const LoginPage = () => {
         <div className="h-screen xl:h-auto flex xl:py-0 my-10 xl:my-0 bg-white ">
           <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto animate__animated animate__bounceInRight">
             <form onSubmit={onSubmit}>
-              <h2 className="intro-x text-2xl xl:text-3xl text-center xl:text-left">
-                Login
+              <h2 className="intro-x text-primary text-2xl xl:text-3xl text-center xl:text-left">
+                {t("login_page.title")}
               </h2>
               <div className="intro-x mt-8">
                 <input
@@ -166,22 +174,22 @@ export const LoginPage = () => {
                 <div className="flex items-center mr-auto">
                   <input id="remember-me" type="checkbox" className="form-check-input border mr-2" />
                   <label className="cursor-pointer select-none" htmlFor="remember-me">
-                    Remember me
+                    {t("login_page.remember")}
                   </label>
                 </div>
-                <a href="/reset">Forgot Password?</a>
+                <a href="/reset">{t("login_page.forgot")}</a>
               </div>
               <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                 <button type="submit" className="btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">
-                  Login
+                {t("login_page.btn_login")}
                 </button>
               </div>
             </form>
 
             <div className="intro-x mt-10 xl:mt-24 text-slate-600 text-center xl:text-left">
-              By logging in, you agree to our
-              <a className="text-primary" href="#"> Terms of Service</a> and
-              <a className="text-primary" href="#"> Privacy Policy</a>.
+            {t("login_page.terms_txt1")}
+              <a className="text-primary" href="#"> {t("login_page.terms_txt2")}</a> {t("login_page.terms_txt3")}
+              <a className="text-primary" href="#"> {t("login_page.terms_txt1")}</a>.
             </div>
           </div>
         </div>

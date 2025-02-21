@@ -11,7 +11,16 @@ def create_folder(path):
         print_message(f"Carpeta ya existe: {path}", CYAN)
 
 
+
+
 def generate_project_structure(project_path):
+    create_project_structure(project_path)
+    create_env_file(project_path)
+    create_env_example_file(project_path)
+
+
+
+def create_project_structure(project_path):
     """
     Genera la estructura de carpetas para el proyecto React.
     """
@@ -50,3 +59,51 @@ def generate_project_structure(project_path):
         create_folder(full_path)
 
     print_message("Estructura de carpetas generada con éxito.", GREEN)
+
+
+
+
+def create_env_file(project_path):
+    """
+    Genera el archivo
+    """
+    file_path = os.path.join(project_path, ".env")
+
+
+
+    # Contenido del archivo
+    content = """VITE_APP_TITLE=SiteLocal
+VITE_APP_ENV=local
+VITE_URL_API_BASE=http://project.test/v1/api/
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+
+
+def create_env_example_file(project_path):
+    """
+    Genera el archivo
+    """
+    file_path = os.path.join(project_path, ".env.example")
+
+    # Contenido del archivo
+    content = """VITE_APP_TITLE=SiteLocal
+VITE_APP_ENV=local
+VITE_URL_API_BASE=http://project.test/v1/api/
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")

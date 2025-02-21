@@ -11,6 +11,7 @@ from to_create_project.generate_dashboard_pages import generate_dashboard_pages
 from to_create_project.generate_auth_pages import generate_auth_pages
 from to_create_project.generate_redux import generate_redux
 from to_create_project.generate_helpers import generate_helpers
+from to_create_project.generate_translate import generate_translate
 
 
 
@@ -65,7 +66,8 @@ def start():
     # Helpers
     generate_helpers(full_path)
 
-
+    # Translate
+    generate_translate(full_path)
 
 
     # Mensaje final

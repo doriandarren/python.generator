@@ -153,15 +153,15 @@ def generate_tailwind_styles(full_path, file_name):
 |
 */
 @theme {
-  --font-display: "Satoshi", "sans-serif";
-  --color-primary: #4f9da6;
-  --color-primary-light: #7dbdc8;
-  --color-primary-dark: #35757d;
+  --font-display: "Roboto", "sans-serif";
+  --color-primary: #0096b2;
+  --color-primary-light: #00b4d6;
+  --color-primary-dark: #007a91;
   --color-primary-alpha70: rgba(79, 157, 166, 0.7);
-  
-  --color-secondary: #78c800;
-  --color-secondary-light: #a4e542;
-  --color-secondary-dark: #569300;
+
+  --color-secondary: #0998FC;
+  --color-secondary-light: #09C0FC;
+  --color-secondary-dark: #0976FC;
   
   --color-error: #f44336;
   --color-success: #4caf50;
