@@ -77,73 +77,33 @@ def generate_home_page(project_path):
     # Contenido del archivo HomePage.jsx
     home_page_content = """import { PublicLayout } from "../../../layouts/public/PublicLayout";
 
-
-const offers = [
-  { name: 'Download the app', description: 'Get an exclusive $5 off code', href: '#' },
-  { name: "Return when you're ready", description: '60 days of free returns', href: '#' },
-  { name: 'Sign up for our newsletter', description: '15% off your first order', href: '#' },
-]
-const trendingProducts = [
+const favorites = [
   {
     id: 1,
-    name: 'Machined Pen',
-    color: 'Black',
-    price: '$35',
+    name: 'Black Basic Tee',
+    price: '$32',
     href: '#',
-    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg',
-    imageAlt: 'Black machined steel pen with hexagonal grip and small white logo at top.',
-    availableColors: [
-      { name: 'Black', colorBg: '#111827' },
-      { name: 'Brass', colorBg: '#FDE68A' },
-      { name: 'Chrome', colorBg: '#E5E7EB' },
-    ],
-  },
-  // More products...
-]
-const collections = [
-  {
-    name: 'Desk and Office',
-    description: 'Work from home accessories',
-    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-edition-01.jpg',
-    imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-    href: '#',
-  },
-  {
-    name: 'Self-Improvement',
-    description: 'Journals and note-taking',
-    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-edition-02.jpg',
-    imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-    href: '#',
-  },
-  {
-    name: 'Travel',
-    description: 'Daily commute essentials',
-    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-edition-03.jpg',
-    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-    href: '#',
-  },
-]
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      'My order arrived super quickly. The product is even better than I hoped it would be. Very happy customer over here!',
-    attribution: 'Sarah Peters, New Orleans',
+    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-favorite-01.jpg',
+    imageAlt: "Model wearing women's black cotton crewneck tee.",
   },
   {
     id: 2,
-    quote:
-      'I had to return a purchase that didn’t fit. The whole process was so simple that I ended up ordering two new items!',
-    attribution: 'Kelly McPherson, Chicago',
+    name: 'Off-White Basic Tee',
+    price: '$32',
+    href: '#',
+    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-favorite-02.jpg',
+    imageAlt: "Model wearing women's off-white cotton crewneck tee.",
   },
   {
     id: 3,
-    quote:
-      'Now that I’m on holiday for the summer, I’ll probably order a few more shirts. It’s just so convenient, and I know the quality will always be there.',
-    attribution: 'Chris Paul, Phoenix',
+    name: 'Mountains Artwork Tee',
+    price: '$36',
+    href: '#',
+    imageSrc: 'https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-favorite-03.jpg',
+    imageAlt:
+      "Model wearing women's burgundy red crewneck artwork tee with small white triangle overlapping larger black triangle.",
   },
 ]
-
 
 export const HomePage = () => {
 
@@ -152,235 +112,256 @@ export const HomePage = () => {
     <PublicLayout>
 
       <main>
-        {/* Hero */}
-        <div className="flex flex-col border-b border-gray-200 lg:border-0">
-          <nav aria-label="Offers" className="order-last lg:order-first">
-            <div className="mx-auto max-w-7xl lg:px-8">
-              <ul
-                role="list"
-                className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0"
-              >
-                {offers.map((offer) => (
-                  <li key={offer.name} className="flex flex-col">
-                    <a
-                      href={offer.href}
-                      className="relative flex flex-1 flex-col justify-center bg-white px-4 py-6 text-center focus:z-10"
-                    >
-                      <p className="text-sm text-gray-500">{offer.name}</p>
-                      <p className="font-semibold text-gray-900">{offer.description}</p>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+        {/* Category section */}
+        <section aria-labelledby="category-heading" className="bg-gray-50">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+            <div className="sm:flex sm:items-baseline sm:justify-between">
+              <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
+                Shop by Category
+              </h2>
+              <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
+                Browse all categories
+                <span aria-hidden="true"> &rarr;</span>
+              </a>
             </div>
-          </nav>
 
-          <div className="relative">
-            <div aria-hidden="true" className="absolute hidden h-full w-1/2 bg-gray-100 lg:block" />
-            <div className="relative bg-gray-100 lg:bg-transparent">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8">
-                <div className="mx-auto max-w-2xl py-24 lg:max-w-none lg:py-64">
-                  <div className="lg:pr-16">
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl xl:text-6xl">
-                      Focus on what matters
-                    </h1>
-                    <p className="mt-4 text-xl text-gray-600">
-                      All the charts, datepickers, and notifications in the world can't beat checking off some items on
-                      a paper card.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
-                      >
-                        Shop Productivity
+            <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
+              <div className="group relative aspect-2/1 overflow-hidden rounded-lg sm:row-span-2 sm:aspect-square">
+                <img
+                  alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee."
+                  src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-featured-category.jpg"
+                  className="absolute size-full object-cover group-hover:opacity-75"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-linear-to-b from-transparent to-black opacity-50"
+                />
+                <div className="absolute inset-0 flex items-end p-6">
+                  <div>
+                    <h3 className="font-semibold text-white">
+                      <a href="#">
+                        <span className="absolute inset-0" />
+                        New Arrivals
                       </a>
+                    </h3>
+                    <p aria-hidden="true" className="mt-1 text-sm text-white">
+                      Shop now
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative aspect-2/1 overflow-hidden rounded-lg sm:aspect-auto">
+                <img
+                  alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters."
+                  src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-01.jpg"
+                  className="absolute size-full object-cover group-hover:opacity-75"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-linear-to-b from-transparent to-black opacity-50"
+                />
+                <div className="absolute inset-0 flex items-end p-6">
+                  <div>
+                    <h3 className="font-semibold text-white">
+                      <a href="#">
+                        <span className="absolute inset-0" />
+                        Accessories
+                      </a>
+                    </h3>
+                    <p aria-hidden="true" className="mt-1 text-sm text-white">
+                      Shop now
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative aspect-2/1 overflow-hidden rounded-lg sm:aspect-auto">
+                <img
+                  alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk."
+                  src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-02.jpg"
+                  className="absolute size-full object-cover group-hover:opacity-75"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-linear-to-b from-transparent to-black opacity-50"
+                />
+                <div className="absolute inset-0 flex items-end p-6">
+                  <div>
+                    <h3 className="font-semibold text-white">
+                      <a href="#">
+                        <span className="absolute inset-0" />
+                        Workspace
+                      </a>
+                    </h3>
+                    <p aria-hidden="true" className="mt-1 text-sm text-white">
+                      Shop now
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 sm:hidden">
+              <a href="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+                Browse all categories
+                <span aria-hidden="true"> &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured section */}
+        <section aria-labelledby="cause-heading">
+          <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
+            <div className="absolute inset-0 overflow-hidden">
+              <img
+                alt=""
+                src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
+                className="size-full object-cover"
+              />
+            </div>
+            <div aria-hidden="true" className="absolute inset-0 bg-gray-900/50" />
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+              <h2 id="cause-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Long-term thinking
+              </h2>
+              <p className="mt-3 text-xl text-white">
+                We're committed to responsible, sustainable, and ethical manufacturing. Our small-scale approach allows
+                us to focus on quality and reduce our impact. We're doing our best to delay the inevitable heat-death of
+                the universe.
+              </p>
+              <a
+                href="#"
+                className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
+              >
+                Read our story
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Favorites section */}
+        <section aria-labelledby="favorites-heading">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+            <div className="sm:flex sm:items-baseline sm:justify-between">
+              <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
+                Our Favorites
+              </h2>
+              <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
+                Browse all favorites
+                <span aria-hidden="true"> &rarr;</span>
+              </a>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
+              {favorites.map((favorite) => (
+                <div key={favorite.id} className="group relative">
+                  <img
+                    alt={favorite.imageAlt}
+                    src={favorite.imageSrc}
+                    className="h-96 w-full rounded-lg object-cover group-hover:opacity-75 sm:aspect-2/3 sm:h-auto"
+                  />
+                  <h3 className="mt-4 text-base font-semibold text-gray-900">
+                    <a href={favorite.href}>
+                      <span className="absolute inset-0" />
+                      {favorite.name}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{favorite.price}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 sm:hidden">
+              <a href="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+                Browse all favorites
+                <span aria-hidden="true"> &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA section */}
+        <section aria-labelledby="sale-heading">
+          <div className="overflow-hidden pt-32 sm:pt-14">
+            <div className="bg-gray-800">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="relative pt-48 pb-16 sm:pb-24">
+                  <div>
+                    <h2 id="sale-heading" className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+                      Final Stock.
+                      <br />
+                      Up to 50% off.
+                    </h2>
+                    <div className="mt-6 text-base">
+                      <a href="#" className="font-semibold text-white">
+                        Shop the sale
+                        <span aria-hidden="true"> &rarr;</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="absolute -top-32 left-1/2 -translate-x-1/2 transform sm:top-6 sm:translate-x-0">
+                    <div className="ml-24 flex min-w-max space-x-6 sm:ml-3 lg:space-x-8">
+                      <div className="flex space-x-6 sm:flex-col sm:space-y-6 sm:space-x-0 lg:space-y-8">
+                        <div className="shrink-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-01.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+
+                        <div className="mt-6 shrink-0 sm:mt-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-02.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-y-6 sm:space-x-0 lg:space-y-8">
+                        <div className="shrink-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-favorite-01.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+
+                        <div className="mt-6 shrink-0 sm:mt-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-favorite-02.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex space-x-6 sm:flex-col sm:space-y-6 sm:space-x-0 lg:space-y-8">
+                        <div className="shrink-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-01.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+
+                        <div className="mt-6 shrink-0 sm:mt-0">
+                          <img
+                            alt=""
+                            src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-03-category-02.jpg"
+                            className="size-64 rounded-lg object-cover md:size-72"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="h-48 w-full sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:h-full lg:w-1/2">
-              <img
-                alt=""
-                src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-hero-half-width.jpg"
-                className="size-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Trending products */}
-        <section aria-labelledby="trending-heading" className="bg-white">
-          <div className="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8 lg:py-32">
-            <div className="flex items-center justify-between px-4 sm:px-6 lg:px-0">
-              <h2 id="trending-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-                Trending products
-              </h2>
-              <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
-                See everything
-                <span aria-hidden="true"> &rarr;</span>
-              </a>
-            </div>
-
-            <div className="relative mt-8">
-              <div className="relative w-full overflow-x-auto">
-                <ul
-                  role="list"
-                  className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0"
-                >
-                  {trendingProducts.map((product) => (
-                    <li key={product.id} className="inline-flex w-64 flex-col text-center lg:w-auto">
-                      <div className="group relative">
-                        <img
-                          alt={product.imageAlt}
-                          src={product.imageSrc}
-                          className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75"
-                        />
-                        <div className="mt-6">
-                          <p className="text-sm text-gray-500">{product.color}</p>
-                          <h3 className="mt-1 font-semibold text-gray-900">
-                            <a href={product.href}>
-                              <span className="absolute inset-0" />
-                              {product.name}
-                            </a>
-                          </h3>
-                          <p className="mt-1 text-gray-900">{product.price}</p>
-                        </div>
-                      </div>
-
-                      <h4 className="sr-only">Available colors</h4>
-                      <ul role="list" className="mt-auto flex items-center justify-center space-x-3 pt-6">
-                        {product.availableColors.map((color) => (
-                          <li
-                            key={color.name}
-                            style={{ backgroundColor: color.colorBg }}
-                            className="size-4 rounded-full border border-black/10"
-                          >
-                            <span className="sr-only">{color.name}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-12 px-4 sm:hidden">
-              <a href="#" className="text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-                See everything
-                <span aria-hidden="true"> &rarr;</span>
-              </a>
-            </div>
           </div>
         </section>
-
-        {/* Collections */}
-        <section aria-labelledby="collections-heading" className="bg-gray-100">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-              <h2 id="collections-heading" className="text-2xl font-bold text-gray-900">
-                Collections
-              </h2>
-
-              <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                {collections.map((collection) => (
-                  <div key={collection.name} className="group relative">
-                    <img
-                      alt={collection.imageAlt}
-                      src={collection.imageSrc}
-                      className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-2/1 lg:aspect-square"
-                    />
-                    <h3 className="mt-6 text-sm text-gray-500">
-                      <a href={collection.href}>
-                        <span className="absolute inset-0" />
-                        {collection.name}
-                      </a>
-                    </h3>
-                    <p className="text-base font-semibold text-gray-900">{collection.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Sale and testimonials */}
-        <div className="relative overflow-hidden">
-          {/* Decorative background image and gradient */}
-          <div aria-hidden="true" className="absolute inset-0">
-            <div className="absolute inset-0 mx-auto max-w-7xl overflow-hidden xl:px-8">
-              <img
-                alt=""
-                src="https://tailwindui.com/plus-assets/img/ecommerce-images/home-page-02-sale-full-width.jpg"
-                className="size-full object-cover"
-              />
-            </div>
-            <div className="absolute inset-0 bg-white/75" />
-            <div className="absolute inset-0 bg-linear-to-t from-white via-white" />
-          </div>
-
-          {/* Sale */}
-          <section
-            aria-labelledby="sale-heading"
-            className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pt-32 text-center sm:px-6 lg:px-8"
-          >
-            <div className="mx-auto max-w-2xl lg:max-w-none">
-              <h2 id="sale-heading" className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-                Get 25% off during our one-time sale
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-xl text-gray-600">
-                Most of our products are limited releases that won't come back. Get your favorite items while they're in
-                stock.
-              </p>
-              <a
-                href="#"
-                className="mt-6 inline-block w-full rounded-md border border-transparent bg-gray-900 px-8 py-3 font-medium text-white hover:bg-gray-800 sm:w-auto"
-              >
-                Get access to our one-time sale
-              </a>
-            </div>
-          </section>
-
-          {/* Testimonials */}
-          <section
-            aria-labelledby="testimonial-heading"
-            className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32"
-          >
-            <div className="mx-auto max-w-2xl lg:max-w-none">
-              <h2 id="testimonial-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-                What are people saying?
-              </h2>
-
-              <div className="mt-16 space-y-16 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
-                {testimonials.map((testimonial) => (
-                  <blockquote key={testimonial.id} className="sm:flex lg:block">
-                    <svg
-                      width={24}
-                      height={18}
-                      viewBox="0 0 24 18"
-                      aria-hidden="true"
-                      className="shrink-0 text-gray-300"
-                    >
-                      <path
-                        d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <div className="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
-                      <p className="text-lg text-gray-600">{testimonial.quote}</p>
-                      <cite className="mt-4 block font-semibold text-gray-900 not-italic">
-                        {testimonial.attribution}
-                      </cite>
-                    </div>
-                  </blockquote>
-                ))}
-              </div>
-            </div>
-          </section>
-        </div>
       </main>
+
     </PublicLayout>
     
   );
