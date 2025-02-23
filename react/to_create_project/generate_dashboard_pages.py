@@ -56,8 +56,6 @@ export const DashboardRoutes = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-
-
 def generate_dashboard_page(project_path):
     """
     Genera el archivo jsx dentro de la carpeta modules/dashboard/pages.

@@ -12,6 +12,7 @@ def create_folder(path):
 
 
 def generate_layouts(project_path):
+    generate_public_layouts(project_path)
     generate_public_header_layouts(project_path)
     generate_public_footer_layouts(project_path)
 
@@ -548,6 +549,50 @@ export const HeaderLayout = () => {
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
+
+
+def generate_public_layouts(project_path):
+    """
+    Genera el archivo dentro de la carpeta layouts.
+    """
+    print_message("Generando HeaderLayout.jsx...", CYAN)
+
+    # Define la ruta del archivo
+    layouts_dir = os.path.join(project_path, "src", "layouts", "public")
+    file_path = os.path.join(layouts_dir, "PublicLayout.jsx")
+
+    # Crear la carpeta layouts si no existe
+    create_folder(layouts_dir)
+
+    # Contenido del archivo MainLayout.jsx
+    main_layout_content = """import { FooterLayout } from "./FooterLayout"
+import { HeaderLayout } from "./HeaderLayout"
+
+
+export const PublicLayout = ({children}) => {
+  return (
+    <div className="bg-white">
+    
+        <HeaderLayout />
+
+        {children}
+
+        <FooterLayout />
+
+    </div>
+
+  )
+}
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(main_layout_content)
+        print_message(f"Archivo creado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
+
 
 
 def generate_public_footer_layouts(project_path):

@@ -38,9 +38,7 @@ import { FooterLayout } from "../../../layouts/public/FooterLayout";
 export const PublicRoutes = () => {
   return (
     <>
-
-      <HeaderLayout />
-
+      
       <Routes>
 
         <Route path="/" element={<HomePage />} />
@@ -50,9 +48,7 @@ export const PublicRoutes = () => {
         <Route path="/*" element={ <Navigate to="/" /> } />
 
       </Routes>
-
-      <FooterLayout />
-
+      
     </>
   )
 }
@@ -79,8 +75,7 @@ def generate_home_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo HomePage.jsx
-    home_page_content = """import { FooterLayout } from "../../../layouts/public/FooterLayout";
-import { HeaderLayout } from "../../../layouts/public/HeaderLayout";
+    home_page_content = """import { PublicLayout } from "../../../layouts/public/PublicLayout";
 
 
 const offers = [
@@ -150,13 +145,11 @@ const testimonials = [
 ]
 
 
-
 export const HomePage = () => {
 
   return (
-    <div className="bg-white">
-      
-      <HeaderLayout />
+    
+    <PublicLayout>
 
       <main>
         {/* Hero */}
@@ -388,10 +381,8 @@ export const HomePage = () => {
           </section>
         </div>
       </main>
-
-      <FooterLayout />
-
-    </div>
+    </PublicLayout>
+    
   );
 };
 """

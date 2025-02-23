@@ -9,17 +9,10 @@ def generate_styles(full_path):
 
     generate_tailwind(full_path)
     generate_tailwind_styles(full_path, "globals.css")
-    generate_normalize_styles(full_path, "normalize.css")
-    generate_scss(full_path, "styles.scss")
-    setup_sass(full_path)
+    ##generate_normalize_styles(full_path, "normalize.css")
+    ##generate_scss(full_path, "styles.scss")
+    ##setup_sass(full_path)
 
-
-
-def setup_sass(full_path):
-    """Compila SASS."""
-    print_message("Compilando SASS...", CYAN)
-    run_command("npx sass src/styles/styles.scss src/styles/styles.css", cwd=full_path)
-    print_message("SASS compilado correctamente.", GREEN)
 
 
 
@@ -1281,3 +1274,10 @@ img { max-width: 100%; display: block; }
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def setup_sass(full_path):
+    """Compila SASS."""
+    print_message("Compilando SASS...", CYAN)
+    run_command("npx sass src/styles/styles.scss src/styles/styles.css", cwd=full_path)
+    print_message("SASS compilado correctamente.", GREEN)

@@ -76,10 +76,10 @@ def update_main_jsx(full_path):
 
         # Reemplazos
         ## "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';" --> Para Tailwind
-        ## "import './styles/normalize.css';\nimport './styles/style.css';"  ---> Para SASS
+        ## "import './styles/normalize.css';\nimport './styles/style.css';\n"  ---> Para SASS
         content = content.replace(
             "import './index.css'",
-            "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';"
+            "import './styles/globals.css';\n"
         )
 
 
