@@ -55,6 +55,7 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
+        lng: "es",
         fallbackLng: "es",
         debug: true,
         interpolation: {
@@ -105,6 +106,10 @@ def create_locales_es(project_path):
     "record_saved": "Registro guardado",
     "record_deleted": "Registro eliminado",
     "record_updated": "Registro actualizado"
+  },
+  "menu": {
+    "contact": "Contacto",
+    "about": "¿Quienes somos?"
   },
   "login_page":{
     "title": "Bienvend@ Globalfleet",
@@ -295,6 +300,10 @@ def create_locales_en(project_path):
     "record_saved": "Record saved",
     "record_deleted": "Record deleted",
     "record_updated": "Record updated"
+  },
+  "menu": {
+    "contact": "Contact",
+    "about": "About"
   },
   "login_page": {
     "title": "Welcome to GlobalFleet",
