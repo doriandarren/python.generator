@@ -44,10 +44,8 @@ def start():
 
 
 
-    ## generate MainLayout
+    ## Layouts
     generate_public_layouts(full_path)
-
-    ## generate MainLayout
     generate_private_layouts(full_path)
 
 
