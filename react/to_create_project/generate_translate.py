@@ -49,13 +49,14 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import HttpBackend from "i18next-http-backend";
 
+const storedLang = localStorage.getItem("i18nextLng") || "es"
 
 i18n
     .use(HttpBackend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        lng: "es",
+        lng: storedLang,
         fallbackLng: "es",
         debug: true,
         interpolation: {
@@ -140,6 +141,7 @@ def create_locales_es(project_path):
   "actions": "Acciones",
   "dashboard": "Inicio",
   "logout": "Cerrar sesión",
+  "profile": "Perfil",
   "resources": "Recursos",
   "home": "Inicio",
   "search": "Buscar",
@@ -334,6 +336,7 @@ def create_locales_en(project_path):
   "actions": "Actions",
   "dashboard": "Home",
   "logout": "Log out",
+  "profile": "Your profile",
   "resources": "Resources",
   "home": "Home",
   "search": "Search",

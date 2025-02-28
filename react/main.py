@@ -5,7 +5,8 @@ from react.to_create_project.generate_images import generate_images
 from to_create_project.generate_by_command_line import generate_by_command_line
 from to_create_project.generate_project_structure import generate_project_structure
 from to_create_project.generate_styles import generate_styles
-from to_create_project.generate_layouts import generate_layouts
+from to_create_project.generate_public_layouts import generate_public_layouts
+from to_create_project.generate_private_layouts import generate_private_layouts
 from to_create_project.generate_public_pages import generate_public_pages
 from to_create_project.generate_dashboard_pages import generate_dashboard_pages
 from to_create_project.generate_auth_pages import generate_auth_pages
@@ -41,7 +42,12 @@ def start():
 
 
     ## generate MainLayout
-    generate_layouts(full_path)
+    generate_public_layouts(full_path)
+
+    ## generate MainLayout
+    generate_private_layouts(full_path)
+
+
 
     ## generate Public
     generate_public_pages(full_path)
