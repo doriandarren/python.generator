@@ -64,12 +64,6 @@ import {
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-const navigation = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: false },
-  { name: "Team", href: "/admin/team", icon: UsersIcon, current: true },
-];
-
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -82,12 +76,19 @@ export const SessionLayout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
 
   const onLogout = () => {
     navigate("/auth/login");
   }
+
+  
+
+  const navigation = [
+    { name: t("dashboard"), href: "/admin/dashboard", icon: HomeIcon, current: false },
+    { name: t("team"), href: "/admin/team", icon: UsersIcon, current: true },
+  ];
 
 
   const userNavigation = [
@@ -100,6 +101,14 @@ export const SessionLayout = ({ children }) => {
     ...item,
     current: location.pathname === item.href, // Marca como activo si la ruta coincide
   }));
+
+
+  const setChangeLanguaje = (event) => {
+    const selectedLanguage = event.target.value;
+    console.log(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+    localStorage.setItem("i18nextLng", selectedLanguage); 
+  }
 
 
   return (
@@ -253,6 +262,17 @@ export const SessionLayout = ({ children }) => {
                 className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
               />
 
+
+                    <select
+                      id="location"
+                      name="location"
+                      value={i18n.language}
+                      onChange={(e) => setChangeLanguaje(e)}
+                      className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    >
+                      <option value="es">Español</option>
+                      <option value="en">Inglés</option>
+                    </select>
               {/* Profile dropdown */}
               <Menu as="div" className="relative">
                 <MenuButton className="-m-1.5 flex items-center p-1.5">

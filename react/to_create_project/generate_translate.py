@@ -262,7 +262,8 @@ def create_locales_es(project_path):
   "account_holder": "Titular de la cuenta",
   "due_date_by_days": "A cuantos días",
   "due_date_days": "Vencimiento el día",
-  "customer_code": "Código de cliente"
+  "customer_code": "Código de cliente",
+  "team": "Equipo"
 }
 """
 
@@ -457,7 +458,8 @@ def create_locales_en(project_path):
   "account_holder": "Account Holder",
   "due_date_by_days": "Due in Days",
   "due_date_days": "Due Date",
-  "customer_code": "Customer Code"
+  "customer_code": "Customer Code",
+  "team": "Team"
 }
 """
 
