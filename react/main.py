@@ -13,6 +13,9 @@ from to_create_project.generate_auth_pages import generate_auth_pages
 from to_create_project.generate_redux import generate_redux
 from to_create_project.generate_helpers import generate_helpers
 from to_create_project.generate_translate import generate_translate
+from to_create_project.generate_env import generate_env
+from to_create_project.generate_gitignore import generate_gitignore
+from to_create_project.generate_readme import generate_readme
 
 
 
@@ -74,6 +77,12 @@ def start():
 
     # Translate
     generate_translate(full_path)
+
+    generate_env(full_path)
+
+    generate_gitignore(full_path)
+
+    generate_readme(full_path)
 
 
     # Mensaje final
