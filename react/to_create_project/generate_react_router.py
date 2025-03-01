@@ -74,14 +74,6 @@ def update_main_jsx(full_path):
             "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';\nimport 'animate.css';"
         )
 
-        # Reemplazos
-        ## "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';" --> Para Tailwind
-        ## "import './styles/normalize.css';\nimport './styles/style.css';\n"  ---> Para SASS
-        content = content.replace(
-            "import './index.css'",
-            "import './styles/globals.css';\n"
-        )
-
 
         # Reemplazos
         content = content.replace(

@@ -7,12 +7,61 @@ from .utils import print_message, GREEN, CYAN, run_command
 
 def generate_styles(full_path):
 
-    generate_tailwind(full_path)
-    generate_tailwind_styles(full_path, "globals.css")
-    ##generate_normalize_styles(full_path, "normalize.css")
-    ##generate_scss(full_path, "styles.scss")
-    ##setup_sass(full_path)
+    update_main_jsx(full_path)
 
+    generate_tailwind(full_path)
+    generate_tailwind_styles(full_path)
+
+    ##generate_normalize_styles(full_path, "normalize.css")
+    create_scss_styles(full_path)
+    create_scss_variables(full_path)
+
+    install_compile_sass(full_path)
+
+
+
+
+
+def update_main_jsx(full_path):
+    """
+    Actualiza el archivo src/main.jsx
+    """
+    main_jsx_path = os.path.join(full_path, "src", "main.jsx")
+
+    # Verificar si el archivo existe
+    if not os.path.exists(main_jsx_path):
+        print_message(f"Error: {main_jsx_path} no existe.", CYAN)
+        return
+
+    try:
+
+        # Leer el contenido del archivo
+        with open(main_jsx_path, "r") as f:
+            content = f.read()
+
+        # Reemplazos
+        content = content.replace(
+            "import './index.css'",
+            "import './styles/globals.css';\n"
+        )
+
+
+        # Reemplazos
+        ## "import './styles/globals.css';\nimport './styles/normalize.css';\nimport './styles/styles.css';" --> Para Tailwind
+        ## "import './styles/normalize.css';\nimport './styles/style.css';\n"  ---> Para SASS
+        content = content.replace(
+            "import './styles/globals.css';",
+            "import './styles/globals.css';\nimport './styles/styles.css';"
+        )
+
+        # Escribir el contenido actualizado
+        with open(main_jsx_path, "w") as f:
+            f.write(content)
+
+        print_message("main.jsx configurado correctamente.", GREEN)
+
+    except Exception as e:
+        print_message(f"Error al actualizar {main_jsx_path}: {e}", CYAN)
 
 
 
@@ -94,13 +143,12 @@ export default config;
     print_message("Tailwind CSS configurado correctamente.", GREEN)
 
 
-def generate_tailwind_styles(full_path, file_name):
+def generate_tailwind_styles(full_path):
     """
     Genera un archivo CSS en la carpeta src/styles.
 
     Args:
         full_path (str): Ruta completa del proyecto.
-        file_name (str): Nombre del archivo a generar (por defecto, 'globals.css').
     """
     styles_path = os.path.join(full_path, "src", "styles")
 
@@ -110,7 +158,7 @@ def generate_tailwind_styles(full_path, file_name):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, file_name)
+    file_path = os.path.join(styles_path, "globals.css")
 
     # Contenido por defecto
 
@@ -122,6 +170,14 @@ def generate_tailwind_styles(full_path, file_name):
 */ 
 /* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap'); */
 
+
+/*
+|--------------------------------------------------------------------------
+| Variables
+|--------------------------------------------------------------------------
+|
+*/ 
+@import "./variables.scss";
 
 
 /*
@@ -137,33 +193,6 @@ def generate_tailwind_styles(full_path, file_name):
 
 
 
-/*
-|--------------------------------------------------------------------------
-| Tailwind Theme Variables
-|--------------------------------------------------------------------------
-|
-| Definir variables personalizadas utilizando `@theme`.
-|
-*/
-@theme {
-  --font-display: "Roboto", "sans-serif";
-  --color-primary: #0096b2;
-  --color-primary-light: #00b4d6;
-  --color-primary-dark: #007a91;
-  --color-primary-alpha70: rgba(79, 157, 166, 0.7);
-
-  --color-secondary: #0998FC;
-  --color-secondary-light: #09C0FC;
-  --color-secondary-dark: #0976FC;
-  
-  --color-error: #f44336;
-  --color-success: #4caf50;
-  --color-navbar: #222831;
-  --color-background: #f8fafc;
-  
-  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
-}
 
 
 
@@ -175,69 +204,12 @@ def generate_tailwind_styles(full_path, file_name):
 |
 | Import layer components.
 |
-*/
+
 @layer components {
     
-    /* Botones */
-    .btn {
-        @apply py-2 px-4 font-semibold rounded-lg shadow-md transition duration-300 ease-in-out;
-    }
-
-    .btn-primary {
-        background-color: var(--color-primary);
-        color: white;
-        @apply shadow-sm hover:bg-[var(--color-primary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
-    }
-
-    .btn-secondary {
-        background-color: var(--color-secondary);
-        color: white;
-        @apply shadow-sm hover:bg-[var(--color-secondary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)];
-    }
-
-    .btn-danger {
-        background-color: var(--color-error);
-        color: white;
-        @apply shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400;
-    }
-
-    /* Inputs */
-    .form-control {
-        @apply w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
-    }
-
-    .text-danger {
-        color: var(--color-error);
-    }
-
-    .border-danger {
-        border-color: var(--color-error);
-        @apply border rounded-lg;
-    }
-
-    .card {
-        @apply shadow border p-4 rounded bg-white;
-    }
-
-    .card--featured {
-        background-color: var(--color-primary-alpha70);
-        border-color: var(--color-primary);
-    }
-
-    .card__title {
-        @apply text-2xl font-bold text-gray-800;
-    }
-
-    .card__description {
-        @apply text-gray-600;
-    }
-
-    .card__button {
-        background-color: var(--color-primary);
-        color: white;
-        @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
-    }
 }
+*/
+
 """
 
     try:
@@ -628,7 +600,7 @@ def generate_normalize_styles(full_path, file_name):
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-def generate_scss(full_path, file_name):
+def generate_scss_BK_NO_BORRAR_(full_path, file_name):
     """
     Genera un archivo CSS en la carpeta src/styles.
 
@@ -1276,8 +1248,98 @@ img { max-width: 100%; display: block; }
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-def setup_sass(full_path):
+
+
+def create_scss_styles(full_path):
+    """
+    Genera un archivo CSS en la carpeta src/styles.
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+
+    styles_path = os.path.join(full_path, "src", "styles")
+
+    # Crear la carpeta src/styles si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "styles.scss")
+
+    # Contenido por defecto
+    content = """
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_scss_variables(full_path):
+    """
+    Genera un archivo CSS en la carpeta src/styles.
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+
+    styles_path = os.path.join(full_path, "src", "styles")
+
+    # Crear la carpeta src/styles si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "variables.scss")
+
+    # Contenido por defecto
+    content = """// 📌 src/styles/variables.scss
+:root {
+  --primary-color: #1e40af;
+  --secondary-color: #9333ea;
+  --danger-color: #dc2626;
+  --success-color: #16a34a;
+}
+
+// Variables de SASS para usar en otros archivos SCSS
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$danger-color: var(--danger-color);
+$success-color: var(--success-color);
+
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def install_compile_sass(full_path):
     """Compila SASS."""
+
+    print_message("Instalando SASS...", CYAN)
+    run_command("npm install -D sass", cwd=full_path)
+    print_message("SASS intalado correctamente.", GREEN)
+
     print_message("Compilando SASS...", CYAN)
     run_command("npx sass src/styles/styles.scss src/styles/styles.css", cwd=full_path)
     print_message("SASS compilado correctamente.", GREEN)
+
+
+
+
+
+
+
+

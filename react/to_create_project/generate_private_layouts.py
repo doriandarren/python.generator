@@ -72,13 +72,18 @@ function classNames(...classes) {
 export const SessionLayout = ({ children }) => {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
+
   const { t, i18n } = useTranslation();
   
+
   const onLogout = () => {
     navigate("/auth/login");
   }
+
+  
 
   const navigation = [
     { name: t("dashboard"), href: "/admin/dashboard", icon: HomeIcon, current: false },
@@ -100,6 +105,7 @@ export const SessionLayout = ({ children }) => {
 
   const setChangeLanguage = (event) => {
     const selectedLanguage = event.target.value;
+    console.log(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
     localStorage.setItem("i18nextLng", selectedLanguage); 
   }
@@ -321,7 +327,7 @@ export const SessionLayout = ({ children }) => {
         </div>
 
         <main className="py-10">
-          <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+          <div className="px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn animate__faster">{children}</div>
         </main>
       </div>
     </>
