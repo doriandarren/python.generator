@@ -105,7 +105,6 @@ export const SessionLayout = ({ children }) => {
 
   const setChangeLanguage = (event) => {
     const selectedLanguage = event.target.value;
-    console.log(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
     localStorage.setItem("i18nextLng", selectedLanguage); 
   }
@@ -275,7 +274,7 @@ export const SessionLayout = ({ children }) => {
                     </select>
               {/* Profile dropdown */}
               <Menu as="div" className="relative">
-                <MenuButton className="-m-1.5 flex items-center p-1.5">
+                <MenuButton className="-m-1.5 flex items-center p-1.5 mr-5">
                   <span className="sr-only">Open user menu</span>
                   <img
                     alt=""

@@ -180,6 +180,7 @@ def generate_tailwind_styles(full_path):
 @import "./variables.scss";
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Tailwind Directives
@@ -193,7 +194,33 @@ def generate_tailwind_styles(full_path):
 
 
 
+/*
+|--------------------------------------------------------------------------
+| Tailwind Theme Variables
+|--------------------------------------------------------------------------
+|
+| Definir variables personalizadas utilizando `@theme`.
+|
+*/
+@theme {
+  --font-display: "Roboto", "sans-serif";
+  --color-primary: #0096b2;
+  --color-primary-light: #00b4d6;
+  --color-primary-dark: #007a91;
+  --color-primary-alpha70: rgba(79, 157, 166, 0.7);
 
+  --color-secondary: #0998FC;
+  --color-secondary-light: #09C0FC;
+  --color-secondary-dark: #0976FC;
+
+  --color-error: #f44336;
+  --color-success: #4caf50;
+  --color-navbar: #222831;
+  --color-background: #f8fafc;
+
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+} 
 
 
 
