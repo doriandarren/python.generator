@@ -42,7 +42,7 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import './index.css'",
-            "import './styles/globals.css';\n"
+            "import './styles/globals.css';"
         )
 
 
