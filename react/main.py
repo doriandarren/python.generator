@@ -7,8 +7,8 @@ from to_create_project.generate_project_structure import generate_project_struct
 from to_create_project.generate_styles import generate_styles
 from to_create_project.generate_public_layouts import generate_public_layouts
 from to_create_project.generate_private_layouts import generate_private_layouts
-from to_create_project.generate_public_pages import generate_public_pages
-from to_create_project.generate_dashboard_pages import generate_dashboard_pages
+from to_create_project.generate_module_public import generate_module_public
+from to_create_project.generate_module_dashboard import generate_module_dashboard
 from to_create_project.generate_module_auth import generate_module_auth
 from to_create_project.generate_redux import generate_redux
 from to_create_project.generate_helpers import generate_helpers
@@ -51,7 +51,7 @@ def start():
 
 
     ## generate Public
-    generate_public_pages(full_path)
+    generate_module_public(full_path)
 
     ## React Router
     generate_react_router(full_path)
@@ -61,7 +61,7 @@ def start():
 
 
     # Dashboard
-    generate_dashboard_pages(full_path)
+    generate_module_dashboard(full_path)
 
     # Auth
     generate_module_auth(full_path)

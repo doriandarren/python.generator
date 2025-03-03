@@ -47,7 +47,7 @@ export const Button = ({children, type="button", variant="primary", onClick, cla
   return (
     <button
         type={type}
-        className={classNames("btn", `btn--${variant}`, className, { "btn--disabled": disabled })}
+        className={classNames("btn", "py-3", "px-4", "w-full", "xl:w-32", "xl:mr-3", `btn-${variant}`, className, { "btn--disabled": disabled })}
         onClick={onClick}
         disabled={disabled}
     >

@@ -77,6 +77,7 @@ import EyeOn from '../../../assets/images/eye_on.svg';
 import { useState } from "react";
 import { Preloader } from "../../../components/Preloader/Preloader";
 import { useTranslation } from "react-i18next";
+import { Button } from "../../../components/Buttons/Button";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -139,16 +140,16 @@ export const LoginPage = () => {
               <div className="intro-x mt-8">
                 <input
                   type="email"
-                  className="intro-x form-control py-3 px-4 block mb-3"
+                  className="form-control w-full h-10 px-4 py-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline mb-3"
                   required
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                />
+              />
 
-                <div className="relative">
+              <div className="relative">
                   <input
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                    className="form-control w-full h-10 px-4 py-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                     type={showPassword ? "text" : "password"}
                     id="password"
                     value={password}
@@ -179,11 +180,16 @@ export const LoginPage = () => {
                 </div>
                 <a href="/reset">{t("login_page.forgot")}</a>
               </div>
+
+
               <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                <button type="submit" className="btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">
-                {t("login_page.btn_login")}
-                </button>
+                <Button
+                  type="submit"
+                >
+                  {t("login_page.btn_login")}
+                </Button>
               </div>
+              
             </form>
 
             <div className="intro-x mt-10 xl:mt-24 text-slate-600 text-center xl:text-left">

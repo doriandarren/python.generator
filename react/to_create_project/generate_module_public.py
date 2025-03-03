@@ -8,7 +8,7 @@ def create_folder(path):
 
 
 
-def generate_public_pages(project_path):
+def generate_module_public(project_path):
     generate_routes(project_path)
     generate_home_page(project_path)
     generate_contact_page(project_path)

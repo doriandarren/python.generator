@@ -9,7 +9,7 @@ def create_folder(path):
 
 
 
-def generate_dashboard_pages(project_path):
+def generate_module_dashboard(project_path):
     generate_routes(project_path)
     generate_dashboard_page(project_path)
     generate_team_page(project_path)

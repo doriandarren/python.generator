@@ -233,7 +233,65 @@ def generate_tailwind_styles(full_path):
 |
 
 @layer components {
-    
+    /* Botones */
+    .btn {
+        @apply py-2 px-4 font-semibold rounded-lg shadow-md transition duration-300 ease-in-out;
+    }
+
+    .btn-primary {
+        background-color: var(--color-primary);
+        color: white;
+        @apply shadow-sm hover:bg-[var(--color-primary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
+    }
+
+    .btn-secondary {
+        background-color: var(--color-secondary);
+        color: white;
+        @apply shadow-sm hover:bg-[var(--color-secondary-dark)] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)];
+    }
+
+    .btn-danger {
+        background-color: var(--color-error);
+        color: white;
+        @apply shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400;
+    }
+
+    /* Inputs */
+    .form-control {
+        @apply w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
+    }
+
+    .text-danger {
+        color: var(--color-error);
+    }
+
+    .border-danger {
+        border-color: var(--color-error);
+        @apply border rounded-lg;
+    }
+
+    .card {
+        @apply shadow border p-4 rounded bg-white;
+    }
+
+    .card--featured {
+        background-color: var(--color-primary-alpha70);
+        border-color: var(--color-primary);
+    }
+
+    .card__title {
+        @apply text-2xl font-bold text-gray-800;
+    }
+
+    .card__description {
+        @apply text-gray-600;
+    }
+
+    .card__button {
+        background-color: var(--color-primary);
+        color: white;
+        @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
+    }
 }
 */
 
