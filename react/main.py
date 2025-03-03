@@ -9,7 +9,7 @@ from to_create_project.generate_public_layouts import generate_public_layouts
 from to_create_project.generate_private_layouts import generate_private_layouts
 from to_create_project.generate_public_pages import generate_public_pages
 from to_create_project.generate_dashboard_pages import generate_dashboard_pages
-from to_create_project.generate_auth_pages import generate_auth_pages
+from to_create_project.generate_module_auth import generate_module_auth
 from to_create_project.generate_redux import generate_redux
 from to_create_project.generate_helpers import generate_helpers
 from to_create_project.generate_translate import generate_translate
@@ -64,7 +64,7 @@ def start():
     generate_dashboard_pages(full_path)
 
     # Auth
-    generate_auth_pages(full_path)
+    generate_module_auth(full_path)
 
     # Redux
     generate_redux(full_path)
@@ -81,6 +81,11 @@ def start():
     generate_gitignore(full_path)
 
     generate_readme(full_path)
+
+
+
+
+
 
 
     # Mensaje final

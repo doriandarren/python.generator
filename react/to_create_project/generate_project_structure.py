@@ -24,7 +24,6 @@ def create_project_structure(project_path):
     """
     print_message("Generando estructura de carpetas...", CYAN)
 
-    # Define la estructura
     structure = [
         "src/assets/images",
         "src/assets/fonts",
@@ -33,23 +32,33 @@ def create_project_structure(project_path):
         "src/store",
         "src/hooks",
         "src/layouts",
-        "src/modules/dashboard/components",
-        "src/modules/dashboard/pages",
-        "src/modules/dashboard/hooks",
-        "src/modules/dashboard/styles",
-        "src/modules/dashboard/routes",
-        "src/modules/auth/components",
-        "src/modules/auth/pages",
-        "src/modules/auth/hooks",
-        "src/modules/auth/styles",
-        "src/modules/auth/routes",
+
+        ## Public
         "src/modules/public/pages",
         "src/modules/public/routes",
-        ##"src/services",
-        ##"src/store/slices",
+
+        ## Auth
+        "src/modules/auth/pages",
+        "src/modules/auth/routes",
+        "src/modules/auth/api",
+
+        ## Dashboard
+        "src/modules/dashboard/components",
+        "src/modules/dashboard/pages",
+        "src/modules/dashboard/routes",
+        "src/modules/dashboard/api",
         "src/helpers",
         "src/styles",
+
+        ## "src/modules/auth/styles",
+        ## "src/modules/auth/hooks",
+        ## "src/modules/dashboard/hooks",
+        ## "src/modules/auth/components",
+        ## "src/services",
+        ## "src/store/slices",
+        ## "src/modules/dashboard/styles",
     ]
+    # Define la estructura
 
     # Crear carpetas
     for folder in structure:
