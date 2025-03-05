@@ -25,7 +25,7 @@ def generate_react_router(project_path):
 def setup_react_router(full_path):
     """Instala React Router."""
     print_message("Instalando React Router...", CYAN)
-    run_command("npm install react-router", cwd=full_path)
+    run_command("npm install react-router-dom", cwd=full_path)
     print_message("React Router instalado correctamente.", GREEN)
 
 
@@ -67,7 +67,7 @@ def update_main_jsx(full_path):
         # Reemplazos
         content = content.replace(
             "import App from './App.jsx'",
-            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';\nimport 'animate.css';"
+            "import { App } from \'./App.jsx\';\nimport { BrowserRouter } from \'react-router-dom\';\nimport { Provider } from \'react-redux\';\nimport { store } from \'./store\';\nimport 'animate.css';"
         )
 
 
@@ -107,47 +107,48 @@ def generate_app_router(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo
-    content = """import { Navigate, Route, Routes } from "react-router";
+    content = """import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
 import { DashboardRoutes } from "../modules/dashboard/routes/DashboardRoutes";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { startRestoreSession } from "../store/auth/thunks";
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 
 
 export const AppRouter = () => {
-
   const dispatch = useDispatch();
-  const { status } = useSelector(state => state.auth);
-  const isAuthenticated = status === 'authenticated';
-  
+  const { status } = useSelector((state) => state.auth);
+  const isAuthenticated = status === "authenticated";
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
   useEffect(() => {
-    dispatch(startRestoreSession());
+    dispatch(startRestoreSession()).finally(() => {
+      setCheckingAuth(false); // Marcar que ya se completó la restauración
+    });
   }, [dispatch]);
 
-  return (
+  if (checkingAuth) {
+    return <div className="flex items-center justify-center h-screen text-xl">Cargando sesión...</div>; // Mostrar loading en lugar de redireccionar
+  }
 
+  return (
     <Routes>
-    
-      {/* Public Routes */}
+      {/* Rutas públicas */}
       <Route path="/auth/*" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
         <Route path="*" element={<AuthRoutes />} />
       </Route>
 
-      {/* Private Routes */}
+      {/* Rutas privadas */}
       <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="*" element={<DashboardRoutes />} />
       </Route>
 
-      {/* Redirección global si la ruta no existe */}
-      <Route path="/" element={<Navigate to={"/auth/login"} />} />
-      <Route path="*" element={<Navigate to={isAuthenticated ? "/admin/dashboard" : "/auth/login"} />} />
-      
+      {/* Redirección global */}
+      <Route path="/" element={<Navigate to={isAuthenticated ? "/admin/dashboard" : "/auth/login"} />} />
     </Routes>
-
-  )
+  );
 }
 """
 
@@ -172,7 +173,7 @@ def generate_private_route(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo
-    content = """import { Navigate, Outlet } from 'react-router';
+    content = """import { Navigate, Outlet } from 'react-router-dom';
 
 export const PrivateRoute = ({ isAuthenticated }) => {
   return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
@@ -201,7 +202,7 @@ def generate_public_route(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo
-    content = """import { Navigate, Outlet } from 'react-router';
+    content = """import { Navigate, Outlet } from 'react-router-dom';
 
 export const PublicRoute = ({ isAuthenticated }) => {
   return !isAuthenticated ? <Outlet /> : <Navigate to="/admin/dashboard" />;

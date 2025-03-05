@@ -57,7 +57,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
