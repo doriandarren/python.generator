@@ -34,7 +34,6 @@ def generate_private_session_layout(project_path):
     main_layout_content = """\"use client\";
 
 import { useState } from "react";
-
 import {
   Dialog,
   DialogBackdrop,
@@ -61,53 +60,48 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
-import { useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../store/auth/thunks";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
 export const SessionLayout = ({ children }) => {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const location = useLocation();
-  const navigate = useNavigate();
-
   const { t, i18n } = useTranslation();
-  
+  const dispatch = useDispatch();
 
   const onLogout = () => {
-    navigate("/auth/login");
+    dispatch( startLogout() );
   }
-
-  
 
   const navigation = [
     { name: t("dashboard"), href: "/admin/dashboard", icon: HomeIcon, current: false },
     { name: t("team"), href: "/admin/team", icon: UsersIcon, current: true },
   ];
 
-
   const userNavigation = [
     { name: t("profile"), href: "#" },
     { name: t("logout"), onClick: onLogout },
   ];
-
 
   const updatedNavigation = navigation.map((item) => ({
     ...item,
     current: location.pathname === item.href, // Marca como activo si la ruta coincide
   }));
 
-
   const setChangeLanguage = (event) => {
     const selectedLanguage = event.target.value;
     i18n.changeLanguage(selectedLanguage);
     localStorage.setItem("i18nextLng", selectedLanguage); 
   }
+
 
 
   return (
@@ -158,8 +152,8 @@ export const SessionLayout = ({ children }) => {
                     <ul role="list" className="-mx-2 space-y-1">
                       {updatedNavigation.map((item) => (
                         <li key={item.name}>
-                          <a
-                            href={item.href}
+                          <NavLink
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? "bg-gray-800 text-white"
@@ -172,7 +166,7 @@ export const SessionLayout = ({ children }) => {
                               className="size-6 shrink-0"
                             />
                             {item.name}
-                          </a>
+                          </NavLink>
                         </li>
                       ))}
                     </ul>
@@ -203,8 +197,8 @@ export const SessionLayout = ({ children }) => {
                 <ul role="list" className="-mx-2 space-y-1">
                   {updatedNavigation.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
+                      <NavLink
+                        to={item.href}
                         className={classNames(
                           item.current
                             ? "bg-gray-800 text-white"
@@ -217,7 +211,7 @@ export const SessionLayout = ({ children }) => {
                           className="size-6 shrink-0"
                         />
                         {item.name}
-                      </a>
+                      </NavLink>
                     </li>
                   ))}
                 </ul>

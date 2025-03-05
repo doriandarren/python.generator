@@ -18,6 +18,7 @@ def generate_module_auth(project_path):
 
 
 
+
 def generate_routes(project_path):
     """
     Genera el archivo
@@ -74,24 +75,28 @@ import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo-white.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';
 import EyeOn from '../../../assets/images/eye_on.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Preloader } from "../../../components/Preloader/Preloader";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
+import { startLoginWithEmailPassword } from "../../../store/auth/thunks";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { status, errorMessage } = useSelector( state => state.auth );
+
+
 
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     if (!email || !password) {
       alert("Los campos son requeridos");
@@ -100,12 +105,9 @@ export const LoginPage = () => {
     }
 
     try {
-      //await dispatch(login({ email, password }));
-      setLoading(false);
-      navigate("/admin/dashboard");
+      dispatch(startLoginWithEmailPassword({ email, password }));  
     } catch (error) {
       console.log(error);
-      setLoading(false);
       alert("Credenciales incorrectas");
     }
   };
@@ -130,10 +132,18 @@ export const LoginPage = () => {
             </div>
           </div>
         </div>
-
+      
         <div className="h-screen xl:h-auto flex xl:py-0 my-10 xl:my-0 bg-white ">
           <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto animate__animated animate__bounceInRight">
-            <form onSubmit={onSubmit}>
+
+            { status }
+            
+            { errorMessage && (<div>{errorMessage}</div>) }
+            
+
+            <form 
+              onSubmit={onSubmit}
+            >
               <h2 className="intro-x text-primary text-2xl xl:text-3xl text-center xl:text-left">
                 {t("login_page.title")}
               </h2>
@@ -801,9 +811,10 @@ def generate_api_file(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    content = """const API_URL = import.meta.env.VITE_API_URL;
+    content = """//const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'https://api.splytin.com/api/v1/';
 
-export const fetchData = async (endpoint, method = "GET", body = null, token = null) => {
+export const authApi = async (endpoint, method = "GET", body = null, token = null) => {
   const headers = {
     "Content-Type": "application/json",
   };
@@ -819,9 +830,9 @@ export const fetchData = async (endpoint, method = "GET", body = null, token = n
       body: body ? JSON.stringify(body) : null,
     });
 
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`Error ${response.status}: ${response.statusText}`);
+    // }
 
     return await response.json();
   } catch (error) {

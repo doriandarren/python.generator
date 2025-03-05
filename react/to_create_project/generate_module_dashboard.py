@@ -1,4 +1,5 @@
 import os
+from .utils import print_message, GREEN, CYAN, run_command
 
 
 def create_folder(path):
@@ -10,6 +11,8 @@ def create_folder(path):
 
 
 def generate_module_dashboard(project_path):
+    install_recharts(project_path)
+
     generate_routes(project_path)
     generate_dashboard_page(project_path)
     generate_team_page(project_path)
@@ -17,6 +20,11 @@ def generate_module_dashboard(project_path):
     generate_api_file(project_path)
 
 
+def install_recharts(project_path):
+    """Installation."""
+    print_message("Instalando Recharts...", CYAN)
+    run_command("npm install recharts", cwd=project_path)
+    print_message("Recharts instalado correctamente.", GREEN)
 
 
 def generate_routes(project_path):
@@ -72,17 +80,144 @@ def generate_dashboard_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
+    home_page_content = """import { useSelector } from "react-redux";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
+
+import {
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts";
+
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 
 export const DashboardPage = () => {
+  const { status } = useSelector((state) => state.auth);
 
   return (
     <SessionLayout>
-      <h1>Dashboard</h1>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, similique, ea soluta voluptatibus reprehenderit suscipit doloremque id magni voluptatum esse atque sequi, illum at consectetur impedit maiores neque! Obcaecati, assumenda.</p>
+      <div>
+        <h2 style={{ color: "red" }}>{status}</h2>
+      </div>
+
+      <div className="pt-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Dashboard de Ventas
+        </h2>
+      </div>
+
+      {/* Contenedor de las 3 Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        {/* Card 1 */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold text-gray-600">Total Ventas</h3>
+          <p className="text-2xl font-bold text-gray-800">$12,500</p>
+        </div>
+
+        {/* Card 2 */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold text-gray-600">
+            Clientes Nuevos
+          </h3>
+          <p className="text-2xl font-bold text-gray-800">320</p>
+        </div>
+
+        {/* Card 3 */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold text-gray-600">
+            Pedidos Totales
+          </h3>
+          <p className="text-2xl font-bold text-gray-800">870</p>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="uv"
+              stroke="#8884d8"
+              fillOpacity={1}
+              fill="url(#colorUv)"
+            />
+            <Area
+              type="monotone"
+              dataKey="pv"
+              stroke="#82ca9d"
+              fillOpacity={1}
+              fill="url(#colorPv)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
     </SessionLayout>
-  )
-}
+  );
+};
 """
 
     # Crear el archivo y escribir el contenido
@@ -106,12 +241,16 @@ def generate_team_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
+    home_page_content = """import { useSelector } from "react-redux";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
 
 export const TeamPage = () => {
 
+  const {status} = useSelector(state => state.auth);
+
   return (
     <SessionLayout>
+      <h2 style={{ color:'red' }}>{status}</h2>
       <h1>Team</h1>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, similique, ea soluta voluptatibus reprehenderit suscipit.</p>
     </SessionLayout>

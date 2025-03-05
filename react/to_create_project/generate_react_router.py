@@ -15,6 +15,8 @@ def generate_react_router(project_path):
     setup_app_jsx(project_path)
     update_main_jsx(project_path)
     generate_app_router(project_path)
+    generate_private_route(project_path)
+    generate_public_route(project_path)
 
 
 
@@ -25,9 +27,6 @@ def setup_react_router(full_path):
     print_message("Instalando React Router...", CYAN)
     run_command("npm install react-router", cwd=full_path)
     print_message("React Router instalado correctamente.", GREEN)
-
-
-
 
 
 def setup_app_jsx(full_path):
@@ -45,9 +44,6 @@ export const App = () => {
     with open(os.path.join(full_path, "src", "App.jsx"), "w") as f:
         f.write(app_jsx_content)
     print_message("App.jsx configurado correctamente.", GREEN)
-
-
-
 
 
 def update_main_jsx(full_path):
@@ -99,7 +95,6 @@ def update_main_jsx(full_path):
 
 
 
-
 def generate_app_router(project_path):
     """
     Genera el archivo AppRoute.jsx
@@ -111,28 +106,47 @@ def generate_app_router(project_path):
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
 
-    # Contenido del archivo AppRoutes.jsx
-    app_routes_content = """import { Route, Routes } from "react-router";
+    # Contenido del archivo
+    content = """import { Navigate, Route, Routes } from "react-router";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
 import { DashboardRoutes } from "../modules/dashboard/routes/DashboardRoutes";
-import { PublicRoutes } from "../modules/public/routes/PublicRoutes";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { startRestoreSession } from "../store/auth/thunks";
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 
 export const AppRouter = () => {
+
+  const dispatch = useDispatch();
+  const { status } = useSelector(state => state.auth);
+  const isAuthenticated = status === 'authenticated';
+  
+  useEffect(() => {
+    dispatch(startRestoreSession());
+  }, [dispatch]);
+
   return (
+
     <Routes>
     
-      {/* Routes Public */}
-      <Route path="/*" element={ <PublicRoutes /> } />
-      
-      {/* Login y Register */}
-      <Route path="auth/*" element={ <AuthRoutes /> } />
+      {/* Public Routes */}
+      <Route path="/auth/*" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
+        <Route path="*" element={<AuthRoutes />} />
+      </Route>
 
+      {/* Private Routes */}
+      <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+        <Route path="*" element={<DashboardRoutes />} />
+      </Route>
 
-      {/* Routes Private */}
-      <Route path="/admin/*" element={ <DashboardRoutes /> } />
+      {/* Redirección global si la ruta no existe */}
+      <Route path="/" element={<Navigate to={"/auth/login"} />} />
+      <Route path="*" element={<Navigate to={isAuthenticated ? "/admin/dashboard" : "/auth/login"} />} />
       
     </Routes>
+
   )
 }
 """
@@ -140,7 +154,64 @@ export const AppRouter = () => {
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
-            file.write(app_routes_content)
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+def generate_private_route(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    routes_dir = os.path.join(project_path, "src", "router")
+    file_path = os.path.join(routes_dir, "PrivateRoute.jsx")
+
+    # Crear la carpeta routes si no existe
+    create_folder(routes_dir)
+
+    # Contenido del archivo
+    content = """import { Navigate, Outlet } from 'react-router';
+
+export const PrivateRoute = ({ isAuthenticated }) => {
+  return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
+};
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+
+def generate_public_route(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    routes_dir = os.path.join(project_path, "src", "router")
+    file_path = os.path.join(routes_dir, "PublicRoute.jsx")
+
+    # Crear la carpeta routes si no existe
+    create_folder(routes_dir)
+
+    # Contenido del archivo
+    content = """import { Navigate, Outlet } from 'react-router';
+
+export const PublicRoute = ({ isAuthenticated }) => {
+  return !isAuthenticated ? <Outlet /> : <Navigate to="/admin/dashboard" />;
+};
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")

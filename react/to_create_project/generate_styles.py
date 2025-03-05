@@ -231,7 +231,7 @@ def generate_tailwind_styles(full_path):
 |
 | Import layer components.
 |
-
+*/
 @layer components {
     /* Botones */
     .btn {
@@ -293,7 +293,6 @@ def generate_tailwind_styles(full_path):
         @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
     }
 }
-*/
 
 """
 
