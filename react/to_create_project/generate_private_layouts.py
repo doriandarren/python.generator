@@ -13,11 +13,11 @@ def create_folder(path):
 
 def generate_private_layouts(project_path):
 
-    generate_private_session_layout(project_path)
+    create_session_layout(project_path)
 
 
 
-def generate_private_session_layout(project_path):
+def create_session_layout(project_path):
     """
     Genera el archivo dentro de la carpeta layouts.
     """
@@ -60,9 +60,9 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
 
 function classNames(...classes) {
@@ -76,6 +76,7 @@ export const SessionLayout = ({ children }) => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const { status, displayName } = useSelector(state => state.auth);
 
   const onLogout = () => {
     dispatch( startLogout() );
@@ -101,7 +102,6 @@ export const SessionLayout = ({ children }) => {
     i18n.changeLanguage(selectedLanguage);
     localStorage.setItem("i18nextLng", selectedLanguage); 
   }
-
 
 
   return (
@@ -239,14 +239,18 @@ export const SessionLayout = ({ children }) => {
           />
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <div className="grid flex-1 grid-cols-1"></div>
+            <div className="grid flex-1 grid-cols-1 mt-5">
+            <div>
+              <h2 style={{ color: "red" }}>{status}</h2>
+            </div>
+            </div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               <button
                 type="button"
                 className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">View notifications</span>
-                <BellIcon aria-hidden="true" className="size-6" />
+                <BellIcon aria-hidden="true" className="size-6" /> 
               </button>
 
               {/* Separator */}
@@ -254,18 +258,16 @@ export const SessionLayout = ({ children }) => {
                 aria-hidden="true"
                 className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
               />
-
-
-                    <select
-                      id="location"
-                      name="location"
-                      value={i18n.language}
-                      onChange={(e) => setChangeLanguage(e)}
-                      className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    >
-                      <option value="es">{ t("languages.es") }</option>
-                      <option value="en">{ t("languages.en") }</option>
-                    </select>
+                <select
+                  id="location"
+                  name="location"
+                  value={i18n.language}
+                  onChange={(e) => setChangeLanguage(e)}
+                  className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                >
+                  <option value="es">{ t("languages.es") }</option>
+                  <option value="en">{ t("languages.en") }</option>
+                </select>
               {/* Profile dropdown */}
               <Menu as="div" className="relative">
                 <MenuButton className="-m-1.5 flex items-center p-1.5 mr-5">
@@ -280,7 +282,7 @@ export const SessionLayout = ({ children }) => {
                       aria-hidden="true"
                       className="ml-4 text-sm/6 font-semibold text-gray-900"
                     >
-                      User
+                      { displayName }
                     </span>
                     <ChevronDownIcon
                       aria-hidden="true"

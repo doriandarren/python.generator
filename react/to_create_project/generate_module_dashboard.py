@@ -80,8 +80,7 @@ def generate_dashboard_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    home_page_content = """import { useSelector } from "react-redux";
-import { SessionLayout } from "../../../layouts/private/SessionLayout";
+    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
 
 import {
   XAxis,
@@ -139,14 +138,11 @@ const data = [
 ];
 
 export const DashboardPage = () => {
-  const { status } = useSelector((state) => state.auth);
+  
 
   return (
     <SessionLayout>
-      <div>
-        <h2 style={{ color: "red" }}>{status}</h2>
-      </div>
-
+      
       <div className="pt-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           Dashboard de Ventas
@@ -241,16 +237,11 @@ def generate_team_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    home_page_content = """import { useSelector } from "react-redux";
-import { SessionLayout } from "../../../layouts/private/SessionLayout";
+    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
 
 export const TeamPage = () => {
-
-  const {status} = useSelector(state => state.auth);
-
   return (
     <SessionLayout>
-      <h2 style={{ color:'red' }}>{status}</h2>
       <h1>Team</h1>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, similique, ea soluta voluptatibus reprehenderit suscipit.</p>
     </SessionLayout>

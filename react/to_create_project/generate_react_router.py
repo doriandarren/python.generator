@@ -125,7 +125,7 @@ export const AppRouter = () => {
 
   useEffect(() => {
     dispatch(startRestoreSession()).finally(() => {
-      setCheckingAuth(false); // Marcar que ya se completó la restauración
+      setCheckingAuth(false);
     });
   }, [dispatch]);
 
