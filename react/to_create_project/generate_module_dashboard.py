@@ -238,17 +238,56 @@ def generate_team_page(project_path):
 
     # Contenido de file
     home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
+import { Datatable } from "../../../components/DataTables/DataTable";
+
+// Header
+const columns = [
+  { key: "name", label: "Name" },
+  { key: "title", label: "Title" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+];
+
+// Data
+const data = [
+  { name: "Lindsay Walton", title: "Front-end Developer", email: "lindsay.walton@example.com", role: "Member" },
+  { name: "John Doe", title: "Back-end Developer", email: "john.doe@example.com", role: "Admin" },
+  { name: "Jane Smith", title: "Project Manager", email: "jane.smith@example.com", role: "Manager" },
+  { name: "Michael Brown", title: "UI/UX Designer", email: "michael.brown@example.com", role: "Designer" },
+  { name: "Emily White", title: "QA Engineer", email: "emily.white@example.com", role: "Tester" },
+  { name: "Carlos Ruiz", title: "Data Scientist", email: "carlos.ruiz@example.com", role: "Analyst" },
+  { name: "Laura Martin", title: "DevOps Engineer", email: "laura.martin@example.com", role: "DevOps" },
+];
+
+// Edit and Delete
+const handleEdit = (id) => alert(`Editando usuario con ID: ${id}`);
+const handleDelete = (id) => alert(`Eliminando usuario con ID: ${id}`);
+
 
 export const TeamPage = () => {
+
   return (
     <SessionLayout>
-      <h1>Team</h1>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, similique, ea soluta voluptatibus reprehenderit suscipit.</p>
+    
+      <div className="pt-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Team</h2>
+      </div>
+      
+      <Datatable
+        columns={columns}
+        data={data}
+        title="Usuarios"
+        buttonLabel="Agregar Usuario"
+        onButtonClick={() => alert("Agregar nuevo usuario")}
+        editPath="/users"
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+      
     </SessionLayout>
-  )
-}
+  );
+};
 """
-
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:

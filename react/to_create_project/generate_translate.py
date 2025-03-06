@@ -263,7 +263,9 @@ def create_locales_es(project_path):
   "due_date_by_days": "A cuantos días",
   "due_date_days": "Vencimiento el día",
   "customer_code": "Código de cliente",
-  "team": "Equipo"
+  "team": "Equipo",
+  "next": "Siguiente",
+  "back": "Anterior"
 }
 """
 
@@ -459,7 +461,9 @@ def create_locales_en(project_path):
   "due_date_by_days": "Due in Days",
   "due_date_days": "Due Date",
   "customer_code": "Customer Code",
-  "team": "Team"
+  "team": "Team",
+  "next": "Next",
+  "back": "Back"
 }
 """
 

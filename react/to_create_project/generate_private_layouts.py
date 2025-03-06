@@ -31,7 +31,7 @@ def create_session_layout(project_path):
     create_folder(layouts_dir)
 
     # Contenido del archivo
-    main_layout_content = """\"use client\";
+    content = """\"use client\";
 
 import { useState } from "react";
 import {
@@ -47,23 +47,19 @@ import {
 import {
   Bars3Icon,
   BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
+import Logo from '../../assets/images/logo.svg';
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -137,11 +133,11 @@ export const SessionLayout = ({ children }) => {
               </div>
             </TransitionChild>
             {/* Sidebar component, swap this element with another sidebar if you like */}
-            <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
+            <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-6 pb-4 ring-1 ring-white/10">
               <div className="flex h-16 shrink-0 items-center">
                 <img
-                  alt="Your Company"
-                  src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                  alt={ import.meta.env.VITE_APP_NAME }
+                  src={Logo}
                   className="h-8 w-auto"
                 />
                 <span className="text-white text-2xl ml-3 font-bold"> { import.meta.env.VITE_APP_NAME } </span>
@@ -156,8 +152,8 @@ export const SessionLayout = ({ children }) => {
                             to={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-gray-800 text-white"
-                                : "text-gray-400 hover:bg-gray-800 hover:text-white",
+                                ? "bg-primary-dark text-white"
+                                : "text-gray-200 hover:bg-gray-300/80 hover:text-white",
                               "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                             )}
                           >
@@ -182,11 +178,11 @@ export const SessionLayout = ({ children }) => {
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center">
             <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+              alt={ import.meta.env.VITE_APP_NAME }
+              src={Logo}
               className="h-8 w-auto"
             />
             <span className="text-white text-2xl ml-3 font-bold">{ import.meta.env.VITE_APP_NAME } </span>
@@ -201,8 +197,8 @@ export const SessionLayout = ({ children }) => {
                         to={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-gray-800 text-white"
-                            : "text-gray-400 hover:bg-gray-800 hover:text-white",
+                            ? "bg-primary-dark text-white"
+                            : "text-gray-200 hover:bg-gray-300/80 hover:text-white",
                           "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                         )}
                       >
@@ -333,7 +329,7 @@ export const SessionLayout = ({ children }) => {
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
-            file.write(main_layout_content)
+            file.write(content)
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)

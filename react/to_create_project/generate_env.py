@@ -17,7 +17,7 @@ def create_env_file(project_path):
 
 
     # Contenido del archivo
-    content = """VITE_APP_TITLE=SiteLocal
+    content = """VITE_APP_NAME=SiteLocal
 VITE_APP_ENV=local
 VITE_URL_API_BASE=http://project.test/v1/api/
 """
@@ -37,7 +37,7 @@ def create_env_example_file(project_path):
     file_path = os.path.join(project_path, ".env.example")
 
     # Contenido del archivo
-    content = """VITE_APP_TITLE=SiteLocal
+    content = """VITE_APP_NAME=SiteLocal
 VITE_APP_ENV=local
 VITE_URL_API_BASE=http://project.test/v1/api/
 """

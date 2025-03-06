@@ -16,6 +16,7 @@ from to_create_project.generate_translate import generate_translate
 from to_create_project.generate_env import generate_env
 from to_create_project.generate_gitignore import generate_gitignore
 from to_create_project.generate_readme import generate_readme
+from to_create_project.generate_index_html import generate_index_html
 
 
 
@@ -82,6 +83,9 @@ def start():
 
     generate_readme(full_path)
 
+
+    ## index.html
+    generate_index_html(full_path)
 
 
 

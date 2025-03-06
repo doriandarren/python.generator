@@ -69,13 +69,12 @@ def generate_login_page(project_path):
     # Crear la carpeta pages si no existe
     create_folder(pages_dir)
 
-    # Contenido del archivo HomePage.jsx
-    home_page_content = """import { useNavigate } from "react-router";
+    # Contenido del archivo
+    content = """import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ImgLogo from "../../../assets/images/logo-white.svg";
+import ImgLogo from "../../../assets/images/logo.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';
 import EyeOn from '../../../assets/images/eye_on.svg';
-import { useEffect, useState } from "react";
 import { Preloader } from "../../../components/Preloader/Preloader";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
@@ -86,16 +85,14 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
   const { status, errorMessage } = useSelector( state => state.auth );
 
+  useEffect(() => {}, [isChecking]);
 
-
-
-  const onSubmit = async (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -105,10 +102,14 @@ export const LoginPage = () => {
     }
 
     try {
+      setIsChecking(true);
       dispatch(startLoginWithEmailPassword({ email, password }));  
     } catch (error) {
       console.log(error);
       alert("Credenciales incorrectas");
+    } finally{
+      console.log(isChecking);
+      //setIsChecking(false);
     }
   };
 
@@ -195,8 +196,9 @@ export const LoginPage = () => {
               <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                 <Button
                   type="submit"
+                  disabled={isChecking}
                 >
-                  {t("login_page.btn_login")}
+                  {isChecking ? "Cargando..." : t("login_page.btn_login")}
                 </Button>
               </div>
               
@@ -218,7 +220,7 @@ export const LoginPage = () => {
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
-            file.write(home_page_content)
+            file.write(content)
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
