@@ -31,7 +31,6 @@ def setup_i18n(full_path):
 
 
 
-
 def create_i18n(project_path):
     """
     Genera el archivo
@@ -78,7 +77,6 @@ export default i18n;
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
 
 
 def create_locales_es(project_path):
@@ -278,7 +276,6 @@ def create_locales_es(project_path):
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
 
 
 def create_locales_en(project_path):
