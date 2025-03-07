@@ -145,6 +145,10 @@ def create_locales_es(project_path):
   "resources": "Recursos",
   "home": "Inicio",
   "search": "Buscar",
+  "next": "Siguiente",
+  "back": "Anterior",
+  "show": "Mostrar",
+  "no_results_found": "No se encontraron resultados.",
   "save": "Guardar",
   "add": "Nuevo",
   "cancel": "Cancelar",
@@ -263,9 +267,7 @@ def create_locales_es(project_path):
   "due_date_by_days": "A cuantos días",
   "due_date_days": "Vencimiento el día",
   "customer_code": "Código de cliente",
-  "team": "Equipo",
-  "next": "Siguiente",
-  "back": "Anterior"
+  "team": "Equipo"
 }
 """
 
@@ -343,6 +345,10 @@ def create_locales_en(project_path):
   "resources": "Resources",
   "home": "Home",
   "search": "Search",
+  "next": "Next",
+  "back": "Back",
+  "show": "Show",
+  "no_results_found": "No results found.",
   "save": "Save",
   "add": "New",
   "cancel": "Cancel",
@@ -461,9 +467,7 @@ def create_locales_en(project_path):
   "due_date_by_days": "Due in Days",
   "due_date_days": "Due Date",
   "customer_code": "Customer Code",
-  "team": "Team",
-  "next": "Next",
-  "back": "Back"
+  "team": "Team"
 }
 """
 

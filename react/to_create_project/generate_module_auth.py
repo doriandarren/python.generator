@@ -9,17 +9,17 @@ def create_folder(path):
 
 
 def generate_module_auth(project_path):
-    generate_routes(project_path)
-    generate_login_page(project_path)
-    generate_register_page(project_path)
-    generate_auth_index_page(project_path)
+    create_routes(project_path)
+    create_login_page(project_path)
+    create_register_page(project_path)
+    create_auth_index_page(project_path)
 
-    generate_api_file(project_path)
-
-
+    create_api_file(project_path)
 
 
-def generate_routes(project_path):
+
+
+def create_routes(project_path):
     """
     Genera el archivo
     """
@@ -58,7 +58,7 @@ export const AuthRoutes = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_login_page(project_path):
+def create_login_page(project_path):
     """
     Genera el archivo
     """
@@ -107,9 +107,6 @@ export const LoginPage = () => {
     } catch (error) {
       console.log(error);
       alert("Credenciales incorrectas");
-    } finally{
-      console.log(isChecking);
-      //setIsChecking(false);
     }
   };
 
@@ -226,7 +223,7 @@ export const LoginPage = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_register_page(project_path):
+def create_register_page(project_path):
     """
     Genera el archivo HomePage.jsx dentro de la carpeta modules/public/pages.
     """
@@ -776,7 +773,7 @@ export const RegisterPage = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_auth_index_page(project_path):
+def create_auth_index_page(project_path):
     """
     Genera el archivo HomePage.jsx dentro de la carpeta modules/public/pages.
     """
@@ -801,7 +798,7 @@ export * from \'./RegisterPage\';
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_api_file(project_path):
+def create_api_file(project_path):
     """
     Genera el archivo.
     """

@@ -13,11 +13,16 @@ def create_folder(path):
 def generate_module_dashboard(project_path):
     install_recharts(project_path)
 
-    generate_routes(project_path)
-    generate_dashboard_page(project_path)
-    generate_team_page(project_path)
+    create_routes(project_path)
+    create_dashboard_page(project_path)
+    create_team_page(project_path)
+    create_perfil_page(project_path)
 
-    generate_api_file(project_path)
+
+
+
+    create_api_file(project_path)
+
 
 
 def install_recharts(project_path):
@@ -27,7 +32,7 @@ def install_recharts(project_path):
     print_message("Recharts instalado correctamente.", GREEN)
 
 
-def generate_routes(project_path):
+def create_routes(project_path):
     """
     Genera el archivo AppRoutes.jsx dentro de la carpeta modules/routes.
     """
@@ -68,7 +73,7 @@ export const DashboardRoutes = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_dashboard_page(project_path):
+def create_dashboard_page(project_path):
     """
     Genera el archivo jsx dentro de la carpeta modules/dashboard/pages.
     """
@@ -225,7 +230,7 @@ export const DashboardPage = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_team_page(project_path):
+def create_team_page(project_path):
     """
     Genera el archivo jsx dentro de la carpeta modules/dashboard/pages.
     """
@@ -297,7 +302,79 @@ export const TeamPage = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def generate_api_file(project_path):
+def create_perfil_page(project_path):
+    """
+    Genera el archivo jsx dentro de la carpeta modules/dashboard/pages.
+    """
+    # Define la ruta del archivo
+    pages_dir = os.path.join(project_path, "src", "modules", "dashboard", "pages")
+    file_path = os.path.join(pages_dir, "TeamPage.jsx")
+
+    # Crear la carpeta pages si no existe
+    create_folder(pages_dir)
+
+    # Contenido de file
+    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
+import { Datatable } from "../../../components/DataTables/DataTable";
+
+// Header
+const columns = [
+  { key: "name", label: "Name" },
+  { key: "title", label: "Title" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+];
+
+// Data
+const data = [
+  { name: "Lindsay Walton", title: "Front-end Developer", email: "lindsay.walton@example.com", role: "Member" },
+  { name: "John Doe", title: "Back-end Developer", email: "john.doe@example.com", role: "Admin" },
+  { name: "Jane Smith", title: "Project Manager", email: "jane.smith@example.com", role: "Manager" },
+  { name: "Michael Brown", title: "UI/UX Designer", email: "michael.brown@example.com", role: "Designer" },
+  { name: "Emily White", title: "QA Engineer", email: "emily.white@example.com", role: "Tester" },
+  { name: "Carlos Ruiz", title: "Data Scientist", email: "carlos.ruiz@example.com", role: "Analyst" },
+  { name: "Laura Martin", title: "DevOps Engineer", email: "laura.martin@example.com", role: "DevOps" },
+];
+
+// Edit and Delete
+const handleEdit = (id) => alert(`Editando usuario con ID: ${id}`);
+const handleDelete = (id) => alert(`Eliminando usuario con ID: ${id}`);
+
+
+export const TeamPage = () => {
+
+  return (
+    <SessionLayout>
+
+      <div className="pt-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Team</h2>
+      </div>
+
+      <Datatable
+        columns={columns}
+        data={data}
+        title="Usuarios"
+        buttonLabel="Agregar Usuario"
+        onButtonClick={() => alert("Agregar nuevo usuario")}
+        editPath="/users"
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+
+    </SessionLayout>
+  );
+};
+"""
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(home_page_content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+def create_api_file(project_path):
     """
     Genera el archivo.
     """
