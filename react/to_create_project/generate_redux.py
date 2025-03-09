@@ -103,7 +103,6 @@ def create_file_auth_slice(project_path):
     # Contenido del archivo
     app_routes_content = """import { createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
     status: 'checking', // 'checking', 'not-authenticated', 'authenticated' 
     token: null,
@@ -112,7 +111,6 @@ const initialState = {
     photoURL: null,
     errorMessage: null,
 }
-
 
 
 export const authSlice = createSlice({
@@ -143,6 +141,7 @@ export const authSlice = createSlice({
             localStorage.removeItem("token_portuarios");
         },
         setErrorMessage: (state, action) => {
+            state.status = 'not-authenticated';
             state.errorMessage = action.payload;
         },
         checkingCredentials: (state) => {

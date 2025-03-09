@@ -70,7 +70,7 @@ def create_login_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo
-    content = """import { useEffect, useState } from "react";
+    content = """import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';
@@ -85,12 +85,10 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { status, errorMessage } = useSelector( state => state.auth );
 
-  useEffect(() => {}, [isChecking]);
 
   const onSubmit = async(e) => {
     e.preventDefault();
@@ -102,7 +100,6 @@ export const LoginPage = () => {
     }
 
     try {
-      setIsChecking(true);
       dispatch(startLoginWithEmailPassword({ email, password }));  
     } catch (error) {
       console.log(error);
@@ -193,9 +190,9 @@ export const LoginPage = () => {
               <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                 <Button
                   type="submit"
-                  disabled={isChecking}
+                  disabled={status!=='not-authenticated'}
                 >
-                  {isChecking ? "Cargando..." : t("login_page.btn_login")}
+                  {status === 'checking' ? "Cargando..." : t("login_page.btn_login")}
                 </Button>
               </div>
               

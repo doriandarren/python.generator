@@ -3,11 +3,14 @@ from .utils import print_message, GREEN, CYAN, run_command
 
 
 def generate_helpers(full_path):
-    generate_helper_sweetalert2(full_path)
+    create_helper_sweetalert2(full_path)
+    create_data_fake(full_path)
 
 
 
-def generate_helper_sweetalert2(full_path):
+
+
+def create_helper_sweetalert2(full_path):
     """
     Genera un archivo
 
@@ -69,6 +72,111 @@ export const showConfirmDialog = async (message) => {
   });
   return result.isConfirmed;
 };
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_data_fake(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "helpers")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "helperDataFake.js")
+
+    # Contenido por defecto
+    content = """
+
+export const dataHeaderFake = [
+  { key: "name", label: "Name" },
+  { key: "title", label: "Title" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+];
+
+export const dataBodyFake = [
+  { name: "Amelia Jones", title: "Data Scientist", email: "amelia.jones@example.com", role: "Designer" },
+  { name: "Ava Williams", title: "Project Manager", email: "ava.williams@example.com", role: "Admin" },
+  { name: "Harper Moore", title: "Database Administrator", email: "harper.moore@example.com", role: "Member" },
+  { name: "Ava Hernandez", title: "Back-end Developer", email: "ava.hernandez@example.com", role: "Analyst" },
+  { name: "Noah Miller", title: "Project Manager", email: "noah.miller@example.com", role: "Tester" },
+  { name: "Liam Brown", title: "Scrum Master", email: "liam.brown@example.com", role: "Manager" },
+  { name: "Ethan Johnson", title: "Data Scientist", email: "ethan.johnson@example.com", role: "Designer" },
+  { name: "Lindsay Davis", title: "QA Engineer", email: "lindsay.davis@example.com", role: "Admin" },
+  { name: "Liam Davis", title: "Full-stack Developer", email: "liam.davis@example.com", role: "Manager" },
+  { name: "Mason Jackson", title: "Full-stack Developer", email: "mason.jackson@example.com", role: "Manager" },
+  { name: "Noah Moore", title: "DevOps Engineer", email: "noah.moore@example.com", role: "Tester" },
+  { name: "Mason Gonzalez", title: "Front-end Developer", email: "mason.gonzalez@example.com", role: "Member" },
+  { name: "Liam Martinez", title: "Full-stack Developer", email: "liam.martinez@example.com", role: "Manager" },
+  { name: "Amelia Brown", title: "Project Manager", email: "amelia.brown@example.com", role: "Member" },
+  { name: "Amelia Gonzalez", title: "Project Manager", email: "amelia.gonzalez@example.com", role: "Tester" },
+  { name: "Ethan Smith", title: "Project Manager", email: "ethan.smith@example.com", role: "Admin" },
+  { name: "Olivia Jones", title: "QA Engineer", email: "olivia.jones@example.com", role: "Tester" },
+  { name: "Amelia Garcia", title: "Back-end Developer", email: "amelia.garcia@example.com", role: "Manager" },
+  { name: "Logan Jones", title: "QA Engineer", email: "logan.jones@example.com", role: "Manager" },
+  { name: "Harper Gonzalez", title: "Data Scientist", email: "harper.gonzalez@example.com", role: "Manager" },
+  { name: "Noah Gonzalez", title: "Project Manager", email: "noah.gonzalez@example.com", role: "Tester" },
+  { name: "Lindsay Williams", title: "Scrum Master", email: "lindsay.williams@example.com", role: "Analyst" },
+  { name: "Aiden Williams", title: "System Architect", email: "aiden.williams@example.com", role: "Designer" },
+  { name: "Olivia Hernandez", title: "DevOps Engineer", email: "olivia.hernandez@example.com", role: "DevOps" },
+  { name: "Charlotte Rodriguez", title: "QA Engineer", email: "charlotte.rodriguez@example.com", role: "Admin" },
+  { name: "Liam Moore", title: "Back-end Developer", email: "liam.moore@example.com", role: "Manager" },
+  { name: "Lindsay Taylor", title: "DevOps Engineer", email: "lindsay.taylor@example.com", role: "Manager" },
+  { name: "Ava Walton", title: "Product Manager", email: "ava.walton@example.com", role: "DevOps" },
+  { name: "Liam Walton", title: "Data Scientist", email: "liam.walton@example.com", role: "Designer" },
+  { name: "Lucas Rodriguez", title: "Full-stack Developer", email: "lucas.rodriguez@example.com", role: "Tester" },
+  { name: "Olivia Miller", title: "Database Administrator", email: "olivia.miller@example.com", role: "DevOps" },
+  { name: "Aiden Gonzalez", title: "Back-end Developer", email: "aiden.gonzalez@example.com", role: "DevOps" },
+  { name: "Mia Taylor", title: "Full-stack Developer", email: "mia.taylor@example.com", role: "Designer" },
+  { name: "Harper Gonzalez", title: "Full-stack Developer", email: "harper.gonzalez@example.com", role: "Tester" },
+  { name: "Elijah Walton", title: "DevOps Engineer", email: "elijah.walton@example.com", role: "Tester" },
+  { name: "Ethan Walton", title: "Software Engineer", email: "ethan.walton@example.com", role: "Analyst" },
+  { name: "Mia Moore", title: "Software Engineer", email: "mia.moore@example.com", role: "Member" },
+  { name: "Ethan Martinez", title: "Database Administrator", email: "ethan.martinez@example.com", role: "DevOps" },
+  { name: "Aiden Wilson", title: "Software Engineer", email: "aiden.wilson@example.com", role: "Manager" },
+  { name: "Mia Rodriguez", title: "System Architect", email: "mia.rodriguez@example.com", role: "Member" },
+  { name: "Lindsay Jackson", title: "Front-end Developer", email: "lindsay.jackson@example.com", role: "Admin" },
+  { name: "Caden Williams", title: "DevOps Engineer", email: "caden.williams@example.com", role: "Admin" },
+  { name: "Noah Johnson", title: "System Architect", email: "noah.johnson@example.com", role: "Member" },
+  { name: "Ethan Miller", title: "System Architect", email: "ethan.miller@example.com", role: "Manager" },
+  { name: "Lindsay Garcia", title: "Back-end Developer", email: "lindsay.garcia@example.com", role: "Analyst" },
+  { name: "Mia Jones", title: "Project Manager", email: "mia.jones@example.com", role: "Designer" },
+  { name: "James Gonzalez", title: "Project Manager", email: "james.gonzalez@example.com", role: "Manager" },
+  { name: "Aiden Wilson", title: "System Architect", email: "aiden.wilson@example.com", role: "Tester" },
+  { name: "Olivia Garcia", title: "Cybersecurity Specialist", email: "olivia.garcia@example.com", role: "Analyst" },
+  { name: "Elijah Walton", title: "DevOps Engineer", email: "elijah.walton@example.com", role: "Tester" },
+  { name: "Ethan Walton", title: "Software Engineer", email: "ethan.walton@example.com", role: "Analyst" },
+  { name: "Mia Moore", title: "Software Engineer", email: "mia.moore@example.com", role: "Member" },
+  { name: "Ethan Martinez", title: "Database Administrator", email: "ethan.martinez@example.com", role: "DevOps" },
+  { name: "Aiden Wilson", title: "Software Engineer", email: "aiden.wilson@example.com", role: "Manager" },
+  { name: "Mia Rodriguez", title: "System Architect", email: "mia.rodriguez@example.com", role: "Member" },
+  { name: "Lindsay Jackson", title: "Front-end Developer", email: "lindsay.jackson@example.com", role: "Admin" },
+  { name: "Caden Williams", title: "DevOps Engineer", email: "caden.williams@example.com", role: "Admin" },
+  { name: "Noah Johnson", title: "System Architect", email: "noah.johnson@example.com", role: "Member" },
+  { name: "Ethan Miller", title: "System Architect", email: "ethan.miller@example.com", role: "Manager" },
+  { name: "Lindsay Garcia", title: "Back-end Developer", email: "lindsay.garcia@example.com", role: "Analyst" },
+  { name: "Mia Jones", title: "Project Manager", email: "mia.jones@example.com", role: "Designer" },
+  { name: "James Gonzalez", title: "Project Manager", email: "james.gonzalez@example.com", role: "Manager" },
+  { name: "Aiden Wilson", title: "System Architect", email: "aiden.wilson@example.com", role: "Tester" },
+  { name: "Olivia Garcia", title: "Cybersecurity Specialist", email: "olivia.garcia@example.com", role: "Analyst" },
+  { name: "Charlotte Johnson", title: "UI/UX Designer", email: "charlotte.johnson@example.com", role: "Admin" }
+];
 """
 
     try:

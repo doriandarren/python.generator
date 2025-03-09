@@ -9,8 +9,8 @@ def generate_styles(full_path):
 
     update_main_jsx(full_path)
 
-    generate_tailwind(full_path)
-    generate_tailwind_styles(full_path)
+    create_tailwind(full_path)
+    create_tailwind_styles(full_path)
 
     ##generate_normalize_styles(full_path, "normalize.css")
     create_scss_styles(full_path)
@@ -64,8 +64,7 @@ def update_main_jsx(full_path):
         print_message(f"Error al actualizar {main_jsx_path}: {e}", CYAN)
 
 
-
-def generate_tailwind(full_path):
+def create_tailwind(full_path):
     """Instala y configura Tailwind CSS."""
     print_message("Instalando Tailwind CSS...", CYAN)
     run_command("npm install tailwindcss @tailwindcss/postcss postcss", cwd=full_path)
@@ -143,9 +142,9 @@ export default config;
     print_message("Tailwind CSS configurado correctamente.", GREEN)
 
 
-def generate_tailwind_styles(full_path):
+def create_tailwind_styles(full_path):
     """
-    Genera un archivo CSS en la carpeta src/styles.
+    Genera un archivo CSS en la carpeta
 
     Args:
         full_path (str): Ruta completa del proyecto.
@@ -213,14 +212,21 @@ def generate_tailwind_styles(full_path):
   --color-secondary-light: #09C0FC;
   --color-secondary-dark: #0976FC;
 
-  --color-error: #f44336;
+  --color-danger: #f44336;
+  --color-danger-light: #ff7961;
+  --color-danger-dark: #b83329;
+  
   --color-success: #4caf50;
+  --color-success-light: #61e265;
+  --color-success-dark: #3a893d;
+  
   --color-navbar: #222831;
   --color-background: #f8fafc;
 
   --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 } 
+
 
 
 
@@ -236,6 +242,7 @@ def generate_tailwind_styles(full_path):
     /* Botones */
     .btn {
         @apply py-2 px-4 font-semibold rounded-lg shadow-md transition duration-300 ease-in-out;
+        /* color: #b83329; */
     }
 
     .btn-primary {
@@ -293,7 +300,6 @@ def generate_tailwind_styles(full_path):
         @apply py-2 px-4 rounded hover:bg-[var(--color-primary-dark)] transition duration-300 ease-in-out;
     }
 }
-
 """
 
     try:
@@ -1330,8 +1336,6 @@ img { max-width: 100%; display: block; }
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
-
-
 
 
 def create_scss_styles(full_path):
