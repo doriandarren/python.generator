@@ -115,6 +115,8 @@ import { useEffect, useState } from "react";
 import { startRestoreSession } from "../store/auth/thunks";
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
+import { ProfileRoutes } from "../modules/profile/routes/ProfileRoutes";
 
 
 export const AppRouter = () => {
@@ -130,7 +132,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checkingAuth) {
-    return <div className="flex items-center justify-center h-screen text-xl">Cargando sesión...</div>; // Mostrar loading en lugar de redireccionar
+    return <div className="flex items-center justify-center h-screen text-xl">Cargando sesión...</div>; // Mostrar loading
   }
 
   return (
@@ -142,7 +144,9 @@ export const AppRouter = () => {
 
       {/* Rutas privadas */}
       <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="*" element={<DashboardRoutes />} />
+        <Route path="dashboard/*" element={<DashboardRoutes />} />
+        <Route path="profile/*" element={<ProfileRoutes />} />
+        <Route path="teams/*" element={<TeamRoutes />} />
       </Route>
 
       {/* Redirección global */}

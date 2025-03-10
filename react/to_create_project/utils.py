@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 
@@ -20,3 +21,13 @@ def run_command(command, cwd=None):
     except subprocess.CalledProcessError as e:
         print_message(f"Error ejecutando el comando: {command}", CYAN)
         raise e
+
+
+
+def create_folder(path):
+    """Crea una carpeta si no existe."""
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print_message(f"Carpeta creada: {path}", GREEN)
+    else:
+        print_message(f"Carpeta ya existe: {path}", CYAN)

@@ -17,6 +17,9 @@ from to_create_project.generate_env import generate_env
 from to_create_project.generate_gitignore import generate_gitignore
 from to_create_project.generate_readme import generate_readme
 from to_create_project.generate_index_html import generate_index_html
+from to_create_project.generate_folder_api import generate_folder_api
+from to_create_project.generate_module_teams import generate_module_teams
+from to_create_project.generate_module_profile import generate_module_profile
 
 
 
@@ -67,6 +70,13 @@ def start():
     # Auth
     generate_module_auth(full_path)
 
+    ## Profile
+    generate_module_profile(full_path)
+
+    # Teams
+    generate_module_teams(full_path)
+
+
     # Redux
     generate_redux(full_path)
 
@@ -86,6 +96,8 @@ def start():
 
     ## index.html
     generate_index_html(full_path)
+
+    generate_folder_api(full_path)
 
 
 

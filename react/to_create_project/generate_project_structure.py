@@ -1,15 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN
-
-
-def create_folder(path):
-    """Crea una carpeta si no existe."""
-    if not os.path.exists(path):
-        os.makedirs(path)
-        print_message(f"Carpeta creada: {path}", GREEN)
-    else:
-        print_message(f"Carpeta ya existe: {path}", CYAN)
-
+from .utils import print_message, GREEN, CYAN, create_folder
 
 
 
@@ -28,6 +18,7 @@ def create_project_structure(project_path):
         "src/assets/images",
         "src/assets/fonts",
         "src/components",
+        "src/api",
         "src/router",
         "src/store",
         "src/hooks",
@@ -40,15 +31,11 @@ def create_project_structure(project_path):
         ## Auth
         "src/modules/auth/pages",
         "src/modules/auth/routes",
-        "src/modules/auth/api",
 
         ## Dashboard
-        "src/modules/dashboard/components",
         "src/modules/dashboard/pages",
         "src/modules/dashboard/routes",
-        "src/modules/dashboard/api",
         "src/helpers",
-        "src/styles",
 
         ## "src/modules/auth/styles",
         ## "src/modules/auth/hooks",

@@ -54,7 +54,7 @@ import {
 import {
   ChevronDownIcon,
 } from "@heroicons/react/20/solid";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
@@ -72,19 +72,27 @@ export const SessionLayout = ({ children }) => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { status, displayName } = useSelector(state => state.auth);
 
-  const onLogout = () => {
+  const onLogout = (e) => {
+    e.preventDefault();
     dispatch( startLogout() );
   }
 
+  const onProfile = (e) => {
+    e.preventDefault();
+    navigate("/admin/profile");
+  }
+
+
   const navigation = [
-    { name: t("dashboard"), href: "/admin/dashboard", icon: HomeIcon, current: false },
-    { name: t("team"), href: "/admin/team", icon: UsersIcon, current: true },
+    { name: t("dashboard"), href: "/admin/dashboard", icon: HomeIcon, current: true },
+    { name: t("teams"), href: "/admin/teams", icon: UsersIcon, current: false },
   ];
 
   const userNavigation = [
-    { name: t("profile"), href: "#" },
+    { name: t("profile"), onClick: onProfile },
     { name: t("logout"), onClick: onLogout },
   ];
 
