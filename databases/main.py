@@ -34,19 +34,23 @@ def list_tables_and_columns(host, user, password, database):
         # Loop through each table to get its columns
         for (table_name,) in tables:
 
-            if table_name == 'items':
+            #if table_name == 'items':
 
-                # Get column details for each table
-                cursor.execute(f"DESCRIBE {table_name}")
-                columns = cursor.fetchall()
+            # Get column details for each table
+            cursor.execute(f"DESCRIBE {table_name}")
+            columns = cursor.fetchall()
 
-                c = ''
+            c = ''
 
-                for column in columns:
+            for column in columns:
+                # print(f" - {column[0]} ({column[1]})")
+
+                if column[0] not in {"created_at", "updated_at", "deleted_at"}:
                     c = c + column[0] + " "
-                    # print(f" - {column[0]} ({column[1]})")
 
-                print(c)
+            table_name_format = convert_word(table_name)
+
+            print(f"{table_name_format['singular']} / {table_name_format['plural']} {table_name}: {c}")
 
 
     except Exception as e:

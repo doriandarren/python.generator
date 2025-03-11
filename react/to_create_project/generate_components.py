@@ -260,7 +260,10 @@ export const Datatable = ({
   // Filtrar datos por búsqueda
   const filteredData = data.filter((row) =>
     columns.some((column) =>
-      row[column.key]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      row[column.key]
+        ?.toString()
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
     )
   );
 
@@ -285,7 +288,10 @@ export const Datatable = ({
   const totalRecords = sortedData.length;
   const totalPages = Math.ceil(totalRecords / itemsPerPage);
   const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
-  const indexOfLastItem = Math.min(indexOfFirstItem + itemsPerPage, totalRecords);
+  const indexOfLastItem = Math.min(
+    indexOfFirstItem + itemsPerPage,
+    totalRecords
+  );
   const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
 
   // Manejar orden de columnas
@@ -318,7 +324,6 @@ export const Datatable = ({
 
   return (
     <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
-
       {/* Barra de búsqueda con lupa */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-3">
         <div className="relative w-full sm:w-auto">
@@ -346,39 +351,67 @@ export const Datatable = ({
                 >
                   <div className="flex items-center gap-1">
                     {column.label}
-                    {sortColumn === column.key && (
-                      sortDirection === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                    )}
+                    {sortColumn === column.key &&
+                      (sortDirection === "asc" ? (
+                        <ChevronUp className="w-4 h-4" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" />
+                      ))}
                   </div>
                 </th>
               ))}
-              <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">{t("actions")}</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                {t("actions")}
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white">
             {currentItems.length > 0 ? (
-              currentItems.map((item, index) => (
-                <tr key={index} className="even:bg-gray-50">
-                  {columns.map((column) => (
-                    <td key={column.key} className="px-4 py-4 text-sm whitespace-nowrap text-gray-500">
-                      {item[column.key]}
+              currentItems.map((item, index) => {
+                const rowKey =
+                  item.id && !isNaN(item.id)
+                    ? `row-${item.id}`
+                    : `row-${index}`;
+
+                return (
+                  <tr key={rowKey} className="even:bg-gray-50">
+                    {columns.map((column) => (
+                      <td
+                        key={`${column.key}-${rowKey}`}
+                        className="px-4 py-4 text-sm whitespace-nowrap text-gray-500"
+                      >
+                        {item[column.key] ?? "-"}
+                      </td>
+                    ))}
+                    {/* ✅ Agregar botones de Editar y Eliminar */}
+                    <td className="px-4 py-4 text-sm whitespace-nowrap">
+                      <div className="flex gap-2">
+                        <Link
+                          to={`${editPath}/${item.id}/edit`}
+                          className="text-primary hover:text-primary-dark"
+                          onClick={() => onEdit(item.id)}
+                        >
+                          <Pencil className="w-5 h-5" />
+                        </Link>
+                        <button
+                          onClick={() => onDelete(item.id)}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
                     </td>
-                  ))}
-                  <td className="px-4 py-4 text-sm whitespace-nowrap">
-                    <div className="flex gap-2">
-                      <Link to={`${editPath}/${item.id}/edit`} className="text-primary hover:text-primary-dark" onClick={() => onEdit(item.id)}>
-                        <Pencil className="w-5 h-5" />
-                      </Link>
-                      <button onClick={() => onDelete(item.id)} className="text-red-600 hover:text-red-800">
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
+                  </tr>
+                );
+              })
             ) : (
-              <tr>
-                <td colSpan={columns.length + 1} className="text-center py-4 text-gray-500">{t("no_results_found")}</td>
+              <tr key="no-data">
+                <td
+                  colSpan={columns.length + 1}
+                  className="text-center py-4 text-gray-500"
+                >
+                  {t("no_results_found")}
+                </td>
               </tr>
             )}
           </tbody>
@@ -398,22 +431,43 @@ export const Datatable = ({
             }}
           >
             {[5, 10, 50, 100].map((num) => (
-              <option key={num} value={num}>{num}</option>
+              <option key={num} value={num}>
+                {num}
+              </option>
             ))}
           </select>
-          <span className="text-gray-500 ml-2">{indexOfFirstItem + 1} - {indexOfLastItem} de {totalRecords}</span>
+          <span className="text-gray-500 ml-2">
+            {indexOfFirstItem + 1} - {indexOfLastItem} de {totalRecords}
+          </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)} className="px-3 py-2 text-sm rounded-md bg-gray-300 hover:bg-gray-400 disabled:opacity-50">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="px-3 py-2 text-sm rounded-md bg-gray-300 hover:bg-gray-400 disabled:opacity-50"
+          >
             {t("back")}
           </button>
           {generatePaginationRange().map((page, index) => (
-            <button key={index} onClick={() => typeof page === "number" && setCurrentPage(page)} className={`px-3 py-2 text-sm rounded-md ${currentPage === page ? "bg-primary text-white" : "bg-gray-200 hover:bg-gray-300"}`} disabled={page === "..."}>
+            <button
+              key={index}
+              onClick={() => typeof page === "number" && setCurrentPage(page)}
+              className={`px-3 py-2 text-sm rounded-md ${
+                currentPage === page
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+              disabled={page === "..."}
+            >
               {page}
             </button>
           ))}
-          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)} className="px-3 py-2 text-sm rounded-md bg-gray-300 hover:bg-gray-400 disabled:opacity-50">
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="px-3 py-2 text-sm rounded-md bg-gray-300 hover:bg-gray-400 disabled:opacity-50"
+          >
             {t("next")}
           </button>
         </div>
@@ -421,7 +475,6 @@ export const Datatable = ({
     </div>
   );
 };
-
 
 // Definición de `PropTypes`
 Datatable.propTypes = {

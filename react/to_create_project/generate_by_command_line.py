@@ -99,6 +99,14 @@ def setup_framer_motion(full_path):
 
 
 
+def setup_validation_form(full_path):
+    """Instala FramerMotion."""
+    print_message("Instalando FramerMotion...", CYAN)
+    run_command("npm install react-hook-form @hookform/resolvers yup", cwd=full_path)
+    print_message("React FramerMotion instalado correctamente.", GREEN)
+
+
+
 
 
 

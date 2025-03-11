@@ -102,7 +102,7 @@ Activar directamente. Si no usar el "mainTK" para activar la interfaz gráfica.
 if __name__ == "__main__":
 
     namespace = input_with_validation("Namespace ( ERP / API / INVOICES ) ", "API")
-    ruta = input_with_validation("Ruta proyecto ( /Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/ ) ", "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/")
+    ruta = input_with_validation("Ruta proyecto ( /Users/dorian/PhpstormProjects81/laravel_test/ ) ", "/Users/dorian/PhpstormProjects81/laravel_test/")
     singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", None)
     plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", None)
 
@@ -148,6 +148,20 @@ if __name__ == "__main__":
 #     ]
 #
 #     generate(namespace, ruta, singular_name, plural_name, columns)
+
+
+
+
+
+
+
+# AgendaUnloading / AgendaUnloadings : id transporeon_code name msoft_code
+# AgendaUpload / AgendaUploads : id transporeon_code name msoft_code
+# Item / Items : id description transporeon_item_id msoft_item_id
+# Service / Services : id description service_code
+# Tow / Tows : id transporeon_plate msoft_plate
+
+
 
 
 

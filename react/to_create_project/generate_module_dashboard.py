@@ -363,6 +363,3 @@ export const ProfilePage = () => {
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
-
-

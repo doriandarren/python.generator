@@ -67,20 +67,21 @@ def create_profile_page(project_path):
 import { SessionLayout } from "../../../layouts/private/SessionLayout"
 import { useState } from "react";
 import { Button } from "../../../components/Buttons/Button";
-import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+
+const dataForm = {
+  name: "",
+  title: "",
+  email: "",
+  role: "",
+};
 
 export const ProfilePage = () => {
 
-  const navigate = useNavigate();
-
   const {t} = useTranslation();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    title: "",
-    email: "",
-    role: "",
-  });
+  const [formData, setFormData] = useState(dataForm);
   
   // Manejar cambios en el formulario
   const handleChange = (e) => {
@@ -92,24 +93,25 @@ export const ProfilePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    //dispatch(addUser(formData)); 
-    navigate("/admin/team");
+    // TODO: implements
+    //navigate("/admin/profile");
+    Swal.fire("Registro guardado correctamente", "Registro guardado", "success")
   };
 
-  const onClickCancel = (e) => {
-    e.preventDefault();
-    navigate("/admin/team"); 
-  }
+
 
   return (
     <SessionLayout>
-
-      <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+      <div>
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-          {t("add")}
+          { t("profile") }
         </h2>
+      </div>
+
+      <div className="mx-auto p-6 bg-white rounded-lg shadow-lg">
+
         <form onSubmit={onSubmit} className="space-y-4">
-          {/* Nombre */}
+
           <div>
             <label className="block text-gray-700">Nombre</label>
             <input
@@ -122,7 +124,6 @@ export const ProfilePage = () => {
             />
           </div>
 
-          {/* Cargo */}
           <div>
             <label className="block text-gray-700">Título</label>
             <input
@@ -135,7 +136,6 @@ export const ProfilePage = () => {
             />
           </div>
 
-          {/* Correo Electrónico */}
           <div>
             <label className="block text-gray-700">Correo Electrónico</label>
             <input
@@ -148,7 +148,6 @@ export const ProfilePage = () => {
             />
           </div>
 
-          {/* Rol */}
           <div>
             <label className="block text-gray-700">Rol</label>
             <select
@@ -165,21 +164,12 @@ export const ProfilePage = () => {
             </select>
           </div>
 
-          {/* Botón de Crear */}
-          <div className="flex justify-end">
-            <div>
-              <Button type="submit">{t("save")}</Button>
-            </div>
-
-            <div>
-              <Button
-                variant="danger"
-                onClick={onClickCancel}
-              >
-                {t("cancel")}
-              </Button>
-            </div>
-
+          <div className="flex justify-end items-end mt-7">
+            <Button 
+              type="submit"
+            >
+              {t("save")}
+            </Button>
           </div>
 
         </form>
