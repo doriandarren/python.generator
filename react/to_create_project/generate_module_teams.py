@@ -36,7 +36,7 @@ export const TeamRoutes = () => {
     
       <Route path="/" element={<TeamPage />} />
       <Route path="create" element={<TeamCreatePage />} />
-      <Route path=":id/edit" element={<TeamEditPage />} />
+      <Route path="edit/:id" element={<TeamEditPage />} />
       
     </Routes>
   )
@@ -71,8 +71,10 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
 import { useEffect, useState } from "react";
-import { getTeams } from "../services/teamService"; // Importa la función correcta
-import { dataHeaderFake } from "../../../helpers/helperDataFake"; // Mantiene solo el header, sin datos fake
+import { deleteTeam, getTeam } from "../services/agendaTeam";
+import Swal from "sweetalert2";
+import { Toast } from "../../../helpers/helperToast";
+
 
 export const TeamPage = () => {
   const navigate = useNavigate();
@@ -80,33 +82,72 @@ export const TeamPage = () => {
   const [data, setData] = useState([]); // Estado para almacenar los datos reales
   const [loading, setLoading] = useState(true); // Estado de carga
 
+
+  const dataHeader = [
+    { key: "name", label: t("name") },
+    { key: "transporeon_code", label: t("transporeon_code") },
+    { key: "msoft_code", label: t("msoft_code") },
+  ];
+
+
   useEffect(() => {
-    const fetchTeams = async () => {
+    const fetchApi = async () => {
       setLoading(true);
+
       try {
         const response = await getTeams();
-        //console.log("🚀 Datos de la API:", response);
+        const { data } = response;
 
-        if (Array.isArray(response.data)) {
-          setData(response.data);
+        //console.log("Datos de la API:", data[0]);
+
+        if (Array.isArray(data)) {
+          setData(data);
           //setData([]);
         } else {
-          console.warn("⚠️ La API no devolvió un array:", response);
+          console.warn("La API no devolvió un array:", response);
         }
       } catch (error) {
-        console.error("🚨 Error al obtener los equipos:", error);
+        console.error("Error al obtener los equipos:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTeams();
+    fetchApi();
   }, []);
 
-  const handleEdit = (id) => alert(`Editando usuario con ID: ${id}`);
-  const handleDelete = (id) => alert(`Eliminando usuario con ID: ${id}`);
 
-  const onButtonClick = (e) => {
+  const onDeleteClick = async (id, description = "") => {
+    Swal.fire({
+      icon: "warning",
+      title: t("message.are_you_sure"),
+      text: t("delete") + (description !== "" ? ": " + description : ""),
+      showCancelButton: true,
+      confirmButtonText: t("delete"),
+      cancelButtonText: t("cancel"),
+      confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_SUCCESS,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await deleteTeam(id);
+          const { success, errors } = response;
+  
+          if (success) {
+            // Eliminando el registro de la tabla sin recargar la página
+            setData((prevData) => prevData.filter((item) => item.id !== id));
+            await Toast(t("message.record_deleted"), "success");
+          } else {
+            await Toast(errors?.[0]?.e || t("message.error_deleting"), "error");
+          }
+        } catch (error) {
+          console.error("Error al eliminar el registro:", error);
+          await Toast(t("message.error_deleting"), "error");
+        }
+      }
+    });
+  };
+
+  const onAddClick = (e) => {
     e.preventDefault();
     navigate("/admin/teams/create");
   };
@@ -120,7 +161,7 @@ export const TeamPage = () => {
 
         <div className="sm:flex sm:items-center">
           <div className="mt-4 sm:mt-0 sm:flex-none">
-            <Button type="button" onClick={onButtonClick}>
+            <Button type="button" onClick={onAddClick}>
               {t("add")}
             </Button>
           </div>
@@ -128,14 +169,13 @@ export const TeamPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-center text-gray-600">Cargando equipos...</p>
+        <p className="text-center text-gray-600">Cargando...</p>
       ) : (
         <Datatable
-          columns={dataHeaderFake}
+          columns={dataHeader}
           data={data}
           editPath="/admin/teams"
-          onEdit={handleEdit}
-          onDelete={handleDelete}
+          onDelete={onDeleteClick}
         />
       )}
     </SessionLayout>
@@ -165,135 +205,129 @@ def create_create_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    content = """import { useTranslation } from "react-i18next"
-import { SessionLayout } from "../../../layouts/private/SessionLayout"
-import { useState } from "react";
+    content = """import { useTranslation } from "react-i18next";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
 import { Button } from "../../../components/Buttons/Button";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { createTeam } from "../services/agendaTeam";
 
 
-const dataForm = {
-  name: "",
-  title: "",
-  email: "",
-  role: "",
-};
+// Esquema de validación con Yup
+const schema = yup.object().shape({
+  name: yup.string().required("Campo obligatorio"),
+  transporeon_code: yup.string().required("Campo obligatorio"),
+  msoft_code: yup.string().required("Campo obligatorio"),
+});
+
 
 export const TeamCreatePage = () => {
-
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(dataForm);
+  // Configuración de react-hook-form con Yup
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  // Función para manejar el envío del formulario
+  const onSubmit = async(data) => {
+    try {
+      console.log("📌 Datos enviados:", data);
+      
+      const response = await createTeam(data);
   
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+      if (response) {
+        Swal.fire("Registro guardado correctamente", "Registro guardado", "success").then(() => {
+          navigate("/admin/teams");
+        });
+      } else {
+        Swal.fire("Error", "No se pudo guardar el registro", "error");
+      }
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+      Swal.fire("Error", "Hubo un problema al guardar el registro", "error");
+    }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // TODO: implements
-    //navigate("/admin/profile");
-    Swal.fire("Registro guardado correctamente", "Registro guardado", "success")
-  };
-
+  // Función para cancelar
   const onClickCancel = (e) => {
     e.preventDefault();
     navigate("/admin/teams");
-  }
-
-
+  };
 
   return (
     <SessionLayout>
       <div>
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-          { t("teams") }
+          {t("agenda_unloading")}
         </h2>
       </div>
 
       <div className="mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 gap-6">
 
-        <form onSubmit={onSubmit} className="space-y-4">
-
-          <div>
-            <label className="block text-gray-700">Nombre</label>
+          {/* Nombre */}
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+            <label className="block text-gray-700">{t("name")}</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              {...register("name")}
+              className={`w-full p-2 border ${
+                errors.name ? "border-danger" : "border-gray-300"
+              } rounded-md`}
             />
+            {errors.name && <p className="text-danger text-sm">{errors.name.message}</p>}
           </div>
 
-          <div>
-            <label className="block text-gray-700">Título</label>
+          {/* Código Transporeon */}
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+            <label className="block text-gray-700">{t("transporeon_code")}</label>
             <input
               type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              {...register("transporeon_code")}
+              className={`w-full p-2 border ${
+                errors.transporeon_code ? "border-danger" : "border-gray-300"
+              } rounded-md`}
             />
+            {errors.transporeon_code && (
+              <p className="text-danger text-sm">{errors.transporeon_code.message}</p>
+            )}
           </div>
 
-          <div>
-            <label className="block text-gray-700">Correo Electrónico</label>
+          {/* Código MSoft */}
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+            <label className="block text-gray-700">{t("msoft_code")}</label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              type="text"
+              {...register("msoft_code")}
+              className={`w-full p-2 border ${
+                errors.msoft_code ? "border-danger" : "border-gray-300"
+              } rounded-md`}
             />
+            {errors.msoft_code && (
+              <p className="text-danger text-sm">{errors.msoft_code.message}</p>
+            )}
           </div>
 
-          <div>
-            <label className="block text-gray-700">Rol</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Selecciona un rol</option>
-              <option value="Admin">Admin</option>
-              <option value="Manager">Manager</option>
-              <option value="User">User</option>
-            </select>
-          </div>
-
-          <div className="flex justify-center items-end mt-7">
-            <Button 
-              type="submit"
-            >
-              { t("save") }
+          {/* Botones */}
+          <div className="col-span-12 flex justify-center mt-7">
+            <Button type="submit">{t("save")}</Button>
+            <Button variant="danger" onClick={onClickCancel}>
+              {t("cancel")}
             </Button>
-
-            <Button
-              variant="danger"
-              onClick={onClickCancel}
-            >
-              { t("cancel") }
-            </Button>
-
           </div>
 
         </form>
       </div>
-      
     </SessionLayout>
-  )
-}
+  );
+};
 """
 
     # Crear el archivo y escribir el contenido
@@ -317,135 +351,162 @@ def create_edit_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    content = """import { useTranslation } from "react-i18next"
-import { SessionLayout } from "../../../layouts/private/SessionLayout"
-import { useState } from "react";
+    content = """import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
 import { Button } from "../../../components/Buttons/Button";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { getTeamById, updateteam } from "../services/agendaTeam";
 
-
-const dataForm = {
-  name: "",
-  title: "",
-  email: "",
-  role: "",
-};
+// Esquema de validación con Yup
+const schema = yup.object().shape({
+  name: yup.string().required("Campo obligatorio"),
+  transporeon_code: yup.string().required("Campo obligatorio"),
+  msoft_code: yup.string().required("Campo obligatorio"),
+});
 
 export const TeamEditPage = () => {
-
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
 
-  const [formData, setFormData] = useState(dataForm);
-  
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  // Configuración de react-hook-form con Yup
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  // Cargar datos del API al montar el componente
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await getTeam(id);
+        const {name, transporeon_code, msoft_code} = response.data;
+        
+        if (response) {
+          setValue("name", name);
+          setValue("transporeon_code", transporeon_code);
+          setValue("msoft_code", msoft_code);
+        } else {
+          Swal.fire("Error", "No se pudo obtener el registro", "error");
+          navigate("/admin/teams");
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        Swal.fire("Error", "Hubo un problema al obtener el registro", "error");
+        navigate("/admin/teams");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id, navigate, setValue]);
+
+  // Función para manejar la actualización
+  const onSubmit = async (data) => {
+    try {
+      console.log("Datos enviados:", data);
+      const response = await updateTeam(id, data);
+
+      if (response) {
+        Swal.fire("Actualizado", "Registro actualizado correctamente", "success").then(() => {
+          navigate("/admin/teams");
+        });
+      } else {
+        Swal.fire("Error", "No se pudo actualizar el registro", "error");
+      }
+    } catch (error) {
+      console.error("Error al actualizar:", error);
+      Swal.fire("Error", "Hubo un problema al actualizar el registro", "error");
+    }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // TODO: implements
-    //navigate("/admin/profile");
-    Swal.fire("Registro guardado correctamente", "Registro guardado", "success")
-  };
-
+  // Función para cancelar
   const onClickCancel = (e) => {
     e.preventDefault();
     navigate("/admin/teams");
-  }
-
-
+  };
 
   return (
     <SessionLayout>
       <div>
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-          { t("teams") }
+          {t("edit")}
         </h2>
       </div>
 
       <div className="mx-auto p-6 bg-white rounded-lg shadow-lg">
+        {loading ? (
+          <p className="text-center text-gray-600">Cargando...</p>
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 gap-6">
 
-        <form onSubmit={onSubmit} className="space-y-4">
+            {/* Nombre */}
+            <div className="col-span-12 md:col-span-6 lg:col-span-4">
+              <label className="block text-gray-700">{t("name")}</label>
+              <input
+                type="text"
+                {...register("name")}
+                className={`w-full p-2 border ${
+                  errors.name ? "border-danger" : "border-gray-300"
+                } rounded-md`}
+              />
+              {errors.name && <p className="text-danger text-sm">{errors.name.message}</p>}
+            </div>
 
-          <div>
-            <label className="block text-gray-700">Nombre</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+            {/* Código Transporeon */}
+            <div className="col-span-12 md:col-span-6 lg:col-span-4">
+              <label className="block text-gray-700">{t("transporeon_code")}</label>
+              <input
+                type="text"
+                {...register("transporeon_code")}
+                className={`w-full p-2 border ${
+                  errors.transporeon_code ? "border-danger" : "border-gray-300"
+                } rounded-md`}
+              />
+              {errors.transporeon_code && (
+                <p className="text-danger text-sm">{errors.transporeon_code.message}</p>
+              )}
+            </div>
 
-          <div>
-            <label className="block text-gray-700">Título</label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+            {/* Código MSoft */}
+            <div className="col-span-12 md:col-span-6 lg:col-span-4">
+              <label className="block text-gray-700">{t("msoft_code")}</label>
+              <input
+                type="text"
+                {...register("msoft_code")}
+                className={`w-full p-2 border ${
+                  errors.msoft_code ? "border-danger" : "border-gray-300"
+                } rounded-md`}
+              />
+              {errors.msoft_code && (
+                <p className="text-danger text-sm">{errors.msoft_code.message}</p>
+              )}
+            </div>
 
-          <div>
-            <label className="block text-gray-700">Correo Electrónico</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+            {/* Botones */}
+            <div className="col-span-12 flex justify-center mt-7 gap-2">
+              <Button type="submit">{t("save")}</Button>
+              <Button variant="danger" onClick={onClickCancel}>
+                {t("cancel")}
+              </Button>
+            </div>
 
-          <div>
-            <label className="block text-gray-700">Rol</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Selecciona un rol</option>
-              <option value="Admin">Admin</option>
-              <option value="Manager">Manager</option>
-              <option value="User">User</option>
-            </select>
-          </div>
-
-          <div className="flex justify-center items-end mt-7">
-            <Button 
-              type="submit"
-            >
-              { t("save") }
-            </Button>
-
-            <Button
-              variant="danger"
-              onClick={onClickCancel}
-            >
-              { t("cancel") }
-            </Button>
-
-          </div>
-
-        </form>
+          </form>
+        )}
       </div>
-      
     </SessionLayout>
-  )
-}
+  );
+};
 """
 
     # Crear el archivo y escribir el contenido
@@ -498,6 +559,9 @@ def create_service_file(project_path):
     # Contenido de file
     content = """import { api } from "../../../api/api";
 
+/**
+ * List
+ */
 export const getTeams = async () => {
     try {
         const token = localStorage.getItem("token_portuarios");
@@ -520,6 +584,84 @@ export const getTeams = async () => {
         return [];
     }
 };
+
+/**
+ * Show
+ */
+export const getTeamById = async (id) => {
+    try {
+        const token = localStorage.getItem("token_portuarios");
+        if (!token) return null;
+
+        const response = await api(`teams/show/${id}`, "GET", null, token);
+        return response;
+    } catch (error) {
+        console.error("Error al obtener el registro:", error);
+        return null;
+    }
+};
+
+
+/**
+ * Store
+ */
+export const createTeam = async (data) => {
+    try {
+        const token = localStorage.getItem("token_portuarios");
+        if (!token) {
+            console.warn("No hay token disponible en localStorage");
+            return null;
+        }
+
+        const response = await api("teams/store", "POST", data, token);
+
+        if (!response || typeof response !== "object") {
+            console.error("Error en la respuesta de la API:", response);
+            return null;
+        }
+
+        return response;
+    } catch (error) {
+        console.error("Error al enviar los datos:", error);
+        return null;
+    }
+};
+
+
+
+/**
+ * Update
+ */
+export const updateTeam = async (id, data) => {
+    try {
+        const token = localStorage.getItem("token_portuarios");
+        if (!token) return null;
+
+        const response = await api(`teams/update/${id}`, "PUT", data, token);
+        return response;
+    } catch (error) {
+        console.error("Error al actualizar el registro:", error);
+        return null;
+    }
+};
+
+
+/**
+ * Delete
+ */
+export const deleteTeam = async (id) => {
+    try {
+        const token = localStorage.getItem("token_portuarios");
+        if (!token) return null;
+
+        const response = await api(`teams/delete/${id}`, "DELETE", null, token);
+        return response;
+    } catch (error) {
+        console.error("Error al actualizar el registro:", error);
+        return null;
+    }
+};
+
 """
 
     # Crear el archivo y escribir el contenido

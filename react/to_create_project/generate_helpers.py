@@ -3,14 +3,15 @@ from .utils import print_message, GREEN, CYAN, run_command
 
 
 def generate_helpers(full_path):
-    create_helper_sweetalert2(full_path)
+    create_sweetalert2(full_path)
     create_data_fake(full_path)
+    create_toast(full_path)
 
 
 
 
 
-def create_helper_sweetalert2(full_path):
+def create_sweetalert2(full_path):
     """
     Genera un archivo
 
@@ -187,3 +188,48 @@ export const dataBodyFake = [
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
+
+def create_toast(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "helpers")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "helperToast.js")
+
+    # Contenido
+    content = """import Swal from \"sweetalert2\";
+
+export const Toast = async (text, icon = \'success\') => {
+  Swal.fire({
+    toast: true,
+    icon: icon,
+    title: text,
+    position: \'top-end\',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener(\'mouseenter\', Swal.stopTimer)
+      toast.addEventListener(\'mouseleave\', Swal.resumeTimer)
+    }
+  });
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
