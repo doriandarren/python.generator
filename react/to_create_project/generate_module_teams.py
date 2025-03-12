@@ -1,5 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command, create_folder
+from react.utils.utils import create_folder
 
 
 
@@ -71,7 +71,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
 import { useEffect, useState } from "react";
-import { deleteTeam, getTeam } from "../services/agendaTeam";
+import { deleteTeam, getTeams } from "../services/teamService";
 import Swal from "sweetalert2";
 import { Toast } from "../../../helpers/helperToast";
 
@@ -79,8 +79,8 @@ import { Toast } from "../../../helpers/helperToast";
 export const TeamPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [data, setData] = useState([]); // Estado para almacenar los datos reales
-  const [loading, setLoading] = useState(true); // Estado de carga
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   const dataHeader = [
@@ -169,7 +169,7 @@ export const TeamPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-center text-gray-600">Cargando...</p>
+        <p className="text-center text-gray-600">{ t("loading") }</p>
       ) : (
         <Datatable
           columns={dataHeader}
@@ -192,7 +192,6 @@ export const TeamPage = () => {
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-
 def create_create_page(project_path):
     """
     Genera el archivo jsx
@@ -213,32 +212,34 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { createTeam } from "../services/agendaTeam";
+import { createTeam } from "../services/teamService";
 
 
-// Esquema de validación con Yup
-const schema = yup.object().shape({
-  name: yup.string().required("Campo obligatorio"),
-  transporeon_code: yup.string().required("Campo obligatorio"),
-  msoft_code: yup.string().required("Campo obligatorio"),
-});
+
 
 
 export const TeamCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  
+  // Schema 
+  const schema = yup.object().shape({
+    name: yup.string().required(t("form.required")),
+    transporeon_code: yup.string().required(t("form.required")),
+    msoft_code: yup.string().required(t("form.required")),
+  });
 
-  // Configuración de react-hook-form con Yup
+  // react-hook-form con Yup
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // Función para manejar el envío del formulario
+  
   const onSubmit = async(data) => {
     try {
-      console.log("📌 Datos enviados:", data);
+      console.log("Datos enviados:", data);
       
       const response = await createTeam(data);
   
@@ -255,7 +256,6 @@ export const TeamCreatePage = () => {
     }
   };
 
-  // Función para cancelar
   const onClickCancel = (e) => {
     e.preventDefault();
     navigate("/admin/teams");
@@ -265,7 +265,7 @@ export const TeamCreatePage = () => {
     <SessionLayout>
       <div>
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-          {t("agenda_unloading")}
+          { t("add") }
         </h2>
       </div>
 
@@ -360,7 +360,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getTeamById, updateteam } from "../services/agendaTeam";
+import { getTeamById, updateTeam } from "../services/teamService";
 
 // Esquema de validación con Yup
 const schema = yup.object().shape({
@@ -383,12 +383,12 @@ export const TeamEditPage = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // Cargar datos del API al montar el componente
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await getTeam(id);
+        const response = await getTeamById(id);
         const {name, transporeon_code, msoft_code} = response.data;
         
         if (response) {
@@ -542,7 +542,6 @@ export * from './TeamEditPage';
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
 
 
 def create_service_file(project_path):

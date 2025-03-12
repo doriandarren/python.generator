@@ -1,6 +1,4 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command
-
 
 
 def generate_env(full_path):
@@ -20,6 +18,12 @@ def create_env_file(project_path):
     content = """VITE_APP_NAME=SiteLocal
 VITE_APP_ENV=local
 VITE_API_URL=http://project.test/api/v1/
+
+## SWEETALERT2
+VITE_SWEETALERT_COLOR_BTN_SUCCESS=#10B981  # Verde (Tailwind "emerald-500")
+VITE_SWEETALERT_COLOR_BTN_DANGER=#EF4444   # Rojo (Tailwind "red-500")
+VITE_SWEETALERT_COLOR_BTN_WARNING=#F59E0B  # Amarillo (Tailwind "amber-500")
+VITE_SWEETALERT_COLOR_BTN_INFO=#3B82F6     # Azul (Tailwind "blue-500")
 """
 
     # Crear el archivo y escribir el contenido
@@ -40,6 +44,12 @@ def create_env_example_file(project_path):
     content = """VITE_APP_NAME=SiteLocal
 VITE_APP_ENV=local
 VITE_API_URL=http://project.test/api/v1/
+
+## SWEETALERT2
+VITE_SWEETALERT_COLOR_BTN_SUCCESS=#10B981  # Verde (Tailwind "emerald-500")
+VITE_SWEETALERT_COLOR_BTN_DANGER=#EF4444   # Rojo (Tailwind "red-500")
+VITE_SWEETALERT_COLOR_BTN_WARNING=#F59E0B  # Amarillo (Tailwind "amber-500")
+VITE_SWEETALERT_COLOR_BTN_INFO=#3B82F6     # Azul (Tailwind "blue-500")
 """
 
     # Crear el archivo y escribir el contenido

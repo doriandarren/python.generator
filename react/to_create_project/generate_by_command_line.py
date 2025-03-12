@@ -1,5 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command
+from react.utils.utils import print_message, GREEN, CYAN, run_command
 
 
 
@@ -13,9 +13,11 @@ def generate_by_command_line(full_path):
     setup_lucide_react(full_path)
     setup_animate_css(full_path)
     setup_sweetalert2(full_path)
+    setup_validation_form(full_path) ## Validators Form
     setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     delete_app_and_index_css(full_path)
+
 
 
 

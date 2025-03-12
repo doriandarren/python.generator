@@ -1,7 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command
-
-
+from react.utils.utils import print_message, GREEN, CYAN
 
 
 def generate_components(full_path):
@@ -383,11 +381,11 @@ export const Datatable = ({
                         {item[column.key] ?? "-"}
                       </td>
                     ))}
-                    {/* ✅ Agregar botones de Editar y Eliminar */}
+                    {/* Agregar botones de Editar y Eliminar */}
                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                       <div className="flex gap-2">
                         <Link
-                          to={`${editPath}/${item.id}/edit`}
+                          to={`${editPath}/edit/${item.id}`}
                           className="text-primary hover:text-primary-dark"
                           onClick={() => onEdit(item.id)}
                         >

@@ -1,5 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command
+from react.utils.utils import print_message, GREEN, CYAN, run_command
 
 
 
@@ -117,6 +117,7 @@ import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
 import { ProfileRoutes } from "../modules/profile/routes/ProfileRoutes";
+import { Preloader } from "../components/Preloader/Preloader";
 
 
 export const AppRouter = () => {
@@ -132,7 +133,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checkingAuth) {
-    return <div className="flex items-center justify-center h-screen text-xl">Cargando sesión...</div>; // Mostrar loading
+    return <Preloader />
   }
 
   return (

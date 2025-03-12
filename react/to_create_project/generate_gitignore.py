@@ -1,6 +1,4 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command
-
 
 
 def generate_gitignore(full_path):

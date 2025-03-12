@@ -1,4 +1,5 @@
-from to_create_project.utils import print_message, GREEN, CYAN
+from react.to_create_module.generate_module_standard import generate_module_standard
+from react.utils.utils import print_message, GREEN, CYAN
 from react.to_create_project.generate_components import generate_components
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
@@ -22,9 +23,22 @@ from to_create_project.generate_module_teams import generate_module_teams
 from to_create_project.generate_module_profile import generate_module_profile
 
 
+# Función para manejar input con validación y valores por defecto
+def input_with_validation(prompt, default_value=None):
+    while True:  # Bucle para solicitar una entrada válida
+        if default_value:  # Si hay un valor por defecto, se muestra
+            user_input = input(f"{prompt} [{default_value}]: ").strip()
+            if user_input:  # Si el usuario escribe algo, lo retorna
+                return user_input
+            return default_value  # Si presiona Enter, usa el valor por defecto
+        else:  # Si no hay un valor por defecto
+            user_input = input(f"{prompt}").strip()
+            if user_input:  # Si el usuario escribe algo, lo retorna
+                return user_input
+            print("La entrada no puede estar en blanco. Por favor, inténtalo de nuevo.")
 
 
-def start():
+def start_project():
     # Ruta predeterminada
     default_path = "/Users/dorian/ReactProjects"
 
@@ -112,5 +126,32 @@ def start():
 
 
 
+def start_module():
+
+    project_path = "/Users/dorian/ReactProjects/"
+
+    folder_project = input_with_validation("Carpeta Proyecto: ")
+    singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", None)
+    plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", None)
+    input_columns = input_with_validation("Columnas: ", None)
+
+    columns = [{"name": column} for column in input_columns.split()]
+    project_path = project_path + folder_project + "/"
+
+    generate_module_standard(project_path, singular_name, plural_name, columns)
+
+
+
+
+
+
 if __name__ == "__main__":
-    start()
+
+    namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
+
+    if namespace.lower() == 'p':
+        start_project()
+    if namespace.lower() == 'm':
+        start_module()
+
+    print("Bye...")

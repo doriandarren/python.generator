@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 
 
@@ -31,3 +32,14 @@ def create_folder(path):
         print_message(f"Carpeta creada: {path}", GREEN)
     else:
         print_message(f"Carpeta ya existe: {path}", CYAN)
+
+
+
+def camel_to_kebab(name):
+    """Convierte un string CamelCase a kebab-case."""
+    return re.sub(r'(?<!^)(?=[A-Z])', '-', name).lower()
+
+
+def camel_to_snake(name):
+    """Convierte un string CamelCase a snake_case."""
+    return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()

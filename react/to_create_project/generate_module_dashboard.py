@@ -1,5 +1,5 @@
 import os
-from .utils import print_message, GREEN, CYAN, run_command, create_folder
+from react.utils.utils import print_message, GREEN, CYAN, run_command, create_folder
 
 
 
@@ -44,7 +44,7 @@ export const DashboardRoutes = () => {
       <Route path="/" element={ <DashboardPage /> } />
       
       
-      <Route path="/*" element={ <Navigate to="/auth/dashboard" /> } />
+      <Route path="/*" element={ <Navigate to="/admin/dashboard" /> } />
       
     </Routes>
   )
