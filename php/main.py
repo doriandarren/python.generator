@@ -1,8 +1,4 @@
 import os
-import re
-
-## Agregue "php." por si acaso no funciona esto con el kt:
-
 from php.to_api.create_model_file import generate_model_file
 from php.to_api.create_repository_file import generate_repository_file
 from php.to_api.create_routes_file import generate_routes_file
@@ -15,27 +11,10 @@ from php.to_api.create_controller_destroy_file import generate_controller_destro
 from php.to_api.create_seeder_file import generate_seeder_file
 from php.to_api.create_factory_file import generate_factory_file
 from php.to_api.create_postman_file import generate_postman_file
-
-
-
-def camel_to_kebab(name):
-    """Convierte un string CamelCase a kebab-case."""
-    return re.sub(r'(?<!^)(?=[A-Z])', '-', name).lower()
-
-
-def camel_to_snake(name):
-    """Convierte un string CamelCase a snake_case."""
-    return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
-
-
+from php.utils.utils import camel_to_kebab, camel_to_snake, input_with_validation
 
 
 def generate(namespace, ruta, singular_name, plural_name, columns):
-    # Obtener la ruta base automáticamente
-    ## base_path = os.path.dirname(os.path.dirname(__file__))  # Navegar un nivel hacia arriba desde la ubicación de 'main.py'
-    ## ruta = os.path.join(base_path, 'api_project/invoices')
-
-
 
     # Path model
     path_model = "Models/" + plural_name
@@ -78,35 +57,15 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
 
-# Función para manejar input con validación y valores por defecto
-def input_with_validation(prompt, default_value=None):
-    while True:  # Bucle para solicitar una entrada válida
-        if default_value:  # Si hay un valor por defecto, se muestra
-            user_input = input(f"{prompt} [{default_value}]: ").strip()
-            if user_input:  # Si el usuario escribe algo, lo retorna
-                return user_input
-            return default_value  # Si presiona Enter, usa el valor por defecto
-        else:  # Si no hay un valor por defecto
-            user_input = input(f"{prompt}").strip()
-            if user_input:  # Si el usuario escribe algo, lo retorna
-                return user_input
-            print("La entrada no puede estar en blanco. Por favor, inténtalo de nuevo.")
-
-
-
-
-"""
-Activar directamente. Si no usar el "mainTK" para activar la interfaz gráfica.
-"""
-
 if __name__ == "__main__":
 
+
+    ruta = input_with_validation("Proyecto ( /Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test ) ", "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/")
     namespace = input_with_validation("Namespace ( ERP / API / INVOICES ) ", "API")
-    ruta = input_with_validation("Ruta proyecto ( /Users/dorian/PhpstormProjects81/laravel_test/ ) ", "/Users/dorian/PhpstormProjects81/laravel_test/")
     singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", None)
     plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", None)
 
-    input_columns = input_with_validation("Columnas: ", None)
+    input_columns = input_with_validation("Columnas (separdo por espacio): ", None)
 
     columns = [{"name": column} for column in input_columns.split()]
 
@@ -115,39 +74,7 @@ if __name__ == "__main__":
 
 
 
-# def load():
-#
-#     # Namespace
-#     # namespace = "INVOICES"
-#     # namespace = "API"
-#     namespace = "ERP"
-#
-#
-#     # Ruta del proyecto
-#     # ruta = "/Users/dorian/PhpstormProjects81/php84/api.splytin.com/"
-#     # ruta = "/Users/dorian/PhpstormProjects81/portuarios.globalfleet.es/"
-#     ruta = "/Users/dorian/PhpstormProjects81/harineras-api.globalfleet.es/"
-#
-#
-#     # Definir tabla
-#     ##singular_name = 'AgendaUnloading'
-#     singular_name = 'Device'
-#     plural_name = 'Devices'
-#
-#     columns = [
-#         {"name": "company_id"},
-#         {"name": "vehicle_id"},
-#         {"name": "box_id"},
-#         {"name": "unit_id"},
-#         {"name": "model"},
-#         {"name": "model_ver"},
-#         {"name": "installed"},
-#         {"name": "imei"},
-#         {"name": "serial"},
-#         {"name": "phone"},
-#     ]
-#
-#     generate(namespace, ruta, singular_name, plural_name, columns)
+
 
 
 

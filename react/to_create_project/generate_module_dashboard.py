@@ -73,7 +73,8 @@ def create_dashboard_page(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    home_page_content = """import { SessionLayout } from "../../../layouts/private/SessionLayout";
+    home_page_content = """import { useTranslation } from "react-i18next";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
 
 import {
   XAxis,
@@ -132,13 +133,14 @@ const data = [
 
 export const DashboardPage = () => {
   
+  const { t } = useTranslation();
 
   return (
     <SessionLayout>
       
-      <div className="pt-6">
+      <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
-          Dashboard de Ventas
+          { t("dashboard") }
         </h2>
       </div>
 
@@ -147,7 +149,7 @@ export const DashboardPage = () => {
         {/* Card 1 */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold text-gray-600">Total Ventas</h3>
-          <p className="text-2xl font-bold text-gray-800">$12,500</p>
+          <p className="text-2xl font-bold text-gray-800">$12.500</p>
         </div>
 
         {/* Card 2 */}

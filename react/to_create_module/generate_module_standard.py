@@ -165,7 +165,7 @@ export const {singular_name}Page = () => {{
     <SessionLayout>
       <div className="flex items-center justify-between mb-5">
         <div className="mt-1">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">{{ t("{plural_name_kebab}") }}</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{{ t("{plural_name_snake}") }}</h2>
         </div>
 
         <div className="sm:flex sm:items-center">

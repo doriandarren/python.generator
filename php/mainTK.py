@@ -35,38 +35,40 @@ def process_inputs():
 
 
 
-root = tk.Tk()
-root.title("Generador de Código")
-root.geometry("800x800")
+if __name__ == "__main__":
+
+    root = tk.Tk()
+    root.title("Generador de Código")
+    root.geometry("800x800")
 
 
-# Crear las etiquetas y entradas
-tk.Label(root, text="Namespace (API / ERP / INVOICES):").pack(anchor="w", padx=10, pady=5)
-namespace_entry = tk.Entry(root)
-namespace_entry.insert(0, "API")  # Valor por defecto
-namespace_entry.pack(fill="x", padx=10)
+    # Crear las etiquetas y entradas
+    tk.Label(root, text="Namespace (API / ERP / INVOICES):").pack(anchor="w", padx=10, pady=5)
+    namespace_entry = tk.Entry(root)
+    namespace_entry.insert(0, "API")  # Valor por defecto
+    namespace_entry.pack(fill="x", padx=10)
 
-tk.Label(root, text="Ruta proyecto:").pack(anchor="w", padx=10, pady=5)
-ruta_entry = tk.Entry(root)
-## /Users/dorian/PhpstormProjects81/laravel_test/
-ruta_entry.insert(0, "/Users/dorian/PhpstormProjects81/laravel_test/")  # Valor por defecto
-ruta_entry.pack(fill="x", padx=10)
+    tk.Label(root, text="Ruta proyecto:").pack(anchor="w", padx=10, pady=5)
+    ruta_entry = tk.Entry(root)
+    ## /Users/dorian/PhpstormProjects81/laravel_test/
+    ruta_entry.insert(0, "/Users/dorian/PhpstormProjects81/laravel_test/")  # Valor por defecto
+    ruta_entry.pack(fill="x", padx=10)
 
-tk.Label(root, text="Nombre singular (AgendaUnloading):").pack(anchor="w", padx=10, pady=5)
-singular_name_entry = tk.Entry(root)
-singular_name_entry.pack(fill="x", padx=10)
+    tk.Label(root, text="Nombre singular (AgendaUnloading):").pack(anchor="w", padx=10, pady=5)
+    singular_name_entry = tk.Entry(root)
+    singular_name_entry.pack(fill="x", padx=10)
 
-tk.Label(root, text="Nombre plural (AgendaUnloadings):").pack(anchor="w", padx=10, pady=5)
-plural_name_entry = tk.Entry(root)
-plural_name_entry.pack(fill="x", padx=10)
+    tk.Label(root, text="Nombre plural (AgendaUnloadings):").pack(anchor="w", padx=10, pady=5)
+    plural_name_entry = tk.Entry(root)
+    plural_name_entry.pack(fill="x", padx=10)
 
-tk.Label(root, text="Columnas (separadas por espacio):").pack(anchor="w", padx=10, pady=5)
-input_columns_entry = tk.Entry(root)
-input_columns_entry.pack(fill="x", padx=10)
+    tk.Label(root, text="Columnas (separadas por espacio):").pack(anchor="w", padx=10, pady=5)
+    input_columns_entry = tk.Entry(root)
+    input_columns_entry.pack(fill="x", padx=10)
 
-# Botón para procesar la entrada
-submit_button = tk.Button(root, text="Procesar", command=process_inputs)
-submit_button.pack(pady=20)
+    # Botón para procesar la entrada
+    submit_button = tk.Button(root, text="Procesar", command=process_inputs)
+    submit_button.pack(pady=20)
 
 
-root.mainloop()
+    root.mainloop()
