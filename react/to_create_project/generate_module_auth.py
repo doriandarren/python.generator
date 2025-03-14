@@ -817,7 +817,7 @@ const initialState = {
     token: null,
     email: null,
     displayName: null,
-    photoURL: null,
+    image_url: null,
     errorMessage: null,
 }
 
@@ -831,7 +831,7 @@ export const authSlice = createSlice({
             state.token = payload.token;
             state.email = payload.email;
             state.displayName = payload.displayName;
-            state.photoURL = payload.photoURL;
+            state.image_url = payload.image_url;
             state.errorMessage = null;
 
             // Guardar en `localStorage` para que persista
@@ -843,7 +843,7 @@ export const authSlice = createSlice({
             state.token = null;
             state.email = null;
             state.displayName = null;
-            state.photoURL = null;
+            state.image_url = null;
             state.errorMessage = payload?.errorMessage;
 
             // Eliminar de `localStorage`
@@ -945,7 +945,7 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
                 token: token,
                 email: emailApi,
                 displayName: nameApi,
-                photoURL: '',
+                image_url: '',
                 errorMessage: null,
             }
 
@@ -996,7 +996,7 @@ export const startRestoreSession = () => {
                 token: token,
                 email: emailApi,
                 displayName: nameApi,
-                photoURL: '',
+                image_url: '',
                 errorMessage: null,
             }
 
