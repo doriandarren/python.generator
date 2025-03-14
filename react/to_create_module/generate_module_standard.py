@@ -65,7 +65,6 @@ export const {singular_name}Routes = () => {{
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-
 def create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
     """
     Genera dinámicamente el archivo {singular_name}Page.jsx con nombres adaptados.
@@ -480,9 +479,6 @@ export const {singular_name}EditPage = () => {{
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-
-
-
 def create_barrel_file(project_path, singular_name, plural_name_snake):
     """
     Genera el archivo
@@ -507,7 +503,6 @@ export * from './{singular_name}EditPage';
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
 
 
 def create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
