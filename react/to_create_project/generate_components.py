@@ -383,7 +383,7 @@ export const Datatable = ({
                     ))}
                     {/* Agregar botones de Editar y Eliminar */}
                     <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <div className="flex gap-2">
+                      <div className="flex gap-5">
                         <Link
                           to={`${editPath}/edit/${item.id}`}
                           className="text-primary hover:text-primary-dark"

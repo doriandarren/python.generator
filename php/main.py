@@ -155,11 +155,6 @@ if __name__ == "__main__":
 
 
 
-# AgendaUnloading / AgendaUnloadings : id transporeon_code name msoft_code
-# AgendaUpload / AgendaUploads : id transporeon_code name msoft_code
-# Item / Items : id description transporeon_item_id msoft_item_id
-# Service / Services : id description service_code
-# Tow / Tows : id transporeon_plate msoft_plate
 
 
 

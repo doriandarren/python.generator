@@ -11,17 +11,18 @@ def generate_module_standard(project_path, singular_name, plural_name, columns):
     plural_name_kebab = camel_to_kebab(plural_name)
     singular_name_snake = camel_to_snake(singular_name)
     plural_name_snake = camel_to_snake(plural_name)
+    singular_first_camel = singular_name[:1].lower() + singular_name[1:]
 
 
     ## Example:
     ##create_routes(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
 
     create_routes(project_path, singular_name, plural_name_snake)
-    create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-    create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-    create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+    create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
+    create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
+    create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
     create_barrel_file(project_path, singular_name, plural_name_snake)
-    create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+    create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
 
 
 
@@ -65,7 +66,7 @@ export const {singular_name}Routes = () => {{
 
 
 
-def create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
     """
     Genera dinámicamente el archivo {singular_name}Page.jsx con nombres adaptados.
     """
@@ -76,10 +77,10 @@ def create_list_page(project_path, singular_name, plural_name, singular_name_keb
     # Crear la carpeta pages si no existe
     create_folder(pages_dir)
 
-    # ✅ Extraer solo los nombres de columna correctamente
+    # Extraer solo los nombres de columna correctamente
     column_names = [col["name"] for col in columns]
 
-    # ✅ Generar correctamente `dataHeader` sin formato erróneo
+    # Generar correctamente `dataHeader` sin formato erróneo
     data_headers = ",\n    ".join([f'{{ key: "{col}", label: t("{col}") }}' for col in column_names])
 
     # Contenido del archivo JSX con nombres dinámicos
@@ -89,7 +90,7 @@ import {{ useNavigate }} from "react-router-dom";
 import {{ useTranslation }} from "react-i18next";
 import {{ Button }} from "../../../components/Buttons/Button";
 import {{ useEffect, useState }} from "react";
-import {{ delete{singular_name}, get{plural_name} }} from "../services/{singular_name_snake}Service";
+import {{ delete{singular_name}, get{plural_name} }} from "../services/{singular_first_camel}Service";
 import Swal from "sweetalert2";
 import {{ Toast }} from "../../../helpers/helperToast";
 
@@ -201,7 +202,7 @@ export const {singular_name}Page = () => {{
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
     """
     Genera dinámicamente el archivo
     """
@@ -241,7 +242,7 @@ import {{ useNavigate }} from "react-router-dom";
 import {{ useForm }} from "react-hook-form";
 import {{ yupResolver }} from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {{ create{singular_name} }} from "../services/{singular_name_snake}Service";
+import {{ create{singular_name} }} from "../services/{singular_first_camel}Service";
 
 export const {singular_name}CreatePage = () => {{
   const {{ t }} = useTranslation();
@@ -319,7 +320,7 @@ export const {singular_name}CreatePage = () => {{
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
     """
         Genera dinámicamente el archivo {singular_name}EditPage.jsx con nombres y campos adaptados.
         """
@@ -366,7 +367,7 @@ import Swal from "sweetalert2";
 import {{ useForm }} from "react-hook-form";
 import {{ yupResolver }} from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {{ get{singular_name}ById, update{singular_name} }} from "../services/{singular_name_snake}Service";
+import {{ get{singular_name}ById, update{singular_name} }} from "../services/{singular_first_camel}Service";
 
 
 
@@ -509,16 +510,15 @@ export * from './{singular_name}EditPage';
 
 
 
-def create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
+def create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
     """
         Genera dinámicamente el archivo de servicios {singular_name}Service.js con nombres adaptados.
         """
     # Define la ruta del archivo
     services_dir = os.path.join(project_path, "src", "modules", plural_name_snake, "services")
 
-    # Convertir el singular_name a camelCase con la primera letra en minúscula
-    singular_name_camel = singular_name[:1].lower() + singular_name[1:]
-    file_path = os.path.join(services_dir, f"{singular_name_camel}Service.js")
+
+    file_path = os.path.join(services_dir, f"{singular_first_camel}Service.js")
 
 
     # Crear la carpeta services si no existe

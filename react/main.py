@@ -155,3 +155,12 @@ if __name__ == "__main__":
         start_module()
 
     print("Bye...")
+
+
+
+# portuarios-office.globalfleet.es
+# AgendaUnloading / AgendaUnloadings : transporeon_code name msoft_code
+# AgendaUpload / AgendaUploads : transporeon_code name msoft_code
+# Service / Services : description service_code
+# Item / Items : description transporeon_item_id msoft_item_id
+# Tow / Tows : transporeon_plate msoft_plate
