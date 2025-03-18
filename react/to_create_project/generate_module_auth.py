@@ -77,27 +77,31 @@ import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';
 import EyeOn from '../../../assets/images/eye_on.svg';
-import { Preloader } from "../../../components/Preloader/Preloader";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
 import { startLoginWithEmailPassword } from "../../../store/auth/thunks";
+import { Toast } from "../../../helpers/helperToast";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { status, errorMessage } = useSelector( state => state.auth );
 
+  
+  useEffect(() => {
+    if (errorMessage) {
+      Toast(`Error: ${errorMessage}` , 'error');
+    }
+  }, [errorMessage]);
 
   const onSubmit = async(e) => {
     e.preventDefault();
 
     if (!email || !password) {
       alert("Los campos son requeridos");
-      setLoading(false);
       return;
     }
 
@@ -111,7 +115,6 @@ export const LoginPage = () => {
 
   return (
     <div className="container bg-primary">
-      {loading && <Preloader />}
       <div className="block xl:grid grid-cols-2 gap-4">
         <div className="hidden xl:flex flex-col min-h-screen pl-24 animate__animated animate__bounceInLeft form-section">
           <div className="my-auto p-10">
@@ -132,11 +135,6 @@ export const LoginPage = () => {
       
         <div className="h-screen xl:h-auto flex xl:py-0 my-10 xl:my-0 bg-white ">
           <div className="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto animate__animated animate__bounceInRight">
-
-            { status }
-            
-            { errorMessage && (<div>{errorMessage}</div>) }
-            
 
             <form 
               onSubmit={onSubmit}

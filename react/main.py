@@ -147,6 +147,7 @@ def start_module():
 
 if __name__ == "__main__":
 
+    print("**********************  REACT   **********************")
     namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
 
     if namespace.lower() == 'p':
