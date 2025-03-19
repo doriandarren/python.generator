@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN, run_command, create_folder
+from helpers.helper_print import print_message, GREEN, CYAN, run_command, create_folder
 
 
 
@@ -147,25 +147,36 @@ export const DashboardPage = () => {
       {/* Contenedor de las 3 Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         {/* Card 1 */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-600">Total Ventas</h3>
-          <p className="text-2xl font-bold text-gray-800">$12.500</p>
+        <div className="bg-white p-6 rounded-lg shadow-md flex justify-between mt-5 mr-5 bg-gradient-to-b from-gray-300/10 transition-ransform duration-300 hover:scale-105">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-600">Total Ventas</h3>
+            <small className="text-gray-500">{t("yesterday")}</small>
+          </div>
+          <div>
+            <p className="text-3xl font-bold text-primary">$12.500</p>
+          </div>
         </div>
 
         {/* Card 2 */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-600">
-            Clientes Nuevos
-          </h3>
-          <p className="text-2xl font-bold text-gray-800">320</p>
+        <div className="bg-white p-6 rounded-lg shadow-md flex justify-between mt-5 mr-5 bg-gradient-to-b from-gray-300/10 transition-ransform duration-300 hover:scale-105">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-600">Clientes Nuevos</h3>
+            <small className="text-gray-500">{t("yesterday")}</small>
+          </div>
+          <div>
+            <p className="text-3xl font-bold text-success">320</p>
+          </div>
         </div>
 
         {/* Card 3 */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-gray-600">
-            Pedidos Totales
-          </h3>
-          <p className="text-2xl font-bold text-gray-800">870</p>
+        <div className="bg-white p-6 rounded-lg shadow-md flex justify-between mt-5 mr-5 bg-gradient-to-b from-gray-300/10 transition-ransform duration-300 hover:scale-105">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-600">Pedidos Totales</h3>
+            <small className="text-gray-500">{t("yesterday")}</small>
+          </div>
+          <div>
+            <p className="text-3xl font-bold text-info">870</p>
+          </div>
         </div>
       </div>
 

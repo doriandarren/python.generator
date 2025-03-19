@@ -1,5 +1,5 @@
 from react.to_create_module.generate_module_standard import generate_module_standard
-from react.utils.utils import print_message, GREEN, CYAN
+from helpers.helper_print import print_message, GREEN, CYAN
 from react.to_create_project.generate_components import generate_components
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
@@ -67,16 +67,13 @@ def start_project():
     generate_private_layouts(full_path)
 
 
-
     ## generate Public
     generate_module_public(full_path)
 
     ## React Router
     generate_react_router(full_path)
 
-
     generate_components(full_path)
-
 
     # Dashboard
     generate_module_dashboard(full_path)
@@ -90,10 +87,8 @@ def start_project():
     # Teams
     generate_module_teams(full_path)
 
-
     # Redux
     generate_redux(full_path)
-
 
     # Helpers
     generate_helpers(full_path)
@@ -107,16 +102,10 @@ def start_project():
 
     generate_readme(full_path)
 
-
     ## index.html
     generate_index_html(full_path)
 
     generate_folder_api(full_path)
-
-
-
-
-
 
     # Mensaje final
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
@@ -147,7 +136,9 @@ def start_module():
 
 if __name__ == "__main__":
 
+    print("******************************************************")
     print("**********************  REACT   **********************")
+    print("******************************************************")
     namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
 
     if namespace.lower() == 'p':

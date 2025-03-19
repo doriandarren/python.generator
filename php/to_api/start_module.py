@@ -1,4 +1,4 @@
-from php.utils.utils import input_with_validation
+from helpers.helper_print import input_with_validation
 from php.generator import generate
 
 

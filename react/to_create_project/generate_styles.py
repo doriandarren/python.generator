@@ -1,6 +1,6 @@
 import os
 
-from react.utils.utils import print_message, GREEN, CYAN, run_command
+from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
 
@@ -219,6 +219,10 @@ def create_tailwind_styles(full_path):
   --color-success: #4caf50;
   --color-success-light: #61e265;
   --color-success-dark: #3a893d;
+  
+  --color-info: #FFB300;
+  --color-info-light: #FFD54F;
+  --color-info-dark: #FFA000;
   
   --color-navbar: #222831;
   --color-background: #f8fafc;

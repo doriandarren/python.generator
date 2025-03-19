@@ -1,5 +1,5 @@
 import os
-from php.utils.utils import camel_to_kebab, camel_to_snake
+from helpers.helper_print import camel_to_kebab, camel_to_snake
 from php.to_api.create_model_file import generate_model_file
 from php.to_api.create_repository_file import generate_repository_file
 from php.to_api.create_routes_file import generate_routes_file

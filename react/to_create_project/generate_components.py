@@ -1,27 +1,32 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN
+from helpers.helper_print import print_message, GREEN, CYAN
 
 
 def generate_components(full_path):
     #Btn
-    generate_button(full_path)
+    create_button(full_path)
 
     # Section
-    generate_section(full_path)
+    create_section(full_path)
 
     # Preloader
-    generate_preloader(full_path)
-    generate_preloader_css(full_path)
+    create_preloader(full_path)
+
+    # Preloader Main
+    create_preloader_main(full_path)
+    create_preloader_main_css(full_path)
+
+
 
     #DataTable
-    generate_datatable(full_path)
+    create_datatable(full_path)
 
 
 
 
 
 
-def generate_button(full_path):
+def create_button(full_path):
     """
     Genera un archivo
 
@@ -74,7 +79,7 @@ export const Button = ({ children, type = "button", variant = "primary", onClick
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-def generate_section(full_path):
+def create_section(full_path):
     """
     Genera un archivo
 
@@ -116,7 +121,7 @@ export const Section = ({title, subtitle, className, children}) => {
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-def generate_preloader(full_path):
+def create_preloader(full_path):
     """
     Genera un archivo
 
@@ -134,9 +139,46 @@ def generate_preloader(full_path):
     file_path = os.path.join(styles_path, "Preloader.jsx")
 
     # Contenido por defecto
-    content = """import "./Preloader.css";
+    content = """import { useTranslation } from "react-i18next"
 
 export const Preloader = () => {
+    const {t} = useTranslation();
+    return (
+        <p className="text-center text-gray-600">{ t("loading") }</p>
+    )
+}
+
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+def create_preloader_main(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Preloader")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "PreloaderMain.jsx")
+
+    # Contenido por defecto
+    content = """import "./PreloaderMain.css";
+
+export const PreloaderMain = () => {
   return (
     <div className="preloader">
       <div className="loader"></div>
@@ -154,7 +196,7 @@ export const Preloader = () => {
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-def generate_preloader_css(full_path):
+def create_preloader_main_css(full_path):
     """
     Genera un archivo
 
@@ -169,7 +211,7 @@ def generate_preloader_css(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "Preloader.css")
+    file_path = os.path.join(styles_path, "PreloaderMain.css")
 
     # Contenido por defecto
     content = """.preloader {
@@ -214,7 +256,7 @@ def generate_preloader_css(full_path):
 
 
 
-def generate_datatable(full_path):
+def create_datatable(full_path):
     """
     Genera un archivo
 

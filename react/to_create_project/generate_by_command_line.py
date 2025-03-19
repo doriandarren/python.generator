@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN, run_command
+from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
 
@@ -24,7 +24,7 @@ def generate_by_command_line(full_path):
 
 def create_project(full_path):
     """Crea el proyecto React con Vite."""
-    print_message("Creando el proyecto React con Vite...", CYAN)
+
     project_dir = os.path.dirname(full_path)
     project_name = os.path.basename(full_path)
 
@@ -33,6 +33,7 @@ def create_project(full_path):
         os.makedirs(project_dir)
         print_message(f"Directorio base {project_dir} creado.", GREEN)
 
+    print_message("Creando el proyecto React con Vite...", CYAN)
     run_command(f"npm create vite@latest {project_name} -- --template react", cwd=project_dir)
 
 

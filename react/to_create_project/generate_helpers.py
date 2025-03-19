@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN
+from helpers.helper_print import print_message, GREEN, CYAN
 
 
 def generate_helpers(full_path):

@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import create_folder, camel_to_kebab, camel_to_snake
+from helpers.helper_print import create_folder, camel_to_kebab, camel_to_snake
 
 
 
@@ -92,6 +92,7 @@ import {{ useEffect, useState }} from "react";
 import {{ delete{singular_name}, get{plural_name} }} from "../services/{singular_first_camel}Service";
 import Swal from "sweetalert2";
 import {{ Toast }} from "../../../helpers/helperToast";
+import {{ Preloader }} from "../../../components/Preloader/Preloader";
 
 
 export const {singular_name}Page = () => {{
@@ -178,7 +179,7 @@ export const {singular_name}Page = () => {{
       </div>
 
       {{ loading ? (
-        <p className="text-center text-gray-600">{{ t("loading") }}</p>
+        <Preloader />
       ) : (
         <Datatable
           columns={{dataHeader}}

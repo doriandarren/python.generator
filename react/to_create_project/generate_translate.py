@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN, run_command
+from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
 
@@ -156,10 +156,17 @@ def create_locales_es(project_path):
   "name": "Nombre",
   "yes": "Sí",
   "no": "No",
+  "yesterday": "Ayer",
+  "today": "Hoy",
   "month": "Mes",
   "year": "Año",
   "insert": "Agregar",
   "setting": "Configuración",
+  "settings": "Configuraciones",
+  "average_15_days": "Media 15 días",
+  "average_30_days": "Media 30 días",
+  "average_3_months": "Media 3 meses",
+  "last_week": "Última semana",
   "setting_table":{
     "next_table": "Sig",
     "prev_table": "Prev",
@@ -358,10 +365,17 @@ def create_locales_en(project_path):
   "name": "Name",
   "yes": "Yes",
   "no": "No",
+  "yesterday": "Yesterday",
+  "today": "Today",
   "month": "Month",
   "year": "Year",
   "insert": "Add",
-  "setting": "Settings",
+  "setting": "Setting",
+  "settings": "Settings",
+  "average_15_days": "Average 15 days",
+  "average_30_days": "Average 30 days",
+  "average_3_months": "Average 3 months",
+  "last_week": "Last week",
   "setting_table": {
     "next_table": "Next",
     "prev_table": "Prev",

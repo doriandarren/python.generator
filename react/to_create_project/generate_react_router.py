@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import print_message, GREEN, CYAN, run_command
+from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
 
@@ -117,7 +117,7 @@ import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
 import { ProfileRoutes } from "../modules/profile/routes/ProfileRoutes";
-import { Preloader } from "../components/Preloader/Preloader";
+import { PreloaderMain } from "../components/Preloader/PreloaderMain";
 
 
 export const AppRouter = () => {
@@ -133,24 +133,24 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checkingAuth) {
-    return <Preloader />
+    return <PreloaderMain />
   }
 
   return (
     <Routes>
-      {/* Rutas públicas */}
+      {/* Public Routes */}
       <Route path="/auth/*" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
         <Route path="*" element={<AuthRoutes />} />
       </Route>
 
-      {/* Rutas privadas */}
+      {/* Private Routes */}
       <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="dashboard/*" element={<DashboardRoutes />} />
         <Route path="profile/*" element={<ProfileRoutes />} />
         <Route path="teams/*" element={<TeamRoutes />} />
       </Route>
 
-      {/* Redirección global */}
+      {/* Global Redirection */}
       <Route path="/" element={<Navigate to={isAuthenticated ? "/admin/dashboard" : "/auth/login"} />} />
     </Routes>
   );

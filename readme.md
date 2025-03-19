@@ -35,8 +35,9 @@ pip install -r requirements.txt   // Instalar requerimientos
 pip install mysql-connector-python 
 pip install inflect
 
-
 pip install aiohttp
+
+pip install colorama
 
 ```
 

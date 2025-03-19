@@ -1,5 +1,5 @@
 import os
-from react.utils.utils import create_folder
+from helpers.helper_print import create_folder
 
 
 
@@ -74,6 +74,7 @@ import { useEffect, useState } from "react";
 import { deleteTeam, getTeams } from "../services/teamService";
 import Swal from "sweetalert2";
 import { Toast } from "../../../helpers/helperToast";
+import { Preloader } from "../../../components/Preloader/Preloader";
 
 
 export const TeamPage = () => {
@@ -169,7 +170,7 @@ export const TeamPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-center text-gray-600">{ t("loading") }</p>
+        <Preloader />
       ) : (
         <Datatable
           columns={dataHeader}
