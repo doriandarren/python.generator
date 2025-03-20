@@ -1,13 +1,13 @@
 import os
 
 def create_seeders_structure(base_path):
-    # Crear la carpeta 'database' si no existe
-    database_path = os.path.join(base_path, 'database')
+    # Crear la carpeta 'settings' si no existe
+    database_path = os.path.join(base_path, 'settings')
     if not os.path.exists(database_path):
         os.makedirs(database_path)
-        print(f"Carpeta 'database' creada en: {database_path}")
+        print(f"Carpeta 'settings' creada en: {database_path}")
 
-    # Crear la carpeta 'seeders' dentro de 'database'
+    # Crear la carpeta 'seeders' dentro de 'settings'
     seeders_path = os.path.join(database_path, 'seeders')
     if not os.path.exists(seeders_path):
         os.makedirs(seeders_path)

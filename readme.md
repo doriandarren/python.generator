@@ -39,6 +39,9 @@ pip install aiohttp
 
 pip install colorama
 
+
+pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
+
 ```
 
 

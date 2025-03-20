@@ -2,9 +2,9 @@ import os
 
 def create_seeder_structure(base_ruta, path_seeder):
     """
-    Crea la estructura de carpetas 'base_ruta/database/migrations/sedeers' en la ruta especificada.
+    Crea la estructura de carpetas 'base_ruta/settings/migrations/sedeers' en la ruta especificada.
     """
-    # Crear la ruta completa base_ruta/database/migrations/sedeers
+    # Crear la ruta completa base_ruta/settings/migrations/sedeers
     seeder_folder_path = os.path.join(base_ruta, path_seeder)
 
     if not os.path.exists(seeder_folder_path):
@@ -18,7 +18,7 @@ def create_seeder_structure(base_ruta, path_seeder):
 
 def generate_seeder_file(base_ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
-    Genera un archivo de seeder PHP basado en los nombres proporcionados y crea la estructura database/migrations/sedeers dentro de base_ruta.
+    Genera un archivo de seeder PHP basado en los nombres proporcionados y crea la estructura settings/migrations/sedeers dentro de base_ruta.
     """
     # Crear la estructura de carpetas llamando a create_seeder_structure
     seeder_folder_path = create_seeder_structure(base_ruta, path_seeder)
@@ -41,7 +41,7 @@ use App\\Models\\{plural_name}\\{singular_name};
 class {singular_name}Seeder extends Seeder
 {{
     /**
-    * Run the database seeds.
+    * Run the settings seeds.
     *
     * @return void
     */

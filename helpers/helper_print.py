@@ -1,6 +1,10 @@
 import os
 import re
 import subprocess
+import pprint
+import sys
+
+
 
 
 # Colores para mensajes
@@ -60,3 +64,9 @@ def input_with_validation(prompt, default_value=None):
             if user_input:  # Si el usuario escribe algo, lo retorna
                 return user_input
             print("La entrada no puede estar en blanco. Por favor, inténtalo de nuevo.")
+
+
+
+def dd(data):
+    pprint.pprint(data)
+    sys.exit()

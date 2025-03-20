@@ -1,5 +1,5 @@
 from helpers.helper_print import input_with_validation
-from php.generator import generate
+from php.to_api.generator import generate
 
 
 def start_module():

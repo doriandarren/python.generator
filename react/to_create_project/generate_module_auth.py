@@ -72,7 +72,7 @@ def create_login_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo
-    content = """import { useState } from "react";
+    content = """import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';

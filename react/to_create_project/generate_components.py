@@ -10,9 +10,8 @@ def generate_components(full_path):
     create_section(full_path)
 
     # Preloader
+    create_preloader_svg(full_path)
     create_preloader(full_path)
-
-    # Preloader Main
     create_preloader_main(full_path)
     create_preloader_main_css(full_path)
 
@@ -121,6 +120,40 @@ export const Section = ({title, subtitle, className, children}) => {
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
+def create_preloader_svg(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Preloader")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "PreloaderSVG.jsx")
+
+    # Contenido por defecto
+    content = """export const PreloaderSVG = () => {
+  return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M2,12A10.94,10.94,0,0,1,5,4.65c-.21-.19-.42-.36-.62-.55h0A11,11,0,0,0,12,23c.34,0,.67,0,1-.05C6,23,2,17.74,2,12Z"><animateTransform attributeName="transform" dur="0.6s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+    )
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
 def create_preloader(full_path):
     """
     Genera un archivo
@@ -139,15 +172,15 @@ def create_preloader(full_path):
     file_path = os.path.join(styles_path, "Preloader.jsx")
 
     # Contenido por defecto
-    content = """import { useTranslation } from "react-i18next"
+    content = """import { PreloaderSVG } from "./PreloaderSVG"
 
 export const Preloader = () => {
-    const {t} = useTranslation();
     return (
-        <p className="text-center text-gray-600">{ t("loading") }</p>
+        <div className="flex justify-center">
+            <PreloaderSVG />  
+        </div>
     )
 }
-
 """
 
     try:
@@ -157,6 +190,7 @@ export const Preloader = () => {
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
 
 def create_preloader_main(full_path):
     """
@@ -176,12 +210,13 @@ def create_preloader_main(full_path):
     file_path = os.path.join(styles_path, "PreloaderMain.jsx")
 
     # Contenido por defecto
-    content = """import "./PreloaderMain.css";
+    content = """import { PreloaderSVG } from "./PreloaderSVG";
+import "./PreloaderMain.css";
 
 export const PreloaderMain = () => {
   return (
-    <div className="preloader">
-      <div className="loader"></div>
+    <div className="preloader flex justify-center">
+      <PreloaderSVG />   
     </div>
   )
 }

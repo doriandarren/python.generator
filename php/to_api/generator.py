@@ -25,9 +25,9 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
     path_repository = "Repositories/" + plural_name
     path_routes = "routes/"
     path_controller = "Http/Controllers/" + namespace + "/" + plural_name
-    path_migration = "database/migrations/"
-    path_seeder = "database/seeders"
-    path_factory = "database/factories"
+    path_migration = "settings/migrations/"
+    path_seeder = "settings/seeders"
+    path_factory = "settings/factories"
     path_script = "public/Script"
 
 

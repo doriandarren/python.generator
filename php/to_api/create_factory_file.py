@@ -2,9 +2,9 @@ import os
 
 def create_factory_structure(base_ruta, path_factory, plural_name):
     """
-    Crea la estructura de carpetas 'base_ruta/database/factories/plural_name' en la ruta especificada.
+    Crea la estructura de carpetas 'base_ruta/settings/factories/plural_name' en la ruta especificada.
     """
-    # Crear la ruta completa base_ruta/database/factories/plural_name
+    # Crear la ruta completa base_ruta/settings/factories/plural_name
     factory_folder_path = os.path.join(base_ruta, path_factory, plural_name)
 
     if not os.path.exists(factory_folder_path):
@@ -18,7 +18,7 @@ def create_factory_structure(base_ruta, path_factory, plural_name):
 
 def generate_factory_file(base_ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
-    Genera un archivo de Factory PHP basado en los nombres proporcionados y crea la estructura database/factories/plural_name dentro de base_ruta.
+    Genera un archivo de Factory PHP basado en los nombres proporcionados y crea la estructura settings/factories/plural_name dentro de base_ruta.
     """
     # Crear la estructura de carpetas llamando a create_factory_structure
     factory_folder_path = create_factory_structure(base_ruta, path_factory, plural_name)

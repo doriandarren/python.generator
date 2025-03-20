@@ -5,7 +5,7 @@ from .string_helpers import get_plural  # Importar el helper de pluralización
 
 def create_migration_structure(base_ruta, path_migration):
     """
-    Crea la estructura de carpetas 'base_ruta/database/migrations/' en la ruta especificada.
+    Crea la estructura de carpetas 'base_ruta/settings/migrations/' en la ruta especificada.
     """
     migration_folder_path = os.path.join(base_ruta, path_migration)
 
@@ -20,7 +20,7 @@ def create_migration_structure(base_ruta, path_migration):
 
 def generate_migration_file(base_ruta, namespace, path_migration, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
     """
-    Genera un archivo de migración PHP basado en los nombres proporcionados y crea la estructura database/migrations/ dentro de base_ruta.
+    Genera un archivo de migración PHP basado en los nombres proporcionados y crea la estructura settings/migrations/ dentro de base_ruta.
     """
     # Crear la estructura de carpetas llamando a create_migration_structure
     migration_folder_path = create_migration_structure(base_ruta, path_migration)
