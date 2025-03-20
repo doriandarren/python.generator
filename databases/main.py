@@ -21,11 +21,12 @@ if __name__ == "__main__":
     port = 3306
     database_name = "portuarios_api"
     password = ""
+    full_path = "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/"
 
     generator_type = input_with_validation("[1]Listar - [2]Generar: ")
     input_db_type = input_with_validation("Basedatos [1]Local - [2]Docker: ")
     input_db_name = input("Nombre Basedatos [portuarios_api]: ")
-    input_tables = input("Nombre Tabla [separado por espacio]: ")
+    input_tables = input("Nombre(s) Tabla(s) [separado por espacio / vacio todos]: ")
     print("\n\n")
 
 
@@ -36,11 +37,21 @@ if __name__ == "__main__":
         port = 3307
         password = "root"
 
+        input_full_path = input_with_validation("Ruta del proyecto a Generar: [/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/]: ")
+
+        if input_full_path:
+            full_path = input_full_path
+
+
+
+
+
     if input_db_name:
         database_name = input_db_name
 
     # Convertir input_tables en lista, aunque sea un solo elemento
     input_tables = input_tables.split() if input_tables else []
+
 
 
 
@@ -61,7 +72,9 @@ if __name__ == "__main__":
             "root",
             password,
             database_name,
-            port
+            full_path,
+            port,
+            input_tables
         )
 
     print("\n\nBye...")

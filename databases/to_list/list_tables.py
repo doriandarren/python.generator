@@ -6,6 +6,7 @@ def list_tables_and_columns(host, user, password, database, port=3306, input_tab
     Retrieves and displays all tables along with their columns in the database.
     """
 
+
     connection = get_connection(host, user, password, database, port)
 
     if connection is None:

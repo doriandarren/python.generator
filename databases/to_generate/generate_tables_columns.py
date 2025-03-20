@@ -2,60 +2,64 @@ from databases.settings.connection import get_connection
 from helpers.helper_string import convert_word
 from php.to_api.generator import generate
 
-
-def list_tables_and_columns_and_generate(host, user, password, database, port):
+def list_tables_and_columns_and_generate(host, user, password, database, full_path, port=3306, input_tables=None):
     """
-    Generate Retrives and displays all tables along with their columns in the settings.
+    Generates code for all tables in the database or only for the specified tables.
     """
 
     connection = get_connection(host, user, password, database, port)
 
-
     if connection is None:
-        print("Failed to connect to the settings.")
+        print("❌ Failed to connect to the database.")
         return
 
     cursor = connection.cursor()
 
     try:
-
-        # Get all tables
+        # Obtener todas las tablas disponibles en la base de datos
         cursor.execute("SHOW TABLES")
-        tables = cursor.fetchall()
+        tables = {table[0] for table in cursor.fetchall()}  # Convertir en un conjunto para búsqueda rápida
 
+        # Si el usuario especificó tablas, filtrar solo esas
+        if input_tables:
+            input_tables_set = set(input_tables)  # `input_tables` ya es una lista
+            tables_to_generate = tables.intersection(input_tables_set)  # Mantener solo las existentes
+        else:
+            tables_to_generate = tables  # Si no se especifican, generar para todas
 
-        # Loop through each table to get its columns
-        for (table_name,) in tables:
-            print(f"\nTable: {table_name}")
+        if not tables_to_generate:
+            print("❌ No se encontraron las tablas especificadas.")
+            return
 
-            # Get column details for each table
+        # Loop a través de las tablas seleccionadas
+        for table_name in tables_to_generate:
+            print(f"\n⚙️ Generando código para la tabla: {table_name}")
+
+            # Obtener columnas de la tabla
             cursor.execute(f"DESCRIBE {table_name}")
             columns = cursor.fetchall()
 
+            # Mostrar detalles de las columnas
             for column in columns:
                 print(f" - {column[0]} ({column[1]})")
 
-            cols = [{"name":column[0]} for column in columns]
+            cols = [{"name": column[0]} for column in columns]
 
             table_name_format = convert_word(table_name)
 
+            # Llamar al generador
             generate(
                 "API",
-                "/Users/dorian/PhpstormProjects81/laravel_test/",
+                full_path,
                 table_name_format['singular'],
                 table_name_format['plural'],
                 cols
             )
 
-
-
-
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error: {e}")
 
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-
-
