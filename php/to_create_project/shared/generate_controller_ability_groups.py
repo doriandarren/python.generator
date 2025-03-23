@@ -3,6 +3,7 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
+
 def generate_controller_ability_groups(full_path):
     create_destroy(full_path)
     create_list(full_path)
