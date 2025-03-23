@@ -18,7 +18,7 @@ def generate_repository_ability_groups(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityRepository.php")
+    file_path = os.path.join(styles_path, "AbilityGroupRepository.php")
 
     # Contenido por defecto
     content = """<?php

@@ -3,10 +3,6 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
-def generate_model_user_statuses(full_path):
-    pass
-
-
 
 def generate_repository_user_statuses(full_path):
     """
@@ -28,21 +24,22 @@ def generate_repository_user_statuses(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\Repositories\RoleUsers;
+namespace App\\Repositories\\UserStatuses;
 
 use App\\Enums\\EnumApiSetup;
-use App\\Models\\RoleUsers\\RoleUser;
+use App\\Models\\UserStatuses\\UserStatus;
 
 
-final class RoleUserRepository
+final class UserStatusRepository
 {
+
     /**
      * By Admin
      * @return mixed
      */
     public function list(): mixed
     {
-        return \App\Models\RoleUsers\RoleUser::latest()
+        return UserStatus::latest()
             ->limit(EnumApiSetup::QUERY_LIMIT)
             ->get();
     }
@@ -54,7 +51,7 @@ final class RoleUserRepository
      */
     public function listByRoleManager($company_id): mixed
     {
-        return RoleUser::where('company_id', $company_id)
+        return UserStatus::where('company_id', $company_id)
             ->latest()
             ->limit(EnumApiSetup::QUERY_LIMIT)
             ->get();
@@ -68,7 +65,7 @@ final class RoleUserRepository
      */
     public function listByRoleUser($company_id, $employee_id): mixed
     {
-        return RoleUser::where('employee_id', $employee_id)
+        return UserStatus::where('employee_id', $employee_id)
             ->where('company_id', $company_id)
             ->latest()
             ->limit(EnumApiSetup::QUERY_LIMIT)
@@ -81,7 +78,7 @@ final class RoleUserRepository
      */
     public function show($id): mixed
     {
-        return RoleUser::where('id', $id)->first();
+        return UserStatus::where('id', $id)->first();
     }
 
     /**
@@ -91,7 +88,7 @@ final class RoleUserRepository
      */
     public function showByRoleManager($company_id, $id): mixed
     {
-        return RoleUser::where('id', $id)
+        return UserStatus::where('id', $id)
             ->where('company_id', $company_id)
             ->first();
 
@@ -104,7 +101,7 @@ final class RoleUserRepository
      */
     public function showByRoleUser($employee_id, $id): mixed
     {
-        return RoleUser::where('id', $id)
+        return UserStatus::where('id', $id)
             ->where('employee_id', $employee_id)
             ->first();
 
@@ -112,13 +109,12 @@ final class RoleUserRepository
 
     /**
      * @param $data
-     * @return RoleUser
+     * @return UserStatus
      */
-    public function store($data): RoleUser
+    public function store($data): UserStatus
     {
-        $objNew = new RoleUser();
-        $objNew->role_id = $data->role_id;
-        $objNew->user_id = $data->user_id;
+        $objNew = new UserStatus();
+        $objNew->name = $data->name;
         $objNew->save();
         return $objNew;
     }
@@ -135,17 +131,11 @@ final class RoleUserRepository
         }else{
             $obj = $data;
         }
-        $objOld = RoleUser::find($id);
+        $objOld = UserStatus::find($id);
 
-        if(isset($obj->role_id)){
-            if($obj->role_id != '' && !empty($obj->role_id)){
-                $objOld->role_id = $obj->role_id;
-            }
-        }
-
-        if(isset($obj->user_id)){
-            if($obj->user_id != '' && !empty($obj->user_id)){
-                $objOld->user_id = $obj->user_id;
+        if(isset($obj->name)){
+            if($obj->name != '' && !empty($obj->name)){
+                $objOld->name = $obj->name;
             }
         }
 
@@ -161,7 +151,7 @@ final class RoleUserRepository
      */
     public function destroy($id): bool
     {
-        $data = RoleUser::find($id);
+        $data = UserStatus::find($id);
         $data->delete();
         return true;
     }
@@ -169,19 +159,18 @@ final class RoleUserRepository
 
     /**
      * Template
-     * @param $role_id
-     * @param $user_id
-     * @return RoleUser
+     * @param $name
+     * @return UserStatus
      */
-    public function setRoleUser($role_id, $user_id): RoleUser
+    public function setUserStatus($name): UserStatus
     {
-        $obj = new RoleUser();
-        $obj->role_id = $role_id;
-        $obj->user_id = $user_id;
+        $obj = new UserStatus();
+        $obj->name = $name;
         return $obj;
     }
 
 }
+
 
 """
 
