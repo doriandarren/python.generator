@@ -33,13 +33,13 @@ def create_destroy(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\Http\Controllers\SHARED\AbilityGroups;
+namespace App\\Http\\Controllers\\SHARED\\AbilityGroups;
 
-use App\Http\Controllers\Controller;
-use App\Models\AbilityGroups\AbilityGroup;
-use App\Repositories\AbilityGroups\AbilityGroupRepository;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\\Http\\Controllers\\Controller;
+use App\\Models\\AbilityGroups\\AbilityGroup;
+use App\\Repositories\\AbilityGroups\\AbilityGroupRepository;
+use Illuminate\\Http\\JsonResponse;
+use Illuminate\\Http\\Request;
 
 class AbilityGroupDestroyController extends Controller
 {
