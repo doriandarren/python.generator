@@ -98,7 +98,6 @@ class AbilityDestroyController extends Controller
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-
 def create_store(full_path):
     """
     Genera un archivo
@@ -241,7 +240,7 @@ def create_list(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\\\Http\\Controllers\\SHARED\\Abilities;
+namespace App\\Http\\Controllers\\SHARED\\Abilities;
 
 use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\Abilities\\AbilityRepository;
@@ -287,7 +286,6 @@ class AbilityListController extends Controller
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
-
 
 
 def create_show(full_path):
@@ -375,7 +373,7 @@ def create_update(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "abilities")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Abilities")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
