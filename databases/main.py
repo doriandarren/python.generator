@@ -21,7 +21,6 @@ if __name__ == "__main__":
     port = 3306
     database_name = "portuarios_api"
     password = ""
-    full_path = "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/"
 
     generator_type = input_with_validation("[1]Listar - [2]Generar: ")
     input_db_type = input_with_validation("Basedatos [1]Local - [2]Docker: ")
@@ -36,11 +35,6 @@ if __name__ == "__main__":
     elif input_db_type.lower() == '2':
         port = 3307
         password = "root"
-
-        input_full_path = input_with_validation("Ruta del proyecto a Generar: [/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/]: ")
-
-        if input_full_path:
-            full_path = input_full_path
 
 
 
@@ -72,7 +66,6 @@ if __name__ == "__main__":
             "root",
             password,
             database_name,
-            full_path,
             port,
             input_tables
         )

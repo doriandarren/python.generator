@@ -1,11 +1,26 @@
 from databases.settings.connection import get_connection
 from helpers.helper_string import convert_word
 from php.to_api.generator import generate
+from helpers.helper_print import input_with_validation
 
-def list_tables_and_columns_and_generate(host, user, password, database, full_path, port=3306, input_tables=None):
+
+
+
+def list_tables_and_columns_and_generate(host, user, password, database, port=3306, input_tables=None):
     """
     Generates code for all tables in the database or only for the specified tables.
     """
+
+    full_path = "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/"
+
+
+    input_full_path = input_with_validation(
+        "Ruta del proyecto a Generar: [/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/]: ")
+
+    if input_full_path:
+        full_path = input_full_path
+
+
 
     connection = get_connection(host, user, password, database, port)
 

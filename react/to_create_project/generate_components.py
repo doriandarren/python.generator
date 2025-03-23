@@ -319,12 +319,14 @@ export const Datatable = ({
   columns,
   data,
   editPath = "",
-  onDelete = () => {},
+  onDelete,
   onEdit = () => {},
 }) => {
   const { t } = useTranslation();
 
-  const defaultItemPerPage = 5;
+  const defaultItemPerPage = 10;
+
+  const showActions = !!editPath || typeof onDelete === "function";
 
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -397,6 +399,9 @@ export const Datatable = ({
     return range;
   };
 
+
+
+
   return (
     <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
       {/* Barra de búsqueda con lupa */}
@@ -435,9 +440,12 @@ export const Datatable = ({
                   </div>
                 </th>
               ))}
-              <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
-                {t("actions")}
-              </th>
+
+              {showActions && (
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  {t("actions")}
+                </th>
+              )}              
             </tr>
           </thead>
           <tbody className="bg-white">
@@ -458,31 +466,40 @@ export const Datatable = ({
                         {item[column.key] ?? "-"}
                       </td>
                     ))}
-                    {/* Agregar botones de Editar y Eliminar */}
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <div className="flex gap-5">
-                        <Link
-                          to={`${editPath}/edit/${item.id}`}
-                          className="text-primary hover:text-primary-dark"
-                          onClick={() => onEdit(item.id)}
-                        >
-                          <Pencil className="w-5 h-5" />
-                        </Link>
-                        <button
-                          onClick={() => onDelete(item.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </td>
+                    
+                    {showActions && (
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <div className="flex gap-5">
+
+                          {editPath && (
+                            <Link
+                              to={`${editPath}/edit/${item.id}`}
+                              className="text-primary hover:text-primary-dark"
+                              onClick={() => onEdit(item.id)}
+                            >
+                              <Pencil className="w-5 h-5" />
+                            </Link>
+                          )}
+
+                          {typeof onDelete === "function" && (
+                            <button
+                              onClick={() => onDelete(item.id)}
+                              className="text-red-600 hover:text-red-800"
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          )}                  
+                          
+                        </div>
+                      </td>
+                    )} 
                   </tr>
                 );
               })
             ) : (
               <tr key="no-data">
                 <td
-                  colSpan={columns.length + 1}
+                  colSpan={columns.length + (showActions ? 1 : 0)}
                   className="text-center py-4 text-gray-500"
                 >
                   {t("no_results_found")}
