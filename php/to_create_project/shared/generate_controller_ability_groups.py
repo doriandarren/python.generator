@@ -28,10 +28,66 @@ def create_destroy(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, ".php")
+    file_path = os.path.join(styles_path, "AbilityGroupDestroyController.php")
 
     # Contenido por defecto
-    content = """
+    content = """<?php
+
+namespace App\Http\Controllers\SHARED\AbilityGroups;
+
+use App\Http\Controllers\Controller;
+use App\Models\AbilityGroups\AbilityGroup;
+use App\Repositories\AbilityGroups\AbilityGroupRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+class AbilityGroupDestroyController extends Controller
+{
+
+	private AbilityGroupRepository $repository;
+
+
+	public function __construct()
+	{
+		$this->repository = new AbilityGroupRepository();
+	}
+
+	/**
+	* @header Bearer BEARER_AUTH
+	*
+	*
+	* @param Request $request
+	* @param AbilityGroup $abilityGroup
+	* @return JsonResponse
+	*/
+	public function __invoke(Request $request, AbilityGroup $abilityGroup): JsonResponse
+	{
+
+		if($this->isAdmin(auth()->user()->roles)){
+
+			$data = $this->repository->destroy($abilityGroup->id);
+
+			return $this->respondWithData('AbilityGroup deleted', $data);
+
+		}else{
+
+			if($abilityGroup->company_id == auth()->user()->employee->company_id){
+
+				$data = $this->repository->destroy($abilityGroup->id);
+
+				return $this->respondWithData('AbilityGroup deleted', $data);
+
+			}else{
+
+				return $this->respondWithError('Error', ['e' => trans('validation.user_not_belong_company')]);
+
+			}
+
+		}
+
+	}
+
+}
 """
 
     try:
@@ -57,7 +113,7 @@ def create_list(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -124,7 +180,7 @@ def create_show(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -201,7 +257,7 @@ def create_store(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -314,7 +370,7 @@ def create_update(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
 
     # Contenido por defecto
     content = """<?php
