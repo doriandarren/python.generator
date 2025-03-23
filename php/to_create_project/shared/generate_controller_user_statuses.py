@@ -113,7 +113,7 @@ def create_list(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "UserStatusController.php")
+    file_path = os.path.join(styles_path, "UserStatusListController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -181,7 +181,7 @@ def create_show(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "UserStatusController.php")
+    file_path = os.path.join(styles_path, "UserStatusShowController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -259,7 +259,7 @@ def create_store(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "UserStatusController.php")
+    file_path = os.path.join(styles_path, "UserStatusStoreController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -373,7 +373,7 @@ def create_update(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "UserStatusController.php")
+    file_path = os.path.join(styles_path, "UserStatusUpdateController.php")
 
     # Contenido por defecto
     content = """<?php
