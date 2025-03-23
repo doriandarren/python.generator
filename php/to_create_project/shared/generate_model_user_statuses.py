@@ -19,7 +19,7 @@ def generate_model_user_statuses(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, ".php")
+    file_path = os.path.join(styles_path, "UserStatuses.php")
 
     # Contenido por defecto
     content = """<?php
