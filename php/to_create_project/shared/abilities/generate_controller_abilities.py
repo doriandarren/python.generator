@@ -3,7 +3,7 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
-def generate_controller_ability(full_path):
+def generate_controller_abilities(full_path):
     create_destroy(full_path)
     create_list(full_path)
     create_show(full_path)

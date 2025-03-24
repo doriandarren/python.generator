@@ -2,8 +2,8 @@ from helpers.helper_print import input_with_validation
 from php.to_create_project.generate_by_command_line import generate_by_command_line
 from php.to_create_project.generate_controller_auth import generate_controller_auth
 from php.to_create_project.generate_enums import generate_enums
+from php.to_create_project.generate_shared import generate_shared
 from php.to_create_project.generate_repositories import generate_repositories
-
 
 
 def start_project():
@@ -29,6 +29,9 @@ def start_project():
 
     # Controllers
     generate_controller_auth(full_path)
+
+    # Shared
+    generate_shared()
 
 
 
