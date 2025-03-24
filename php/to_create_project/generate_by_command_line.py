@@ -3,12 +3,10 @@ from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
 
-
 def generate_by_command_line(full_path):
     create_project(full_path)
     create_console(full_path)
     create_route_service_provider(full_path)
-
 
 
 
@@ -22,7 +20,6 @@ def create_project(full_path):
     command = f'composer create-project --prefer-dist laravel/laravel {full_path}'
     run_command(command)
     print_message(f'Proyecto Laravel creado en: {full_path}', GREEN)
-
 
 
 

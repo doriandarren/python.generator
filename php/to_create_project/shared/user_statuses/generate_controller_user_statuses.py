@@ -34,7 +34,7 @@ def create_destroy(full_path):
 
 namespace App\\Http\\Controllers\\SHARED\\UserStatuses;
 
-use App\\Http\\Controllers\Controller;
+use App\\Http\\Controllers\\Controller;
 use App\\Models\\UserStatuses\\UserStatus;
 use App\\Repositories\\UserStatuses\\UserStatusRepository;
 use Illuminate\\Http\\JsonResponse;
@@ -380,7 +380,7 @@ def create_update(full_path):
 
 namespace App\\Http\\Controllers\\SHARED\\UserStatuses;
 
-use App\\Http\\Controllers\Controller;
+use App\\Http\\Controllers\\Controller;
 use App\\Models\\UserStatuses\\UserStatus;
 use App\\Repositories\\UserStatuses\\UserStatusRepository;
 use Illuminate\\Http\\JsonResponse;

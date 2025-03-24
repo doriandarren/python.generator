@@ -3,7 +3,7 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
-def generate_model_ability_users(full_path):
+def generate_repository_ability_users(full_path):
     """
     Genera un archivo
 

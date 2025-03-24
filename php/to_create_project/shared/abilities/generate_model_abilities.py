@@ -30,9 +30,9 @@ namespace App\\Models\\Abilities;
 use App\\Models\\AbilityGroups\\AbilityGroup;
 use App\\Models\\AbilityUsers\\AbilityUser;
 use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;
-use Illuminate\\Database\Eloquent\\Model;
+use Illuminate\\Database\\Eloquent\\Model;
 use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;
-use Illuminate\\Database\\Eloquent\Relations\\HasMany;
+use Illuminate\\Database\\Eloquent\\Relations\\HasMany;
 
 class Ability extends Model
 {

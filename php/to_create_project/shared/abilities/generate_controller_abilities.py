@@ -227,7 +227,7 @@ def create_list(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "Abilities")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Abilities")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):

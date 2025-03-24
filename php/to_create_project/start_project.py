@@ -1,9 +1,11 @@
 from helpers.helper_print import input_with_validation
+from php.to_create_project.generate_base_controller import generate_base_controller
 from php.to_create_project.generate_by_command_line import generate_by_command_line
 from php.to_create_project.generate_controller_auth import generate_controller_auth
 from php.to_create_project.generate_enums import generate_enums
-from php.to_create_project.generate_shared import generate_shared
-from php.to_create_project.generate_repositories import generate_repositories
+from php.to_create_project.shared.generate_shared import generate_shared
+from php.to_create_project.updates.update_model_user import update_model_user
+from php.to_create_project.utilities.generate_utilities import generate_utilities
 
 
 def start_project():
@@ -25,17 +27,32 @@ def start_project():
     generate_enums(full_path)
 
 
-    # TODO Exceptions
+    # Controller & Base Controller
+    generate_base_controller(full_path)
+
+
+
 
     # Controllers
     generate_controller_auth(full_path)
 
     # Shared
-    generate_shared()
+    generate_shared(full_path)
+
+
+    # Utilities
+    generate_utilities(full_path)
 
 
 
-    ## generate_repositories(full_path)
+    # Update Model User
+    update_model_user(full_path)
+
+    # TODO Exceptions
+
+
+
+
 
 
 

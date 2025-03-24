@@ -1,7 +1,11 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN
 from php.to_create_project.shared.abilities.generate_controller_abilities import generate_controller_abilities
+
 from php.to_create_project.shared.abilities.generate_model_abilities import generate_model_abilities
+from php.to_create_project.shared.ability_users.generate_model_ability_users import generate_model_ability_users
+from php.to_create_project.shared.ability_users.generate_repository_ability_users import generate_repository_ability_users
+
 from php.to_create_project.shared.abilities.generate_repository_abilities import generate_repository_abilities
 from php.to_create_project.shared.ability_groups.generate_controller_ability_groups import \
     generate_controller_ability_groups
@@ -41,8 +45,8 @@ def generate_shared(full_path):
 
     # Abilities Users
     generate_controller_ability_users(full_path)
-    generate_model_ability_groups(full_path)
-    generate_repository_ability_groups(full_path)
+    generate_model_ability_users(full_path)
+    generate_repository_ability_users(full_path)
 
 
     # Countries

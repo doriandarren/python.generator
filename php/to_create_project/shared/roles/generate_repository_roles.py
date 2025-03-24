@@ -27,7 +27,7 @@ def generate_repository_roles(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\Repositories\Roles;
+namespace App\\Repositories\\Roles;
 
 use App\\Enums\\EnumApiSetup;
 use App\\Models\\Roles\\Role;
