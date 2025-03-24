@@ -117,7 +117,7 @@ def create_list(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\Http\\Controllers\\SHARED\\AbilityUsers;
+namespace App\\Http\\Controllers\\SHARED\\AbilityUsers;
 
 use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\AbilityUsers\\AbilityUserRepository;
@@ -270,7 +270,7 @@ use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\AbilityUsers\\AbilityUserRepository;
 use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
-use Illuminate\\Support\\Facades\Validator;
+use Illuminate\\Support\\Facades\\Validator;
 
 class AbilityUserStoreController extends Controller
 {
@@ -382,7 +382,7 @@ def create_update(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\\Http\\Controllers\\SHARED\AbilityUsers;
+namespace App\\Http\\Controllers\\SHARED\\AbilityUsers;
 
 use App\\Http\\Controllers\\Controller;
 use App\\Models\\AbilityUsers\\AbilityUser;

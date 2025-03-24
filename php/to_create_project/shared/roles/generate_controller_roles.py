@@ -261,7 +261,7 @@ def create_store(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\Http\Controllers\SHARED\Roles;
+namespace App\\Http\\Controllers\\SHARED\\Roles;
 
 use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\Roles\\RoleRepository;

@@ -5,8 +5,9 @@ from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 def generate_by_command_line(full_path):
     create_project(full_path)
-    create_console(full_path)
+    create_command(full_path)
     create_route_service_provider(full_path)
+    create_install_sanctum(full_path)
 
 
 
@@ -24,7 +25,7 @@ def create_project(full_path):
 
 
 
-def create_console(full_path):
+def create_command(full_path):
     print_message("Instalando TestCommand...", CYAN)
     run_command("php artisan make:command TestCommand", cwd=full_path)
     print_message("TestCommand instalado correctamente.", GREEN)
@@ -39,9 +40,17 @@ def create_route_service_provider(full_path):
 
 
 
+# def create_install_sanctum(full_path):
+#     print_message("Instalando sanctum...", CYAN)
+#     run_command("composer require laravel/sanctum", cwd=full_path)
+#     run_command("php artisan vendor:publish --provider=\"Laravel\\Sanctum\\SanctumServiceProvider\"", cwd=full_path)
+#     run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
+#     print_message("sanctum instalado correctamente.", GREEN)
+
+
+
+
 def create_install_sanctum(full_path):
-    print_message("Instalando sanctum...", CYAN)
-    run_command("composer require laravel/sanctum", cwd=full_path)
-    run_command("php artisan vendor:publish --provider=\"Laravel\\Sanctum\\SanctumServiceProvider\"", cwd=full_path)
-    run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
-    print_message("sanctum instalado correctamente.", GREEN)
+    print_message("Instalando Sanctum...", CYAN)
+    run_command("php artisan install:api", cwd=full_path)
+    print_message("Sanctum instalado correctamente.", GREEN)
