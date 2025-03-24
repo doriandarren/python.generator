@@ -18,7 +18,7 @@ def create_destroy(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Countries")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "SHARED", "Countries")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
@@ -104,7 +104,7 @@ def create_list(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Countries")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "SHARED", "Countries")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
@@ -171,7 +171,7 @@ def create_show(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Countries")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "SHARED", "Countries")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
@@ -252,7 +252,7 @@ def create_store(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Countries")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "SHARED", "Countries")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
@@ -386,7 +386,7 @@ def create_update(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "API", "SHARED", "Countries")
+    styles_path = os.path.join(full_path, "app", "Http", "Controllers", "SHARED", "Countries")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):

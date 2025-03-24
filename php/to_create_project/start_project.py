@@ -4,7 +4,8 @@ from php.to_create_project.generate_by_command_line import generate_by_command_l
 from php.to_create_project.generate_controller_auth import generate_controller_auth
 from php.to_create_project.generate_enums import generate_enums
 from php.to_create_project.shared.generate_shared import generate_shared
-from php.to_create_project.updates.update_model_user import update_model_user
+from php.to_create_project.updates.update_app_php import update_app_php
+from php.to_create_project.updates.update_model_user_php import update_model_user
 from php.to_create_project.utilities.generate_utilities import generate_utilities
 
 
@@ -45,8 +46,9 @@ def start_project():
 
 
 
-    # Update Model User
+    # Updates
     update_model_user(full_path)
+    update_app_php(full_path)
 
     # TODO Exceptions
 

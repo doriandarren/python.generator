@@ -35,3 +35,13 @@ def create_route_service_provider(full_path):
     print_message("Instalando RouteServiceProvider...", CYAN)
     run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
     print_message("RouteServiceProvider instalado correctamente.", GREEN)
+
+
+
+
+def create_install_sanctum(full_path):
+    print_message("Instalando sanctum...", CYAN)
+    run_command("composer require laravel/sanctum", cwd=full_path)
+    run_command("php artisan vendor:publish --provider=\"Laravel\\Sanctum\\SanctumServiceProvider\"", cwd=full_path)
+    run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
+    print_message("sanctum instalado correctamente.", GREEN)

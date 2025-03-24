@@ -30,7 +30,8 @@ def update_use(full_path):
         # Reemplazos
         content = content.replace(
             "use Illuminate\\Notifications\\Notifiable;",
-            """use App\\Models\\Abilities\\Ability;
+            """use Illuminate\\Notifications\\Notifiable;
+use App\\Models\\Abilities\\Ability;
 use App\\Models\\AbilityUsers\\AbilityUser;
 use App\\Models\\Roles\\Role;
 use App\\Models\\RoleUsers\\RoleUser;
