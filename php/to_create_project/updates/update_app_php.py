@@ -36,3 +36,4 @@ def update_app_php(full_path):
     except Exception as e:
         print_message(f"Error al actualizar {main_jsx_path}: {e}", CYAN)
 
+

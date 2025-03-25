@@ -5,6 +5,7 @@ from php.to_create_project.generate_controller_auth import generate_controller_a
 from php.to_create_project.generate_enums import generate_enums
 from php.to_create_project.shared.generate_shared import generate_shared
 from php.to_create_project.updates.update_app_php import update_app_php
+from php.to_create_project.updates.update_bootstrap_app_php import update_bootstrap_app_php
 from php.to_create_project.updates.update_model_user_php import update_model_user
 from php.to_create_project.utilities.generate_utilities import generate_utilities
 
@@ -49,15 +50,9 @@ def start_project():
     # Updates
     update_model_user(full_path)
     update_app_php(full_path)
+    update_bootstrap_app_php(full_path)
 
     # TODO Exceptions
-
-
-
-
-
-
-
 
 
 
