@@ -21,6 +21,10 @@ from php.to_create_project.shared.countries.generate_model_countries import gene
 from php.to_create_project.shared.countries.generate_repository_countries import generate_repository_countries
 from php.to_create_project.shared.countries.generate_factory_countries import generate_factory_countries
 from php.to_create_project.shared.countries.generate_seeder_countries import generate_seeder_countries
+from php.to_create_project.shared.migrations.generate_ability_groups_table import generate_ability_groups_table
+from php.to_create_project.shared.migrations.generate_countries_table import generate_countries_table
+from php.to_create_project.shared.migrations.generate_roles_table import generate_roles_table
+from php.to_create_project.shared.migrations.update_create_users_table import update_create_users_table
 from php.to_create_project.shared.role_users.generate_controller_role_users import generate_controller_role_users
 from php.to_create_project.shared.role_users.generate_model_role_users import generate_model_role_users
 from php.to_create_project.shared.role_users.generate_factory_role_users import generate_factory_role_users
@@ -30,11 +34,13 @@ from php.to_create_project.shared.roles.generate_model_roles import generate_mod
 from php.to_create_project.shared.roles.generate_repository_roles import generate_repository_roles
 from php.to_create_project.shared.roles.generate_factory_roles import generate_factory_roles
 from php.to_create_project.shared.roles.generate_seeder_roles import generate_seeder_roles
+from php.to_create_project.shared.update_database_seeders.update_database_seeders import update_database_seeder
 from php.to_create_project.shared.user_statuses.generate_controller_user_statuses import generate_controller_user_statuses
 from php.to_create_project.shared.user_statuses.generate_model_user_statuses import generate_model_user_statuses
 from php.to_create_project.shared.user_statuses.generate_repository_user_statuses import generate_repository_user_statuses
 from php.to_create_project.shared.user_statuses.generate_factory_user_statuses import generate_factory_user_statuses
 from php.to_create_project.shared.user_statuses.generate_seeder_user_statuses import generate_seeder_user_statuses
+from php.to_create_project.shared.user_roles_abilities.generate_seeder_user_roles_abilities import generate_seeder_user_roles_abilities
 
 
 
@@ -95,3 +101,15 @@ def generate_shared(full_path):
     generate_seeder_user_statuses(full_path)
 
 
+    # UserRolesAbilities
+    generate_seeder_user_roles_abilities(full_path)
+
+
+    # Update DatabaseSeeder
+    update_database_seeder(full_path)
+
+    # Migrations
+    update_create_users_table(full_path)
+    generate_ability_groups_table(full_path)
+    generate_roles_table(full_path)
+    generate_countries_table(full_path)
