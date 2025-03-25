@@ -25,7 +25,6 @@ def generate_route_user_statuses(full_path):
     content = """<?php
 
 use App\\Enums\\EnumAbilitySuffix;
-use App\\Enums\\EnumApiSetup;
 use App\\Http\\Controllers\\SHARED\\UserStatuses\\UserStatusListController;
 use App\\Http\\Controllers\\SHARED\\UserStatuses\\UserStatusShowController;
 use App\\Http\\Controllers\\SHARED\\UserStatuses\\UserStatusStoreController;
@@ -38,7 +37,7 @@ use Illuminate\\Support\\Facades\\Route;
 */
 
 
-Route::group(['prefix' => EnumApiSetup::API_VERSION . 'user-statuses/'], function () {
+Route::group(['prefix' => 'user-statuses/'], function () {
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {
 

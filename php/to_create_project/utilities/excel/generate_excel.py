@@ -28,7 +28,7 @@ def create_example_export(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\\Exports\\Example;
+namespace App\\Utilities\\Exls\\Exports\\Example;
 
 use Maatwebsite\\Excel\\Concerns\\Exportable;
 use Maatwebsite\\Excel\\Concerns\\WithMultipleSheets;
@@ -125,7 +125,7 @@ def create_example_export_per_sheet(full_path):
     # Contenido por defecto
     content = """<?php
 
-namespace App\\Exports\\Example;
+namespace App\\Utilities\\Exls\\Exports\\Example;
 
 use Maatwebsite\\Excel\\Concerns\\FromArray;
 use Maatwebsite\\Excel\\Concerns\\ShouldAutoSize;

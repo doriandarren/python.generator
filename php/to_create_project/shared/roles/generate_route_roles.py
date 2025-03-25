@@ -24,7 +24,6 @@ def generate_route_roles(full_path):
     content = """<?php
 
 use App\\Enums\\EnumAbilitySuffix;
-use App\\Enums\\EnumApiSetup;
 use App\\Http\\Controllers\\SHARED\\Roles\\RoleListController;
 use App\\Http\\Controllers\\SHARED\\Roles\\RoleShowController;
 use App\\Http\\Controllers\\SHARED\\Roles\\RoleStoreController;
@@ -37,7 +36,7 @@ use Illuminate\\Support\\Facades\\Route;
 */
 
 
-Route::group(['prefix' => EnumApiSetup::API_VERSION . 'roles/'], function () {
+Route::group(['prefix' => 'roles/'], function () {
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {
 

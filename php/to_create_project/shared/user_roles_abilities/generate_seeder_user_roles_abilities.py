@@ -18,7 +18,7 @@ def generate_seeder_user_roles_abilities(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "UserRoleAbilitiesSeeder.php")
+    file_path = os.path.join(styles_path, "UserRolesAbilitiesSeeder.php")
 
     # Contenido por defecto
     content = """<?php
@@ -38,7 +38,7 @@ use Illuminate\\Database\\Seeder;
 
 
 
-class UserRolesAbilitiesSeeder extends Seeder
+class UserRolesAbilitySeeder extends Seeder
 {
 
     /**

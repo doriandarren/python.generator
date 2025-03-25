@@ -24,7 +24,6 @@ def generate_route_countries(full_path):
     content = """<?php
 
 use App\\Enums\\EnumAbilitySuffix;
-use App\\Enums\\EnumApiSetup;
 use App\\Http\\Controllers\\SHARED\\Countries\\CountryListController;
 use App\\Http\\Controllers\\SHARED\\Countries\\CountryShowController;
 //use App\\Http\\Controllers\\SHARED\\Countries\\CountryStoreController;
@@ -36,7 +35,7 @@ use Illuminate\\Support\\Facades\\Route;
 * Countries
 */
 
-Route::group(['prefix' => EnumApiSetup::API_VERSION . 'countries/'], function () {
+Route::group(['prefix' => 'countries/'], function () {
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {
 

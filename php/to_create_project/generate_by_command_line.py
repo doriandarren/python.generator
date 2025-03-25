@@ -5,8 +5,8 @@ from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 def generate_by_command_line(full_path):
     create_project(full_path)
-    create_route_service_provider(full_path)
     create_install_sanctum(full_path)
+    #### create_route_service_provider(full_path)
 
 
 
@@ -23,10 +23,10 @@ def create_project(full_path):
 
 
 
-def create_route_service_provider(full_path):
-    print_message("Instalando RouteServiceProvider...", CYAN)
-    run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
-    print_message("RouteServiceProvider instalado correctamente.", GREEN)
+# def create_route_service_provider(full_path):
+#     print_message("Instalando RouteServiceProvider...", CYAN)
+#     run_command("php artisan make:provider RouteServiceProvider", cwd=full_path)
+#     print_message("RouteServiceProvider instalado correctamente.", GREEN)
 
 
 

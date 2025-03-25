@@ -23,7 +23,6 @@ def generate_route_ability_groups(full_path):
     content = """<?php
 
 use App\\Enums\\EnumAbilitySuffix;
-use App\\Enums\\EnumApiSetup;
 use App\\Http\\Controllers\\SHARED\\AbilityGroups\\AbilityGroupListController;
 use App\\Http\\Controllers\\SHARED\\AbilityGroups\\AbilityGroupShowController;
 use App\\Http\\Controllers\\SHARED\\AbilityGroups\\AbilityGroupStoreController;
@@ -36,7 +35,7 @@ use Illuminate\\Support\\Facades\\Route;
 */
 
 
-Route::group(['prefix' => EnumApiSetup::API_VERSION . 'ability-groups/'], function () {
+Route::group(['prefix' => 'ability-groups/'], function () {
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {
 

@@ -27,7 +27,6 @@ def generate_route_ability_users(full_path):
     content = """<?php
 
 use App\\Enums\\EnumAbilitySuffix;
-use App\\Enums\\EnumApiSetup;
 use App\\Http\\Controllers\\SHARED\\AbilityUsers\\AbilityUserListController;
 use App\\Http\\Controllers\\SHARED\\AbilityUsers\\AbilityUserShowController;
 use App\\Http\\Controllers\\SHARED\\AbilityUsers\\AbilityUserStoreController;
@@ -40,7 +39,7 @@ use Illuminate\\Support\\Facades\\Route;
 */
 
 
-Route::group(['prefix' => EnumApiSetup::API_VERSION . 'ability-users/'], function () {
+Route::group(['prefix' => 'ability-users/'], function () {
 
 	Route::group(['middleware' => 'auth:sanctum'], function() {
 

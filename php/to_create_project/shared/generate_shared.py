@@ -32,6 +32,7 @@ from php.to_create_project.shared.migrations.update_create_users_table import up
 from php.to_create_project.shared.role_users.generate_controller_role_users import generate_controller_role_users
 from php.to_create_project.shared.role_users.generate_model_role_users import generate_model_role_users
 from php.to_create_project.shared.role_users.generate_factory_role_users import generate_factory_role_users
+from php.to_create_project.shared.role_users.generate_repository_role_users import generate_repository_role_users
 from php.to_create_project.shared.role_users.generate_route_role_users import generate_route_role_users
 from php.to_create_project.shared.role_users.generate_seeder_role_users import generate_seeder_role_users
 from php.to_create_project.shared.roles.generate_controller_roles import generate_controller_roles
@@ -95,7 +96,7 @@ def generate_shared(full_path):
     generate_model_role_users(full_path)
     generate_factory_role_users(full_path)
     generate_seeder_role_users(full_path)
-    generate_seeder_role_users(full_path)
+    generate_repository_role_users(full_path)
     generate_route_role_users(full_path)
 
 

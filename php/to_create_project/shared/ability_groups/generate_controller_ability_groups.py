@@ -180,7 +180,7 @@ def create_show(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupShowController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -257,7 +257,7 @@ def create_store(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupStoreController.php")
 
     # Contenido por defecto
     content = """<?php
@@ -370,7 +370,7 @@ def create_update(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "AbilityGroupListController.php")
+    file_path = os.path.join(styles_path, "AbilityGroupUpdateController.php")
 
     # Contenido por defecto
     content = """<?php
