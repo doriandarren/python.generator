@@ -1,16 +1,19 @@
 from helpers.helper_print import input_with_validation
 from php.to_create_project.dev.generate_execute_controller import generate_execute_controller
+from php.to_create_project.dev.generate_route_test import generate_route_test
 from php.to_create_project.dev.generate_test_controller import generate_test_controller
 from php.to_create_project.generate_base_controller import generate_base_controller
 from php.to_create_project.generate_by_command_line import generate_by_command_line
 from php.to_create_project.generate_controller_auth import generate_controller_auth
 from php.to_create_project.generate_enums import generate_enums
+from php.to_create_project.images.generate_company_logos import generate_company_logos
 from php.to_create_project.shared.generate_shared import generate_shared
 from php.to_create_project.updates.update_app_php import update_app_php
 from php.to_create_project.updates.update_bootstrap_app_php import update_bootstrap_app_php
 from php.to_create_project.updates.update_gitignore import update_gitignore
 from php.to_create_project.updates.update_model_user_php import update_model_user
 from php.to_create_project.updates.update_readme import update_readme
+from php.to_create_project.updates.update_welcome_blade import update_welcome_blade
 from php.to_create_project.utilities.generate_utilities import generate_utilities
 
 
@@ -62,10 +65,21 @@ def start_project():
     # Dev
     generate_execute_controller(full_path)
     generate_test_controller(full_path)
+    generate_route_test(full_path)
 
 
     # gitignore
     update_gitignore(full_path)
+
+
+    # Logos
+    generate_company_logos(full_path)
+
+
+    # Welcome
+    update_welcome_blade(full_path)
+
+
 
     # TODO Exceptions
 
