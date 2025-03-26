@@ -60,6 +60,9 @@ def generate_diagrams(table, user_columns):
     print(f"✅ Diagrama generado en {output_filename}")
 
 
+
+
+
 if __name__ == '__main__':
     print("******************************************************")
     print("**********************  DIAGRAMS   *******************")
