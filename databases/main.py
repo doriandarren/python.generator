@@ -1,16 +1,12 @@
-import pprint
-import sys
 import os
-# Añadir la carpeta raíz del proyecto al sys.path
-## sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from helpers.helper_print import input_with_validation
 from databases.to_list.list_tables import list_tables_and_columns
 from databases.to_generate.generate_tables_columns import list_tables_and_columns_and_generate
+from dotenv import load_dotenv
 
 
 
-
+load_dotenv()
 
 if __name__ == "__main__":
 
@@ -31,10 +27,10 @@ if __name__ == "__main__":
 
     if input_db_type.lower() == '1':
         port = 3306
-        password = "123456"
+        password = os.getenv("DATABASE_LOCAL_PASSWORD")
     elif input_db_type.lower() == '2':
         port = 3307
-        password = "root"
+        password = os.getenv("DATABASE_DOCKER_PASSWORD")
 
 
 

@@ -63,7 +63,6 @@ dmypy.json
 # Environments
 .env
 *.env
-*.env.*
 
 # Test coverage reports
 htmlcov/

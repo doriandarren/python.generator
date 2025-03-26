@@ -63,7 +63,9 @@ def update_route(full_path):
         print_message(f"Error: {file_path} no existe.", CYAN)
         return
 
-    block_to_add = """Route::prefix(EnumApiSetup::API_VERSION )->group(function () {
+    block_to_add = """
+
+Route::prefix(EnumApiSetup::API_VERSION )->group(function () {
     require base_path('routes/SHARED/abilities.php');
     require base_path('routes/SHARED/ability_groups.php');
     require base_path('routes/SHARED/ability_users.php');
