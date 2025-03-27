@@ -1,5 +1,5 @@
 import os
-from helpers.helper_print import input_with_validation
+from helpers.helper_print import input_with_validation, print_header
 from databases.to_list.list_tables import list_tables_and_columns
 from databases.to_generate.generate_tables_columns import list_tables_and_columns_and_generate
 from dotenv import load_dotenv
@@ -10,9 +10,8 @@ load_dotenv()
 
 if __name__ == "__main__":
 
-    print("******************************************************")
-    print("**********************  DATABASE   *******************")
-    print("******************************************************")
+
+    print_header("DATABASE")
 
     port = 3306
     database_name = "portuarios_api"

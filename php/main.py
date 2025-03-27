@@ -1,15 +1,13 @@
 from php.to_api.start_module import start_module
 from php.to_create_project.start_project import start_project
-from helpers.helper_print import input_with_validation
-from colorama import Fore
+from helpers.helper_print import input_with_validation, print_header
+
 
 
 
 if __name__ == "__main__":
 
-    print(Fore.GREEN + "****************************************************")
-    print(Fore.GREEN + "*******             PHP                    *********")
-    print(Fore.GREEN + "****************************************************")
+    print_header("PHP")
 
     namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
 

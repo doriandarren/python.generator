@@ -34,9 +34,9 @@ use Illuminate\\Support\\Facades\\Route;
 |
 */
 
-Route::get('v1/dev/execute', ExecuteController::class . '@__invoke')->name('v1/dev/execute');
+Route::get('dev/execute', ExecuteController::class . '@__invoke')->name('dev/execute');
 
-Route::get('v1/dev/test', TestController::class . '@__invoke')->name('v1/dev/test');
+Route::get('dev/test', TestController::class . '@__invoke')->name('dev/test');
 
 
 """

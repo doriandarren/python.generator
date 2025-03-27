@@ -34,3 +34,6 @@ def create_install_sanctum(full_path):
     print_message("Instalando Sanctum...", CYAN)
     run_command("php artisan install:api -n", cwd=full_path)
     print_message("Sanctum instalado correctamente.", GREEN)
+
+
+

@@ -1,5 +1,5 @@
 from react.to_create_module.generate_module_standard import generate_module_standard
-from helpers.helper_print import print_message, GREEN, CYAN
+from helpers.helper_print import print_message, GREEN, CYAN, print_header
 from react.to_create_project.generate_components import generate_components
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
@@ -136,9 +136,8 @@ def start_module():
 
 if __name__ == "__main__":
 
-    print("******************************************************")
-    print("**********************  REACT   **********************")
-    print("******************************************************")
+    print_header("REACT")
+
     namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
 
     if namespace.lower() == 'p':

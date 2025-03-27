@@ -3,15 +3,16 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
-def generate_controller_auth(full_path):
-    create_auth_login(full_path)
-    create_auth_logout(full_path)
-    create_auth_register(full_path)
-    create_auth_user(full_path)
+def generate_module_auth(full_path):
+    create_login(full_path)
+    create_logout(full_path)
+    create_register(full_path)
+    create_user(full_path)
+    create_route(full_path)
 
 
 
-def create_auth_login(full_path):
+def create_login(full_path):
     """
     Genera un archivo
 
@@ -122,7 +123,7 @@ class AuthLoginController extends Controller
 
 
 
-def create_auth_logout(full_path):
+def create_logout(full_path):
     """
     Genera un archivo
 
@@ -177,7 +178,7 @@ class AuthLogoutController extends Controller
 
 
 
-def create_auth_register(full_path):
+def create_register(full_path):
     """
     Genera un archivo
 
@@ -254,7 +255,7 @@ class AuthRegisterController extends Controller
 
 
 
-def create_auth_user(full_path):
+def create_user(full_path):
     """
     Genera un archivo
 
@@ -306,6 +307,60 @@ class AuthUserController extends Controller
     }
 
 }
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+def create_route(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "routes", "API")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "auth.php")
+
+    # Contenido por defecto
+    content = r"""<?php
+
+use App\Http\Controllers\API\Auth\AuthLoginController;
+use App\Http\Controllers\API\Auth\AuthLogoutController;
+use App\Http\Controllers\API\Auth\AuthUserController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Auth
+|--------------------------------------------------------------------------
+*/
+
+// Login
+Route::post('auth/login', [AuthLoginController::class, '__invoke']);
+
+// Password Reset
+//    Route::post('password/email', [ForgotPasswordController::class, '__invoke']);
+//    Route::post('password/restore', [RestorePasswordController::class, '__invoke']);
+
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::get('auth/logout', [AuthLogoutController::class, '__invoke']);
+    Route::get('auth/user', [AuthUserController::class, '__invoke']);
+});
 """
 
     try:

@@ -19,7 +19,6 @@ def update_gitignore(full_path):
 
     block_to_add = """.DS_Store
 app/Http/Controllers/Dev/TestController.php
-src/Api/Dev/
 """
 
     lines_to_add = block_to_add.splitlines()

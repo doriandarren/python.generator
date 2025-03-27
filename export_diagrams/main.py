@@ -1,5 +1,8 @@
 import xml.etree.ElementTree as ET
 
+from helpers.helper_print import print_header
+
+
 def generate_diagrams(table, user_columns):
     parent_id = "WIyWlLk6GJQsqaUBKTNV-1"
     table_id = f"{table}-0"
@@ -64,9 +67,8 @@ def generate_diagrams(table, user_columns):
 
 
 if __name__ == '__main__':
-    print("******************************************************")
-    print("**********************  DIAGRAMS   *******************")
-    print("******************************************************")
+
+    print_header("EXPORT DIAGRAMS")
 
     while True:
         table = input("🔤 Nombre de la tabla: ").strip()

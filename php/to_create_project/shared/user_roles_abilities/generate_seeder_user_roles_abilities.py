@@ -38,7 +38,7 @@ use Illuminate\\Database\\Seeder;
 
 
 
-class UserRolesAbilitySeeder extends Seeder
+class UserRolesAbilitiesSeeder extends Seeder
 {
 
     /**

@@ -66,6 +66,10 @@ def update_route(full_path):
     block_to_add = """
 
 Route::prefix(EnumApiSetup::API_VERSION )->group(function () {
+    // Auth
+    require base_path('routes/API/auth.php');
+    
+    // Shared
     require base_path('routes/SHARED/abilities.php');
     require base_path('routes/SHARED/ability_groups.php');
     require base_path('routes/SHARED/ability_users.php');
@@ -74,6 +78,8 @@ Route::prefix(EnumApiSetup::API_VERSION )->group(function () {
     require base_path('routes/SHARED/role_users.php');
     require base_path('routes/SHARED/roles.php');
     require base_path('routes/SHARED/user_statuses.php');
+    
+    // API
     // ...
 });
 """

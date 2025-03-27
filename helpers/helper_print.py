@@ -3,6 +3,7 @@ import re
 import subprocess
 import pprint
 import sys
+from colorama import Fore
 
 
 
@@ -67,6 +68,36 @@ def input_with_validation(prompt, default_value=None):
 
 
 
+def capitalize_camel_case(name):
+    return ''.join(word.capitalize() for word in name.split('_'))
+
+
+
+
 def dd(data):
     pprint.pprint(data)
     sys.exit()
+
+
+
+def print_header(title, width=50):
+    # Asegurarse que el título no sea más largo que el ancho permitido
+    clean_title = f"🚀 {title}"
+    if len(clean_title) > width - 4:
+        width = len(clean_title) + 4
+
+    border = '+' + '-' * (width - 1) + '+'
+    empty_line = f"|{' ' * (width - 1)}|"
+
+    # Centrar el título
+    padding = (width - 2 - len(clean_title)) // 2
+    line = f"|{' ' * padding}{clean_title}{' ' * (width - 2 - len(clean_title) - padding)}|"
+
+    final_box = f"""
+{border}
+{empty_line}
+{line}
+{empty_line}
+{border}
+"""
+    print_message(final_box, CYAN)

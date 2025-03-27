@@ -4,7 +4,7 @@ from php.to_api.generator import generate
 
 def start_module():
 
-    ruta = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/")
+    full_path = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/docker-laravel/projects/laravel_test/")
     namespace = input_with_validation("Namespace (ERP / API / INVOICES) ", "API")
     singular_name = input_with_validation("Tabla singular (EX: AgendaUnloading): ", None)
     plural_name = input_with_validation("Tabla plural (EX: AgendaUnloadings): ", None)
@@ -12,4 +12,4 @@ def start_module():
 
     columns = [{"name": column} for column in input_columns.split()]
 
-    generate(namespace, ruta, singular_name, plural_name, columns)
+    generate(namespace, full_path, singular_name, plural_name, columns)

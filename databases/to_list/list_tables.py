@@ -1,6 +1,9 @@
 from databases.settings.connection import get_connection
 from helpers.helper_string import convert_word
 
+
+
+
 def list_tables_and_columns(host, user, password, database, port=3306, input_tables=None):
     """
     Retrieves and displays all tables along with their columns in the database.
