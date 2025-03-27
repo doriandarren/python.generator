@@ -20,30 +20,30 @@ def generate_test_controller(full_path):
     file_path = os.path.join(styles_path, "TestController.php")
 
     # Contenido por defecto
-    content = """<?php
+    content = r"""<?php
 
-namespace App\\Http\\Controllers\\Dev;
+namespace App\Http\Controllers\Dev;
 
-use App\\Enums\\EnumAbilityGroups;
-use App\\Enums\\Roles\\EnumRole;
-use App\\Enums\\UserStatuses\\EnumUserStatus;
-use App\\Http\\Controllers\\Controller;
-use App\\Models\\Abilities\\Ability;
-use App\\Models\\AbilityGroups\\AbilityGroup;
-use App\\Models\\Roles\\Role;
-use App\\Models\\User;
-use App\\Models\\UserStatuses\\UserStatus;
-use App\\Repositories\\BatchProcesses\\Abilities\\BatchAbilityAndGroupRepository;
-use App\\Repositories\\BatchProcesses\\Abilities\\BatchReloadDatabaseAbilitiesRepository;
-use App\\Utilities\\Helpers\\HelperFile;
-use App\\Utilities\\Helpers\\HelperMail;
-use App\\Utilities\\Messages\\MessageChannel;
+use App\Enums\EnumAbilityGroups;
+use App\Enums\Roles\EnumRole;
+use App\Enums\UserStatuses\EnumUserStatus;
+use App\Http\Controllers\Controller;
+use App\Models\Abilities\Ability;
+use App\Models\AbilityGroups\AbilityGroup;
+use App\Models\Roles\Role;
+use App\Models\User;
+use App\Models\UserStatuses\UserStatus;
+use App\Repositories\BatchProcesses\Abilities\BatchAbilityAndGroupRepository;
+use App\Repositories\BatchProcesses\Abilities\BatchReloadDatabaseAbilitiesRepository;
+use App\Utilities\Exls\Exports\Example\ExampleExport;
+use App\Utilities\Helpers\HelperFile;
+use App\Utilities\Helpers\HelperMail;
+use App\Utilities\Messages\MessageChannel;
 use DateTime;
-use Illuminate\\Http\\Response;
-use Illuminate\\Support\\Facades\\Mail;
-use Knp\\Snappy\\Pdf;
-use Maatwebsite\\Excel\\Facades\\Excel;
-use setasign\\Fpdi\\Fpdi;
+use Illuminate\Http\Response;
+use Knp\Snappy\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use setasign\Fpdi\Fpdi;
 use stdClass;
 
 class TestController extends Controller
@@ -250,12 +250,6 @@ class TestController extends Controller
 
 
 
-
-
-
-
-
-
     /*********************************************************
      *
      * GENERATE ABILITIES OF THE EnumAbilityGroups
@@ -292,8 +286,6 @@ class TestController extends Controller
 
 
 
-
-
     /*******************************
      * Create User
      */
@@ -303,11 +295,11 @@ class TestController extends Controller
 
 
         // No borrar sirve para actualizar las Abilities de la DB
-        (new \\App\\Repositories\\BatchProcesses\\Abilities\\BatchAbilityAndGroupRepository())->createAbilities();
+        (new \App\Repositories\BatchProcesses\Abilities\BatchAbilityAndGroupRepository())->createAbilities();
 
 
         // Recarga las abilidades de los usuarios
-        (new \\App\\Repositories\\BatchProcesses\\Abilities\\BatchReloadDatabaseAbilitiesRepository())->__invoke();
+        (new \App\Repositories\BatchProcesses\Abilities\BatchReloadDatabaseAbilitiesRepository())->__invoke();
 
         echo "OK Bash Abilities <br>";
 
@@ -463,13 +455,6 @@ class TestController extends Controller
     /**
      * END Create User
      *******************************/
-
-
-
-
-
-
-
 
 }
 

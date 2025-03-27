@@ -3,6 +3,7 @@ from php.to_create_project.batch_processes.generate_batch_processes import gener
 from php.to_create_project.dev.generate_execute_controller import generate_execute_controller
 from php.to_create_project.dev.generate_route_test import generate_route_test
 from php.to_create_project.dev.generate_test_controller import generate_test_controller
+from php.to_create_project.excel.generate_maatwebsite_excel import generate_maatwebsite_excel
 from php.to_create_project.exceptions.generate_exception_handler import generate_exception_handler
 from php.to_create_project.exceptions.generate_exception_handler_response import generate_exception_handler_response
 from php.to_create_project.generate_base_controller import generate_base_controller
@@ -44,7 +45,10 @@ def start_project():
     # Crear Snappy
     generate_snappy(full_path)
 
+    # Crear Excel
+    generate_maatwebsite_excel(full_path)
 
+    # Enums
     generate_enums(full_path)
 
 
