@@ -6,6 +6,7 @@ from php.to_create_project.dev.generate_test_controller import generate_test_con
 from php.to_create_project.excel.generate_maatwebsite_excel import generate_maatwebsite_excel
 from php.to_create_project.exceptions.generate_exception_handler import generate_exception_handler
 from php.to_create_project.exceptions.generate_exception_handler_response import generate_exception_handler_response
+from php.to_create_project.fpdf_merge.generate_fpdf_merge import generate_fpdf_merge
 from php.to_create_project.generate_base_controller import generate_base_controller
 from php.to_create_project.generate_by_command_line import generate_by_command_line
 from php.to_create_project.auth.generate_module_auth import generate_module_auth
@@ -44,6 +45,9 @@ def start_project():
 
     # Crear Snappy
     generate_snappy(full_path)
+
+    # Crear FPDF Merge
+    generate_fpdf_merge(full_path)
 
     # Crear Excel
     generate_maatwebsite_excel(full_path)

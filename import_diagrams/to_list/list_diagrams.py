@@ -27,17 +27,18 @@ def list_diagrams(xml_path, excluded_columns):
                 tables[parent_id]['columns'].append(value)
 
     for table in tables.values():
-        print(f"📦 Tabla: {table['name']}")
-        for column in table['columns']:
-            print(f"  - 🧩 {column}")
+        # print(f"📦 Tabla: {table['name']}")
+        # for column in table['columns']:
+        #     print(f"  - 🧩 {column}")
+        # print()
+
+
+
+        # plural_name = capitalize_camel_case(table['name']) # e.g., InvoiceLines
+        # singular_name = convert_word(plural_name)  # e.g., invoice_line
+        # singular_name = capitalize_camel_case(singular_name['singular']) # e.g., InvoiceLine
+
+
+        # Format custom:
+        print(f"require base_path('routes/API/{ table['name'] }.php'); ")
         print()
-
-
-
-
-    plural_name = capitalize_camel_case(table['name'])  # e.g., InvoiceLines
-    singular_name = convert_word(plural_name)  # e.g., invoice_lines
-    singular_name = capitalize_camel_case(singular_name['singular'])  # e.g., InvoiceLine
-    columns = [{"name": column} for column in table['columns']]
-
-    print(singular_name, plural_name, columns)

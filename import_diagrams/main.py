@@ -23,8 +23,8 @@ if __name__ == '__main__':
     print("✅ Bye...")
 
 
-## /Users/dorian/PhpstormProjects81/api.truckwashvilamalla.eu/
+## /Users/dorian/PhpstormProjects81/docker-laravel-84/projects/api.truckwashvilamalla.eu/
 
-## /Users/dorian/ReactProjects/office.truckwashvilamalla.eu
+## /Users/dorian/ReactProjects/office.truckwashvilamalla.eu/
 
 ## dorian.gonzalez@globaltank.eu

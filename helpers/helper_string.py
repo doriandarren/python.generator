@@ -59,3 +59,4 @@ if __name__ == "__main__":
     print(convert_word("vat_type"))  # {'singular': 'web_contact_form_log', 'plural': 'web_contact_form_logs'}
     print(convert_word("_station_products_"))  # {'singular': 'web_contact_form_log', 'plural': 'web_contact_form_logs'}
     print(convert_word("_station_product_"))  # {'singular': 'web_contact_form_log', 'plural': 'web_contact_form_logs'}
+    print(convert_word("customer_plates_authorizations"))

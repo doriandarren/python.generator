@@ -7,12 +7,9 @@ from react.to_create_module.generate_module_standard import generate_module_stan
 
 def generate_tables_columns(xml_path, excluded_columns):
 
-
     php_full_path = input_with_validation("Proyecto [PHP - /Users/dorian/PhpstormProjects81/app-1/ ]","/Users/dorian/PhpstormProjects81/app-1/")
     php_namespace = input_with_validation("Namespace (ERP / API / INVOICES) ", "API")
-
     react_full_path = input_with_validation("Proyecto [React - /Users/dorian/ReactProjects/app-1/ ]","/Users/dorian/ReactProjects/app-1/")
-
 
 
 
@@ -38,18 +35,16 @@ def generate_tables_columns(xml_path, excluded_columns):
                 tables[parent_id]['columns'].append(value)
 
     for table in tables.values():
-        print(f"📦 Tabla: {table['name']}")
-        for column in table['columns']:
-            print(f"  - 🧩 {column}")
-        print()
+        # print(f"📦 Tabla: {table['name']}")
+        # for column in table['columns']:
+        #     print(f"  - 🧩 {column}")
+        # print()
 
-        plural_name = capitalize_camel_case(table['name'])         # e.g., InvoiceLines
-
-        singular_name = convert_word(plural_name)  # e.g., invoice_lines
-
-        singular_name = capitalize_camel_case(singular_name['singular'])  # e.g., InvoiceLine
-
+        plural_name = capitalize_camel_case(table['name'])                  # e.g., InvoiceLines
+        singular_obj = convert_word(table['name'])                          # e.g., invoice_lines
+        singular_name = singular_obj['singular']                           # e.g., InvoiceLine
         columns = [{"name": column} for column in table['columns']]
+
 
         ## Generate PHP
         generate(php_namespace, php_full_path, singular_name, plural_name, columns)

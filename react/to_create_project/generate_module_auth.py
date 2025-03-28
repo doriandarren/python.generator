@@ -157,6 +157,7 @@ export const LoginPage = () => {
                     className="form-control w-full h-10 px-4 py-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                     type={showPassword ? "text" : "password"}
                     id="password"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required

@@ -148,9 +148,12 @@ class TestController extends Controller
     /**
      * Laravel Excel
      */
-
     public function __invokeEXCEL()
     {
+        /**
+         * IMPORTANTE!!! -> Si todo va bien el archivo estara en storage/app/private/exampleExport.xlsx
+         */
+         
         // Data Fake replace by Collection
         $arrData = [];
         $data = new stdClass();

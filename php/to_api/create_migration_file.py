@@ -29,7 +29,7 @@ def generate_migration_file(base_ruta, namespace, path_migration, singular_name,
     current_time = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
 
     # Nombre del archivo PHP será año_mes_dia_hora_min_seg_create_invoice_headers_table.php
-    file_name = f'{current_time}_create_{singular_name_snake}_table.php'
+    file_name = f'{current_time}_create_{plural_name_snake}_table.php'
     migration_file_path = os.path.join(migration_folder_path, file_name)
 
     # Contenido del archivo PHP de la migración adaptado
