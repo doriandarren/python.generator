@@ -66,17 +66,9 @@ class {singular_name}DestroyController extends Controller
 
         }}else{{
 
-            if(${singular_name_snake}->company_id == auth()->user()->employee->company_id){{
+            $data = $this->repository->destroy(${singular_name_snake}->id);
 
-                $data = $this->repository->destroy(${singular_name_snake}->id);
-
-                return $this->respondWithData('{singular_name} deleted', $data);
-
-            }}else{{
-
-                return $this->respondWithError('Error', ['e' => trans('validation.user_not_belong_company')]);
-
-            }}
+            return $this->respondWithData('{singular_name} deleted', $data);
 
         }}
 

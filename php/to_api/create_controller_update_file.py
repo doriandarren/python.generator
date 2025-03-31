@@ -94,17 +94,9 @@ class {singular_name}UpdateController extends Controller
                 return $this->respondWithError('Error', $validator->errors());
             }}
 
-            if(${singular_name_snake}->company_id == auth()->user()->employee->company_id){{
+            $data = $this->repository->update(${singular_name_snake}->id, $request->all());
 
-                $data = $this->repository->update(${singular_name_snake}->id, $request->all());
-
-                return $this->respondWithData('{singular_name} updated', $data);
-
-            }}else{{
-
-                return $this->respondWithError('Error', ['e' => trans('validation.user_not_belong_company')]);
-
-            }}
+            return $this->respondWithData('{singular_name} updated', $data);
 
         }}
 
