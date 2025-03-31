@@ -27,7 +27,7 @@ def update_use(full_path):
             content = f.read()
 
 
-        # Reemplazos
+        # Use Relations & HasApiTokens
         content = content.replace(
             "use Illuminate\\Notifications\\Notifiable;",
             """use Illuminate\\Notifications\\Notifiable;
@@ -38,8 +38,20 @@ use App\\Models\\RoleUsers\\RoleUser;
 use App\\Models\\UserStatuses\\UserStatus;
 use Illuminate\\Database\\Eloquent\\Model;
 use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;
-use Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;"""
+use Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;
+use Laravel\\Sanctum\\HasApiTokens;"""
         )
+
+
+
+
+        ## add HasApiTokens
+        content = content.replace(
+            "use HasFactory, Notifiable;",
+            "use HasApiTokens, HasFactory, Notifiable;"
+        )
+
+
 
         # Escribir el contenido actualizado
         with open(main_jsx_path, "w") as f:

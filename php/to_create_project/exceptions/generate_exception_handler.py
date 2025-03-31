@@ -27,6 +27,7 @@ namespace App\Exceptions;
 
 use App\Utilities\Messages\MessageChannel;
 use ErrorException;
+use BadMethodCallException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -67,25 +68,6 @@ class Handler extends ExceptionHandler
                 return HandlerResponse::respondWithError($e->getMessage(), $e->getStatusCode());
             }
         });
-
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->is('api/*')) {
-                if($e->getMessage() == ''){
-                    $message = 'Not Found';
-                }else{
-                    $message = $e->getMessage();
-                }
-
-                $errors = [[
-                    'e' => $message
-                ]];
-
-                MessageChannel::send($e->getMessage(), 'Error NotFoundHttpException', true);
-
-                return HandlerResponse::respondWithError($message, $e->getStatusCode(), $errors);
-            }
-        });
-
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             if ($request->is('api/*')) {
@@ -162,6 +144,20 @@ class Handler extends ExceptionHandler
             }
         });
 
+
+        $this->renderable(function (BadMethodCallException $e, $request) {
+            if ($request->is('api/*')) {
+
+                $errors = [[
+                    'e' => $e->getMessage() . ' File: ' . $e->getFile() . ' Line: ' . $e->getLine()
+                ]];
+
+
+                MessageChannel::send($e->getMessage() . ' File: ' . $e->getFile() . ' Line: ' . $e->getLine(), 'Error 500', true);
+
+                return HandlerResponse::respondWithError('Error', 500, $errors);
+            }
+        });
 
     }
 }

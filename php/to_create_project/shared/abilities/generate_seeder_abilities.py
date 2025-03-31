@@ -52,8 +52,13 @@ class AbilitySeeder extends Seeder
             'migrations',
             'failed_jobs',
             'jobs',
+            'job_batches',
+            'cache',
+            'cache_locks',
             'password_resets',
             'personal_access_tokens',
+            'password_reset_tokens',
+            'sessions',
         ];
 
         $connections = [

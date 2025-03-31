@@ -26,31 +26,121 @@ def update_abilities(full_path):
             content = f.read()
 
 
-        # Reemplazos
+        # Uses
         content = content.replace(
-            """<?php
+            r"""<?php
 
 """,
-            """<?php
+            r"""<?php
 
-use Laravel\\Sanctum\\Http\\Middleware\\CheckAbilities;
-use Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyAbility;
+use Laravel\Sanctum\Http\Middleware\CheckAbilities;
+use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
+use Illuminate\Http\Request;
+use App\Utilities\Messages\MessageChannel;
+use App\Exceptions\HandlerResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Database\QueryException;
 """
         )
 
 
-        # Reemplazos
+
+
+        # Abilities
         content = content.replace(
-            """->withMiddleware(function (Middleware $middleware) {
+            r"""->withMiddleware(function (Middleware $middleware) {
         //
     })""",
-            """->withMiddleware(function (Middleware $middleware) {
+            r"""->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'abilities' => CheckAbilities::class,
             'ability' => CheckForAnyAbility::class,
         ]);
     })"""
         )
+
+
+
+
+        # Exceptions
+        content = content.replace(
+            r"""->withMiddleware(function (Middleware $middleware) {""",
+            r"""->withExceptions(function (Exceptions $exceptions) {
+        // BadMethodCallException
+        $exceptions->render(function (BadMethodCallException $e, Request $request) {
+            if ($request->is('api/*')) {
+                $msg = $e->getMessage() . ' File: ' . $e->getFile() . ' Line: ' . $e->getLine();
+                MessageChannel::send($msg, 'Error BadMethodCallException', true);
+                return HandlerResponse::respondWithError('Error Bad method call', 500, [[
+                    'e' => $e->getMessage(),
+                ]]);
+            }
+            return null;
+        });
+
+        // ErrorException
+        $exceptions->render(function (ErrorException $e, Request $request) {
+            if ($request->is('api/*')) {
+                $msg = $e->getMessage() . ' File: ' . $e->getFile() . ' Line: ' . $e->getLine();
+                MessageChannel::send($msg, 'Error ErrorException', true);
+                return HandlerResponse::respondWithError('Error exception', 500, [[
+                    'e' => $e->getMessage(),
+                ]]);
+            }
+            return null;
+        });
+
+        // QueryException
+        $exceptions->render(function (QueryException $e, Request $request) {
+            if ($request->is('api/*')) {
+                MessageChannel::send($e->getMessage(), 'Error QueryException', true);
+                return HandlerResponse::respondWithError('Error Query Exception', 500, [[
+                    'e' => $e->getMessage()
+                ]]);
+            }
+            return null;
+        });
+
+        // NotFoundHttpException
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                $msg = $e->getMessage() ?: 'Error Not found';
+                MessageChannel::send($msg, 'Error NotFoundHttpException', true);
+                return HandlerResponse::respondWithError('Error Not found', 404, [[
+                    'e' => $msg
+                ]]);
+            }
+            return null;
+        });
+
+        // AccessDeniedHttpException
+        $exceptions->render(function (AccessDeniedHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                MessageChannel::send($e->getMessage(), 'Error AccessDeniedHttpException', true);
+                return HandlerResponse::respondWithError('Error Access denied', 403, [[
+                    'e' => $e->getMessage()
+                ]]);
+            }
+            return null;
+        });
+
+        // MethodNotAllowedHttpException
+        $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                $msg = $e->getMessage() ?: 'Error Method not allowed';
+                MessageChannel::send($msg, 'Error MethodNotAllowedHttpException', true);
+                return HandlerResponse::respondWithError('Error Method not allowed', 405, [[
+                    'e' => $msg
+                ]]);
+            }
+            return null;
+        });
+"""
+        )
+
+
 
         # Escribir el contenido actualizado
         with open(main_jsx_path, "w") as f:
