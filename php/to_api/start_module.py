@@ -13,3 +13,8 @@ def start_module():
     columns = [{"name": column} for column in input_columns.split()]
 
     generate(namespace, full_path, singular_name, plural_name, columns)
+
+
+
+
+

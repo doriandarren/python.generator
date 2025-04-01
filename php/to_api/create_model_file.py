@@ -17,8 +17,7 @@ def create_model_structure(base_ruta, path_model):
     return model_folder_path
 
 
-def generate_model_file(base_ruta, path_model, singular_name, plural_name, singular_name_kebab, plural_name_kebab,
-                        singular_name_snake, plural_name_snake):
+def generate_model_file(base_ruta, path_model, singular_name, plural_name, plural_name_snake):
     """
     Genera un archivo de modelo PHP basado en los nombres proporcionados y crea la estructura app/path_model dentro de base_ruta.
     El nombre del archivo será igual a 'singular_name'.

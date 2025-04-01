@@ -18,7 +18,7 @@ if __name__ == "__main__":
     password = ""
 
     generator_type = input_with_validation("[1]Listar - [2]Generar: ")
-    input_db_type = input_with_validation("Basedatos [1]Local - [2]Docker: ")
+    input_db_type = input_with_validation("Basedatos [1]Local - [2]Docker(3307) - [3]Docker(3308): ")
     input_db_name = input("Nombre Basedatos [portuarios_api]: ")
     input_tables = input("Nombre(s) Tabla(s) [separado por espacio / vacio todos]: ")
     print("\n\n")
@@ -29,6 +29,9 @@ if __name__ == "__main__":
         password = os.getenv("DATABASE_LOCAL_PASSWORD")
     elif input_db_type.lower() == '2':
         port = 3307
+        password = os.getenv("DATABASE_DOCKER_PASSWORD")
+    elif input_db_type.lower() == '3':
+        port = 3308
         password = os.getenv("DATABASE_DOCKER_PASSWORD")
 
 

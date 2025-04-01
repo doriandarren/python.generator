@@ -41,7 +41,7 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
     if os.path.isdir(ruta):
-        generate_model_file(ruta, path_model, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+        generate_model_file(ruta, path_model, singular_name, plural_name, plural_name_snake)
         generate_repository_file(ruta, path_repository, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
         generate_routes_file(ruta, namespace, path_routes, plural_name, singular_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
         generate_migration_file(ruta, namespace, path_migration, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
