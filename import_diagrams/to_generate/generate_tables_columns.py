@@ -52,7 +52,7 @@ def generate_tables_columns(xml_path, excluded_columns):
 
 
         ## Generate PHP
-        generate(php_namespace, php_full_path, singular_name, plural_name, columns)
+        ## generate(php_namespace, php_full_path, singular_name, plural_name, columns)
 
         ## Generate React
         generate_module_standard(react_full_path, singular_name, plural_name, columns)

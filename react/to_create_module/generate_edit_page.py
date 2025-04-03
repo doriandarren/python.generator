@@ -51,6 +51,9 @@ import {{ useForm }} from "react-hook-form";
 import {{ yupResolver }} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {{ get{singular_name}ById, update{singular_name} }} from "../services/{singular_first_camel}Service";
+import {{ Preloader }} from "../../../components/Preloader/Preloader";
+import {{ PreloaderButton }} from "../../../components/Preloader/PreloaderButton";
+
 
 
 
@@ -58,7 +61,9 @@ export const {singular_name}EditPage = () => {{
   const {{ t }} = useTranslation();
   const navigate = useNavigate();
   const {{ id }} = useParams();
-  const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   // Esquema de validación con Yup (fuera del componente)
   const schema = yup.object().shape({{
@@ -76,22 +81,22 @@ export const {singular_name}EditPage = () => {{
   useEffect(() => {{
     const fetchData = async () => {{
       try {{
-        setLoading(true);
+        setDataLoading(true);
         const response = await get{singular_name}ById(id);
         const data = response.data;
 
         if (response.success) {{
           {set_values}
         }} else {{
-          Swal.fire(t("error"), "error");
+          Swal.fire(t("error"), \'\', "error");
           navigate("/admin/{plural_name_kebab}");
         }}
       }} catch (error) {{
         console.error("Error al obtener los datos:", error);
-        Swal.fire(t("errors.error_process"), "error");
+        Swal.fire(t("errors.error_process"), \'\', "error");
         navigate("/admin/{plural_name_kebab}");
       }} finally {{
-        setLoading(false);
+        setDataLoading(false);
       }}
     }};
 
@@ -101,7 +106,8 @@ export const {singular_name}EditPage = () => {{
   // Función para manejar la actualización
   const onSubmit = async (data) => {{
     try {{
-      console.log("Datos enviados:", data);
+    
+      setIsLoading(true);
       const response = await update{singular_name}(id, data);
 
       if (response) {{
@@ -109,11 +115,13 @@ export const {singular_name}EditPage = () => {{
           navigate("/admin/{plural_name_kebab}");
         }});
       }} else {{
-        Swal.fire(t("error"), "error");
+        Swal.fire(t("error"), \'\', "error");
       }}
     }} catch (error) {{
       console.error("Error al actualizar:", error);
-      Swal.fire(t("errors.error_process"), "error");
+      Swal.fire(t("errors.error_process"), \'\', "error");
+    }}finally {{
+      setIsLoading(false);
     }}
   }};
 
@@ -132,18 +140,28 @@ export const {singular_name}EditPage = () => {{
       </div>
 
       <div className="mx-auto p-6 bg-white rounded-lg shadow-lg">
-        {{loading ? (
-          <p className="text-center text-gray-600">Cargando...</p>
+        {{dataLoading ? (
+          <Preloader />
         ) : (
           <form onSubmit={{handleSubmit(onSubmit)}} className="grid grid-cols-12 gap-6">
 
             {input_fields}
 
-            <div className="col-span-12 flex justify-center mt-7 gap-2">
-              <Button type="submit">{{ t("save") }}</Button>
-              <Button variant="danger" onClick={{onClickCancel}}>
-                {{ t("cancel") }}
-              </Button>
+            <div className="col-span-12 flex justify-center items-center mt-7 gap-4 flex-wrap">
+                <Button 
+                  type="submit"
+                  disabled={{isLoading}}
+                  className="w-32 h-12 flex items-center justify-center"
+                >
+                  {{ 
+                    isLoading 
+                    ? <PreloaderButton /> 
+                    : t("save")
+                  }}
+                </Button>
+                <Button variant="danger" onClick={{onClickCancel}}>
+                 {{ t("cancel") }}
+                </Button>
             </div>
 
           </form>

@@ -14,6 +14,7 @@ def generate_components(full_path):
     create_preloader(full_path)
     create_preloader_main(full_path)
     create_preloader_main_css(full_path)
+    create_preloader_button(full_path)
 
 
 
@@ -581,6 +582,45 @@ Datatable.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
 };
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+def create_preloader_button(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Preloader")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "PreloaderButton.css")
+
+    # Contenido por defecto
+    content = """import { PreloaderSVG } from "./PreloaderSVG"
+
+export const PreloaderButton = () => {
+    return (
+        <div className="w-8 h-8">
+            <PreloaderSVG />  
+        </div>
+    )
+}
 """
 
     try:

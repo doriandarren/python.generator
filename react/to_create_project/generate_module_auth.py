@@ -81,6 +81,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Buttons/Button";
 import { startLoginWithEmailPassword } from "../../../store/auth/thunks";
 import { Toast } from "../../../helpers/helperToast";
+import { PreloaderButton } from "../../../components/Preloader/PreloaderButton";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -192,8 +193,9 @@ export const LoginPage = () => {
                 <Button
                   type="submit"
                   disabled={status!=='not-authenticated'}
+                  className="w-32 h-12 flex items-center justify-center"
                 >
-                  {status === 'checking' ? "Cargando..." : t("login_page.btn_login")}
+                  {status === 'checking' ? <><PreloaderButton /></> : t("login_page.btn_login")}
                 </Button>
               </div>
               

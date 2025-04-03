@@ -37,7 +37,8 @@ def create_create_page(project_path, singular_name, plural_name, singular_name_k
     ])
 
     # Contenido del archivo JSX con nombres y campos dinámicos
-    content = f"""import {{ useTranslation }} from "react-i18next";
+    content = f"""import {{ useState }} from "react";
+import {{ useTranslation }} from "react-i18next";
 import {{ SessionLayout }} from "../../../layouts/private/SessionLayout";
 import {{ Button }} from "../../../components/Buttons/Button";
 import Swal from "sweetalert2";
@@ -46,10 +47,13 @@ import {{ useForm }} from "react-hook-form";
 import {{ yupResolver }} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {{ create{singular_name} }} from "../services/{singular_first_camel}Service";
+import {{ PreloaderButton }} from "../../../components/Preloader/PreloaderButton";
+
 
 export const {singular_name}CreatePage = () => {{
   const {{ t }} = useTranslation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Schema de validación con Yup
   const schema = yup.object().shape({{
@@ -65,20 +69,23 @@ export const {singular_name}CreatePage = () => {{
 
   const onSubmit = async(data) => {{
     try {{
-      console.log("Datos enviados:", data);
+      
+      setIsLoading(true);
+      
+      const {{ success }} = await create{singular_name}(data);
 
-      const response = await create{singular_name}(data);
-
-      if (response.success) {{
-        Swal.fire(t("message.record_saved"), "success").then(() => {{
+      if (success) {{
+        Swal.fire(t("message.record_saved"), \'\', "success").then(() => {{
           navigate("/admin/{plural_name_kebab}");
         }});
       }} else {{
-        Swal.fire(t("error"), "error");
+        Swal.fire(t("error"), \'\', "error");
       }}
     }} catch (error) {{
       console.error("Error al enviar los datos:", error);
-      Swal.fire(t("errors.error_proccess"), "error");
+      Swal.fire(t("errors.error_proccess"), \'\', "error");
+    }} finally {{
+      setIsLoading(false);
     }}
   }};
 
@@ -100,8 +107,18 @@ export const {singular_name}CreatePage = () => {{
 
           {input_fields}
 
-          <div className="col-span-12 flex justify-center mt-7">
-            <Button type="submit">{{ t("save") }}</Button>
+          <div className="col-span-12 flex justify-center items-center mt-7 gap-4 flex-wrap">
+            <Button 
+              type="submit"
+              disabled={{isLoading}}
+              className="w-32 h-12 flex items-center justify-center"
+            >
+              {{ 
+                isLoading 
+                ? <PreloaderButton /> 
+                : t("save")
+              }}
+            </Button>
             <Button variant="danger" onClick={{onClickCancel}}>
               {{ t("cancel") }}
             </Button>
