@@ -21,8 +21,7 @@ def create_api_file(project_path):
     create_folder(pages_dir)
 
     # Contenido de file
-    content = """//const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = 'https://api.splytin.com/api/v1/';
+    content = """const API_URL = import.meta.env.VITE_API_URL;
 
 export const api = async (endpoint, method = "GET", body = null, token = null) => {
   const headers = {

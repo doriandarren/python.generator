@@ -16,11 +16,15 @@ from php.to_api.create_postman_file import generate_postman_file
 
 
 
+def generate(namespace, ruta, singular_name, plural_name, columns, input_menu_checkbox=None):
 
 
-def generate(namespace, ruta, singular_name, plural_name, columns):
+    ## Input Default
+    if input_menu_checkbox is None:
+        input_menu_checkbox = [ "model", "controller_list", "controller_show", "controller_store", "controller_update",
+                   "controller_destroy", "repository", "routes", "migration", "seeder", "factory", "postman" ]
 
-    # Path model
+
     path_model = "Models/" + plural_name
     path_repository = "Repositories/" + plural_name
     path_routes = "routes/"
@@ -28,7 +32,7 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
     path_migration = "database/migrations/"
     path_seeder = "database/seeders"
     path_factory = "database/factories"
-    path_script = "public/Script"
+
 
 
     # Convertir singular_name y plural_name a kebab-case para las URLs
@@ -41,19 +45,42 @@ def generate(namespace, ruta, singular_name, plural_name, columns):
 
 
     if os.path.isdir(ruta):
-        generate_model_file(ruta, path_model, singular_name, plural_name, plural_name_snake)
-        generate_repository_file(ruta, path_repository, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
-        generate_routes_file(ruta, namespace, path_routes, plural_name, singular_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
-        generate_migration_file(ruta, namespace, path_migration, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-        generate_controller_list_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
-        generate_controller_show_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_snake, plural_name_snake)
-        generate_controller_store_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-        generate_controller_update_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
-        generate_controller_destroy_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+        if "model" in input_menu_checkbox:
+            generate_model_file(ruta, path_model, singular_name, plural_name, plural_name_snake)
 
-        generate_seeder_file(ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
-        generate_factory_file(ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
-        generate_postman_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, columns)
+        if "controller_list" in input_menu_checkbox:
+            generate_controller_list_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+
+        if "controller_show" in input_menu_checkbox:
+            generate_controller_show_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_snake, plural_name_snake)
+
+        if "controller_store" in input_menu_checkbox:
+            generate_controller_store_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+
+        if "controller_update" in input_menu_checkbox:
+            generate_controller_update_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+
+        if "controller_destroy" in input_menu_checkbox:
+            generate_controller_destroy_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+
+        if "repository" in input_menu_checkbox:
+            generate_repository_file(ruta, path_repository, singular_name, plural_name, singular_name_snake,plural_name_snake, columns)
+
+        if "routes" in input_menu_checkbox:
+            generate_routes_file(ruta, namespace, path_routes, plural_name, singular_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+
+        if "migration" in input_menu_checkbox:
+            generate_migration_file(ruta, namespace, path_migration, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
+
+        if "seeder" in input_menu_checkbox:
+            generate_seeder_file(ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
+
+        if "factory" in input_menu_checkbox:
+            generate_factory_file(ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns)
+
+        if "postman" in input_menu_checkbox:
+            generate_postman_file(ruta, singular_name, plural_name, singular_name_kebab, plural_name_kebab, columns)
+
 
     else:
         print("La ruta proporcionada no es válida o no existe. Por favor, verifica y vuelve a intentarlo.")

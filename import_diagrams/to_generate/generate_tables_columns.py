@@ -46,6 +46,11 @@ def generate_tables_columns(xml_path, excluded_columns):
         columns = [{"name": column} for column in table['columns']]
 
 
+        # by_php = [ "model", "controller_list", "controller_show", "controller_store", "controller_update",
+        #            "controller_destroy", "repository", "routes", "migration", "seeder", "factory", "postman" ]
+        # by_react = [ "route", "list", "create", "edit", "create", "barrel", "service"]
+
+
         ## Generate PHP
         generate(php_namespace, php_full_path, singular_name, plural_name, columns)
 

@@ -182,7 +182,8 @@ def create_locales_es(project_path):
     "must_be_number": "Número"
   },
   "errors":{
-    "error_internal": "Error Interno"
+    "error_internal": "Error Interno",
+    "error_process": "No se pudo procesar la solicitud"
   },
   "error": "Error al procesar la información",
   "code": "Código",
@@ -393,7 +394,8 @@ def create_locales_en(project_path):
     "must_be_number": "Number"
   },
   "errors": {
-    "error_internal": "Internal Error"
+    "error_internal": "Internal Error",
+    "error_process": "Error processing the information"
   },
   "error": "Error processing the information",
   "code": "Code",

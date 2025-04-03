@@ -27,10 +27,10 @@ def list_diagrams(xml_path, excluded_columns):
                 tables[parent_id]['columns'].append(value)
 
     for table in tables.values():
-        # print(f"📦 Tabla: {table['name']}")
-        # for column in table['columns']:
-        #     print(f"  - 🧩 {column}")
-        # print()
+        print(f"📦 Tabla: {table['name']}")
+        for column in table['columns']:
+            print(f"  - 🧩 {column}")
+        print()
 
 
 
@@ -40,5 +40,5 @@ def list_diagrams(xml_path, excluded_columns):
 
 
         # Format custom:
-        print(f"require base_path('routes/API/{ table['name'] }.php'); ")
-        print()
+        # print(f"require base_path('routes/API/{ table['name'] }.php'); ")
+        # print()

@@ -17,7 +17,7 @@ def create_env_file(project_path):
     # Contenido del archivo
     content = """VITE_APP_NAME=SiteLocal
 VITE_APP_ENV=local
-VITE_API_URL=http://project.test/api/v1/
+VITE_API_URL=https://api.splytin.com/api/v1/
 
 ## SWEETALERT2
 VITE_SWEETALERT_COLOR_BTN_SUCCESS=#10B981  # Verde (Tailwind "emerald-500")

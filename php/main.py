@@ -1,19 +1,31 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from helpers.helper_print import print_header
+from helpers.helper_menu import menu_list, clear_screen
 from php.to_api.start_module import start_module
 from php.to_create_project.start_project import start_project
-from helpers.helper_print import input_with_validation, print_header
-
 
 
 
 if __name__ == "__main__":
 
+    clear_screen()
     print_header("PHP")
 
-    namespace = input_with_validation("¿Que quieres crear? ([P]royecto / [M]ódulo): ")
+    str_input = menu_list(
+        "¿Que quieres crear?: ",
+        ["Proyecto", "Modulo"]
+    )
 
-    if namespace.lower() == 'p':
+    print(f"Crear un: {str_input} ")
+
+    if str_input.lower() == 'proyecto':
         start_project()
-    if namespace.lower() == 'm':
+    if str_input.lower() == 'modulo':
         start_module()
+
+
 
     print("Bye...")
