@@ -335,14 +335,23 @@ export const Datatable = ({
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
 
+
+  const getNestedValue = (obj, path) => {
+    return path.split(".").reduce((acc, part) => acc?.[part], obj);
+  };
+
+
   // Filtrar datos por búsqueda
   const filteredData = data.filter((row) =>
-    columns.some((column) =>
-      row[column.key]
+    columns.some((column) => {
+      const value = column.render
+        ? column.render(row)
+        : getNestedValue(row, column.key);
+      return value
         ?.toString()
         .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-    )
+        .includes(searchQuery.toLowerCase());
+    })
   );
 
   // Ordenar datos
@@ -398,12 +407,6 @@ export const Datatable = ({
       range.push(totalPages);
     }
     return range;
-  };
-
-
-
-  const getNestedValue = (obj, path) => {
-    return path.split(".").reduce((acc, part) => acc?.[part], obj);
   };
 
 
@@ -574,7 +577,7 @@ export const Datatable = ({
   );
 };
 
-// Definición de PropTypes
+// Definición de `PropTypes`
 Datatable.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({

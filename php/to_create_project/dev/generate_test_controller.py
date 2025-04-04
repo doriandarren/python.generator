@@ -458,6 +458,113 @@ class TestController extends Controller
     /**
      * END Create User
      *******************************/
+     
+     
+     
+     
+     
+     /*********************************************************
+     *
+     * GENERATE ABILITIES OF THE EnumAbilityGroups
+     *
+     *********************************************************/
+
+    // Crear para abstract class UserPermissions
+    public function __invokeAAAASSSSS(Request $request)
+    {
+
+        $excludeTable = [
+            'migrations',
+            'failed_jobs',
+            'password_resets',
+            'personal_access_tokens',
+        ];
+
+
+
+        $connections = [
+            'api',
+        ];
+
+
+        $arrModule = [];
+
+
+        foreach ($connections as $connection_name) {
+
+            $connection = config("database.connections.{$connection_name}");
+            $database = 'Tables_in_' . $connection['database'];
+            $tables = DB::connection($connection_name)->select('SHOW TABLES');
+
+            foreach ($tables as $k => $v) {
+
+                $tableName = $v->{$database};
+
+                if(!in_array($tableName, $excludeTable)){
+
+                    $modules = $this->createConstModulePrintScreen($tableName);
+
+                    foreach ($modules as $module) {
+                        $arrModule[] = $module;
+                    }
+
+                }
+
+            }
+        }
+
+
+        echo "/**<br>";
+        echo "* @return string[]<br>";
+        echo "*/<br>";
+        echo 'public static function getModules(): array<br>';
+        echo '{<br>';
+        echo 'return [<br>';
+
+        foreach ($arrModule as $module) {
+            echo 'self::' . $module . ',<br>';
+        }
+
+        echo '];<br>';
+        echo '}<br>';
+
+
+    }
+
+    private function createConstModulePrintScreen($tableName)
+    {
+
+        //echo $tableName . "<br>";
+
+
+        //$module = 'MODULE_' . strtoupper($tableName);
+        $list = 'MODULE_' . strtoupper($tableName) . '_LIST';
+        $store = 'MODULE_' . strtoupper($tableName) . '_STORE';
+        $show = 'MODULE_' . strtoupper($tableName) . '_SHOW';
+        $update = 'MODULE_' . strtoupper($tableName) . '_UPDATE';
+        $destroy = 'MODULE_' . strtoupper($tableName) . '_DESTROY';
+
+
+        echo '// ' . ucfirst($tableName) . "<br>";
+        //echo 'const ' . $module . ' = \'' . $tableName . '\';' . "<br>";
+        echo 'const ' . $list . ' = \'' . $tableName . '\' . EnumAbilitySuffix::LIST;' . "<br>";
+        echo 'const ' . $store .' = \'' . $tableName . '\' . EnumAbilitySuffix::STORE;' . "<br>";
+        echo 'const ' . $show . ' = \'' . $tableName . '\' . EnumAbilitySuffix::SHOW;' . "<br>";
+        echo 'const ' . $update . ' = \'' . $tableName . '\' . EnumAbilitySuffix::UPDATE;' . "<br>";
+        echo 'const ' . $destroy . ' = \'' . $tableName . '\' . EnumAbilitySuffix::DESTROY;' . "<br><br><br>";
+
+        //return [$module, $list, $store, $show, $update, $destroy];
+        return [$list, $store, $show, $update, $destroy];
+
+    }
+
+
+    /**
+     * *******************************************************
+     */
+     
+     
+     
 
 }
 
