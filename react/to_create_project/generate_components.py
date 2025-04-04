@@ -310,7 +310,7 @@ def create_datatable(full_path):
     file_path = os.path.join(styles_path, "DataTable.jsx")
 
     # Contenido por defecto
-    content = """import { useState } from "react";
+    content = r"""import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Pencil, Trash2, ChevronUp, ChevronDown, Search } from "lucide-react";
@@ -402,6 +402,11 @@ export const Datatable = ({
 
 
 
+  const getNestedValue = (obj, path) => {
+    return path.split(".").reduce((acc, part) => acc?.[part], obj);
+  };
+
+
 
   return (
     <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
@@ -464,7 +469,7 @@ export const Datatable = ({
                         key={`${column.key}-${rowKey}`}
                         className="px-4 py-4 text-sm whitespace-nowrap text-gray-500"
                       >
-                        {item[column.key] ?? "-"}
+                        {column.render ? column.render(item) : getNestedValue(item, column.key) ?? "-"}
                       </td>
                     ))}
                     
@@ -569,12 +574,13 @@ export const Datatable = ({
   );
 };
 
-// Definición de `PropTypes`
+// Definición de PropTypes
 Datatable.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
+      render: PropTypes.func // <-- Agregado
     })
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,

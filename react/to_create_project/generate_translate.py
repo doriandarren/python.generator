@@ -104,7 +104,8 @@ def create_locales_es(project_path):
     "are_you_sure": "¿Estás seguro?",
     "record_saved": "Registro guardado",
     "record_deleted": "Registro eliminado",
-    "record_updated": "Registro actualizado"
+    "record_updated": "Registro actualizado",
+    "ok": "Vale"
   },
   "menu": {
     "contact": "Contacto",
@@ -316,7 +317,8 @@ def create_locales_en(project_path):
     "are_you_sure": "Are you sure?",
     "record_saved": "Record saved",
     "record_deleted": "Record deleted",
-    "record_updated": "Record updated"
+    "record_updated": "Record updated",
+    "ok": "Ok"
   },
   "menu": {
     "contact": "Contact",

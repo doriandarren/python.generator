@@ -105,10 +105,19 @@ export const SessionLayout = ({ children }) => {
     { name: t("logout"), onClick: onLogout },
   ];
 
-  const updatedNavigation = navigation.map((item) => ({
-    ...item,
-    current: location.pathname === item.href, // Marca como activo si la ruta coincide
-  }));
+  const updatedNavigation = navigation.map((item) => {
+    const isCurrent =
+      location.pathname.startsWith(item.href) ||
+      (item.children &&
+        item.children.some((child) =>
+          location.pathname.startsWith(child.href)
+        ));
+  
+    return {
+      ...item,
+      current: isCurrent
+    };
+  });
 
   const setChangeLanguage = (event) => {
     const selectedLanguage = event.target.value;
@@ -166,7 +175,7 @@ export const SessionLayout = ({ children }) => {
                         <li key={index}>
                           {/* Si el elemento tiene hijos (submenú), renderiza un desplegable */}
                           {item.children ? (
-                            <details className="group">
+                            <details className="group" open={item.current}>
                               <summary className="flex items-center justify-between cursor-pointer rounded-md p-2 text-sm font-semibold text-gray-200 hover:bg-gray-300/80 hover:text-white">
                                 <div className="flex items-center gap-x-3">
                                   <item.icon
@@ -185,7 +194,14 @@ export const SessionLayout = ({ children }) => {
                                   <li key={subIndex}>
                                     <NavLink
                                       to={subItem.href}
-                                      className="block rounded-md px-2 py-1 text-sm text-gray-300 hover:bg-gray-300/80 hover:text-white"
+                                      className={({ isActive }) =>
+                                        classNames(
+                                          isActive
+                                            ? "bg-primary-dark text-white"
+                                            : "text-gray-300 hover:bg-gray-300/80 hover:text-white",
+                                          "block rounded-md px-2 py-1 text-sm"
+                                        )
+                                      }
                                     >
                                       {subItem.name}
                                     </NavLink>
@@ -243,7 +259,7 @@ export const SessionLayout = ({ children }) => {
                     <li key={index}>
                       {/* Si el elemento tiene hijos (submenú), renderiza un desplegable */}
                       {item.children ? (
-                        <details className="group">
+                        <details className="group" open={item.current}>
                           <summary className="flex items-center justify-between cursor-pointer rounded-md p-2 text-sm font-semibold text-gray-200 hover:bg-gray-300/80 hover:text-white">
                             <div className="flex items-center gap-x-3">
                               <item.icon
@@ -262,7 +278,14 @@ export const SessionLayout = ({ children }) => {
                               <li key={subIndex}>
                                 <NavLink
                                   to={subItem.href}
-                                  className="block rounded-md px-2 py-1 text-sm text-gray-300 hover:bg-gray-300/80 hover:text-white"
+                                  className={({ isActive }) =>
+                                    classNames(
+                                      isActive
+                                        ? "bg-primary-dark text-white"
+                                        : "text-gray-300 hover:bg-gray-300/80 hover:text-white",
+                                      "block rounded-md px-2 py-1 text-sm"
+                                    )
+                                  }
                                 >
                                   {subItem.name}
                                 </NavLink>

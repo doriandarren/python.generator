@@ -66,28 +66,43 @@ export const {singular_name}CreatePage = () => {{
     handleSubmit,
     formState: {{ errors }},
   }} = useForm({{ resolver: yupResolver(schema) }});
-
+  
   const onSubmit = async(data) => {{
-    try {{
-      
-      setIsLoading(true);
-      
-      const {{ success }} = await create{singular_name}(data);
-
-      if (success) {{
-        Swal.fire(t("message.record_saved"), \'\', "success").then(() => {{
-          navigate("/admin/{plural_name_kebab}");
+      try {{
+        setIsLoading(true);
+        
+        const {{ success }} = await create{singular_name}(data);
+        
+        if (success) {{
+          Swal.fire({{
+            title: t("message.record_saved"),
+            icon: "success",
+            confirmButtonText: t("message.ok"),
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_SUCCESS
+          }}).then(() => {{
+            navigate("/admin/{plural_name_kebab}");
+          }});
+        }} else {{
+          Swal.fire({{
+            title: t("error"),
+            icon: "error",
+            confirmButtonText: t("message.ok"),
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+          }});
+        }}
+      }} catch (error) {{
+        console.error("Error al enviar los datos:", error);
+        Swal.fire({{
+          title: t("errors.error_process"),
+          icon: "error",
+          confirmButtonText: t("message.ok"),
+          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
         }});
-      }} else {{
-        Swal.fire(t("error"), \'\', "error");
+      }} finally {{
+        setIsLoading(false);
       }}
-    }} catch (error) {{
-      console.error("Error al enviar los datos:", error);
-      Swal.fire(t("errors.error_proccess"), \'\', "error");
-    }} finally {{
-      setIsLoading(false);
-    }}
   }};
+  
 
   const onClickCancel = (e) => {{
     e.preventDefault();

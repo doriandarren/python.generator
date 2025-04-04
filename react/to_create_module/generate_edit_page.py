@@ -77,53 +77,82 @@ export const {singular_name}EditPage = () => {{
     setValue,
     formState: {{ errors }},
   }} = useForm({{ resolver: yupResolver(schema) }});
-
+  
   useEffect(() => {{
-    const fetchData = async () => {{
-      try {{
-        setDataLoading(true);
-        const response = await get{singular_name}ById(id);
-        const data = response.data;
-
-        if (response.success) {{
-          {set_values}
-        }} else {{
-          Swal.fire(t("error"), \'\', "error");
+      const fetchData = async () => {{
+        try {{
+          setDataLoading(true);
+          const response = await get{singular_name}ById(id);
+          const data = response.data;
+    
+          if (response.success) {{
+            {set_values}
+          }} else {{
+            Swal.fire({{
+              title: t("error"),
+              icon: "error",
+              confirmButtonText: t("message.ok"),
+              confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+            }});
+            navigate("/admin/{plural_name_kebab}");
+          }}
+        }} catch (error) {{
+          console.error("Error al obtener los datos:", error);
+          Swal.fire({{
+            title: t("errors.error_proccess"),
+            icon: "error",
+            confirmButtonText: t("message.ok"),
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+          }});
           navigate("/admin/{plural_name_kebab}");
+        }} finally {{
+          setDataLoading(false);
         }}
-      }} catch (error) {{
-        console.error("Error al obtener los datos:", error);
-        Swal.fire(t("errors.error_process"), \'\', "error");
-        navigate("/admin/{plural_name_kebab}");
-      }} finally {{
-        setDataLoading(false);
-      }}
-    }};
-
-    fetchData();
+      }};
+    
+      fetchData();
+      
   }}, [id, navigate, setValue]);
 
+  
+  
   // Función para manejar la actualización
   const onSubmit = async (data) => {{
-    try {{
+      try {{
+        setIsLoading(true);
     
-      setIsLoading(true);
-      const response = await update{singular_name}(id, data);
-
-      if (response) {{
-        Swal.fire(t("message.record_updated"), "success").then(() => {{
-          navigate("/admin/{plural_name_kebab}");
+        const response = await update{singular_name}(id, data);
+    
+        if (response) {{
+          Swal.fire({{
+            title: t("message.record_updated"),
+            icon: "success",
+            confirmButtonText: t("message.ok"),
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_SUCCESS
+          }}).then(() => {{
+            navigate("/admin/{plural_name_kebab}");
+          }});
+        }} else {{
+          Swal.fire({{
+            title: t("error"),
+            icon: "error",
+            confirmButtonText: t("message.ok"),
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+          }});
+        }}
+      }} catch (error) {{
+        console.error("Error al actualizar:", error);
+        Swal.fire({{
+          title: t("errors.error_proccess"),
+          icon: "error",
+          confirmButtonText: t("message.ok"),
+          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
         }});
-      }} else {{
-        Swal.fire(t("error"), \'\', "error");
+      }} finally {{
+        setIsLoading(false);
       }}
-    }} catch (error) {{
-      console.error("Error al actualizar:", error);
-      Swal.fire(t("errors.error_process"), \'\', "error");
-    }}finally {{
-      setIsLoading(false);
-    }}
   }};
+  
 
   // Función para cancelar
   const onClickCancel = (e) => {{
