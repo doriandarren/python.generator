@@ -56,9 +56,9 @@ class {singular_name}ListController extends Controller
         if ($this->isAdmin(auth()->user()->roles)) {{
             $data = $this->repository->list();
         }} elseif ($this->isManager(auth()->user()->roles)) {{
-            $data = $this->repository->listByRoleManager(auth()->user()->employee->company_id);
+            $data = $this->repository->listByRoleManager();
         }} else {{
-            $data = $this->repository->listByRoleUser(auth()->user()->employee->company_id, auth()->user()->employee->id);
+            $data = $this->repository->listByRoleUser();
         }}
         
         return $this->respondWithData('{plural_name} list', $data);

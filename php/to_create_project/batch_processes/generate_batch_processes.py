@@ -31,11 +31,12 @@ def create_ability_and_group(full_path):
 
 namespace App\Repositories\BatchProcesses\Abilities;
 
-
+use App\Enums\Dev\EnumExcludeTable;
 use App\Enums\EnumAbilitySuffix;
 use App\Models\Abilities\Ability;
 use App\Models\AbilityGroups\AbilityGroup;
 use Illuminate\Support\Facades\DB;
+
 
 class BatchAbilityAndGroupRepository
 {
@@ -43,13 +44,7 @@ class BatchAbilityAndGroupRepository
     public function createAbilities()
     {
 
-        $excludeTable = [
-            'migrations',
-            'failed_jobs',
-            'jobs',
-            'password_resets',
-            'personal_access_tokens',
-        ];
+        $excludeTable = EnumExcludeTable::EXCLUDE_TABLE;
 
         $connections = [
             'api',
@@ -99,14 +94,15 @@ class BatchAbilityAndGroupRepository
         }
 
 
+
         /**
          * Manuals
          */
-        $abilityGroup = $this->createAbilityGroups('action_task_camera_image');
-        $this->createModuleAbilities('action_task_camera_image', $abilityGroup->id);
-
-        $abilityGroup = $this->createAbilityGroups('action_stage_camera_image');
-        $this->createModuleAbilities('action_stage_camera_image', $abilityGroup->id);
+//        $abilityGroup = $this->createAbilityGroups('action_task_camera_image');
+//        $this->createModuleAbilities('action_task_camera_image', $abilityGroup->id);
+//
+//        $abilityGroup = $this->createAbilityGroups('action_stage_camera_image');
+//        $this->createModuleAbilities('action_stage_camera_image', $abilityGroup->id);
 
     }
 

@@ -30,6 +30,7 @@ use App\\Models\\Abilities\\Ability;
 use App\\Models\\AbilityGroups\\AbilityGroup;
 use Illuminate\\Database\\Seeder;
 use Illuminate\\Support\\Facades\\DB;
+use App\\Enums\\Dev\\EnumExcludeTable;
 
 class AbilitySeeder extends Seeder
 {
@@ -48,18 +49,7 @@ class AbilitySeeder extends Seeder
     private function createAbilities()
     {
 
-        $excludeTable = [
-            'migrations',
-            'failed_jobs',
-            'jobs',
-            'job_batches',
-            'cache',
-            'cache_locks',
-            'password_resets',
-            'personal_access_tokens',
-            'password_reset_tokens',
-            'sessions',
-        ];
+        $excludeTable = EnumExcludeTable::EXCLUDE_TABLE;
 
         $connections = [
             'api',

@@ -24,6 +24,7 @@ def generate_test_controller(full_path):
 
 namespace App\Http\Controllers\Dev;
 
+use App\Enums\Dev\EnumExcludeTable;
 use App\Enums\EnumAbilityGroups;
 use App\Enums\Roles\EnumRole;
 use App\Enums\UserStatuses\EnumUserStatus;
@@ -372,6 +373,11 @@ class TestController extends Controller
             $user->assignRole($role);
 
         }
+        
+        if($roleName == EnumRole::USER){
+            $role = Role::where('name', EnumRole::USER)->first();
+            $user->assignRole($role);
+        }
 
 
         if($roleName == EnumRole::ERP){
@@ -401,12 +407,20 @@ class TestController extends Controller
             $this->createAbilityByRol($user, EnumAbilityGroups::ABILITIES_GROUP_BY_MANAGER);
 
         }
+        
+        if($roleName == EnumRole::USER){
+        
+            $this->createAbilityByRol($user, EnumAbilityGroups::ABILITIES_GROUP_BY_USER);
+            
+        }
 
         if($roleName == EnumRole::ERP){
 
             $this->createAbilityByRol($user, EnumAbilityGroups::ABILITIES_GROUP_BY_ERP);
 
         }
+        
+        
 
     }
 
@@ -470,17 +484,10 @@ class TestController extends Controller
      *********************************************************/
 
     // Crear para abstract class UserPermissions
-    public function __invokeAAAASSSSS(Request $request)
+    public function __invoke(Request $request)
     {
 
-        $excludeTable = [
-            'migrations',
-            'failed_jobs',
-            'password_resets',
-            'personal_access_tokens',
-        ];
-
-
+        $excludeTable = EnumExcludeTable::EXCLUDE_TABLE;
 
         $connections = [
             'api',
@@ -502,11 +509,7 @@ class TestController extends Controller
 
                 if(!in_array($tableName, $excludeTable)){
 
-                    $modules = $this->createConstModulePrintScreen($tableName);
-
-                    foreach ($modules as $module) {
-                        $arrModule[] = $module;
-                    }
+                    $arrModule[] = $this->createConstModulePrintScreen($tableName);
 
                 }
 
@@ -514,47 +517,32 @@ class TestController extends Controller
         }
 
 
-        echo "/**<br>";
-        echo "* @return string[]<br>";
-        echo "*/<br>";
-        echo 'public static function getModules(): array<br>';
-        echo '{<br>';
-        echo 'return [<br>';
+        echo "const ABILITIES_GROUP_BY_MANAGER = [<br>";
 
         foreach ($arrModule as $module) {
-            echo 'self::' . $module . ',<br>';
+            echo $module;
         }
 
         echo '];<br>';
-        echo '}<br>';
 
 
     }
 
     private function createConstModulePrintScreen($tableName)
     {
-
-        //echo $tableName . "<br>";
-
-
-        //$module = 'MODULE_' . strtoupper($tableName);
-        $list = 'MODULE_' . strtoupper($tableName) . '_LIST';
-        $store = 'MODULE_' . strtoupper($tableName) . '_STORE';
-        $show = 'MODULE_' . strtoupper($tableName) . '_SHOW';
-        $update = 'MODULE_' . strtoupper($tableName) . '_UPDATE';
-        $destroy = 'MODULE_' . strtoupper($tableName) . '_DESTROY';
-
-
-        echo '// ' . ucfirst($tableName) . "<br>";
-        //echo 'const ' . $module . ' = \'' . $tableName . '\';' . "<br>";
-        echo 'const ' . $list . ' = \'' . $tableName . '\' . EnumAbilitySuffix::LIST;' . "<br>";
-        echo 'const ' . $store .' = \'' . $tableName . '\' . EnumAbilitySuffix::STORE;' . "<br>";
-        echo 'const ' . $show . ' = \'' . $tableName . '\' . EnumAbilitySuffix::SHOW;' . "<br>";
-        echo 'const ' . $update . ' = \'' . $tableName . '\' . EnumAbilitySuffix::UPDATE;' . "<br>";
-        echo 'const ' . $destroy . ' = \'' . $tableName . '\' . EnumAbilitySuffix::DESTROY;' . "<br><br><br>";
-
-        //return [$module, $list, $store, $show, $update, $destroy];
-        return [$list, $store, $show, $update, $destroy];
+        $str = '
+        [<br>
+            \'name\' => \''.$tableName.'\',<br>
+            \'abilities\' => [<br>
+                EnumAbilitySuffix::LIST,<br>
+                EnumAbilitySuffix::SHOW,<br>
+                EnumAbilitySuffix::STORE,<br>
+                EnumAbilitySuffix::UPDATE,<br>
+                EnumAbilitySuffix::DESTROY,<br>
+            ]<br>
+        ],<br>
+        ';
+        return $str;
 
     }
 

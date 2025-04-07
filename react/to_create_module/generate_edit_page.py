@@ -108,7 +108,7 @@ export const {singular_name}EditPage = () => {{
         }} finally {{
           setDataLoading(false);
         }}
-      }};
+      }}
     
       fetchData();
       

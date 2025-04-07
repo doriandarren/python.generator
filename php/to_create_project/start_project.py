@@ -87,6 +87,7 @@ def start_project():
     generate_test_controller(full_path)
     generate_route_test(full_path)
 
+
     # gitignore
     update_gitignore(full_path)
 

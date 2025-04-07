@@ -5,6 +5,7 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 def generate_enums(full_path):
     create_dev(full_path)
+    create_exclude_table(full_path)
     create_role(full_path)
     create_user(full_path)
     create_user_status(full_path)
@@ -68,6 +69,57 @@ class EnumDefaultCompany
      */
     const USER_NAME = 'User';
     const USER_EMAIL = 'user@site.com';
+
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_exclude_table(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "app", "Enums", "Dev")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "EnumExcludeTable.php")
+
+    # Contenido por defecto
+    content = r"""<?php
+
+namespace App\Enums\Dev;
+
+enum EnumExcludeTable
+{
+
+    const EXCLUDE_TABLE = [
+        'migrations',
+        'failed_jobs',
+        'jobs',
+        'job_batches',
+        'cache',
+        'cache_locks',
+        'password_resets',
+        'personal_access_tokens',
+        'password_reset_tokens',
+        'sessions',
+    ];
+
 
 }
 """
@@ -590,5 +642,7 @@ abstract class EnumSettingPaginate
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
 
 

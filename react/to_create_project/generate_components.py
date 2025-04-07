@@ -23,6 +23,13 @@ def generate_components(full_path):
 
 
 
+    ##ComboBoxes
+    create_combobox(full_path)
+    create_toggle_button(full_path)
+
+
+
+
 
 
 
@@ -289,7 +296,6 @@ def create_preloader_main_css(full_path):
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
-
 
 
 def create_datatable(full_path):
@@ -602,7 +608,6 @@ Datatable.propTypes = {
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-
 def create_preloader_button(full_path):
     """
     Genera un archivo
@@ -640,3 +645,206 @@ export const PreloaderButton = () => {
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
+
+def create_combobox(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "ComboBoxes")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "ComboBox.php")
+
+    # Contenido por defecto
+    content = r""""use client";
+
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+} from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+
+// CustomCombobox.jsx
+
+export default function CustomCombobox({
+  label = "Select an option",
+  options = [],
+  selected,
+  setSelected,
+  onChange,
+  error,
+  getLabel = (item) => item?.name,
+}) {
+  const [query, setQuery] = useState("");
+
+  const filteredOptions =
+    query === ""
+      ? options
+      : options.filter((item) =>
+          getLabel(item).toLowerCase().includes(query.toLowerCase())
+        );
+
+  return (
+    <div>
+      <label className="block text-gray-700 mb-1">{label}</label>
+      <Combobox
+        value={selected}
+        onChange={(value) => {
+          setQuery("");
+          setSelected(value);
+          onChange?.(value);
+        }}
+      >
+        <div className="relative">
+          <ComboboxInput
+            className={`block w-full rounded-md bg-white py-2.5 pr-12 pl-3 text-base text-gray-900 outline-1 placeholder:text-gray-400 sm:text-sm ${
+              error
+                ? "border border-danger"
+                : "outline-gray-300 focus:outline-indigo-600"
+            }`}
+            onChange={(e) => setQuery(e.target.value)}
+            onBlur={() => setQuery("")}
+            displayValue={(item) => getLabel(item)}
+          />
+          <ComboboxButton className="absolute inset-y-0 right-0 flex items-center px-2">
+            <ChevronUpDownIcon className="size-5 text-gray-400" />
+          </ComboboxButton>
+
+          {filteredOptions.length > 0 && (
+            <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+              {filteredOptions.map((item) => (
+                <ComboboxOption
+                  key={item.id}
+                  value={item}
+                  className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-focus:bg-indigo-600 data-focus:text-white"
+                >
+                  <span className="block truncate group-data-selected:font-semibold">
+                    {getLabel(item)}
+                  </span>
+
+                  <span className="absolute inset-y-0 right-0 hidden items-center pr-4 text-indigo-600 group-data-focus:text-white group-data-selected:flex">
+                    <CheckIcon className="size-5" aria-hidden="true" />
+                  </span>
+                </ComboboxOption>
+              ))}
+            </ComboboxOptions>
+          )}
+        </div>
+      </Combobox>
+      {error && <p className="text-danger text-sm mt-1">{error}</p>}
+    </div>
+  );
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_toggle_button(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Toggles")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "ToggleButton.php")
+
+    # Contenido por defecto
+    content = r"""'use client'
+
+import { Switch } from '@headlessui/react'
+
+export default function ToggleButton({
+  label,
+  enabled,
+  setEnabled,
+  error,
+}) {
+  return (
+    <div>
+      {label && (
+        <label className="block text-gray-700 mb-1">{label}</label>
+      )}
+      <Switch
+        checked={enabled}
+        onChange={setEnabled}
+        className={`group relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:outline-hidden ${
+          enabled ? 'bg-indigo-600' : 'bg-gray-200'
+        }`}
+      >
+        <span className="sr-only">{label ?? 'Toggle setting'}</span>
+        <span
+          className={`pointer-events-none relative inline-block size-5 transform rounded-full bg-white ring-0 shadow-sm transition duration-200 ease-in-out ${
+            enabled ? 'translate-x-5' : 'translate-x-0'
+          }`}
+        >
+          {/* Iconos */}
+          <span
+            aria-hidden="true"
+            className={`absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in ${
+              enabled ? 'opacity-0 duration-100 ease-out' : 'opacity-100'
+            }`}
+          >
+            <svg fill="none" viewBox="0 0 12 12" className="size-3 text-gray-400">
+              <path
+                d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          <span
+            aria-hidden="true"
+            className={`absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in ${
+              enabled ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <svg fill="currentColor" viewBox="0 0 12 12" className="size-3 text-indigo-600">
+              <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+            </svg>
+          </span>
+        </span>
+      </Switch>
+      {error && (
+        <p className="text-danger text-sm mt-1">{error}</p>
+      )}
+    </div>
+  )
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
