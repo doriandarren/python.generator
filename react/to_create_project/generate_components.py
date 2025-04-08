@@ -52,7 +52,7 @@ def create_button(full_path):
     file_path = os.path.join(styles_path, "Button.jsx")
 
     # Contenido por defecto
-    content = """import classNames from "classnames";
+    content = r"""import classNames from "classnames";
 
 export const Button = ({ children, type = "button", variant = "primary", onClick, className, disabled = false }) => {
   return (
@@ -66,6 +66,7 @@ export const Button = ({ children, type = "button", variant = "primary", onClick
           "bg-danger hover:bg-danger-dark": !disabled && variant === "danger",
           "bg-secondary hover:bg-secondary-dark": !disabled && variant === "secondary",
           "bg-success hover:bg-success-dark": !disabled && variant === "success",
+          "bg-info hover:bg-info-dark": !disabled && variant === "info",
         },
         className
       )}
@@ -871,28 +872,29 @@ def create_badges(full_path):
     file_path = os.path.join(styles_path, "Badge.php")
 
     # Contenido por defecto
-    content = r"""const colorMap = {
-  gray: "bg-gray-100 text-gray-600",
-  red: "bg-red-100 text-red-700",
-  yellow: "bg-yellow-100 text-yellow-800",
-  green: "bg-green-100 text-green-700",
-  blue: "bg-blue-100 text-blue-700",
-  indigo: "bg-indigo-100 text-indigo-700",
-  purple: "bg-purple-100 text-purple-700",
-  pink: "bg-pink-100 text-pink-700",
-};
+    content = r"""import classNames from "classnames"
 
-export const Badge = ({ text, color = "gray" }) => {
-  const colorClasses = colorMap[color] || colorMap.gray;
-
+export const Badge = ({ text, variant = "primary", className = "" }) => {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${colorClasses}`}
+      className={classNames(
+        "inline-flex items-center rounded-full px-2 py-1 text-xs font-medium",
+        {
+          "bg-gray-100 text-gray-600": variant === "gray",
+          "bg-danger text-white": variant === "danger",
+          "bg-warning text-white": variant === "warning",
+          "bg-success text-white": variant === "success",
+          "bg-info text-white": variant === "info",
+          "bg-primary text-white": variant === "primary",
+          "bg-secondary text-white": variant === "secondary",
+        },
+        className
+      )}
     >
       {text}
     </span>
-  );
-};
+  )
+}
 """
 
     try:
