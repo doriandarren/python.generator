@@ -17,15 +17,16 @@ def generate_components(full_path):
     create_preloader_button(full_path)
 
 
-
     #DataTable
     create_datatable(full_path)
-
 
 
     ##ComboBoxes
     create_combobox(full_path)
     create_toggle_button(full_path)
+
+
+    create_badges(full_path)
 
 
 
@@ -850,3 +851,55 @@ export default function ToggleButton({
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_badges(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Badges")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "Badge.php")
+
+    # Contenido por defecto
+    content = r"""const colorMap = {
+  gray: "bg-gray-100 text-gray-600",
+  red: "bg-red-100 text-red-700",
+  yellow: "bg-yellow-100 text-yellow-800",
+  green: "bg-green-100 text-green-700",
+  blue: "bg-blue-100 text-blue-700",
+  indigo: "bg-indigo-100 text-indigo-700",
+  purple: "bg-purple-100 text-purple-700",
+  pink: "bg-pink-100 text-pink-700",
+};
+
+export const Badge = ({ text, color = "gray" }) => {
+  const colorClasses = colorMap[color] || colorMap.gray;
+
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${colorClasses}`}
+    >
+      {text}
+    </span>
+  );
+};
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
