@@ -58,7 +58,7 @@ export const Button = ({ children, type = "button", variant = "primary", onClick
     <button
       type={type}
       className={classNames(
-        "py-3 px-4 w-full xl:w-32 xl:mr-3 rounded-md text-white font-semibold transition-all duration-200",
+        "py-2 px-4 w-full xl:w-32 xl:mr-3 rounded-md text-white font-semibold transition-all duration-200",
         {
           "bg-primary hover:bg-primary-dark": !disabled && variant === "primary",
           "bg-gray-400 cursor-not-allowed": disabled,
@@ -685,7 +685,7 @@ export default function CustomCombobox({
   setSelected,
   onChange,
   error,
-  getLabel = (item) => item?.name,
+  getLabel = (item) => item?.name, // 👈 nuevo prop con fallback
 }) {
   const [query, setQuery] = useState("");
 
@@ -698,8 +698,9 @@ export default function CustomCombobox({
 
   return (
     <div>
-      <label className="block text-gray-700 mb-1">{label}</label>
+      <label className="block text-gray-700">{label}</label>
       <Combobox
+        autoComplete="off"
         value={selected}
         onChange={(value) => {
           setQuery("");
@@ -709,6 +710,7 @@ export default function CustomCombobox({
       >
         <div className="relative">
           <ComboboxInput
+            autoComplete="off"
             className={`block w-full rounded-md bg-white py-2.5 pr-12 pl-3 text-base text-gray-900 outline-1 placeholder:text-gray-400 sm:text-sm ${
               error
                 ? "border border-danger"

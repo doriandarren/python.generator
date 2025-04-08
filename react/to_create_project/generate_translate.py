@@ -238,6 +238,7 @@ def create_locales_es(project_path):
   "has_paid": "Pagada",
   "providers": "Proveedores",
   "products": "Productos",
+  "product": "Producto",
   "services": "Servicios",
   "service": "Servicio",
   "invoice_counters": "Contadores",
@@ -257,9 +258,6 @@ def create_locales_es(project_path):
   "rental_price_without_vat": "Alquiler sin IVA",
   "provider_rental_price_without_vat": "Alquiler Prov. sin IVA",
   "installed_at": "Fecha de Instalación",
-  "product_id": "Producto",
-  "service_id": "Servicio",
-  "code_ims": "Código IMS",
   "sim": "SIM",
   "file": "campo",
   "remittance_types": "Tipos de Remesas",
@@ -279,7 +277,13 @@ def create_locales_es(project_path):
   "due_date_days": "Vencimiento el día",
   "customer_code": "Código de cliente",
   "team": "Equipo",
-  "teams": "Equipos"
+  "teams": "Equipos",
+  "details": "Detalles",
+  "detail": "Detalle",
+  "status": "Status",
+  "statuses": "Statuses",
+  "type": "Tipo",
+  "types": "Tipos"
 }
 """
 
@@ -451,6 +455,7 @@ def create_locales_en(project_path):
   "has_paid": "Paid",
   "providers": "Providers",
   "products": "Products",
+  "product": "Product",
   "services": "Services",
   "service": "Service",
   "invoice_counters": "Counters",
@@ -470,9 +475,6 @@ def create_locales_en(project_path):
   "rental_price_without_vat": "Rental without VAT",
   "provider_rental_price_without_vat": "Provider Rental without VAT",
   "installed_at": "Installation Date",
-  "product_id": "Product",
-  "service_id": "Service",
-  "code_ims": "IMS Code",
   "sim": "SIM",
   "file": "Field",
   "remittance_types": "Remittance Types",
@@ -492,7 +494,13 @@ def create_locales_en(project_path):
   "due_date_days": "Due Date",
   "customer_code": "Customer Code",
   "team": "Team",
-  "teams": "Teams"
+  "teams": "Teams",
+  "details": "Details",
+  "detail": "Detail",
+  "status": "Status",
+  "statuses": "Statuses",
+  "type": "Type",
+  "types": "Types"
 }
 """
 

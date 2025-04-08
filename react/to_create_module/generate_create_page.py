@@ -87,7 +87,7 @@ export const {singular_name}CreatePage = () => {{
             title: t("error"),
             icon: "error",
             confirmButtonText: t("message.ok"),
-            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
           }});
         }}
       }} catch (error) {{
@@ -96,7 +96,7 @@ export const {singular_name}CreatePage = () => {{
           title: t("errors.error_process"),
           icon: "error",
           confirmButtonText: t("message.ok"),
-          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
         }});
       }} finally {{
         setIsLoading(false);
@@ -126,7 +126,7 @@ export const {singular_name}CreatePage = () => {{
             <Button 
               type="submit"
               disabled={{isLoading}}
-              className="w-32 h-12 flex items-center justify-center"
+              className="w-32 h-10 flex items-center justify-center"
             >
               {{ 
                 isLoading 

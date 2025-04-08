@@ -17,6 +17,7 @@ def generate_by_command_line(full_path):
     setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     delete_app_and_index_css(full_path)
+    setup_uuid(full_path)
 
 
 
@@ -107,6 +108,14 @@ def setup_validation_form(full_path):
     print_message("Instalando FramerMotion...", CYAN)
     run_command("npm install react-hook-form @hookform/resolvers yup", cwd=full_path)
     print_message("React FramerMotion instalado correctamente.", GREEN)
+
+
+
+def setup_uuid(full_path):
+    """Instala FramerMotion."""
+    print_message("Instalando UUID...", CYAN)
+    run_command("npm i uuid", cwd=full_path)
+    print_message("UUID instalado correctamente.", GREEN)
 
 
 

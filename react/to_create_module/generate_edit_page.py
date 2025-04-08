@@ -92,7 +92,7 @@ export const {singular_name}EditPage = () => {{
               title: t("error"),
               icon: "error",
               confirmButtonText: t("message.ok"),
-              confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+              confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
             }});
             navigate("/admin/{plural_name_kebab}");
           }}
@@ -102,7 +102,7 @@ export const {singular_name}EditPage = () => {{
             title: t("errors.error_proccess"),
             icon: "error",
             confirmButtonText: t("message.ok"),
-            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
           }});
           navigate("/admin/{plural_name_kebab}");
         }} finally {{
@@ -137,7 +137,7 @@ export const {singular_name}EditPage = () => {{
             title: t("error"),
             icon: "error",
             confirmButtonText: t("message.ok"),
-            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+            confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
           }});
         }}
       }} catch (error) {{
@@ -146,7 +146,7 @@ export const {singular_name}EditPage = () => {{
           title: t("errors.error_proccess"),
           icon: "error",
           confirmButtonText: t("message.ok"),
-          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_ERROR
+          confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
         }});
       }} finally {{
         setIsLoading(false);
@@ -180,7 +180,7 @@ export const {singular_name}EditPage = () => {{
                 <Button 
                   type="submit"
                   disabled={{isLoading}}
-                  className="w-32 h-12 flex items-center justify-center"
+                  className="w-32 h-10 flex items-center justify-center"
                 >
                   {{ 
                     isLoading 

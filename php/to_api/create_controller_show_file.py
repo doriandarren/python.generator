@@ -59,10 +59,10 @@ class {singular_name}ShowController extends Controller
             $data = $this->repository->show(${singular_name_snake}->id);
             return $this->respondWithData('{singular_name} show', $data);
         }} else if($this->isManager(auth()->user()->roles)){{
-            $data = $this->repository->showByRoleManager(auth()->user()->employee->company_id, ${singular_name_snake}->id);
+            $data = $this->repository->showByRoleManager(${singular_name_snake}->id);
             return $this->respondWithData('{singular_name} show', $data);
         }} else {{
-            $data = $this->repository->showByRoleUser(auth()->user()->employee->id, ${singular_name_snake}->id);
+            $data = $this->repository->showByRoleUser(${singular_name_snake}->id);
             return $this->respondWithData('{singular_name} show', $data);
         }}
     }}
