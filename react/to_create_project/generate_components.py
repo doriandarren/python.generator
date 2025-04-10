@@ -28,6 +28,8 @@ def generate_components(full_path):
 
     create_badges(full_path)
 
+    create_tooltip(full_path)
+
 
 
 
@@ -323,6 +325,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Pencil, Trash2, ChevronUp, ChevronDown, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Tooltip } from "../Tooltips/Tooltip";
 
 export const Datatable = ({
   columns,
@@ -330,6 +333,7 @@ export const Datatable = ({
   editPath = "",
   onDelete,
   onEdit = () => {},
+  customActions = () => null,
 }) => {
   const { t } = useTranslation();
 
@@ -443,11 +447,11 @@ export const Datatable = ({
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className="px-4 py-3 text-left text-sm font-semibold text-gray-900 cursor-pointer"
+                  className="px-4 py-3 text-center text-sm font-semibold text-gray-900 cursor-pointer"
                   onClick={() => handleSort(column.key)}
                 >
                   <div className="flex items-center gap-1">
-                    {column.label}
+                    {column.label.toUpperCase()}
                     {sortColumn === column.key &&
                       (sortDirection === "asc" ? (
                         <ChevronUp className="w-4 h-4" />
@@ -459,8 +463,8 @@ export const Datatable = ({
               ))}
 
               {showActions && (
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("actions")}
+                <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900">
+                  { String(t("actions")).toUpperCase() }
                 </th>
               )}              
             </tr>
@@ -486,27 +490,35 @@ export const Datatable = ({
                     
                     {showActions && (
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        <div className="flex gap-5">
+                        <div className="flex gap-3 justify-center">
+
+                          {customActions(item)}
 
                           {editPath && (
-                            <Link
-                              to={`${editPath}/edit/${item.id}`}
-                              className="text-primary hover:text-primary-dark"
-                              onClick={() => onEdit(item.id)}
-                            >
-                              <Pencil className="w-5 h-5" />
-                            </Link>
+                            <Tooltip text={t("edit")}>
+                              <Link
+                                to={`${editPath}/edit/${item.id}`}
+                                className="text-primary"
+                                onClick={() => onEdit(item.id)}
+                              >
+                                <Pencil className="w-5 h-5 text-primary hover:text-primary-dark" />
+                              </Link>
+                            </Tooltip>
+                            
                           )}
 
                           {typeof onDelete === "function" && (
-                            <button
-                              onClick={() => onDelete(item.id)}
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <Trash2 className="w-5 h-5" />
-                            </button>
-                          )}                  
-                          
+                            <Tooltip text={t("delete")}>
+                              <button
+                                onClick={() => onDelete(item.id)}
+                                className="text-red-600"
+                              >
+                                <Trash2 className="w-5 h-5 text-danger hover:text-danger-dark" />
+                              </button>
+                            </Tooltip>
+                            
+                          )}
+
                         </div>
                       </td>
                     )} 
@@ -591,13 +603,14 @@ Datatable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      render: PropTypes.func // <-- Agregado
+      render: PropTypes.func
     })
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   editPath: PropTypes.string,
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
+  customActions: PropTypes.func,
 };
 """
 
@@ -676,6 +689,7 @@ import {
   ComboboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import classNames from "classnames";
 import { useState } from "react";
 
 // CustomCombobox.jsx
@@ -687,7 +701,8 @@ export default function CustomCombobox({
   setSelected,
   onChange,
   error,
-  getLabel = (item) => item?.name, // 👈 nuevo prop con fallback
+  getLabel = (item) => item?.name,
+  disabled = false,
 }) {
   const [query, setQuery] = useState("");
 
@@ -709,20 +724,32 @@ export default function CustomCombobox({
           setSelected(value);
           onChange?.(value);
         }}
+        disabled={disabled}
       >
         <div className="relative">
           <ComboboxInput
+            disabled={disabled}
             autoComplete="off"
-            className={`block w-full rounded-md bg-white py-2.5 pr-12 pl-3 text-base text-gray-900 outline-1 placeholder:text-gray-400 sm:text-sm ${
-              error
-                ? "border border-danger"
-                : "outline-gray-300 focus:outline-indigo-600"
-            }`}
-            onChange={(e) => setQuery(e.target.value)}
+            className={classNames(
+              "block w-full rounded-md bg-white py-2.5 pr-12 pl-3 text-base text-gray-900 outline-1 placeholder:text-gray-400 sm:text-sm",
+              {
+                "border border-danger": error,
+                "outline-gray-300 focus:outline-indigo-600": !error,
+              },
+              disabled && "disabled" // 👈 Aquí aplicamos tu clase global
+            )}
+            onChange={(e) => !disabled && setQuery(e.target.value)}
             onBlur={() => setQuery("")}
             displayValue={(item) => getLabel(item)}
           />
-          <ComboboxButton className="absolute inset-y-0 right-0 flex items-center px-2">
+
+          <ComboboxButton
+            disabled={disabled}
+            className={classNames(
+              "absolute inset-y-0 right-0 flex items-center px-2",
+              disabled && "disabled" // 👈 También aplica tu clase
+            )}
+          >
             <ChevronUpDownIcon className="size-5 text-gray-400" />
           </ComboboxButton>
 
@@ -904,4 +931,85 @@ export const Badge = ({ text, variant = "primary", className = "" }) => {
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_tooltip(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Badges")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "Badge.php")
+
+    # Contenido por defecto
+    content = r"""import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+
+export const Tooltip = ({ children, text }) => {
+  const [show, setShow] = useState(false);
+  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (show && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      const tooltipHeight = 30; // altura aprox del tooltip
+      const spaceAbove = rect.top;
+      const top = spaceAbove < tooltipHeight
+        ? rect.bottom + window.scrollY + 8
+        : rect.top + window.scrollY - tooltipHeight - 8;
+
+      setCoords({
+        top,
+        left: rect.left + rect.width / 2,
+      });
+    }
+  }, [show]);
+
+  return (
+    <div
+      ref={ref}
+      className="relative inline-flex"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
+      {children}
+      {show &&
+        createPortal(
+          <div
+            style={{
+              position: "absolute",
+              top: `${coords.top}px`,
+              left: `${coords.left}px`,
+              transform: "translateX(-50%)",
+              zIndex: 9999,
+            }}
+            className="bg-black text-white text-xs rounded px-2 py-1 shadow-lg whitespace-nowrap"
+          >
+            {text}
+          </div>,
+          document.body
+        )}
+    </div>
+  );
+};
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
 

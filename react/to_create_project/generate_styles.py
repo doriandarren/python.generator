@@ -270,6 +270,11 @@ def create_tailwind_styles(full_path):
         color: white;
         @apply shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400;
     }
+    
+    .disabled{
+        @apply bg-gray-100 cursor-not-allowed pointer-events-none;
+    }
+    
 
     /* Inputs */
     .form-control {
