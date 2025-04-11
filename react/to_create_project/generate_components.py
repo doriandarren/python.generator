@@ -350,11 +350,9 @@ export const Datatable = ({
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
 
-
   const getNestedValue = (obj, path) => {
     return path.split(".").reduce((acc, part) => acc?.[part], obj);
   };
-
 
   // Filtrar datos por búsqueda
   const filteredData = data.filter((row) =>
@@ -373,8 +371,8 @@ export const Datatable = ({
   const sortedData = [...filteredData];
   if (sortColumn) {
     sortedData.sort((a, b) => {
-      const valueA = a[sortColumn] || "";
-      const valueB = b[sortColumn] || "";
+      const valueA = getNestedValue(a, sortColumn) ?? "";
+      const valueB = getNestedValue(b, sortColumn) ?? "";
 
       if (typeof valueA === "number" && typeof valueB === "number") {
         return sortDirection === "asc" ? valueA - valueB : valueB - valueA;
@@ -398,6 +396,11 @@ export const Datatable = ({
 
   // Manejar orden de columnas
   const handleSort = (columnKey) => {
+    const column = columns.find((col) => col.key === columnKey);
+
+    // Ignorar si no tiene key válida o tiene render
+    if (!column || column.key === "-" || column.render) return;
+
     if (sortColumn === columnKey) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
@@ -423,8 +426,6 @@ export const Datatable = ({
     }
     return range;
   };
-
-
 
   return (
     <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
@@ -453,14 +454,22 @@ export const Datatable = ({
                   className={classNames(
                     "px-4 py-3 text-sm font-semibold text-gray-900 cursor-pointer",
                     {
-                      "text-left": !column.align || column.align === "left",
-                      "text-center": column.align === "center",
-                      "text-right": column.align === "right",
+                      "text-left":
+                        !column.align_col || column.align_col === "left",
+                      "text-center": column.align_col === "center",
+                      "text-right": column.align_col === "right",
                     }
                   )}
                   onClick={() => handleSort(column.key)}
                 >
-                  <div className="flex items-center gap-1">
+                  <div
+                    className={classNames("flex items-center gap-1", {
+                      "justify-start":
+                        !column.align_col || column.align_col === "left",
+                      "justify-center": column.align_col === "center",
+                      "justify-end": column.align_col === "right",
+                    })}
+                  >
                     {column.label.toUpperCase()}
                     {sortColumn === column.key &&
                       (sortDirection === "asc" ? (
@@ -474,9 +483,9 @@ export const Datatable = ({
 
               {showActions && (
                 <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900">
-                  { String(t("actions")).toUpperCase() }
+                  {String(t("actions")).toUpperCase()}
                 </th>
-              )}              
+              )}
             </tr>
           </thead>
           <tbody className="bg-white">
@@ -490,25 +499,27 @@ export const Datatable = ({
                 return (
                   <tr key={rowKey} className="even:bg-gray-50">
                     {columns.map((column) => (
-                        <td
+                      <td
                         key={`${column.key}-${rowKey}`}
                         className={classNames(
                           "px-4 py-4 text-sm whitespace-nowrap text-gray-500",
                           {
-                            "text-left": !column.align || column.align === "left",
-                            "text-center": column.align === "center",
-                            "text-right": column.align === "right",
+                            "text-left":
+                              !column.align_row || column.align_row === "left",
+                            "text-center": column.align_row === "center",
+                            "text-right": column.align_row === "right",
                           }
                         )}
                       >
-                        {column.render ? column.render(item) : getNestedValue(item, column.key) ?? "-"}
+                        {column.render
+                          ? column.render(item)
+                          : getNestedValue(item, column.key) ?? "-"}
                       </td>
                     ))}
-                    
+
                     {showActions && (
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex gap-3 justify-center">
-
                           {customActions(item)}
 
                           {editPath && (
@@ -521,7 +532,6 @@ export const Datatable = ({
                                 <Pencil className="w-5 h-5 text-primary hover:text-primary-dark" />
                               </Link>
                             </Tooltip>
-                            
                           )}
 
                           {typeof onDelete === "function" && (
@@ -533,12 +543,10 @@ export const Datatable = ({
                                 <Trash2 className="w-5 h-5 text-danger hover:text-danger-dark" />
                               </button>
                             </Tooltip>
-                            
                           )}
-
                         </div>
                       </td>
-                    )} 
+                    )}
                   </tr>
                 );
               })
@@ -620,7 +628,7 @@ Datatable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      render: PropTypes.func // <-- Agregado
+      render: PropTypes.func, // <-- Agregado
     })
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -629,6 +637,7 @@ Datatable.propTypes = {
   onEdit: PropTypes.func,
   customActions: PropTypes.func,
 };
+
 """
 
     try:
