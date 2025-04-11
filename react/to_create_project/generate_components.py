@@ -445,7 +445,7 @@ export const Datatable = ({
 
       {/* Tabla */}
       <div className="overflow-x-auto rounded-xl">
-        <table className="min-w-full w-full divide-y divide-gray-300">
+        <table className="min-w-full w-full table-fixed divide-y divide-gray-300">
           <thead className="bg-gray-100">
             <tr>
               {columns.map((column) => (
@@ -453,6 +453,7 @@ export const Datatable = ({
                   key={column.key}
                   className={classNames(
                     "px-4 py-3 text-sm font-semibold text-gray-900 cursor-pointer",
+                    column.width || "w-40", // ⬅️ valor por defecto
                     {
                       "text-left":
                         !column.align_col || column.align_col === "left",
@@ -462,14 +463,7 @@ export const Datatable = ({
                   )}
                   onClick={() => handleSort(column.key)}
                 >
-                  <div
-                    className={classNames("flex items-center gap-1", {
-                      "justify-start":
-                        !column.align_col || column.align_col === "left",
-                      "justify-center": column.align_col === "center",
-                      "justify-end": column.align_col === "right",
-                    })}
-                  >
+                  <div className="flex items-center gap-1">
                     {column.label.toUpperCase()}
                     {sortColumn === column.key &&
                       (sortDirection === "asc" ? (
@@ -502,13 +496,15 @@ export const Datatable = ({
                       <td
                         key={`${column.key}-${rowKey}`}
                         className={classNames(
-                          "px-4 py-4 text-sm whitespace-nowrap text-gray-500",
+                          "px-4 py-4 text-sm text-gray-500",
+                          column.width || "w-40", // ancho por defecto
                           {
                             "text-left":
                               !column.align_row || column.align_row === "left",
                             "text-center": column.align_row === "center",
                             "text-right": column.align_row === "right",
-                          }
+                          },
+                          "whitespace-nowrap overflow-hidden truncate"
                         )}
                       >
                         {column.render
@@ -637,7 +633,6 @@ Datatable.propTypes = {
   onEdit: PropTypes.func,
   customActions: PropTypes.func,
 };
-
 """
 
     try:
