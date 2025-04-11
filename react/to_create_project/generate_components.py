@@ -323,6 +323,7 @@ def create_datatable(full_path):
 
     # Contenido por defecto
     content = r"""import { useState } from "react";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Pencil, Trash2, ChevronUp, ChevronDown, Search } from "lucide-react";
@@ -449,7 +450,14 @@ export const Datatable = ({
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className="px-4 py-3 text-center text-sm font-semibold text-gray-900 cursor-pointer"
+                  className={classNames(
+                    "px-4 py-3 text-sm font-semibold text-gray-900 cursor-pointer",
+                    {
+                      "text-left": !column.align || column.align === "left",
+                      "text-center": column.align === "center",
+                      "text-right": column.align === "right",
+                    }
+                  )}
                   onClick={() => handleSort(column.key)}
                 >
                   <div className="flex items-center gap-1">
@@ -482,9 +490,16 @@ export const Datatable = ({
                 return (
                   <tr key={rowKey} className="even:bg-gray-50">
                     {columns.map((column) => (
-                      <td
+                        <td
                         key={`${column.key}-${rowKey}`}
-                        className="px-4 py-4 text-sm whitespace-nowrap text-gray-500"
+                        className={classNames(
+                          "px-4 py-4 text-sm whitespace-nowrap text-gray-500",
+                          {
+                            "text-left": !column.align || column.align === "left",
+                            "text-center": column.align === "center",
+                            "text-right": column.align === "right",
+                          }
+                        )}
                       >
                         {column.render ? column.render(item) : getNestedValue(item, column.key) ?? "-"}
                       </td>
@@ -605,7 +620,7 @@ Datatable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      render: PropTypes.func
+      render: PropTypes.func // <-- Agregado
     })
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
