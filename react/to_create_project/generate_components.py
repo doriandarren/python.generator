@@ -30,6 +30,8 @@ def generate_components(full_path):
 
     create_tooltip(full_path)
 
+    create_invoice_icon(full_path)
+
 
 
 
@@ -1012,4 +1014,55 @@ export const Tooltip = ({ children, text }) => {
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
+
+
+def create_invoice_icon(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Icons")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "InvoiceIcon.php")
+
+    # Contenido por defecto
+    content = r"""import classNames from "classnames";
+
+export const ImageInvoiceIcon = ({ variant = "gray", className = "w-6 h-6" }) => {
+  return (
+    <svg
+      className={classNames(className, {
+        "text-gray-600": variant === "gray",
+        "text-danger": variant === "danger",
+        "text-warning": variant === "warning",
+        "text-success": variant === "success",
+        "text-info": variant === "info",
+        "text-primary": variant === "primary",
+        "text-secondary": variant === "secondary",
+      })}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M6 2a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V4a2 2 0 0 0-2-2H6zm2 4h8v2H8V6zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" />
+    </svg>
+  )
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 

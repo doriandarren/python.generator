@@ -285,7 +285,12 @@ def create_locales_es(project_path):
   "status": "Status",
   "statuses": "Statuses",
   "type": "Tipo",
-  "types": "Tipos"
+  "types": "Tipos",
+  "is_exempt": "Exento IVA",
+  "service_activated": "Servicio activado",
+  "services_activated": "Servicios activados",
+  "country": "País",
+  "countries": "Paises"
 }
 """
 
@@ -504,7 +509,12 @@ def create_locales_en(project_path):
   "status": "Status",
   "statuses": "Statuses",
   "type": "Type",
-  "types": "Types"
+  "types": "Types",
+  "is_exempt": "Exempt",
+  "service_activated": "Service activated",
+  "services_activated": "Activated Services",
+  "country": "Country",
+  "countries": "Countries"
 }
 """
 
