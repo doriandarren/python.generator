@@ -446,6 +446,7 @@ export const Datatable = ({
       {/* Tabla */}
       <div className="overflow-x-auto rounded-xl">
         <table className="min-w-full w-full table-fixed divide-y divide-gray-300">
+          
           <thead className="bg-gray-100">
             <tr>
               {columns.map((column) => (
@@ -476,12 +477,13 @@ export const Datatable = ({
               ))}
 
               {showActions && (
-                <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900">
+                <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900 w-40">
                   {String(t("actions")).toUpperCase()}
                 </th>
               )}
             </tr>
           </thead>
+
           <tbody className="bg-white">
             {currentItems.length > 0 ? (
               currentItems.map((item, index) => {
@@ -514,29 +516,29 @@ export const Datatable = ({
                     ))}
 
                     {showActions && (
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        <div className="flex gap-3 justify-center">
+                      <td className="w-40 px-4 py-4 text-sm whitespace-nowrap">
+                        <div className="flex flex-wrap justify-center items-center gap-2">
                           {customActions(item)}
-
+                      
                           {editPath && (
                             <Tooltip text={t("edit")}>
                               <Link
                                 to={`${editPath}/edit/${item.id}`}
-                                className="text-primary"
                                 onClick={() => onEdit(item.id)}
+                                className="p-1 rounded hover:bg-gray-100 transition"
                               >
-                                <Pencil className="w-5 h-5 text-primary hover:text-primary-dark" />
+                                <Pencil className="w-5 h-5 shrink-0 text-primary" />
                               </Link>
                             </Tooltip>
                           )}
-
+                      
                           {typeof onDelete === "function" && (
                             <Tooltip text={t("delete")}>
                               <button
                                 onClick={() => onDelete(item.id)}
-                                className="text-red-600"
+                                className="p-1 rounded hover:bg-gray-100 transition"
                               >
-                                <Trash2 className="w-5 h-5 text-danger hover:text-danger-dark" />
+                                <Trash2 className="w-5 h-5 shrink-0 text-danger" />
                               </button>
                             </Tooltip>
                           )}
