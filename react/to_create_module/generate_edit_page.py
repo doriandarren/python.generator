@@ -99,7 +99,7 @@ export const {singular_name}EditPage = () => {{
         }} catch (error) {{
           console.error("Error al obtener los datos:", error);
           Swal.fire({{
-            title: t("errors.error_proccess"),
+            title: t("errors.error_process"),
             icon: "error",
             confirmButtonText: t("message.ok"),
             confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER
@@ -143,7 +143,7 @@ export const {singular_name}EditPage = () => {{
       }} catch (error) {{
         console.error("Error al actualizar:", error);
         Swal.fire({{
-          title: t("errors.error_proccess"),
+          title: t("errors.error_process"),
           icon: "error",
           confirmButtonText: t("message.ok"),
           confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_DANGER

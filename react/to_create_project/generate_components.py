@@ -322,7 +322,7 @@ def create_datatable(full_path):
     file_path = os.path.join(styles_path, "DataTable.jsx")
 
     # Contenido por defecto
-    content = r"""import { useState } from "react";
+    content = r"""import { useEffect, useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -349,6 +349,12 @@ export const Datatable = ({
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemPerPage);
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
+
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
 
   const getNestedValue = (obj, path) => {
     return path.split(".").reduce((acc, part) => acc?.[part], obj);
@@ -451,29 +457,34 @@ export const Datatable = ({
             <tr>
               {columns.map((column) => (
                 <th
-                  key={column.key}
-                  className={classNames(
-                    "px-4 py-3 text-sm font-semibold text-gray-900 cursor-pointer",
-                    column.width || "w-40", // ⬅️ valor por defecto
-                    {
-                      "text-left":
-                        !column.align_col || column.align_col === "left",
-                      "text-center": column.align_col === "center",
-                      "text-right": column.align_col === "right",
-                    }
-                  )}
-                  onClick={() => handleSort(column.key)}
+                key={column.key}
+                className={classNames(
+                  "px-4 py-3 text-sm font-semibold text-gray-900 cursor-pointer",
+                  column.width || "w-40",
+                  {
+                    "text-left": !column.align_col || column.align_col === "left",
+                    "text-center": column.align_col === "center",
+                    "text-right": column.align_col === "right",
+                  }
+                )}
+                onClick={() => handleSort(column.key)}
+              >
+                <div
+                  className={classNames("flex items-center gap-1", {
+                    "justify-start": !column.align_col || column.align_col === "left",
+                    "justify-center": column.align_col === "center",
+                    "justify-end": column.align_col === "right",
+                  })}
                 >
-                  <div className="flex items-center gap-1">
-                    {column.label.toUpperCase()}
-                    {sortColumn === column.key &&
-                      (sortDirection === "asc" ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
-                      ))}
-                  </div>
-                </th>
+                  {column.label.toUpperCase()}
+                  {sortColumn === column.key &&
+                    (sortDirection === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    ))}
+                </div>
+              </th>
               ))}
 
               {showActions && (
