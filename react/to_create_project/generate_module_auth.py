@@ -72,7 +72,7 @@ def create_login_page(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo
-    content = """import { useEffect, useState } from "react";
+    content = r"""import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ImgLogo from "../../../assets/images/logo.svg";
 import EyeOff from '../../../assets/images/eye_off.svg';
@@ -82,6 +82,7 @@ import { Button } from "../../../components/Buttons/Button";
 import { startLoginWithEmailPassword } from "../../../store/auth/thunks";
 import { Toast } from "../../../helpers/helperToast";
 import { PreloaderButton } from "../../../components/Preloader/PreloaderButton";
+
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");

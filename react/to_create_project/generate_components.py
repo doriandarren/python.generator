@@ -14,6 +14,7 @@ def generate_components(full_path):
     create_preloader(full_path)
     create_preloader_main(full_path)
     create_preloader_main_css(full_path)
+    create_preloader_button_css(full_path)
     create_preloader_button(full_path)
 
 
@@ -337,6 +338,7 @@ export const Datatable = ({
   onDelete,
   onEdit = () => {},
   customActions = () => null,
+  filters
 }) => {
   const { t } = useTranslation();
 
@@ -437,16 +439,23 @@ export const Datatable = ({
     <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
       {/* Barra de búsqueda con lupa */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-3">
-        <div className="relative w-full sm:w-auto">
+        <div className="relative w-full sm:w-64">
           <Search className="absolute left-3 top-2.5 text-gray-500 w-5 h-5" />
           <input
             type="text"
             placeholder={t("search")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full sm:w-64 pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary-dark sm:text-sm"
+            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary-dark sm:text-sm"
           />
         </div>
+
+        {/* Filtros horizontales aquí */}
+        {filters && (
+          <div className="flex items-center gap-2">
+            {filters}
+          </div>
+        )}
       </div>
 
       {/* Tabla */}
@@ -645,7 +654,67 @@ Datatable.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
   customActions: PropTypes.func,
+  filters: PropTypes.node,
 };
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+def create_preloader_button_css(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "components", "Preloader")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "PreloaderButton.css")
+
+    # Contenido por defecto
+    content = r""".preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 """
 
     try:
@@ -672,7 +741,7 @@ def create_preloader_button(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "PreloaderButton.css")
+    file_path = os.path.join(styles_path, "PreloaderButton.jsx")
 
     # Contenido por defecto
     content = """import { PreloaderSVG } from "./PreloaderSVG"
@@ -693,6 +762,7 @@ export const PreloaderButton = () => {
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
 
 
 def create_combobox(full_path):
@@ -930,7 +1000,7 @@ def create_badges(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "Badge.php")
+    file_path = os.path.join(styles_path, "Badge.jsx")
 
     # Contenido por defecto
     content = r"""import classNames from "classnames"
@@ -974,7 +1044,7 @@ def create_tooltip(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    styles_path = os.path.join(full_path, "src", "components", "Badges")
+    styles_path = os.path.join(full_path, "src", "components", "Tooltips")
 
     # Crear la carpeta si no existe
     if not os.path.exists(styles_path):
@@ -982,7 +1052,7 @@ def create_tooltip(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "Badge.php")
+    file_path = os.path.join(styles_path, "Tooltip.jsx")
 
     # Contenido por defecto
     content = r"""import { useEffect, useRef, useState } from "react";
