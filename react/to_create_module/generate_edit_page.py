@@ -18,7 +18,7 @@ def create_edit_page(project_path, singular_name, plural_name, singular_name_keb
     column_names = [col["name"] for col in columns]
 
     # Genera correctamente el esquema de validación sin errores de interpolación
-    schema_fields = ",\n    ".join([f'{col}: yup.string().required(t("{col}"))' for col in column_names])
+    schema_fields = ",\n    ".join([f'{col}: yup.string().required(t("form.required"))' for col in column_names])
 
     # Genera correctamente los valores `setValue`
     set_values = "\n        ".join([f'setValue("{col}", data.{col});' for col in column_names])

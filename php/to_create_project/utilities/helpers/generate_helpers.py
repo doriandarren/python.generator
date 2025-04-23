@@ -505,9 +505,9 @@ def create_helper_file(full_path):
     file_path = os.path.join(styles_path, "HelperFile.php")
 
     # Contenido por defecto
-    content = """<?php
+    content = r"""<?php
 
-namespace App\\Utilities\\Helpers;
+namespace App\Utilities\Helpers;
 
 
 class HelperFile
