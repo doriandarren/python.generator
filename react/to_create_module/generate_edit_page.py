@@ -112,7 +112,7 @@ export const {singular_name}EditPage = () => {{
     
       fetchData();
       
-  }}, [id, navigate, setValue]);
+  }}, [id, navigate, setValue, t]);
 
   
   
