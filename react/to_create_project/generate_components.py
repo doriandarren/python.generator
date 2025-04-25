@@ -64,7 +64,7 @@ export const Button = ({ children, type = "button", variant = "primary", onClick
     <button
       type={type}
       className={classNames(
-        "py-2 px-4 w-full xl:w-32 xl:mr-3 rounded-md text-white font-semibold transition-all duration-200",
+        "py-2 px-4 w-full xl:w-32 xl:mr-3 rounded-md text-white font-semibold transition-all duration-200 cursor-pointer",
         {
           "bg-primary hover:bg-primary-dark": !disabled && variant === "primary",
           "bg-gray-400 cursor-not-allowed": disabled,
