@@ -29,8 +29,8 @@ def start_project():
     # Ruta predeterminada
     default_path = "/Users/dorian/ReactProjects"
 
-    project_name = input("Introduce el nombre del proyecto React: ")
-    project_path = input(f"Introduce la ruta donde deseas crear el proyecto (por defecto: {default_path}): ").strip()
+    project_name = input("Nombre del proyecto React: ")
+    project_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip()
 
     # Si no se introduce una ruta, usar la predeterminada
     if not project_path:
