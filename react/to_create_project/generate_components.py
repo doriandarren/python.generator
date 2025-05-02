@@ -435,8 +435,17 @@ export const Datatable = ({
     return range;
   };
 
+
+  //Comprueba si el customActions tiene items. Sirve para controlar el boton edit 
+  const hasCustomActions = (item) => {
+    const result = customActions?.(item);
+    return !!result; // true si hay contenido
+  };
+  
+
+
   return (
-    <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4">
+    <div className="w-full border-2 border-gray-100 shadow-xl rounded-xl overflow-hidden p-4 animate__animated animate__fadeIn animate__faster">
       {/* Barra de búsqueda con lupa */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-3">
         <div className="relative w-full sm:w-64">
@@ -540,7 +549,7 @@ export const Datatable = ({
                         <div className="flex flex-wrap justify-center items-center gap-2">
                           {customActions(item)}
                       
-                          {editPath && (
+                          {editPath && !hasCustomActions(item) && (
                             <Tooltip text={t("edit")}>
                               <Link
                                 to={`${editPath}/edit/${item.id}`}

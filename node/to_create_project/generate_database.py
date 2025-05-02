@@ -233,7 +233,7 @@ def create_user_statuses(full_path):
     Args:
         full_path (str): Ruta completa del proyecto.
     """
-    folder_path = os.path.join(full_path, "src", "datatbase", "seeders", "userStatuses")
+    folder_path = os.path.join(full_path, "src", "database", "seeders", "userStatuses")
 
     # Crear la carpeta si no existe
     if not os.path.exists(folder_path):
