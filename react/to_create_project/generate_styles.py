@@ -228,6 +228,10 @@ def create_tailwind_styles(full_path):
   --color-warning-light: #fef9c3;   
   --color-warning-dark: #ca8a04;
   
+  --color-neutral-light: #9CA3AF;
+  --color-neutral: #6B7280;
+  --color-neutral-dark: #374151;
+  
   --color-navbar: #222831;
   --color-background: #f8fafc;
 
