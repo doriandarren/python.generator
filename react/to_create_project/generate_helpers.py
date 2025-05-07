@@ -6,6 +6,7 @@ def generate_helpers(full_path):
     create_sweetalert2(full_path)
     create_data_fake(full_path)
     create_toast(full_path)
+    create_variant_class(full_path)
 
 
 
@@ -224,6 +225,65 @@ export const Toast = async (text, icon = \'success\') => {
     }
   });
 }
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+def create_variant_class(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "src", "helpers")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "helperVariantClass.js")
+
+    # Contenido
+    content = """export const getVariantTextClass = (variant = "neutral") => {
+  return (
+    {
+      neutral: "text-neutral",
+      special_price: "text-special-price",
+      danger: "text-danger",
+      warning: "text-warning",
+      success: "text-success",
+      info: "text-info",
+      primary: "text-primary",
+      secondary: "text-secondary",
+    }[variant] || "text-neutral"
+  );
+};
+
+export const getVariantBgClass = (variant = "neutral") => {
+  return (
+    {
+      neutral: "bg-neutral",
+      special_price: "bg-special-price",
+      danger: "bg-danger",
+      warning: "bg-warning",
+      success: "bg-success",
+      info: "bg-info",
+      primary: "bg-primary",
+      secondary: "bg-secondary",
+    }[variant] || "bg-neutral"
+  );
+};
 """
 
     try:

@@ -1012,22 +1012,16 @@ def create_badges(full_path):
     file_path = os.path.join(styles_path, "Badge.jsx")
 
     # Contenido por defecto
-    content = r"""import classNames from "classnames"
+    content = r"""import classNames from "classnames";
+import { getVariantBgClass } from "../../helpers/helperVariantClass";
 
-export const Badge = ({ text, variant = "primary", className = "" }) => {
+export const Badge = ({ text, variant = "gray", className = "" }) => {
   return (
     <span
       className={classNames(
         "inline-flex items-center rounded-full px-2 py-1 text-xs font-medium",
-        {
-          "bg-gray-100 text-gray-600": variant === "gray",
-          "bg-danger text-white": variant === "danger",
-          "bg-warning text-white": variant === "warning",
-          "bg-success text-white": variant === "success",
-          "bg-info text-white": variant === "info",
-          "bg-primary text-white": variant === "primary",
-          "bg-secondary text-white": variant === "secondary",
-        },
+        getVariantBgClass(variant),
+        'text-white',
         className
       )}
     >
