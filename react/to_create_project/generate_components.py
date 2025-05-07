@@ -1147,11 +1147,11 @@ def create_invoice_icon(full_path):
     # Contenido por defecto
     content = r"""import classNames from "classnames";
 
-export const ImageInvoiceIcon = ({ variant = "gray", className = "w-6 h-6" }) => {
+export const ImageInvoiceIcon = ({ variant = "neutral", className = "w-6 h-6" }) => {
   return (
     <svg
       className={classNames(className, {
-        "text-gray-600": variant === "gray",
+        "text-neutral": variant === "neutral",
         "text-danger": variant === "danger",
         "text-warning": variant === "warning",
         "text-success": variant === "success",
