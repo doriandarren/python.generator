@@ -216,6 +216,7 @@ def create_tailwind_styles(full_path):
   --color-danger-light: #ff7961;
   --color-danger-dark: #b83329;
   
+  
   --color-success: #4caf50;
   --color-success-light: #61e265;
   --color-success-dark: #3a893d;
