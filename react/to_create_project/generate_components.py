@@ -359,7 +359,14 @@ export const Datatable = ({
 
 
   const getNestedValue = (obj, path) => {
-    return path.split(".").reduce((acc, part) => acc?.[part], obj);
+    if (!obj || !path) return undefined;
+  
+    const parts = path
+      .replace(/\[(\w+)\]/g, '.$1') // "customer[0].code" → "customer.0.code"
+      .replace(/^\./, '')           // elimina punto inicial si lo hubiera
+      .split('.');
+  
+    return parts.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
   };
 
   // Filtrar datos por búsqueda
