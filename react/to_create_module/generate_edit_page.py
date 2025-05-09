@@ -123,7 +123,7 @@ export const {singular_name}EditPage = () => {{
     
         const response = await update{singular_name}(id, data);
     
-        if (response) {{
+        if (response.success) {{
           Swal.fire({{
             title: t("message.record_updated"),
             icon: "success",
