@@ -182,7 +182,8 @@ def create_locales_es(project_path):
   "form": {
     "required": "Requerido",
     "select": "Seleccione",
-    "must_be_number": "Número"
+    "must_be_number": "Número",
+    "must_be_positive": "Mayor a cero"
   },
   "errors":{
     "error_internal": "Error Interno",
@@ -407,7 +408,8 @@ def create_locales_en(project_path):
   "form": {
     "required": "Required",
     "select": "Select",
-    "must_be_number": "Number"
+    "must_be_number": "Number",
+    "must_be_positive": "Must be positive"
   },
   "errors": {
     "error_internal": "Internal Error",
