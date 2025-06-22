@@ -1,5 +1,8 @@
+import sys
 import os
-from helpers.helper_print import input_with_validation, print_header
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from helpers.helper_print import print_header, input_with_validation
 from databases.to_list.list_tables import list_tables_and_columns
 from databases.to_generate.generate_tables_columns import list_tables_and_columns_and_generate
 from dotenv import load_dotenv

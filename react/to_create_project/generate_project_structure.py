@@ -37,13 +37,6 @@ def create_project_structure(project_path):
         "src/modules/dashboard/routes",
         "src/helpers",
 
-        ## "src/modules/auth/styles",
-        ## "src/modules/auth/hooks",
-        ## "src/modules/dashboard/hooks",
-        ## "src/modules/auth/components",
-        ## "src/services",
-        ## "src/store/slices",
-        ## "src/modules/dashboard/styles",
     ]
     # Define la estructura
 

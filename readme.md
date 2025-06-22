@@ -76,38 +76,35 @@ pip install aiohttp
 
 
 
+### Generar el proyecto
+[washes] GMWash *** GMWashes : wash_counter trx_date customer_code company_name plate trailer_plate driver driver_doc wash_type_id init_time finish_time price special_price courtesy operator_id extras comments payment_method invoiced invoice_package_id in_job status
 
-Listos:
+
+
+
+
+
+
+
+
+# TODOS:
+[washes] Wash *** Washes : wash_counter trx_date customer_code company_name plate trailer_plate driver driver_doc wash_type_id init_time finish_time price special_price courtesy operator_id extras comments payment_method invoiced invoice_package_id in_job status
 [wash_customer_codes] WashCustomerCode *** WashCustomerCodes : customer_code status
-
 [wash_types] WashType *** WashTypes : name duration price
 [wash_fixed_extras] WashFixedExtra *** WashFixedExtras : name price
 [wash_extras] WashExtra *** WashExtras : name duration price
 [wash_operators] WashOperator *** WashOperators : name
-
 [wash_risk_customers] WashRiskCustomer *** WashRiskCustomers : country_id code_alpha_2 customer_code company_name phone address code_zip country_name population province fiscal_identification email type
 [wash_risk_customer_banks] WashRiskCustomerBank *** WashRiskCustomerBanks : customer_id bank_id iban bank_name account_number swift_bic account_holder pay_day remitance_type remittance_type_id due_date risk_req quantity mandate_reference status globaldocs_document_id
-
 [customer_wash_types] CustomerWashType *** CustomerWashTypes : wash_id customer_code price
-
-
-
-
-
-
-
-
-Faltan:
 [washes_invoice_subtotals] WashesInvoiceSubtotal *** WashesInvoiceSubtotals : header_id units amount vat_quote total_amount payment_type
 [washes_payment_modes] WashesPaymentMode *** WashesPaymentModes : name
 [wash_customer_plates_authorizations] WashCustomerPlatesAuthorization *** WashCustomerPlatesAuthorizations : customer_code status
-
 [wash_transactions] WashTransaction *** WashTransactions : wash_id type concept_id extra_weight
 [washes_invoice_headers] WashesInvoiceHeader *** WashesInvoiceHeaders : wash_id invoice_string serie invoice_nb year invoice_date due_date payment_mode remittance_type remittance_type_id customer_code company_name address city zipcode cif state vat_base vat_type vat_quote total invoice_sent paid sage_file origin
 [washes_daily_sessions_details] WashesDailySessionsDetail *** WashesDailySessionsDetails : wash_session_id amount type count
 [customer_wash_types] CustomerWashType *** CustomerWashTypes : wash_id customer_code price
 [wash_vehicles] WashVehicle *** WashVehicles : company_name customer_code plate
-[washes] Wash *** Washes : wash_counter trx_date customer_code company_name plate trailer_plate driver driver_doc wash_type_id init_time finish_time price special_price courtesy operator_id extras comments payment_method invoiced invoice_package_id in_job status
 [wash_vat_customers] WashVatCustomer *** WashVatCustomers : customer_code exempt
 [washes_invoice_subtotal_lines] WashesInvoiceSubtotalLine *** WashesInvoiceSubtotalLines : subtotal_id wash_type units amount vat_quote total_amount
 [washes_daily_sessions] WashesDailySession *** WashesDailySessions : opened_at closed_at

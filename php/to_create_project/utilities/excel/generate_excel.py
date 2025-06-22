@@ -210,9 +210,7 @@ class ExampleExportPerSheet implements WithTitle, FromArray, ShouldAutoSize, Wit
                         )
                     );
 
-
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(35);
-
 
                 //OK
 //                $event->sheet->getDelegate()->getStyle('A1:W1')->applyFromArray(
@@ -225,7 +223,6 @@ class ExampleExportPerSheet implements WithTitle, FromArray, ShouldAutoSize, Wit
 //                    )
 //                );
 
-
 //                $styleArray = [
 //                    'borders' => [
 //                        'outline' => [
@@ -236,16 +233,11 @@ class ExampleExportPerSheet implements WithTitle, FromArray, ShouldAutoSize, Wit
 //                ];
 //                $event->sheet->getDelegate()->getStyle('B2:G8')->applyFromArray($styleArray);
 
-
 //                $cellRange = 'A1:W1'; // All headers
 //                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
-
             },
         ];
-
     }
-
-
 
     /**
      * @param $number

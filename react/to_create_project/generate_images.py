@@ -24,8 +24,6 @@ def generate_images(project_path):
 
 
 
-
-
 def generate_icon(project_path):
     """
     Genera el archivo
@@ -137,7 +135,6 @@ def generate_image_header_bg(project_path):
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
 
-
 def generate_image_logo_svg(project_path):
     """
     Genera el archivo
@@ -161,7 +158,6 @@ def generate_image_logo_svg(project_path):
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
-
 
 def generate_image_app_1(project_path):
     """
@@ -1054,7 +1050,6 @@ def generate_image_app_1(project_path):
         print_message(f"Archivo creado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al crear el archivo {file_path}: {e}", CYAN)
-
 
 def generate_image_logo_blanco(project_path):
     """

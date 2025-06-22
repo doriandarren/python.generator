@@ -45,12 +45,14 @@ def start_project():
     generate_project_structure(full_path)
 
     generate_styles(full_path)
+
+    
     generate_images(full_path)
 
 
 
     ## Layouts
-    generate_public_layouts(full_path)
+    generate_public_layouts(full_path)  ########### TODO AQUIIII
     generate_private_layouts(full_path)
 
 

@@ -15,6 +15,9 @@ def create_controller_structure(base_ruta, path_controller):
 
     return controller_folder_path
 
+
+
+
 def generate_controller_update_file(base_ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
     """
     Genera el archivo de controlador PHP para el método Update.
@@ -111,6 +114,10 @@ class {singular_name}UpdateController extends Controller
             print(f"Archivo PHP controlador '{file_name}' creado en: {controller_folder_path}")
     except Exception as e:
         print(f"Error al crear el archivo de controlador '{file_name}': {e}")
+
+
+
+
 
 # Función auxiliar para generar reglas de validación
 def generate_validation_rules(columns):

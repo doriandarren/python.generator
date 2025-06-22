@@ -67,8 +67,11 @@ def start_project():
     # Controllers
     generate_module_auth(full_path)
 
+
+
+
     # Shared
-    generate_shared(full_path)
+    generate_shared(full_path)   ## TODO Pending
 
 
     # Utilities
@@ -80,6 +83,7 @@ def start_project():
     update_app_php(full_path)
     update_bootstrap_app_php(full_path)
     update_readme(full_path)
+    update_gitignore(full_path)
 
 
     # Dev
@@ -88,8 +92,6 @@ def start_project():
     generate_route_test(full_path)
 
 
-    # gitignore
-    update_gitignore(full_path)
 
 
     # Logos
@@ -101,12 +103,12 @@ def start_project():
 
 
     # Postaman
-    generate_shared_postman_collections(full_path)
+    generate_shared_postman_collections(full_path) ## TODO Pending
 
 
     # Exceptions
-    generate_exception_handler(full_path)
-    generate_exception_handler_response(full_path)
+    ## generate_exception_handler(full_path)
+    ## generate_exception_handler_response(full_path)
 
 
     # route api

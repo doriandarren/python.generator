@@ -3,6 +3,7 @@ from helpers.helper_print import print_message, GREEN, CYAN
 
 
 
+
 def generate_enums(full_path):
     create_dev(full_path)
     create_exclude_table(full_path)
