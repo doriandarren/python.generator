@@ -41,18 +41,16 @@ def start_project():
 
 
     generate_by_command_line(full_path)
-
     generate_project_structure(full_path)
-
     generate_styles(full_path)
 
-    
+
     generate_images(full_path)
 
 
 
     ## Layouts
-    generate_public_layouts(full_path)  ########### TODO AQUIIII
+    generate_public_layouts(full_path)
     generate_private_layouts(full_path)
 
 
@@ -71,7 +69,7 @@ def start_project():
     generate_module_auth(full_path)
 
     ## Profile
-    generate_module_profile(full_path)
+    generate_module_profile(full_path)  ########### TODO AQUIIII ---------------<>>>>>>>>>>
 
     # Teams
     generate_module_teams(full_path)

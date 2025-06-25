@@ -23,6 +23,7 @@ def generate_module_standard(project_path, singular_name, plural_name, columns, 
     singular_first_camel = singular_name[:1].lower() + singular_name[1:]
 
 
+    # DILAN
     if "route" in input_menu_checkbox:
         create_routes(project_path, singular_name, plural_name_snake)
 
@@ -32,6 +33,9 @@ def generate_module_standard(project_path, singular_name, plural_name, columns, 
     if "create" in input_menu_checkbox:
         create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
 
+
+
+    ##  MILENA
     if "edit" in input_menu_checkbox:
         create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
 
@@ -40,4 +44,6 @@ def generate_module_standard(project_path, singular_name, plural_name, columns, 
 
     if "service" in input_menu_checkbox:
         create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
+
+
 
