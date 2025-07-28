@@ -18,6 +18,7 @@ def generate_by_command_line(full_path):
     setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
     delete_app_and_index_css(full_path)
     setup_uuid(full_path)
+    setup_protypes(full_path)
 
 
 
@@ -118,6 +119,12 @@ def setup_uuid(full_path):
     print_message("UUID instalado correctamente.", GREEN)
 
 
+
+def setup_protypes(full_path):
+    """ PropTypes """
+    print_message("Instalando PropTypes...", CYAN)
+    run_command("npm install prop-types", cwd=full_path)
+    print_message("PropTypes instalado correctamente.", GREEN)
 
 
 

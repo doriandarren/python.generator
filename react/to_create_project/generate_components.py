@@ -72,6 +72,7 @@ export const Button = ({ children, type = "button", variant = "primary", onClick
           "bg-secondary hover:bg-secondary-dark": !disabled && variant === "secondary",
           "bg-success hover:bg-success-dark": !disabled && variant === "success",
           "bg-info hover:bg-info-dark": !disabled && variant === "info",
+          "bg-warning hover:bg-warning-dark": !disabled && variant === "warning",
         },
         className
       )}
