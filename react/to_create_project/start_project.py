@@ -66,10 +66,10 @@ def start_project():
     generate_module_dashboard(full_path)
 
     # Auth
-    generate_module_auth(full_path)
+    generate_module_auth(full_path) ########### TODO NUUEUEUEUE ---------------<>>>>>>>>>>
 
     ## Profile
-    generate_module_profile(full_path)  ########### TODO AQUIIII ---------------<>>>>>>>>>>
+    generate_module_profile(full_path)
 
     # Teams
     generate_module_teams(full_path)
@@ -81,7 +81,7 @@ def start_project():
     generate_helpers(full_path)
 
     # Translate
-    generate_translate(full_path)
+    generate_translate(full_path) ########### TODO VOY AQUIIII ---------------<>>>>>>>>>>
 
     generate_env(full_path)
 

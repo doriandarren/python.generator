@@ -11,6 +11,7 @@ def generate_by_command_line(full_path):
     setup_headlessui(full_path)  ## Estilos UI
     setup_heroicons(full_path)  ## Icons
     setup_lucide_react(full_path)
+    setup_recharts(full_path)
     setup_animate_css(full_path)
     setup_sweetalert2(full_path)
     setup_validation_form(full_path) ## Validators Form
@@ -117,6 +118,13 @@ def setup_uuid(full_path):
     print_message("Instalando UUID...", CYAN)
     run_command("npm i uuid", cwd=full_path)
     print_message("UUID instalado correctamente.", GREEN)
+
+
+def setup_recharts(full_path):
+    """Instala FramerMotion."""
+    print_message("Instalando Recharts...", CYAN)
+    run_command("npm install recharts", cwd=full_path)
+    print_message("Recharts instalado correctamente.", GREEN)
 
 
 
