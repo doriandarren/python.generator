@@ -1,10 +1,5 @@
 ## Python Generator
 
-```sh
-cd generators
-python3 main.py
-```
-
 ### Install
 
 ```sh
@@ -14,10 +9,7 @@ python3 main.py
 - source venv/bin/activate                  // MacOs
 - pip install --upgrade pip
 
-- python3.exe -m venv venv                  // Windows
-- .\venv\bin\activate                       // Windows
-- python3.exe -m pip install --upgrade pip  // Windows
-- deactivate                                // Deactivate
+
 
 // Instala los requirimientos:
 pip freeze > requirements.txt     // Crear archivo requerimientos
@@ -43,3 +35,4 @@ pip install colorama
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
 
 ```
+

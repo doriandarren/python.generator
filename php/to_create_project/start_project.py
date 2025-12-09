@@ -45,7 +45,7 @@ def start_project():
 
     # Crear Snappy
     generate_snappy(full_path)
-
+    
     # Crear FPDF Merge
     generate_fpdf_merge(full_path)
 
@@ -68,10 +68,8 @@ def start_project():
     generate_module_auth(full_path)
 
 
-
-
     # Shared
-    generate_shared(full_path)   ## TODO Pending
+    generate_shared(full_path)
 
 
     # Utilities
@@ -90,8 +88,6 @@ def start_project():
     generate_execute_controller(full_path)
     generate_test_controller(full_path)
     generate_route_test(full_path)
-
-
 
 
     # Logos

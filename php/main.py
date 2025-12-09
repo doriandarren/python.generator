@@ -9,14 +9,13 @@ from php.to_create_project.start_project import start_project
 
 
 
-if __name__ == "__main__":
-
+def start_php():
     clear_screen()
     print_header("PHP")
 
     str_input = menu_list(
         "¿Que quieres crear?: ",
-        ["Proyecto", "Modulo"]
+        ["Proyecto", "Modulo", "<-Back"]
     )
 
     print(f"Crear un: {str_input} ")
@@ -29,3 +28,7 @@ if __name__ == "__main__":
 
 
     print("Bye...")
+
+
+if __name__ == "__main__":
+    start_php()
