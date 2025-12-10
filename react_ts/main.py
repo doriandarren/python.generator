@@ -11,12 +11,12 @@ if BASE_DIR not in sys.path:
 # from php.to_project.start_project import start_project
 
 
-def start_reat_ts():
+def start_react_ts():
     """Menú principal para generar código (proyectos / módulos)."""
 
     while True:
         clear_screen()
-        print_header("reat_ts")
+        print_header("react_ts")
 
         str_input = menu_list(
             "¿Qué quieres crear?: ",
@@ -28,10 +28,12 @@ def start_reat_ts():
         print(f"Crear un: {str_input} ")
 
         if opt.startswith('proyecto'):
-            start_project()
+            pass
+            # start_project()
 
         elif opt.startswith("módulo") or opt.startswith("modulo"):
-            start_module()
+            pass
+            # start_module()
 
         elif opt.startswith("<-") or opt.startswith("back"):
             print("\nVolviendo al menú anterior...\n")
@@ -42,4 +44,4 @@ def start_reat_ts():
 
 
 if __name__ == "__main__":
-    start_reat_ts()
+    start_react_ts()
