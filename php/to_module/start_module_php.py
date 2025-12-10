@@ -1,6 +1,6 @@
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
-from php.to_module.generator import generate
+from php.to_module.generateModuleStandardPHP import generateModuleStandardPHP
 
 
 def start_module():
@@ -22,21 +22,19 @@ def start_module():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
-    pause()
+    # pause()
 
     full_path = input_with_validation(
         "Proyecto ", "/Users/dorian/PhpstormProjects81/app-1")
     namespace = input_with_validation(
         "Namespace (ERP / API / INVOICES) ", "EFIDATA")
     singular_name = input_with_validation(
-        "Tabla singular (EX: AgendaUnloading): ", None)
+        "Tabla singular (EX: AgendaUnloading): ", "AgendaUnloading")
     plural_name = input_with_validation(
-        "Tabla plural (EX: AgendaUnloadings): ", None)
+        "Tabla plural (EX: AgendaUnloadings): ", "AgendaUnloadings")
     input_columns = input_with_validation(
-        "Columnas (separdo por espacio): ", None)
+        "Columnas (separdo por espacio): ", "customer_id:fk name:string amount:float description has_active:boolean")
 
     columns = [{"name": column} for column in input_columns.split()]
-
-    print(columns)
-
-    # generate(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)
+    
+    generateModuleStandardPHP(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)

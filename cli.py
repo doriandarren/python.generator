@@ -1,4 +1,4 @@
-from react_ts.main import start_reat_ts
+from react_ts.main import start_react_ts
 from helpers.helper_menu import clear_screen, menu_list
 from helpers.helper_print import print_header
 from php.main import start_php
@@ -26,7 +26,7 @@ def start():
             start_php()
 
         elif opt.startswith('react_ts'):
-            start_reat_ts()
+            start_react_ts()
 
         elif opt.startswith('salir'):
             break
