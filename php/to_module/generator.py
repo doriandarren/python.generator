@@ -1,17 +1,17 @@
 import os
 from helpers.helper_print import camel_to_kebab, camel_to_snake
-from php.to_api.create_model_file import generate_model_file
-from php.to_api.create_repository_file import generate_repository_file
-from php.to_api.create_routes_file import generate_routes_file
-from php.to_api.create_migration_file import generate_migration_file
-from php.to_api.create_controller_list_file import generate_controller_list_file
-from php.to_api.create_controller_show_file import generate_controller_show_file
-from php.to_api.create_controller_store_file import generate_controller_store_file
-from php.to_api.create_controller_update_file import generate_controller_update_file
-from php.to_api.create_controller_destroy_file import generate_controller_destroy_file
-from php.to_api.create_seeder_file import generate_seeder_file
-from php.to_api.create_factory_file import generate_factory_file
-from php.to_api.create_postman_file import generate_postman_file
+from php.to_module.create_model_file import generate_model_file
+from php.to_module.create_repository_file import generate_repository_file
+from php.to_module.create_routes_file import generate_routes_file
+from php.to_module.create_migration_file import generate_migration_file
+from php.to_module.create_controller_list_file import generate_controller_list_file
+from php.to_module.create_controller_show_file import generate_controller_show_file
+from php.to_module.create_controller_store_file import generate_controller_store_file
+from php.to_module.create_controller_update_file import generate_controller_update_file
+from php.to_module.create_controller_destroy_file import generate_controller_destroy_file
+from php.to_module.create_seeder_file import generate_seeder_file
+from php.to_module.create_factory_file import generate_factory_file
+from php.to_module.create_postman_file import generate_postman_file
 
 
 

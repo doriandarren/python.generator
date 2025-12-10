@@ -1,6 +1,6 @@
 from databases.settings.connection import get_connection
 from helpers.helper_string import convert_word
-from php.to_api.generator import generate
+from php.to_module.generator import generate
 from helpers.helper_print import input_with_validation
 
 

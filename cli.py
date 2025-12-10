@@ -1,21 +1,40 @@
+import sys
+import os
+
+# Ajustar sys.path para poder importar desde el proyecto
+##sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
 from php.main import start_php
 from helpers.helper_print import print_header
 from helpers.helper_menu import clear_screen, menu_list
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-if __name__ == '__main__':
-
+def start():
     clear_screen()
     print_header("Bienvenodo al Sistema")
 
-    str_input = menu_list(
-        "Lenguajes",
-        ["PHP", "React_TS"]
-    )
+    while True:
+        str_input = menu_list(
+            "Lenguajes",
+            ["PHP", "React_TS", "Salir"]
+        )
 
-    if str_input.lower() == 'php':
-        start_php()
-    
+        opt = str_input.strip().lower()
+
+        if opt.startswith('php'):
+            start_php()
+
+        elif opt.startswith('react_ts'):
+            start_react_ts()
+            
+        elif opt.startswith('salir'):
+            break
+
+    print("\nBye...")
+
+
+if __name__ == '__main__':
+    start()
