@@ -46,7 +46,7 @@ def generate(namespace, ruta, singular_name, plural_name, columns, input_menu_ch
 
     if os.path.isdir(ruta):
         if "model" in input_menu_checkbox:
-            generate_model_file(ruta, path_model, singular_name, plural_name, plural_name_snake)
+            generate_model_file(ruta, namespace, path_model, singular_name, plural_name, plural_name_snake)
 
         if "controller_list" in input_menu_checkbox:
             generate_controller_list_file(ruta, namespace, path_controller, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)

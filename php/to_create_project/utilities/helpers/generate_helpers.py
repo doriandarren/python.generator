@@ -508,20 +508,18 @@ def create_helper_file(full_path):
     content = r"""<?php
 
 namespace App\Utilities\Helpers;
+use Illuminate\Support\Facades\File;
 
+
+/**********************************************
+*
+*  Method Generic to Write File
+*
+* ***********************
+*/
 
 class HelperFile
 {
-
-    /**********************************************
-     *
-     *  Method Generic to Write File
-     *
-     * ***********************
-     */
-
-
-
 
     /**
      * @param $path
