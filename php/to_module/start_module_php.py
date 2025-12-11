@@ -1,3 +1,4 @@
+from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
 from php.to_module.generateModuleStandardPHP import generateModuleStandardPHP
@@ -35,6 +36,8 @@ def start_module():
     input_columns = input_with_validation(
         "Columnas (separdo por espacio): ", "customer_id:fk name:string amount:float description has_active:boolean")
 
-    columns = [{"name": column} for column in input_columns.split()]
+    ##columns = [{"name": column} for column in input_columns.split()]
+    
+    columns = parse_columns_input(input_columns)
     
     generateModuleStandardPHP(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)

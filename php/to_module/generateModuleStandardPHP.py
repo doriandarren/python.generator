@@ -27,9 +27,9 @@ def generateModuleStandardPHP(namespace, ruta, singular_name, plural_name, colum
 
     path_model = "Models/" + namespace + "/" + plural_name
     path_repository = "Repositories/" + namespace + "/" + plural_name
-    path_routes = "routes/" + namespace + "/"
     path_controller = "Http/Controllers/" + namespace + "/" + plural_name
     path_migration = "database/migrations/"
+    path_routes = "routes/"
     path_seeder = "database/seeders"
     path_factory = "database/factories"
 
@@ -39,8 +39,6 @@ def generateModuleStandardPHP(namespace, ruta, singular_name, plural_name, colum
     singular_name_snake = camel_to_snake(singular_name)
     plural_name_snake = camel_to_snake(plural_name)
     
-    print(columns)
-    pause()
 
     if os.path.isdir(ruta):
         if "model" in input_menu_checkbox:
