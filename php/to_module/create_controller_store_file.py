@@ -47,8 +47,9 @@ namespace App\\Http\\Controllers\\{namespace}\\{plural_name};
 
 use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
-use App\\Http\\Controllers\\Controller;
+use Illuminate\\Support\\Facades\\Auth;
 use Illuminate\\Support\\Facades\\Validator;
+use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\{plural_name}\\{singular_name}Repository;
 
 class {singular_name}StoreController extends Controller
@@ -70,7 +71,7 @@ class {singular_name}StoreController extends Controller
     */
     public function __invoke(Request $request): JsonResponse
     {{
-        if($this->isAdmin(auth()->user()->roles)){{
+        if($this->isAdmin(Auth::user()->roles)){{
 
             $validator = Validator::make($request->all(), [
 """
@@ -90,7 +91,7 @@ class {singular_name}StoreController extends Controller
             $data = $this->repository->store(${first_letter_lower(singular_name)});
             return $this->respondWithData('{singular_name} created', $data);
 
-        }} else if($this->isManager(auth()->user()->roles)){{
+        }} else if($this->isManager(Auth::user()->roles)){{
             // By Manager
             $validator = Validator::make($request->all(), [
 """

@@ -1,7 +1,3 @@
-from react_ts.main import start_react_ts
-from helpers.helper_menu import clear_screen, menu_list
-from helpers.helper_print import print_header
-from php.main import start_php
 import sys
 import os
 # Ajustar sys.path para poder importar desde el proyecto
@@ -9,11 +5,15 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
+from react_ts.main import start_react_ts
+from helpers.helper_menu import clear_screen, menu_list
+from helpers.helper_print import print_header
+from php.main import start_php
 
 def start():
     clear_screen()
     print_header("Bienvenodo al Sistema")
-    
+
     while True:
         str_input = menu_list(
             "Lenguajes",

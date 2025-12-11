@@ -31,10 +31,11 @@ def generate_controller_destroy_file(base_ruta, namespace, path_controller, sing
 
 namespace App\\Http\\Controllers\\{namespace}\\{plural_name};
 
-use App\\Models\\{plural_name}\\{singular_name};
 use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
+use Illuminate\\Support\\Facades\\Auth;
 use App\\Http\\Controllers\\Controller;
+use App\\Models\\{plural_name}\\{singular_name};
 use App\\Repositories\\{plural_name}\\{singular_name}Repository;
 
 class {singular_name}DestroyController extends Controller
@@ -58,7 +59,7 @@ class {singular_name}DestroyController extends Controller
     public function __invoke(Request $request, {singular_name} ${singular_name_snake}): JsonResponse
     {{
 
-        if($this->isAdmin(auth()->user()->roles)){{
+        if($this->isAdmin(Auth::user()->roles)){{
 
             $data = $this->repository->destroy(${singular_name_snake}->id);
 

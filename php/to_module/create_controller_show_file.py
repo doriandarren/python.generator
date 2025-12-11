@@ -32,9 +32,10 @@ def generate_controller_show_file(base_ruta, namespace, path_controller, singula
 
 namespace App\\Http\\Controllers\\{namespace}\\{plural_name};
 
-use App\\Models\\{plural_name}\\{singular_name};
+use Illuminate\\Support\\Facades\\Auth;
 use Illuminate\\Http\\JsonResponse;
 use App\\Http\\Controllers\\Controller;
+use App\\Models\\{plural_name}\\{singular_name};
 use App\\Repositories\\{plural_name}\\{singular_name}Repository;
 
 class {singular_name}ShowController extends Controller
@@ -55,10 +56,10 @@ class {singular_name}ShowController extends Controller
     */
     public function __invoke({singular_name} ${singular_name_snake}): JsonResponse
     {{
-        if($this->isAdmin(auth()->user()->roles)){{
+        if($this->isAdmin(Auth::user()->roles)){{
             $data = $this->repository->show(${singular_name_snake}->id);
             return $this->respondWithData('{singular_name} show', $data);
-        }} else if($this->isManager(auth()->user()->roles)){{
+        }} else if($this->isManager(Auth::user()->roles)){{
             $data = $this->repository->showByRoleManager(${singular_name_snake}->id);
             return $this->respondWithData('{singular_name} show', $data);
         }} else {{

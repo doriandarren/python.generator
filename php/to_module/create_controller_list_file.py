@@ -33,6 +33,7 @@ namespace App\\Http\\Controllers\\{namespace}\\{plural_name};
 
 use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
+use Illuminate\\Support\\Facades\\Auth;
 use App\\Http\\Controllers\\Controller;
 use App\\Repositories\\{plural_name}\\{singular_name}Repository;
 
@@ -53,9 +54,9 @@ class {singular_name}ListController extends Controller
     */
     public function __invoke(Request $request): JsonResponse
     {{
-        if ($this->isAdmin(auth()->user()->roles)) {{
+        if ($this->isAdmin(Auth::user()->roles)) {{
             $data = $this->repository->list();
-        }} elseif ($this->isManager(auth()->user()->roles)) {{
+        }} elseif ($this->isManager(Auth::user()->roles)) {{
             $data = $this->repository->listByRoleManager();
         }} else {{
             $data = $this->repository->listByRoleUser();

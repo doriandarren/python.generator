@@ -11,10 +11,9 @@ from php.to_module.start_module_php import start_module
 from php.to_project.start_project import start_project
 
 
-
 def start_php():
     """Menú principal para generar código en PHP (proyectos / módulos)."""
-    
+
     while True:
         clear_screen()
         print_header("PHP")
@@ -23,17 +22,17 @@ def start_php():
             "¿Que quieres crear?: ",
             ["Proyecto", "Modulo", "<-Back"]
         )
-        
+
         opt = str_input.strip().lower()
 
         print(f"Crear un: {str_input} ")
 
         if opt.startswith('proyecto'):
             start_project()
-        
+
         elif opt.startswith("módulo") or opt.startswith("modulo"):
             start_module()
-            
+
         elif opt.startswith("<-") or opt.startswith("back"):
             # Volver al menú anterior (por ejemplo, menú general de lenguajes)
             print("\nVolviendo al menú anterior...\n")

@@ -22,6 +22,9 @@ def generateModuleStandardPHP(namespace, ruta, singular_name, plural_name, colum
         input_menu_checkbox = ["model", "controller_list", "controller_show", "controller_store", "controller_update",
                                "controller_destroy", "repository", "routes", "migration", "seeder", "factory", "postman"]
 
+
+    ##TODO refactorizar esto a cada uno de las rutas
+
     path_model = "Models/" + namespace + "/" + plural_name
     path_repository = "Repositories/" + namespace + "/" + plural_name
     path_routes = "routes/" + namespace + "/"
