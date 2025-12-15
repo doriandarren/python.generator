@@ -74,3 +74,13 @@ pip3 install schedule                           # CronJobs
 ## Si no funciona VSCode:
 ( Cmd + Shift + P ) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
 ```
+
+## Adicionales
+
+```sh
+
+python -m pip install -U pip setuptools wheel
+python -m pip install Cython
+
+```
+
