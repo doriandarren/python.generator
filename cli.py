@@ -5,6 +5,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
+from react.main import start_react
 from react_ts.main import start_react_ts
 from helpers.helper_menu import clear_screen, menu_list
 from helpers.helper_print import print_header
@@ -17,7 +18,7 @@ def start():
     while True:
         str_input = menu_list(
             "Lenguajes",
-            ["PHP", "React_TS", "Salir"]
+            ["PHP", "React", "React_TS", "Salir"]
         )
 
         opt = str_input.strip().lower()
@@ -25,6 +26,9 @@ def start():
         if opt.startswith('php'):
             start_php()
 
+        elif opt.startswith('react'):
+            start_react()
+        
         elif opt.startswith('react_ts'):
             start_react_ts()
 

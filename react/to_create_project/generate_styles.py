@@ -1,24 +1,15 @@
 import os
-
 from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
-
-
 def generate_styles(full_path):
-
     update_main_jsx(full_path)
-
     create_tailwind(full_path)
     create_tailwind_styles(full_path)
-
     ##generate_normalize_styles(full_path, "normalize.css")
     create_scss_styles(full_path)
     create_scss_variables(full_path)
-
     install_compile_sass(full_path)
-
-
 
 
 
@@ -216,14 +207,13 @@ def create_tailwind_styles(full_path):
   --color-danger-light: #ff7961;
   --color-danger-dark: #b83329;
   
-  
   --color-success: #4caf50;
   --color-success-light: #61e265;
   --color-success-dark: #3a893d;
   
-  --color-info: #FFB300;
-  --color-info-light: #FFD54F;
-  --color-info-dark: #FFA000;
+  --color-info: #60A5FA;
+    --color-info-light: #BFDBFE;
+    --color-info-dark: #2563EB;
   
   --color-warning: #facc15;         
   --color-warning-light: #fef9c3;   
@@ -235,9 +225,6 @@ def create_tailwind_styles(full_path):
   
   --color-navbar: #222831;
   --color-background: #f8fafc;
-
-  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 } 
 
 
@@ -252,10 +239,8 @@ def create_tailwind_styles(full_path):
 |
 */
 @layer components {
-    /* Botones */
     .btn {
         @apply py-2 px-4 font-semibold rounded-lg shadow-md transition duration-300 ease-in-out;
-        /* color: #b83329; */
     }
 
     .btn-primary {
@@ -275,13 +260,11 @@ def create_tailwind_styles(full_path):
         color: white;
         @apply shadow-sm hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400;
     }
-    
-    .disabled{
+
+    .disabled {
         @apply bg-gray-100 cursor-not-allowed pointer-events-none;
     }
-    
 
-    /* Inputs */
     .form-control {
         @apply w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
     }

@@ -46,6 +46,3 @@ def create_project_structure(project_path):
         create_folder(full_path)
 
     print_message("Estructura de carpetas generada con éxito.", GREEN)
-
-
-

@@ -2,152 +2,80 @@ import os
 from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
-
-def generate_by_command_line(full_path):
-    # Crear proyecto y configurar
+def generate_by_command_line(full_path: str):
     create_project(full_path)
     install_dependencies(full_path)
-    setup_classname(full_path)
-    setup_headlessui(full_path)  ## Estilos UI
-    setup_heroicons(full_path)  ## Icons
-    setup_lucide_react(full_path)
-    setup_recharts(full_path)
-    setup_animate_css(full_path)
-    setup_sweetalert2(full_path)
-    setup_validation_form(full_path) ## Validators Form
-    setup_clsx(full_path)  ## utilidad para construir cadenas de clases condicionalmente
-    setup_framer_motion(full_path)  ## utilidad para construir cadenas de clases condicionalmente
+
+    # Instalar librerías (declarativo y fácil de mantener)
+    install_packages(full_path, [
+        ("classnames", "ClassNames"),
+        ("@headlessui/react", "Headless UI"),
+        ("@heroicons/react", "Heroicons"),
+        ("lucide-react", "Lucide React"),
+        ("recharts", "Recharts"),
+        ("animate.css", "Animate.css"),
+        ("sweetalert2", "SweetAlert2"),
+        ("clsx", "clsx"),
+        ("framer-motion", "Framer Motion"),
+        ("uuid", "UUID"),
+        ("prop-types", "PropTypes"),
+    ])
+
+    # Form validation (tu stack actual)
+    install_packages(full_path, [
+        ("react-hook-form", "React Hook Form"),
+        ("@hookform/resolvers", "Hookform Resolvers"),
+        ("yup", "Yup"),
+    ], label="Validación de formularios")
+
     delete_app_and_index_css(full_path)
-    setup_uuid(full_path)
-    setup_protypes(full_path)
 
 
-
-
-
-def create_project(full_path):
+def create_project(full_path: str):
     """Crea el proyecto React con Vite."""
-
     project_dir = os.path.dirname(full_path)
     project_name = os.path.basename(full_path)
 
-    # Verificar si el directorio base existe
     if not os.path.exists(project_dir):
         os.makedirs(project_dir)
         print_message(f"Directorio base {project_dir} creado.", GREEN)
 
     print_message("Creando el proyecto React con Vite...", CYAN)
-    run_command(f"npm create vite@latest {project_name} -- --template react", cwd=project_dir)
+    run_command(
+        f"npm create vite@latest {project_name} -- --template react --yes",
+        cwd=project_dir
+    )
 
 
-def install_dependencies(full_path):
+def install_dependencies(full_path: str):
     """Instala las dependencias del proyecto."""
-    print_message("Instalando dependencias...", CYAN)
+    print_message("Instalando dependencias (npm install)...", CYAN)
     run_command("npm install", cwd=full_path)
+    print_message("Dependencias instaladas.", GREEN)
 
 
-
-def setup_classname(full_path):
-    """Instala ClassNames."""
-    print_message("Instalando ClassNames...", CYAN)
-    run_command("npm install classnames", cwd=full_path)
-    print_message("ClassNames instalado correctamente.", GREEN)
-
-
-def setup_headlessui(full_path):
-    """Instala Headlessui."""
-    print_message("Instalando Headlessui...", CYAN)
-    run_command("npm install @headlessui/react", cwd=full_path)
-    print_message("Headlessui instalado correctamente.", GREEN)
-
-
-def setup_heroicons(full_path):
-    """Instala Heroicons."""
-    print_message("Instalando Heroicons...", CYAN)
-    run_command("npm install @heroicons/react", cwd=full_path)
-    print_message("Heroicons instalado correctamente.", GREEN)
-
-
-
-def setup_lucide_react(full_path):
-    """Instala Heroicons."""
-    print_message("Instalando LucideReact...", CYAN)
-    run_command("npm install lucide-react", cwd=full_path)
-    print_message("LucideReact instalado correctamente.", GREEN)
-
-
-def setup_animate_css(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando AnimateCss...", CYAN)
-    run_command("npm install animate.css --save", cwd=full_path)
-    print_message("AnimateCss instalado correctamente.", GREEN)
-
-
-def setup_sweetalert2(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando Sweetalert2...", CYAN)
-    run_command("npm install sweetalert2", cwd=full_path)
-    print_message("Sweetalert2 instalado correctamente.", GREEN)
-
-
-def setup_clsx(full_path):
-    """Instala Clsx."""
-    print_message("Instalando Clsx...", CYAN)
-    run_command("npm install clsx", cwd=full_path)
-    print_message("Clsx instalado correctamente.", GREEN)
-
-
-def setup_framer_motion(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando FramerMotion...", CYAN)
-    run_command("npm install framer-motion", cwd=full_path)
-    print_message("React FramerMotion instalado correctamente.", GREEN)
-
-
-
-def setup_validation_form(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando FramerMotion...", CYAN)
-    run_command("npm install react-hook-form @hookform/resolvers yup", cwd=full_path)
-    print_message("React FramerMotion instalado correctamente.", GREEN)
-
-
-
-def setup_uuid(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando UUID...", CYAN)
-    run_command("npm i uuid", cwd=full_path)
-    print_message("UUID instalado correctamente.", GREEN)
-
-
-def setup_recharts(full_path):
-    """Instala FramerMotion."""
-    print_message("Instalando Recharts...", CYAN)
-    run_command("npm install recharts", cwd=full_path)
-    print_message("Recharts instalado correctamente.", GREEN)
-
-
-
-def setup_protypes(full_path):
-    """ PropTypes """
-    print_message("Instalando PropTypes...", CYAN)
-    run_command("npm install prop-types", cwd=full_path)
-    print_message("PropTypes instalado correctamente.", GREEN)
-
-
-
-
-
-def delete_app_and_index_css(full_path):
+def install_packages(full_path: str, packages: list[tuple[str, str]], label: str | None = None):
     """
-    Elimina los archivos src/App.css y src/index.css si existen.
+    Instala paquetes con npm.
+    packages: [("pkg-name", "Nombre bonito"), ...]
     """
+    if label:
+        print_message(f"Instalando: {label}", CYAN)
+
+    for pkg, nice_name in packages:
+        print_message(f"Instalando {nice_name} ({pkg})...", CYAN)
+        run_command(f"npm install {pkg}", cwd=full_path)
+        print_message(f"{nice_name} instalado correctamente.", GREEN)
+
+
+def delete_app_and_index_css(full_path: str):
+    """Elimina los archivos src/App.css y src/index.css si existen."""
     files_to_delete = ["src/App.css", "src/index.css"]
 
-    for file in files_to_delete:
-        file_path = os.path.join(full_path, file)
+    for rel in files_to_delete:
+        file_path = os.path.join(full_path, rel)
         if os.path.exists(file_path):
             os.remove(file_path)
-            print_message(f"{file} eliminado correctamente.", GREEN)
+            print_message(f"{rel} eliminado correctamente.", GREEN)
         else:
-            print_message(f"{file} no existe, no es necesario eliminarlo.", CYAN)
+            print_message(f"{rel} no existe, no es necesario eliminarlo.", CYAN)

@@ -10,8 +10,9 @@ from colorama import Fore
 
 # Colores para mensajes
 GREEN = "\033[0;32m"
-CYAN = "\033[0;36m"
-NC = "\033[0m"  # Sin color
+CYAN  = "\033[0;36m"
+RED   = "\033[0;31m"
+NC    = "\033[0m"  # Sin color
 
 
 def print_message(message, color=NC):

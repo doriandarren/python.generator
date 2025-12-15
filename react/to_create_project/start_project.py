@@ -1,5 +1,7 @@
-from helpers.helper_print import print_message, GREEN, CYAN
-from react.to_create_project.generate_components import generate_components
+import os
+from helpers.helper_menu import pause
+from helpers.helper_print import RED, dd, print_message, GREEN, CYAN
+from react.to_create_project.components.generate_components import generate_components
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
 from react.to_create_project.generate_by_command_line import generate_by_command_line
@@ -27,31 +29,41 @@ from react.to_create_project.generate_module_profile import generate_module_prof
 
 def start_project():
     # Ruta predeterminada
+    # default_path = "/Users/dorian/ReactProjects"
+
+    # project_name = input("Nombre del proyecto React: ")
+    # project_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip()
+
+    # # Si no se introduce una ruta, usar la predeterminada
+    # if not project_path:
+    #     project_path = default_path
+
+    # # Combinar la ruta y el nombre del proyecto
+    # full_path = f"{project_path}/{project_name}"
+    
+    
+    # Ruta predeterminada
     default_path = "/Users/dorian/ReactProjects"
 
-    project_name = input("Nombre del proyecto React: ")
-    project_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip()
+    project_name = input("Nombre del proyecto React (default: app-1): ").strip() or "app-1"
+    base_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip() or default_path
 
-    # Si no se introduce una ruta, usar la predeterminada
-    if not project_path:
-        project_path = default_path
+    if not project_name:
+        print_message("El nombre del proyecto no puede estar vacío.", RED)
+        return
 
-    # Combinar la ruta y el nombre del proyecto
-    full_path = f"{project_path}/{project_name}"
-
-
+    full_path = os.path.join(base_path, project_name)
+    
+    
     generate_by_command_line(full_path)
-    generate_project_structure(full_path)
-    generate_styles(full_path)
-
-
-    generate_images(full_path)
-
+    ##generate_project_structure(full_path)
+    generate_styles(full_path) 
+    generate_images(full_path) 
 
 
     ## Layouts
-    generate_public_layouts(full_path)
     generate_private_layouts(full_path)
+    generate_public_layouts(full_path)
 
 
     ## generate Public
@@ -66,7 +78,7 @@ def start_project():
     generate_module_dashboard(full_path)
 
     # Auth
-    generate_module_auth(full_path) ########### TODO NUUEUEUEUE ---------------<>>>>>>>>>>
+    generate_module_auth(full_path)
 
     ## Profile
     generate_module_profile(full_path)
@@ -81,7 +93,7 @@ def start_project():
     generate_helpers(full_path)
 
     # Translate
-    generate_translate(full_path) ########### TODO VOY AQUIIII ---------------<>>>>>>>>>>
+    generate_translate(full_path) 
 
     generate_env(full_path)
 
@@ -93,7 +105,17 @@ def start_project():
     generate_index_html(full_path)
 
     generate_folder_api(full_path)
+    
+    
+    ## TODO Add:
+    ## Roles and Permission
+    ## generateHelperAllowedPaths(fullPath);
+    ## generateHelperBuildAccessibleNav(fullPath);
+    ## generateHelperRoleMenuAccess(fullPath);
+    
 
     # Mensaje final
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
     print_message(f"Para empezar: cd {full_path} && npm run dev", CYAN)
+    pause()
+
