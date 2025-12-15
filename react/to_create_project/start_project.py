@@ -1,6 +1,7 @@
 import os
 from helpers.helper_menu import pause
 from helpers.helper_print import RED, dd, print_message, GREEN, CYAN
+from react.to_create_module.generate_module_standard import generate_module_standard
 from react.to_create_project.components.generate_components import generate_components
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
@@ -20,8 +21,11 @@ from react.to_create_project.generate_gitignore import generate_gitignore
 from react.to_create_project.generate_readme import generate_readme
 from react.to_create_project.generate_index_html import generate_index_html
 from react.to_create_project.generate_folder_api import generate_folder_api
-from react.to_create_project.generate_module_teams import generate_module_teams
 from react.to_create_project.generate_module_profile import generate_module_profile
+from react.to_create_project.role_permissions.generate_helper_allowed_paths import generate_helper_allowed_paths
+from react.to_create_project.role_permissions.generate_helper_build_accessible_nav import generate_generate_helper_build_accessible_nav
+from react.to_create_project.role_permissions.generate_helper_role_menu_access import generate_helper_role_menu_access
+
 
 
 
@@ -84,7 +88,7 @@ def start_project():
     generate_module_profile(full_path)
 
     # Teams
-    generate_module_teams(full_path)
+    generate_module_standard(full_path)
 
     # Redux
     generate_redux(full_path)
@@ -106,12 +110,10 @@ def start_project():
 
     generate_folder_api(full_path)
     
-    
-    ## TODO Add:
     ## Roles and Permission
-    ## generateHelperAllowedPaths(fullPath);
-    ## generateHelperBuildAccessibleNav(fullPath);
-    ## generateHelperRoleMenuAccess(fullPath);
+    generate_helper_allowed_paths(full_path)
+    generate_generate_helper_build_accessible_nav(full_path)
+    generate_helper_role_menu_access(full_path)
     
 
     # Mensaje final

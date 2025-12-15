@@ -39,6 +39,4 @@ def generate_components(full_path):
     generate_section(full_path)
     generate_text(full_path)
     generate_toggle(full_path)
-    
-    
     generate_tooltip(full_path)

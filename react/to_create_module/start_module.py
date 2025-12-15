@@ -1,3 +1,4 @@
+from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
 from react.to_create_module.generate_module_standard import generate_module_standard
@@ -21,13 +22,20 @@ def start_module():
     project_path = "/Users/dorian/ReactProjects/"
 
     print("[Directorio por defecto es: /Users/dorian/ReactProjects/]")
-    folder_project = input_with_validation("Carpeta Proyecto: ")
-    singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", None)
-    plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", None)
-    input_columns = input_with_validation("Columnas: ", None)
+    folder_project = input_with_validation("Carpeta Proyecto: ", "/Users/dorian/ReactProjects/")
+    singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", "AgendaUnloading")
+    plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", "AgendaUnloadings")
+    input_columns = input_with_validation("Columnas: ", "user_id:fk name age:integer description")
 
-    columns = [{"name": column} for column in input_columns.split()]
+    
+
+    #columns = [{"name": column} for column in input_columns.split()]
+    columns = parse_columns_input(input_columns)
+    
     project_path = project_path + folder_project + "/"
+    
+    print(columns)
+    pause()
 
-    generate_module_standard(project_path, singular_name, plural_name, columns, input_menu_checkbox)
+    ##generate_module_standard(project_path, singular_name, plural_name, columns, input_menu_checkbox)
 

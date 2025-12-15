@@ -1,4 +1,3 @@
-
 def parse_columns_input(input_columns: str):
     """
     Convierte un string tipo:
@@ -6,7 +5,7 @@ def parse_columns_input(input_columns: str):
     en una lista de diccionarios bien formados.
     """
 
-    allowed_types = {"string", "int", "float", "boolean", "fk"}
+    allowed_types = {"string", "integer", "float", "boolean", "fk"}
 
     columns = []
 

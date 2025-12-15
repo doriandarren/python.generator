@@ -1,5 +1,6 @@
 import os
 from helpers.helper_print import create_folder, camel_to_kebab, camel_to_snake
+from helpers.helpers import dd
 from react.to_create_module.generate_list_page import create_list_page
 from react.to_create_module.generate_routes import create_routes
 from react.to_create_module.generate_create_page import create_create_page
@@ -9,6 +10,11 @@ from react.to_create_module.generate_service_file import create_service_file
 
 
 def generate_module_standard(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
+    
+    
+    print(project_path, singular_name, plural_name, columns, input_menu_checkbox=None)
+    
+    dd("OKKK")
 
     ## Input Default
     if input_menu_checkbox is None:
@@ -22,8 +28,6 @@ def generate_module_standard(project_path, singular_name, plural_name, columns, 
     plural_name_snake = camel_to_snake(plural_name)
     singular_first_camel = singular_name[:1].lower() + singular_name[1:]
 
-
-    # DILAN
     if "route" in input_menu_checkbox:
         create_routes(project_path, singular_name, plural_name_snake)
 
@@ -33,9 +37,6 @@ def generate_module_standard(project_path, singular_name, plural_name, columns, 
     if "create" in input_menu_checkbox:
         create_create_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
 
-
-
-    ##  MILENA
     if "edit" in input_menu_checkbox:
         create_edit_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns)
 

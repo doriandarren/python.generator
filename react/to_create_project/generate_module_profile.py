@@ -64,10 +64,10 @@ def create_profile_page(project_path):
 
     # Contenido de file
     content = """import { useTranslation } from "react-i18next"
-import { SessionLayout } from "../../../layouts/private/SessionLayout"
 import { useState } from "react";
-import { Button } from "../../../components/Buttons/Button";
 import Swal from "sweetalert2";
+import { SessionLayout } from "../../../layouts/private/SessionLayout"
+import { ThemedButton } from "../../../components/Buttons/ThemedButton";
 
 
 const dataForm = {
@@ -165,11 +165,11 @@ export const ProfilePage = () => {
           </div>
 
           <div className="flex justify-end items-end mt-7">
-            <Button 
+            <ThemedButton 
               type="submit"
             >
               {t("save")}
-            </Button>
+            </ThemedButton>
           </div>
 
         </form>
