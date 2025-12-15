@@ -118,4 +118,3 @@ def start_project():
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
     print_message(f"Para empezar: cd {full_path} && npm run dev", CYAN)
     pause()
-

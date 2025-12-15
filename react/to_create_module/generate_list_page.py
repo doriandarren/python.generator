@@ -1,73 +1,105 @@
 import os
 from helpers.helper_print import create_folder
 
+from react.to_create_module.helpers.helper_list import (
+    clean_name,
+    build_filters_state,
+    build_reset_filters_body,
+    build_filters_object,
+    build_effect_deps,
+    build_render_filters_fn,
+)
 
 
-def create_list_page(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
-    """
-    Genera dinámicamente el archivo {singular_name}Page.jsx con nombres adaptados.
-    """
-    # Define la ruta del archivo
+def create_list_page(
+    project_path,
+    singular_name,
+    plural_name,
+    singular_name_kebab,
+    plural_name_kebab,
+    singular_name_snake,
+    plural_name_snake,
+    singular_first_camel,
+    columns,
+):
     pages_dir = os.path.join(project_path, "src", "modules", plural_name_snake, "pages")
     file_path = os.path.join(pages_dir, f"{singular_name}Page.jsx")
 
-    # Crear la carpeta pages si no existe
     create_folder(pages_dir)
 
-    # Extraer solo los nombres de columna correctamente
-    column_names = [col["name"] for col in columns]
+    column_names = [c["name"] for c in columns]
 
-    # Generar correctamente `dataHeader` sin formato erróneo
-    data_headers = ",\n    ".join([f'{{ key: "{col}", label: t("{col}") }}' for col in column_names])
+    # headers: label limpia _id
+    data_headers = "\n".join(
+        [f'    {{ key: "{col}", label: t("{clean_name(col)}") }},' for col in column_names]
+    )
 
-    # Contenido del archivo JSX con nombres dinámicos
-    content = f"""import {{ SessionLayout }} from "../../../layouts/private/SessionLayout";
-import {{ Datatable }} from "../../../components/DataTables/DataTable";
-import {{ useNavigate }} from "react-router-dom";
-import {{ useTranslation }} from "react-i18next";
-import {{ Button }} from "../../../components/Buttons/Button";
-import {{ useEffect, useState }} from "react";
-import {{ delete{singular_name}, get{plural_name} }} from "../services/{singular_first_camel}Service";
+    # filtros (igual que Node)
+    filters_state = build_filters_state(column_names)
+    reset_filters_body = build_reset_filters_body(column_names)
+    filters_object = build_filters_object(column_names, indent="          ")
+    effect_deps = build_effect_deps(column_names)
+    render_filters = build_render_filters_fn(column_names).rstrip()
+
+    # Template con TOKENS únicos (sin format)
+    template = r"""
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import {{ Toast }} from "../../../helpers/helperToast";
-import {{ Preloader }} from "../../../components/Preloader/Preloader";
+import { SessionLayout } from "../../../layouts/private/SessionLayout";
+import { Toast } from "../../../helpers/helperToast";
+import { Preloader } from "../../../components/Preloader/Preloader";
+import { ThemedDataTable } from "../../../components/DataTables/ThemedDataTable";
+import { ThemedButton } from "../../../components/Buttons/ThemedButton";
+import { ThemedText } from "../../../components/Text/ThemedText";
+import { delete__SINGULAR__, get__PLURAL__ } from "../services/__SERVICE__Service";
 
-
-export const {singular_name}Page = () => {{
+export const __SINGULAR__Page = () => {
   const navigate = useNavigate();
-  const {{ t }} = useTranslation();
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // --- filtros (UI) ---
+  __FILTERS_STATE__
+
+  const resetFilters = useCallback(() => {
+__RESET_FILTERS_BODY__
+  }, []);
+
   const dataHeader = [
-    {data_headers}
+__DATA_HEADERS__
   ];
 
-  useEffect(() => {{
-    const fetchApi = async () => {{
+  useEffect(() => {
+    const fetchApi = async () => {
       setLoading(true);
+      try {
 
-      try {{
-        const response = await get{plural_name}();
-        const {{ data }} = response;
+        const response = await get__PLURAL__({
+__FILTERS_OBJECT__
+        });
 
-        if (Array.isArray(data)) {{
+        const { data } = response;
+
+        if (Array.isArray(data)) {
           setData(data);
-        }} else {{
+        } else {
           console.warn("La API no devolvió un array:", response);
-        }}
-      }} catch (error) {{
+        }
+      } catch (error) {
         console.error("Error al obtener los datos:", error);
-      }} finally {{
+      } finally {
         setLoading(false);
-      }}
-    }};
+      }
+    };
 
     fetchApi();
-  }}, []);
+  }, [__EFFECT_DEPS__]);
 
-  const onDeleteClick = async (id, description = "") => {{
-    Swal.fire({{
+  const onDeleteClick = async (id, description = "") => {
+    Swal.fire({
       icon: "warning",
       title: t("message.are_you_sure"),
       text: t("delete") + (description !== "" ? ": " + description : ""),
@@ -75,66 +107,82 @@ export const {singular_name}Page = () => {{
       confirmButtonText: t("delete"),
       cancelButtonText: t("cancel"),
       confirmButtonColor: import.meta.env.VITE_SWEETALERT_COLOR_BTN_SUCCESS,
-    }}).then(async (result) => {{
-      if (result.isConfirmed) {{
-        try {{
-          const response = await delete{singular_name}(id);
-          const {{ success, errors }} = response;
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await delete__SINGULAR__(id);
+          const { success, errors } = response;
 
-          if (success) {{
+          if (success) {
             setData((prevData) => prevData.filter((item) => item.id !== id));
             await Toast(t("message.record_deleted"), "success");
-          }} else {{
+          } else {
             await Toast(errors?.[0]?.e || t("message.error_deleting"), "error");
-          }}
-        }} catch (error) {{
+          }
+        } catch (error) {
           console.error("Error al eliminar el registro:", error);
           await Toast(t("message.error_deleting"), "error");
-        }}
-      }}
-    }});
-  }};
+        }
+      }
+    });
+  };
 
-  const onAddClick = (e) => {{
+  const onAddClick = (e) => {
     e.preventDefault();
-    navigate("/admin/{plural_name_kebab}/create");
-  }};
+    navigate("/admin/__PLURAL_KEBAB__/create");
+  };
 
   return (
     <SessionLayout>
       <div className="flex items-center justify-between mb-5">
-        <div className="mt-1">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">{{ t("{plural_name_snake}") }}</h2>
-        </div>
+        <ThemedText type="h2">{t("__PLURAL_SNAKE__")}</ThemedText>
 
         <div className="sm:flex sm:items-center">
           <div className="mt-4 sm:mt-0 sm:flex-none">
-            <Button type="button" onClick={{onAddClick}}>
-              {{ t("add") }}
-            </Button>
+            <ThemedButton type="button" onClick={onAddClick}>
+              {t("add")}
+            </ThemedButton>
           </div>
         </div>
       </div>
 
-      {{ loading ? (
+      {/* filters */}
+      __RENDER_FILTERS__
+
+      {loading ? (
         <Preloader />
       ) : (
-        <Datatable
-          columns={{dataHeader}}
-          data={{data}}
-          editPath="/admin/{plural_name_kebab}"
-          onDelete={{onDeleteClick}}
+        <ThemedDataTable
+          columns={dataHeader}
+          data={data}
+          editPath="/admin/__PLURAL_KEBAB__"
+          onDelete={onDeleteClick}
         />
-      ) }}
+      )}
     </SessionLayout>
   );
-}};
-"""
+};
+""".lstrip()
 
-    # Crear el archivo
+    # Reemplazos (sin format → no KeyError nunca)
+    content = (
+        template
+        .replace("__SINGULAR__", singular_name)
+        .replace("__PLURAL__", plural_name)
+        .replace("__SERVICE__", singular_first_camel)
+        .replace("__PLURAL_KEBAB__", plural_name_kebab)
+        .replace("__PLURAL_SNAKE__", plural_name_snake)
+        .replace("__FILTERS_STATE__", filters_state)
+        .replace("__RESET_FILTERS_BODY__", reset_filters_body)
+        .replace("__DATA_HEADERS__", data_headers)
+        .replace("__FILTERS_OBJECT__", filters_object)
+        .replace("__EFFECT_DEPS__", effect_deps)
+        .replace("__RENDER_FILTERS__", render_filters)
+    )
+
     try:
-        with open(file_path, "w") as file:
-            file.write(content)
-        print(f"Archivo creado: {file_path}")
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"✅ Archivo creado: {file_path}")
     except Exception as e:
-        print(f"Error al crear el archivo {file_path}: {e}")
+        print(f"❌ Error al crear el archivo {file_path}: {e}")

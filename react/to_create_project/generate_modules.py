@@ -19,7 +19,7 @@ def generate_modules(full_path):
             {"name": "password", "type": "STRING", "allowNull": True},
             {"name": "image_url", "type": "STRING", "allowNull": True},
         ],
-        ["route", "list", "create", "edit", "create", "barrel", "service"],
+        ["route", "list", "create", "edit", "barrel", "service"],
     )
 
 
