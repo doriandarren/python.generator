@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from helpers.helper_print import capitalize_camel_case, input_with_validation
 from helpers.helper_string import convert_word
 from php.to_module.generateModuleStandardPHP import generate
-from react.to_create_module.generate_module_standard import generate_module_standard
+from react.to_create_module.generate_module_standard_react import generate_module_standard
 
 
 def generate_tables_columns(xml_path, excluded_columns):

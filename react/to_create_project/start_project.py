@@ -1,12 +1,11 @@
 import os
 from helpers.helper_menu import pause
 from helpers.helper_print import RED, dd, print_message, GREEN, CYAN
-from react.to_create_module.generate_module_standard import generate_module_standard
 from react.to_create_project.components.generate_components import generate_components
+from react.to_create_project.generate_modules import generate_modules
 from react.to_create_project.generate_react_router import generate_react_router
 from react.to_create_project.generate_images import generate_images
 from react.to_create_project.generate_by_command_line import generate_by_command_line
-from react.to_create_project.generate_project_structure import generate_project_structure
 from react.to_create_project.generate_styles import generate_styles
 from react.to_create_project.generate_public_layouts import generate_public_layouts
 from react.to_create_project.generate_private_layouts import generate_private_layouts
@@ -60,7 +59,6 @@ def start_project():
     
     
     generate_by_command_line(full_path)
-    ##generate_project_structure(full_path)
     generate_styles(full_path) 
     generate_images(full_path) 
 
@@ -87,8 +85,8 @@ def start_project():
     ## Profile
     generate_module_profile(full_path)
 
-    # Teams
-    generate_module_standard(full_path)
+    # Modules
+    generate_modules(full_path)
 
     # Redux
     generate_redux(full_path)
