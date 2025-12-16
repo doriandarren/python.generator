@@ -23,16 +23,11 @@ def start_module():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
-    # pause()
-
-    full_path = input_with_validation(
-        "Proyecto ", "/Users/dorian/PhpstormProjects81/app-1")
-    namespace = input_with_validation(
-        "Namespace (ERP / API / INVOICES) ", "EFIDATA")
-    singular_name = input_with_validation(
-        "Tabla singular (EX: AgendaUnloading): ", "AgendaUnloading")
-    plural_name = input_with_validation(
-        "Tabla plural (EX: AgendaUnloadings): ", "AgendaUnloadings")
+    ##full_path = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/app-1")
+    full_path = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/docker-laravel-84/projects/services.avanzaoil.eu")
+    namespace = input_with_validation("Namespace (ERP / API / INVOICES) ", "EFIDATA")
+    singular_name = input_with_validation("Tabla singular (EX: AgendaUnloading): ", "AgendaUnloading")
+    plural_name = input_with_validation("Tabla plural (EX: AgendaUnloadings): ", "AgendaUnloadings")
     input_columns = input_with_validation(
         "Columnas (separdo por espacio): ", "customer_id:fk name:string amount:float description has_active:boolean")
 
@@ -41,3 +36,5 @@ def start_module():
     columns = parse_columns_input(input_columns)
     
     generate_module_standard_php(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)
+    
+    pause()
