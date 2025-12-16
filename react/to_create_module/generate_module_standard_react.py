@@ -64,6 +64,7 @@ def generate_module_standard_react(project_path, singular_name, plural_name, col
             singular_name_snake,
             plural_name_snake,
             singular_first_camel,
+            plural_first_camel,
             columns,
         )
 

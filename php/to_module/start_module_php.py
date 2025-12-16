@@ -1,7 +1,7 @@
 from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
-from php.to_module.generateModuleStandardPHP import generateModuleStandardPHP
+from php.to_module.generate_module_standard_php import generate_module_standard_php
 
 
 def start_module():
@@ -40,4 +40,4 @@ def start_module():
     
     columns = parse_columns_input(input_columns)
     
-    generateModuleStandardPHP(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)
+    generate_module_standard_php(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)

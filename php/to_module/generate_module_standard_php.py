@@ -15,7 +15,7 @@ from php.to_module.create_factory_file import generate_factory_file
 from php.to_module.create_postman_file import generate_postman_file
 
 
-def generateModuleStandardPHP(namespace, ruta, singular_name, plural_name, columns, input_menu_checkbox=None):
+def generate_module_standard_php(namespace, ruta, singular_name, plural_name, columns, input_menu_checkbox=None):
 
     # Input Default
     if input_menu_checkbox is None:

@@ -1,44 +1,72 @@
+import re
+import html
 import xml.etree.ElementTree as ET
-from helpers.helper_print import capitalize_camel_case
-from helpers.helper_string import convert_word
+
+from import_diagrams.helpers.helper_table_naming import table_to_classes
+
+_TAG_RE = re.compile(r"<[^>]+>")
+
+def _clean_value(v: str) -> str:
+    if not v:
+        return ""
+
+    # decode html entities (&nbsp;, &amp;...)
+    v = html.unescape(v)
+
+    # remove html tags
+    v = _TAG_RE.sub("", v)
+
+    # normalize spaces/newlines
+    v = v.replace("\xa0", " ").replace("\n", " ").strip()
+
+    # collapse multiple spaces
+    v = re.sub(r"\s+", " ", v)
+
+    return v
 
 
+def list_diagrams(xml_path, excluded_columns, selected_filename=None):
+    if selected_filename:
+        print(f"✔ 📂 Selecciona un archivo para importar: {selected_filename}")
 
-def list_diagrams(xml_path, excluded_columns):
     tree = ET.parse(xml_path)
     root = tree.getroot()
+
+    excluded = {c.lower() for c in excluded_columns}
     tables = {}
 
-    for cell in root.iter('mxCell'):
-        style = cell.attrib.get('style', '')
-        if 'swimlane' in style:
-            table_id = cell.attrib['id']
-            table_name = cell.attrib.get('value', 'unknown_table')
-            tables[table_id] = {
-                'name': table_name,
-                'columns': []
-            }
+    # 1) Tablas (swimlane)
+    for cell in root.iter("mxCell"):
+        style = cell.attrib.get("style", "")
+        if "swimlane" in style:
+            table_id = cell.attrib.get("id")
+            table_name = _clean_value(cell.attrib.get("value", "unknown_table"))
+            if table_id:
+                tables[table_id] = {"name": table_name, "columns": []}
 
-    for cell in root.iter('mxCell'):
-        parent_id = cell.attrib.get('parent')
-        value = cell.attrib.get('value')
-        if parent_id in tables and value:
-            if 'swimlane' not in cell.attrib.get('style', '') and value not in excluded_columns:
-                tables[parent_id]['columns'].append(value)
+    # 2) Columnas
+    for cell in root.iter("mxCell"):
+        parent_id = cell.attrib.get("parent")
+        value = _clean_value(cell.attrib.get("value"))
 
+        if not value or parent_id not in tables:
+            continue
+
+        style = cell.attrib.get("style", "")
+        if "swimlane" in style:
+            continue
+
+        if value.lower() in excluded:
+            continue
+
+        tables[parent_id]["columns"].append(value)
+
+    # 3) Output con tu formato
     for table in tables.values():
-        print(f"📦 Tabla: {table['name']}")
-        for column in table['columns']:
-            print(f"  - 🧩 {column}")
+        table_name = table["name"]
+        singular_class, plural_class = table_to_classes(table_name)
+
+        print(f"📄 Table: {table_name} - {singular_class} - {plural_class}")
+        cols = table["columns"]
+        print("Columns:", " ".join(cols) if cols else "(none)")
         print()
-
-
-
-        # plural_name = capitalize_camel_case(table['name']) # e.g., InvoiceLines
-        # singular_name = convert_word(plural_name)  # e.g., invoice_line
-        # singular_name = capitalize_camel_case(singular_name['singular']) # e.g., InvoiceLine
-
-
-        # Format custom:
-        # print(f"require base_path('routes/API/{ table['name'] }.php'); ")
-        # print()

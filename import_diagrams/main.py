@@ -1,44 +1,42 @@
-import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from helpers.helper_menu import clear_screen, menu_list
 from helpers.helper_print import print_header
 from import_diagrams.to_generate.generate_tables_columns import generate_tables_columns
 from import_diagrams.to_list.list_diagrams import list_diagrams
-
+from import_diagrams.helpers.helper_assets_loader import list_xml_assets
 
 EXCLUDED_COLUMNS = {"id", "created_at", "updated_at", "deleted_at"}
 
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # python.generator/
-xml_path = os.path.join(BASE_DIR, "import_diagrams", "Truckwash.drawio.xml")
-
+HERE = os.path.dirname(os.path.abspath(__file__))
+ASSETS_DIR = os.path.join(HERE, "assets")
 
 
-if __name__ == '__main__':
-
+def start_import_diagrams():
     clear_screen()
     print_header("IMPORT DIAGRAMS")
 
-    str_input = menu_list(
-        "¿Que quieres crear?: ",
-        ["Listar", "Generar"]
-    )
+    opt = menu_list("¿Qué quieres hacer?", [
+        {"name": "Listar", "value": "listar"},
+        {"name": "Generar", "value": "generar"},
+        {"name": "Volver", "value": "volver"},
+    ])
 
-    print(f"Crear un: {str_input} ")
+    if opt in ("volver", None):
+        return
 
-    if str_input.lower() == 'listar':
+    files = list_xml_assets(ASSETS_DIR)
+
+    if not files:
+        print("❌ No hay archivos .drawio.xml en assets/")
+        return
+
+    xml_path = menu_list("Selecciona el diagrama:", files)
+
+    if not xml_path:
+        return
+
+    if opt == "listar":
         list_diagrams(xml_path, EXCLUDED_COLUMNS)
-    if str_input.lower() == 'generar':
+
+    elif opt == "generar":
         generate_tables_columns(xml_path, EXCLUDED_COLUMNS)
-
-
-    print("✅ Bye...")
-
-
-## /Users/dorian/PhpstormProjects81/docker-laravel-84/projects/api.truckwashvilamalla.eu/
-
-## /Users/dorian/ReactProjects/office.truckwashvilamalla.eu/
-
-## dorian.gonzalez@globaltank.eu

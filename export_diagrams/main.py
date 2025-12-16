@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 
+from helpers.helper_menu import clear_screen
 from helpers.helper_print import print_header
 
 
@@ -65,9 +66,9 @@ def generate_diagrams(table, user_columns):
 
 
 
-
-if __name__ == '__main__':
-
+def start_export_diagrams():
+    
+    clear_screen()
     print_header("EXPORT DIAGRAMS")
 
     while True:
@@ -84,4 +85,8 @@ if __name__ == '__main__':
         if continuar != "s":
             break
 
-    print("👋 Fin del generador de diagramas.")
+    
+    
+    
+if __name__ == '__main__': 
+    start_export_diagrams()

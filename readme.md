@@ -30,7 +30,6 @@ pip3 install colorama                    # Console / Terminal
 pip3 install requests                           # Conexion API
 pip3 install schedule  
 pip3 install mysql-connector-python
-
 pip3 install inflect
 
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar

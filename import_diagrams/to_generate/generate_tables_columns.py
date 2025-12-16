@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 from helpers.helper_print import capitalize_camel_case, input_with_validation
 from helpers.helper_string import convert_word
-from php.to_module.generateModuleStandardPHP import generate
-from react.to_create_module.generate_module_standard_react import generate_module_standard
+from php.to_module.generate_module_standard_php import generate_module_standard_php
+from react.to_create_module.generate_module_standard_react import generate_module_standard_react
 
 
 def generate_tables_columns(xml_path, excluded_columns):
@@ -52,8 +52,8 @@ def generate_tables_columns(xml_path, excluded_columns):
 
 
         ## Generate PHP
-        ## generate(php_namespace, php_full_path, singular_name, plural_name, columns)
+        ##generate_module_standard_php(php_namespace, php_full_path, singular_name, plural_name, columns)
 
         ## Generate React
-        generate_module_standard(react_full_path, singular_name, plural_name, columns)
+        ##generate_module_standard_react(react_full_path, singular_name, plural_name, columns)
 
