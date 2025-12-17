@@ -35,8 +35,8 @@ use Illuminate\\Http\\JsonResponse;
 use Illuminate\\Http\\Request;
 use Illuminate\\Support\\Facades\\Auth;
 use App\\Http\\Controllers\\Controller;
-use App\\Models\\{plural_name}\\{singular_name};
-use App\\Repositories\\{plural_name}\\{singular_name}Repository;
+use App\\Models\\{namespace}\\{plural_name}\\{singular_name};
+use App\\Repositories\\{namespace}\\{plural_name}\\{singular_name}Repository;
 
 class {singular_name}DestroyController extends Controller
 {{

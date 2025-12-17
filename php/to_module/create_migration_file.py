@@ -58,9 +58,9 @@ return new class extends Migration
      */
     public function up()
     {{
-        if (!Schema::connection('api')->hasTable('{plural_name_snake}')) {{
+        if (!Schema::connection('{namespace.lower()}')->hasTable('{plural_name_snake}')) {{
 
-            Schema::connection('api')->create('{plural_name_snake}', function (Blueprint $table) {{
+            Schema::connection('{namespace.lower()}')->create('{plural_name_snake}', function (Blueprint $table) {{
 
                 $table->id();
 """
@@ -105,15 +105,15 @@ return new class extends Migration
         is_fk = column.get("is_fk") or column.get("type") == "fk"
 
         if is_fk:
-            migration_content += f"""        if (Schema::connection('api')->hasColumn('{plural_name_snake}', '{name}')) {{
-            Schema::connection('api')->table('{plural_name_snake}', function (Blueprint $table) {{
+            migration_content += f"""        if (Schema::connection('{namespace.lower()}')->hasColumn('{plural_name_snake}', '{name}')) {{
+            Schema::connection('{namespace.lower()}')->table('{plural_name_snake}', function (Blueprint $table) {{
                 $table->dropForeign(['{name}']);
                 $table->dropColumn('{name}');
             }});
         }}
 """
 
-    migration_content += f"""        Schema::connection('api')->dropIfExists('{plural_name_snake}');
+    migration_content += f"""        Schema::connection('{namespace.lower()}')->dropIfExists('{plural_name_snake}');
     }}
 }};
 """
