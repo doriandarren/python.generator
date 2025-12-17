@@ -32,7 +32,7 @@ def generate_model_file(base_ruta, namespace, path_model, singular_name, plural_
     # Contenido del archivo PHP del modelo adaptado
     model_content = f"""<?php
 
-namespace App\\Models\\{plural_name};
+namespace App\\Models\\{namespace}\\{plural_name};
 
 use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;
 use Illuminate\\Database\\Eloquent\\Model;
@@ -40,10 +40,9 @@ use Illuminate\\Database\\Eloquent\\Model;
 class {singular_name} extends Model
 {{
     use HasFactory;
-
     // use SoftDeletes;
 
-    protected $connection = 'api';
+    protected $connection = '{namespace.lower()}';
     protected $table = '{plural_name_snake}';
 
     /***********************

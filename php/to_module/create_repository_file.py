@@ -16,7 +16,7 @@ def create_repository_structure(base_ruta, path_model):
     return repository_folder_path
 
 
-def generate_repository_file(base_ruta, path_model, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
+def generate_repository_file(base_ruta, namespace, path_model, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
     Genera un archivo de repositorio PHP basado en los nombres proporcionados y crea la estructura app/path_model dentro de base_ruta.
     """
@@ -33,10 +33,10 @@ def generate_repository_file(base_ruta, path_model, singular_name, plural_name, 
     # Contenido del archivo PHP del repositorio adaptado
     repository_content = f"""<?php
 
-namespace App\\Repositories\\{plural_name};
+namespace App\\Repositories\\{namespace}\\{plural_name};
 
 use App\\Enums\\EnumApiSetup;
-use App\\Models\\{plural_name}\\{singular_name};
+use App\\Models\\{namespace}\\{plural_name}\\{singular_name};
 
 class {singular_name}Repository
 {{

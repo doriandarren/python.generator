@@ -31,7 +31,7 @@ def generate_module_standard_php(namespace, ruta, singular_name, plural_name, co
     path_migration = "database/migrations/"
     path_routes = "routes/"
     path_seeder = "database/seeders"
-    path_factory = "database/factories"
+    path_factory = "database/factories/" + namespace
 
     # Convertir singular_name y plural_name a kebab-case para las URLs
     singular_name_kebab = camel_to_kebab(singular_name)
@@ -66,7 +66,7 @@ def generate_module_standard_php(namespace, ruta, singular_name, plural_name, co
                                              singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
 
         if "repository" in input_menu_checkbox:
-            generate_repository_file(ruta, path_repository, singular_name,
+            generate_repository_file(ruta, namespace, path_repository, singular_name,
                                      plural_name, singular_name_snake, plural_name_snake, columns)
 
         if "routes" in input_menu_checkbox:
@@ -82,7 +82,7 @@ def generate_module_standard_php(namespace, ruta, singular_name, plural_name, co
                                  singular_name_snake, plural_name_snake, columns)
 
         if "factory" in input_menu_checkbox:
-            generate_factory_file(ruta, path_factory, singular_name,
+            generate_factory_file(ruta, namespace, path_factory, singular_name,
                                   plural_name, singular_name_snake, plural_name_snake, columns)
 
         if "postman" in input_menu_checkbox:

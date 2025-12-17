@@ -16,7 +16,7 @@ def create_factory_structure(base_ruta, path_factory, plural_name):
     return factory_folder_path
 
 
-def generate_factory_file(base_ruta, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
+def generate_factory_file(base_ruta, namespace, path_factory, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
     Genera un archivo de Factory PHP basado en los nombres proporcionados y crea la estructura settings/factories/plural_name dentro de base_ruta.
     """
@@ -33,12 +33,12 @@ def generate_factory_file(base_ruta, path_factory, singular_name, plural_name, s
     # Contenido del archivo PHP del Factory adaptado
     factory_content = f"""<?php
 
-namespace Database\\Factories\\{plural_name};
+namespace Database\\Factories\\{namespace}\\{plural_name};
 
 use Illuminate\\Database\\Eloquent\\Factories\\Factory;
 
 /**
-* @extends \\Illuminate\\Database\\Eloquent\\Factories\\Factory<\\App\\Models\\{plural_name}\\{singular_name}>
+* @extends \\Illuminate\\Database\\Eloquent\\Factories\\Factory<\\App\\Models\\{namespace}\\{plural_name}\\{singular_name}>
 */
 class {singular_name}Factory extends Factory
 {{
