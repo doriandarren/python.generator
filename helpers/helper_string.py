@@ -1,3 +1,4 @@
+import re
 import inflect
 
 p = inflect.engine()
@@ -42,6 +43,39 @@ def convert_word(word):
         "singular": singular_form,
         "plural": plural_form
     }
+
+
+
+
+def normalize_project_name(project_name: str) -> str:
+    """
+    Normaliza el nombre del proyecto para usarlo como identificador seguro.
+    
+    Ejemplos:
+    - prices.avanazaoil.eu -> prices_avanazaoil_eu
+    - app-1 -> app_1
+    - App-1 -> app_1
+    """
+    if not project_name:
+        return ""
+
+    # 1) minúsculas
+    name = project_name.lower()
+
+    # 2) reemplazar cualquier cosa que no sea letra o número por _
+    name = re.sub(r"[^a-z0-9]+", "_", name)
+
+    # 3) eliminar _ repetidos
+    name = re.sub(r"_+", "_", name)
+
+    # 4) quitar _ al inicio o final
+    return name.strip("_")
+
+
+
+
+
+
 
 
 

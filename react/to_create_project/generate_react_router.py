@@ -107,18 +107,20 @@ def generate_app_router(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo
-    content = """import { Navigate, Route, Routes } from "react-router-dom";
+    content = r"""import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
 import { DashboardRoutes } from "../modules/dashboard/routes/DashboardRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { startRestoreSession } from "../store/auth/thunks";
-import { PublicRoute } from './PublicRoute';
-import { PrivateRoute } from './PrivateRoute';
-import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
-import { ProfileRoutes } from "../modules/profile/routes/ProfileRoutes";
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
 import { PreloaderMain } from "../components/Preloader/PreloaderMain";
-
+import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
+import { UserRoutes } from "../modules/users/routes/UserRoutes";
+import { ProfileRoutes } from "../modules/profiles/routes/ProfileRoutes";
+import { SystemRoutes } from "../modules/systems/routes/SystemRoutes";
+import { QuoteRoutes } from "../modules/quotes/routes/QuoteRoutes";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -133,7 +135,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checkingAuth) {
-    return <PreloaderMain />
+    return <PreloaderMain />;
   }
 
   return (
@@ -146,17 +148,22 @@ export const AppRouter = () => {
       {/* Private Routes */}
       <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="dashboard/*" element={<DashboardRoutes />} />
-        <Route path="profile/*" element={<ProfileRoutes />} />
+        <Route path="users/*" element={<UserRoutes />} />
         <Route path="teams/*" element={<TeamRoutes />} />
+        <Route path="profiles/*" element={<ProfileRoutes />} />
+        <Route path="systems/*" element={<SystemRoutes />} />
+        <Route path="quotes/*" element={<QuoteRoutes />} />
       </Route>
 
       {/* Global Redirection */}
       <Route path="/" element={<Navigate to={isAuthenticated ? "/admin/dashboard" : "/auth/login"} />} />
     </Routes>
   );
-}
+};
 """
 
+    
+    
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
@@ -178,12 +185,41 @@ def generate_private_route(project_path):
     create_folder(routes_dir)
 
     # Contenido del archivo
-    content = """import { Navigate, Outlet } from 'react-router-dom';
+    content = r"""// router/PrivateRoute.jsx
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAllowedPathsByRoles } from '../helpers/helperAllowedPaths.js';
 
 export const PrivateRoute = ({ isAuthenticated }) => {
-  return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
+  // hooks SIEMPRE arriba
+  const location = useLocation();
+  const { roles } = useSelector((state) => state.auth);
+
+  // 1) auth
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  // 2) autorización por rol
+  const allowedPaths = getAllowedPathsByRoles(roles);
+
+  // full access si allowed contiene "/admin"
+  const hasFullAccess = allowedPaths.has("/admin");
+
+  // ¿la ruta actual empieza por alguna base permitida?
+  const isAllowed =
+    hasFullAccess || [...allowedPaths].some(base => location.pathname.startsWith(base));
+
+  if (!isAllowed) {
+    // opcional: log rápido
+    // console.warn('Bloqueado por rol', { path: location.pathname, allowed: [...allowedPaths] });
+    return <Navigate to="/admin/dashboard" replace />;
+  }
+
+  return <Outlet />;
 };
 """
+
 
     # Crear el archivo y escribir el contenido
     try:

@@ -1,19 +1,20 @@
 import os
 from helpers.helper_print import create_folder
+from helpers.helper_string import normalize_project_name
 
 
 
 
-def generate_module_auth(project_path):
+def generate_module_auth(project_path, project_name):
     create_routes(project_path)
     create_login_page(project_path)
     create_register_page(project_path)
     create_auth_index_page(project_path)
 
     ## Redux
-    create_file_auth_slice(project_path)
+    create_file_auth_slice(project_path, project_name)
     create_barrel_file_slice(project_path)
-    create_file_thunks_auth(project_path)
+    create_file_thunks_auth(project_path, project_name)
 
 
 
@@ -230,9 +231,6 @@ export const LoginPage = () => {
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
-
-
 
 def create_register_page(project_path):
     """
@@ -811,7 +809,7 @@ export * from \'./RegisterPage\';
 
 ## Redux
 
-def create_file_auth_slice(project_path):
+def create_file_auth_slice(project_path, project_name):
     """
     Genera el archivo
     """
@@ -821,61 +819,68 @@ def create_file_auth_slice(project_path):
 
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
+    
+    normalized_name = normalize_project_name(project_name)
 
     # Contenido del archivo
-    content = """import { createSlice } from '@reduxjs/toolkit';
+    content = f"""import {{ createSlice }} from '@reduxjs/toolkit';
 
-const initialState = {
-    status: 'checking', // 'checking', 'not-authenticated', 'authenticated' 
-    token: null,
-    email: null,
-    displayName: null,
-    image_url: null,
-    errorMessage: null,
-}
+const initialState = {{
+  status: 'checking', // 'checking', 'not-authenticated', 'authenticated' 
+  token: null,
+  email: null,
+  displayName: null,
+  image_url: null,
+  roles: [],
+  errorMessage: null,
+}};
 
+export const authSlice = createSlice({{
+  name: 'auth',
+  initialState,
+  reducers: {{
+    login: (state, {{ payload }}) => {{
+      state.status = 'authenticated';
+      state.token = payload.token;
+      state.email = payload.email;
+      state.displayName = payload.displayName;
+      state.image_url = payload.image_url;
+      state.roles = payload.roles || [];
+      state.errorMessage = null;
 
-export const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {
-        login: (state, {payload}) => {
-            state.status = 'authenticated';
-            state.token = payload.token;
-            state.email = payload.email;
-            state.displayName = payload.displayName;
-            state.image_url = payload.image_url;
-            state.errorMessage = null;
+      // Guardar en localStorage para que persista
+      localStorage.setItem("token_{normalized_name}", payload.token);
+    }},
 
-            // Guardar en `localStorage` para que persista
-            localStorage.setItem("token_portuarios", payload.token);
+    logout: (state, payload) => {{
+      state.status = 'not-authenticated';
+      state.token = null;
+      state.email = null;
+      state.displayName = null;
+      state.image_url = null;
+      state.roles = [];
+      state.errorMessage = payload?.errorMessage;
 
-        },
-        logout: (state, payload) => {
-            state.status = 'not-authenticated';
-            state.token = null;
-            state.email = null;
-            state.displayName = null;
-            state.image_url = null;
-            state.errorMessage = payload?.errorMessage;
+      // Eliminar de localStorage
+      localStorage.removeItem("token_{normalized_name}");
+    }},
 
-            // Eliminar de `localStorage`
-            localStorage.removeItem("token_portuarios");
-        },
-        setErrorMessage: (state, action) => {
-            state.status = 'not-authenticated';
-            state.errorMessage = action.payload;
-        },
-        checkingCredentials: (state) => {
-            state.status = 'checking';
-        }
-    }
-});
+    setErrorMessage: (state, action) => {{
+      state.status = 'not-authenticated';
+      state.errorMessage = action.payload;
+    }},
 
+    checkingCredentials: (state) => {{
+      state.status = 'checking';
+    }}
+  }}
+}});
 
-// Action creators are generated for each case reducer function
-export const { login, logout, checkingCredentials, setErrorMessage } = authSlice.actions;
+// Action creators generados automáticamente por cada reducer
+export const {{ login, logout, checkingCredentials, setErrorMessage }} = authSlice.actions;
 """
+
+
 
     # Crear el archivo y escribir el contenido
     try:
@@ -910,7 +915,7 @@ export * from \'./thunks\';"""
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-def create_file_thunks_auth(project_path):
+def create_file_thunks_auth(project_path, project_name):
     """
     Genera el archivo
     """
@@ -920,116 +925,108 @@ def create_file_thunks_auth(project_path):
 
     # Crear la carpeta routes si no existe
     create_folder(routes_dir)
+    
+    normalized_name = normalize_project_name(project_name)
 
     # Contenido del archivo
-    content = """import { api } from "../../api/api";
-import { checkingCredentials, login, logout, setErrorMessage } from "./authSlice";
+    content = f"""import {{ api }} from "../../api/api";
+import {{ checkingCredentials, login, logout, setErrorMessage }} from "./authSlice";
 
+/**
+ * Marca el estado como "checking" para mostrar loaders o bloquear formulario.
+ */
+export const checkingAuthentication = () => {{
+  return async (dispatch) => {{
+    dispatch(checkingCredentials());
+  }};
+}};
 
-export const checkingAuthentication = () => {
-    return async( dispatch ) => {
-        dispatch( checkingCredentials() );
-    }
-}
+/**
+ * Inicia sesión con email y password.
+ * Si es exitoso, obtiene el usuario y lo guarda en Redux + localStorage.
+ */
+export const startLoginWithEmailPassword = ({{ email, password }}) => {{
+  return async (dispatch) => {{
+    dispatch(checkingCredentials());
 
+    try {{
+      const {{ token, errors }} = await api("auth/login", "POST", {{ email, password }});
 
-export const startLoginWithEmailPassword = ({ email, password }) => {
+      // Si la API devolvió errores:
+      if (!token) {{
+        console.log(errors);
+        dispatch(setErrorMessage(errors[0].e));
+        return;
+      }}
 
-    return async( dispatch ) => {
+      // Obtener datos del usuario autenticado
+      const userResponse = await api("auth/user", "GET", null, token);
+      const {{ email: emailApi, name: nameApi, roles }} = userResponse.data;
 
-        dispatch( checkingCredentials() );
+      const user = {{
+        status: "authenticated",
+        token,
+        email: emailApi,
+        displayName: nameApi,
+        image_url: "",
+        roles,
+        errorMessage: null,
+      }};
 
-        try {
+      dispatch(login(user));
+    }} catch (error) {{
+      console.log(error);
+    }}
+  }};
+}};
 
-            const { token, errors } = await api('auth/login', 'POST', {email, password});
+/**
+ * Cierra la sesión limpiando Redux y localStorage.
+ */
+export const startLogout = () => {{
+  return async (dispatch) => {{
+    dispatch(logout());
+  }};
+}};
 
-            if (!token) {
-                console.log(errors);
-                dispatch( setErrorMessage(errors[0].e) );
-                return;
-            }
+/**
+ * Restaura la sesión si existe un token válido en localStorage.
+ */
+export const startRestoreSession = () => {{
+  return async (dispatch) => {{
+    dispatch(checkingCredentials());
 
-            const userResponse = await api('auth/user', 'GET', null, token);
-            const { email: emailApi, name: nameApi } = userResponse.data;
+    const token = localStorage.getItem("token_{normalized_name}");
 
+    // Si no hay token ⇒ cerrar sesión
+    if (!token) {{
+      dispatch(logout());
+      return;
+    }}
 
-            const user = {
-                status: 'authenticated',
-                token: token,
-                email: emailApi,
-                displayName: nameApi,
-                image_url: '',
-                errorMessage: null,
-            }
+    try {{
+      const userResponse = await api("auth/user", "GET", null, token);
+      const {{ email: emailApi, name: nameApi, roles = [] }} = userResponse.data;
 
-            dispatch(login(user));
+      const user = {{
+        status: "authenticated",
+        token,
+        email: emailApi,
+        displayName: nameApi,
+        image_url: "",
+        roles,
+        errorMessage: null,
+      }};
 
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
-}
-
-
-
-export const startLogout = () => {
-    return async( dispatch ) => {
-        dispatch( logout() );
-    }
-}
-
-
-
-export const startRestoreSession = () => {
-    return async(dispatch) => {
-
-        dispatch(checkingCredentials());
-
-        const token = localStorage.getItem("token_portuarios");
-
-        if (!token) {
-            dispatch(logout());
-            return;
-        }
-
-
-        try {
-
-            const userResponse = await api('auth/user', 'GET', null, token);
-
-
-            const { email: emailApi, name: nameApi } = userResponse.data;
-
-
-            const user = {
-                status: 'authenticated',
-                token: token,
-                email: emailApi,
-                displayName: nameApi,
-                image_url: '',
-                errorMessage: null,
-            }
-
-            dispatch(login(user));
-
-            //console.log(userResponse.data);
-
-
-
-        } catch (error) {
-            console.error("Error al restaurar sesión:", error);
-            dispatch(logout());
-        }
-
-
-
-    }
-}
+      dispatch(login(user));
+    }} catch (error) {{
+      console.error("Error al restaurar sesión:", error);
+      dispatch(logout());
+    }}
+  }};
+}};
 """
-
+    
     # Crear el archivo
     try:
         with open(file_path, "w") as file:

@@ -7,6 +7,9 @@ def generate_helpers(full_path):
     create_data_fake(full_path)
     create_toast(full_path)
     create_variant_class(full_path)
+    create_helper_date(full_path)
+    create_helper_url(full_path)
+    create_helper_number(full_path)
 
 
 
@@ -236,7 +239,6 @@ export const Toast = async (text, icon = \'success\') => {
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
-
 def create_variant_class(full_path):
     """
     Genera un archivo
@@ -293,3 +295,217 @@ export const getVariantBgClass = (variant = "neutral") => {
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+        
+def create_helper_date(full_path):
+    """
+    Genera el archivo
+    """
+    folder_path = os.path.join(full_path, "src", "helpers")
+    file_path = os.path.join(folder_path, "helperDate.js")
+
+    os.makedirs(folder_path, exist_ok=True)
+
+    content = r"""/**
+ * Retorna hoy
+ * @returns {string} ex: "AAAA-MM-DD"
+ */
+export const getTodayDate = (byHTML = false ) => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0
+  const dd = String(today.getDate()).padStart(2, '0');
+
+  if(byHTML){
+    return `${dd}-${mm}-${yyyy}`;
+  }else{
+    return `${yyyy}-${mm}-${dd}`;
+  }
+};
+
+
+
+/**
+ * Retorna la hora actual en formato HH:mm (24h)
+ * @returns {string} Ejemplo: "08:42"
+ */
+export const getCurrentTime = () => {
+  const now = new Date();
+  return now.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
+
+
+/**
+ * Return Month
+ */
+export const getCurrentMonth = () => {
+  const date = new Date();
+  return date.getMonth() + 1; // Enero es 0, por eso se suma 1
+};
+
+
+/**
+ * Return Year
+ */
+export const getCurrentYear = () => {
+  const date = new Date();
+  return date.getFullYear(); // Ej: 2025
+};
+
+
+/**
+ * Retorna la fecha en formato DD-MM-AAAA. Ejemplo "2025-12-15" -> "25-12-2025"
+ * @param {*} dateStr 
+ * @returns 
+ */
+export function formatDateToDDMMYYYY(dateStr) {
+  if (!dateStr) return "";
+
+  const [year, month, day] = dateStr.split("-");
+  return `${day}-${month}-${year}`;
+}
+
+
+/**
+ * Convierte un string ISO (ej: "2025-07-31T14:47:44.000000Z")
+ * en formato "DD-MM-YYYY HH:mm"
+ */
+export function formatDateTimeToDDMMYYYYHHmm(dateStr) {
+  if (!dateStr) return "";
+
+  const date = new Date(dateStr); // crea objeto Date
+
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+
+  const hh = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+
+  return `${dd}-${mm}-${yyyy} ${hh}:${min}`;
+}
+"""
+
+
+    try:
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+        
+def create_helper_url(full_path):
+    """
+    Genera el archivo
+    """
+    folder_path = os.path.join(full_path, "src", "helpers")
+    file_path = os.path.join(folder_path, "helperURL.js")
+
+    os.makedirs(folder_path, exist_ok=True)
+
+    content = r"""// helpers/helperURL.js
+/**
+ * Crea el query string ignorando valores vacíos (null/undefined/"").
+ */
+export const buildQuery = (filters = {}, allowed = []) => {
+  const qs = new URLSearchParams();
+  const keys = allowed.length ? allowed : Object.keys(filters);
+
+  for (const k of keys) {
+    const v = filters[k];
+    if (v !== undefined && v !== null) {
+      const s = String(v).trim();
+      if (s !== "") qs.set(k, s);
+    }
+  }
+  const s = qs.toString();
+  return s ? `?${s}` : "";
+};
+
+/**
+ * Devuelve basePath + query ya montado.
+ */
+export const buildURL = (basePath, filters = {}, allowed = []) =>
+  `${basePath}${buildQuery(filters, allowed)}`;
+"""
+
+
+    try:
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+     
+        
+def create_helper_number(full_path):
+    """
+    Genera el archivo
+    """
+    folder_path = os.path.join(full_path, "src", "helpers")
+    file_path = os.path.join(folder_path, "helperNumber.js")
+
+    os.makedirs(folder_path, exist_ok=True)
+
+    content = r"""// helpers/helperNumber.js
+/**
+ * Formatea un número a formato europeo con decimales y símbolo de moneda.
+ *
+ * @param {number|string} value - El número a formatear.
+ * @param {Object} options - Opciones opcionales (mínimo de decimales, etc.).
+ * @param {boolean} withCurrency - Si se incluye el símbolo de €.
+ * @returns {string} - Número formateado.
+ */
+export const formatNumber = (
+  value,
+  withCurrency = true,
+  options = { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+) => {
+  const numericValue = Number(value);
+
+  if (isNaN(numericValue)) return "";
+
+  const formatted = numericValue.toLocaleString("es-ES", options);
+
+  return withCurrency ? `${formatted} €` : formatted;
+};
+
+
+
+/**
+ * Agrega ceros a la izquierda hasta alcanzar la longitud deseada
+ * @param {string|number} numero - El número original
+ * @param {number} longitud - La longitud total deseada
+ * @returns {string} El número con ceros a la izquierda
+ */
+export function padLeft(numero, longitud = 0) {
+  return numero.toString().padStart(longitud, '0');
+}
+
+
+
+
+/**
+ * Retorna un UUID unico
+ * @returns {string} El número con ceros a la izquierda
+ */
+export function getUID() {
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+"""
+
+
+    try:
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+        
+        
+        

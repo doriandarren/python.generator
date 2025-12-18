@@ -13,7 +13,7 @@ from react.to_create_project.generate_module_public import generate_module_publi
 from react.to_create_project.generate_module_dashboard import generate_module_dashboard
 from react.to_create_project.generate_module_auth import generate_module_auth
 from react.to_create_project.generate_redux import generate_redux
-from react.to_create_project.generate_helpers import generate_helpers
+from react.to_create_project.file_helpers.generate_helpers import generate_helpers
 from react.to_create_project.generate_translate import generate_translate
 from react.to_create_project.generate_env import generate_env
 from react.to_create_project.generate_gitignore import generate_gitignore
@@ -80,7 +80,7 @@ def start_project():
     generate_module_dashboard(full_path)
 
     # Auth
-    generate_module_auth(full_path)
+    generate_module_auth(full_path, project_name)
 
     ## Profile
     generate_module_profile(full_path)
