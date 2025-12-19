@@ -2,12 +2,12 @@ import os
 from helpers.helper_menu import pause
 from helpers.helper_print import camel_to_kebab, camel_to_snake
 from helpers.helper_string import normalize_project_name
-from react.to_create_module.generate_list_page import create_list_page
-from react.to_create_module.generate_routes import create_routes
-from react.to_create_module.generate_create_page import create_create_page
-from react.to_create_module.generate_edit_page import create_edit_page
-from react.to_create_module.generate_barrel_file import create_barrel_file
-from react.to_create_module.generate_service_file import create_service_file
+from react.to_create_module_crud.generate_list_page import create_list_page
+from react.to_create_module_crud.generate_routes import create_routes
+from react.to_create_module_crud.generate_create_page import create_create_page
+from react.to_create_module_crud.generate_edit_page import create_edit_page
+from react.to_create_module_crud.generate_barrel_file import create_barrel_file
+from react.to_create_module_crud.generate_service_file import create_service_file
 
 
 def generate_module_standard_react(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
@@ -22,8 +22,7 @@ def generate_module_standard_react(project_path, singular_name, plural_name, col
     singular_name_snake = camel_to_snake(singular_name)
     plural_name_snake = camel_to_snake(plural_name)
     
-    
-    ## TODO
+    ## Project Name
     temp_name = os.path.basename(project_path.rstrip(os.sep))
     project_name = normalize_project_name(temp_name)
     

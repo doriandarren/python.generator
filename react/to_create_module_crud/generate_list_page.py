@@ -1,7 +1,7 @@
 import os
 from helpers.helper_print import create_folder
 
-from react.to_create_module.helpers.helper_list import (
+from react.to_create_module_crud.helpers.helper_list import (
     clean_name,
     build_filters_state,
     build_reset_filters_body,

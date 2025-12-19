@@ -1,6 +1,6 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN
-from react.to_create_module.generate_module_standard_react import generate_module_standard_react
+from react.to_create_module_crud.generate_module_standard_react import generate_module_standard_react
 
 
 def generate_modules(full_path):

@@ -16,9 +16,11 @@ def create_folder(path):
 def generate_translate(full_path):
     setup_i18n(full_path)
     create_i18n(full_path)
+    update_file_main(full_path)
+    
+    
     create_locales_en(full_path)
     create_locales_es(full_path)
-    update_file_main(full_path)
 
 
 
@@ -91,34 +93,56 @@ def create_locales_es(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo
-    home_page_content = """{
+    content = r"""{
   "welcome": "Bievendido!",
   "languages": {
-    "en": "Inglés",
-    "es": "Español"
+    "en": "EN",
+    "es": "ES"
   },
-  "title": {
-    "config": "Configuración"
-  },
-  "message":{
+  "message": {
     "are_you_sure": "¿Estás seguro?",
     "record_saved": "Registro guardado",
     "record_deleted": "Registro eliminado",
     "record_updated": "Registro actualizado",
-    "ok": "Vale"
+    "record_generated": "Registro creado",
+    "invoice_in_process": "Facturación en proceso",
+    "ok": "Aceptar",
+    "download_file": "Descargar archivo",
+    "download_files": "Descargar archivos",
+    "file_downloaded": "Archivo descargado",
+    "files_downloaded": "Archivos descargados",
+    "no_records_found": "No hay registros para mostrar"
+  },
+  "errors": {
+    "error_internal": "Error Interno",
+    "error_process": "No se pudo procesar la solicitud"
+  },
+  "setting_table": {
+    "next_table": "Sig",
+    "prev_table": "Prev",
+    "rows_per_page": "Páginas",
+    "of": "de",
+    "search": "Buscar"
+  },
+  "form": {
+    "required": "Requerido",
+    "select": "Seleccione",
+    "number": "Número",
+    "must_be_positive": "Mayor a cero",
+    "start_must_be_before_end": "La fecha de inicio debe ser anterior o igual a la fecha fin."
   },
   "menu": {
     "contact": "Contacto",
     "about": "¿Quienes somos?"
   },
-  "login_page":{
-    "title": "Bienvend@ Globalfleet",
-    "subtitle": "Plataforma GlobalFleet Facturas.",
+  "login_page": {
+    "title": "Bienvend@ a Site",
+    "subtitle": "Plataforma Site Facturas.",
     "email_placeholder": "Correo electrónico",
     "password_placeholder": "Contraseña",
     "remember": "Recuérdame",
-    "email" : "Correo electrónico",
-    "password" : "Contraseña",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
     "sign_in": "Acceder",
     "remember_me": "Recuerdame",
     "forgot_password": "Olvidaste la contraseña?",
@@ -132,12 +156,16 @@ def create_locales_es(project_path):
     "terms_txt4": "Política de Privacidad",
     "credential_error": "Claves de acceso no válidas"
   },
+  "title": "Título",
+  "config": "Configuración",
   "privacity_polices": "Políticas de Privacidad",
   "link_interest": "Enlaces de interés",
   "login": "Login",
   "coockies": "Cookies",
   "page_not_found": "Página no encontrada",
   "actions": "Acciones",
+  "created": "Creado",
+  "deleted": "Eliminado",
   "updated": "Actualizado",
   "update": "Actualizar",
   "dashboard": "Inicio",
@@ -151,6 +179,7 @@ def create_locales_es(project_path):
   "show": "Mostrar",
   "no_results_found": "No se encontraron resultados.",
   "loading": "Cargando...",
+  "clear_filters": "Limpiar",
   "save": "Guardar",
   "add": "Nuevo",
   "edit": "Editar",
@@ -172,23 +201,6 @@ def create_locales_es(project_path):
   "average_30_days": "Media 30 días",
   "average_3_months": "Media 3 meses",
   "last_week": "Última semana",
-  "setting_table":{
-    "next_table": "Sig",
-    "prev_table": "Prev",
-    "rows_per_page": "Páginas",
-    "of": "de",
-    "search": "Buscar"
-  },
-  "form": {
-    "required": "Requerido",
-    "select": "Seleccione",
-    "must_be_number": "Número",
-    "must_be_positive": "Mayor a cero"
-  },
-  "errors":{
-    "error_internal": "Error Interno",
-    "error_process": "No se pudo procesar la solicitud"
-  },
   "error": "Error al procesar la información",
   "code": "Código",
   "address": "Dirección",
@@ -292,14 +304,17 @@ def create_locales_es(project_path):
   "service_activated": "Servicio activado",
   "services_activated": "Servicios activados",
   "country": "País",
-  "countries": "Paises"
-}
-"""
+  "countries": "Paises",
+  "system": "Sistema",
+  "systems": "Sistemas",
+  "quote": "Cuota",
+  "quotes": "Cuotas"
+}"""
 
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
-            file.write(home_page_content)
+            file.write(content)
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
@@ -317,29 +332,51 @@ def create_locales_en(project_path):
     create_folder(pages_dir)
 
     # Contenido del archivo
-    home_page_content = """{
+
+    content = r"""{
   "welcome": "Welcome!",
   "languages": {
-    "en": "English",
-    "es": "Spanish"
-  },
-  "title": {
-    "config": "Settings"
+    "en": "EN",
+    "es": "ES"
   },
   "message": {
     "are_you_sure": "Are you sure?",
     "record_saved": "Record saved",
     "record_deleted": "Record deleted",
     "record_updated": "Record updated",
-    "ok": "Ok"
+    "invoice_in_process": "Invoice in process",
+    "ok": "Ok",
+    "download_file": "Download file",
+    "download_files": "Download files",
+    "file_downloaded": "File downloaded",
+    "files_downloaded": "Files downloaded",
+    "no_records_found": "No records found"
+  },
+  "errors": {
+    "error_internal": "Internal Error",
+    "error_process": "Error processing the information"
+  },
+  "setting_table": {
+    "next_table": "Next",
+    "prev_table": "Prev",
+    "rows_per_page": "Pages",
+    "of": "of",
+    "search": "Search"
+  },
+  "form": {
+    "required": "Required",
+    "select": "Select",
+    "number": "Number",
+    "must_be_positive": "Must be positive",
+    "start_must_be_before_end": "The start date must be before or equal to the end date."
   },
   "menu": {
     "contact": "Contact",
     "about": "About"
   },
   "login_page": {
-    "title": "Welcome to GlobalFleet",
-    "subtitle": "GlobalFleet Invoices Platform.",
+    "title": "Welcome to Site",
+    "subtitle": "Site Invoices Platform.",
     "email_placeholder": "Email",
     "password_placeholder": "Password",
     "remember": "Remember me",
@@ -358,12 +395,16 @@ def create_locales_en(project_path):
     "terms_txt4": "Privacy Policy",
     "credential_error": "Invalid credentials"
   },
+  "title": "Title",
+  "config": "Settings",
   "privacity_polices": "Privacy Policies",
   "link_interest": "Useful links",
   "login": "Login",
   "coockies": "Cookies",
   "page_not_found": "Page not found",
   "actions": "Actions",
+  "created": "Created",
+  "deleted": "Deleted",
   "updated": "Updated",
   "update": "Update",
   "dashboard": "Home",
@@ -377,6 +418,7 @@ def create_locales_en(project_path):
   "show": "Show",
   "no_results_found": "No results found.",
   "loading": "Loading...",
+  "clear_filters": "Clear",
   "save": "Save",
   "add": "New",
   "edit": "Edit",
@@ -398,23 +440,6 @@ def create_locales_en(project_path):
   "average_30_days": "Average 30 days",
   "average_3_months": "Average 3 months",
   "last_week": "Last week",
-  "setting_table": {
-    "next_table": "Next",
-    "prev_table": "Prev",
-    "rows_per_page": "Pages",
-    "of": "of",
-    "search": "Search"
-  },
-  "form": {
-    "required": "Required",
-    "select": "Select",
-    "must_be_number": "Number",
-    "must_be_positive": "Must be positive"
-  },
-  "errors": {
-    "error_internal": "Internal Error",
-    "error_process": "Error processing the information"
-  },
   "error": "Error processing the information",
   "code": "Code",
   "address": "Address",
@@ -518,14 +543,17 @@ def create_locales_en(project_path):
   "service_activated": "Service activated",
   "services_activated": "Activated Services",
   "country": "Country",
-  "countries": "Countries"
-}
-"""
+  "countries": "Countries",
+  "system": "System",
+  "systems": "Systems",
+  "quote": "Quote",
+  "quotes": "Quotes"
+}"""
 
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
-            file.write(home_page_content)
+            file.write(content)
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")

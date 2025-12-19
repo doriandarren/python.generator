@@ -1,12 +1,12 @@
 import os
 from helpers.helper_print import create_folder
 
-from react.to_create_module.helpers.helper_react_form_generator import (
+from react.to_create_module_crud.helpers.helper_react_form_generator import (
     build_yup_schema_fields,
     build_input_fields,
 )
 
-from react.to_create_module.helpers.helper_react_relations import (
+from react.to_create_module_crud.helpers.helper_react_relations import (
     build_combobox_import,
     build_variables,
     has_fk,

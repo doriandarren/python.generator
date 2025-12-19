@@ -1,6 +1,6 @@
 from helpers.helper_menu import menu_list, clear_screen
 from helpers.helper_print import print_header
-from react.to_create_module.start_module import start_module
+from react.to_create_module_crud.start_module import start_module
 from react.to_create_project.start_project import start_project
 
 

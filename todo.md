@@ -7,7 +7,6 @@
 - En PHP: revisar el plural cambiar a inflect por que agrega una "s" al final de la palabra de las migraciones cuando es fk
 
 
-- REACT crear módulos para incorporar input select, text, mediante el fk y los boolean.
 
 - Crear React_TS
 - Crear Python
