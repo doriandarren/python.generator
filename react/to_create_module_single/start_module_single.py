@@ -1,8 +1,6 @@
 from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
-# TODO refactor
-# from react.to_create_module_crud.generate_module_standard_X import generate_module_standard_X
 
 
 def start_module_single():
