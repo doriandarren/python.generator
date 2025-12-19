@@ -3,7 +3,18 @@ from helpers.helper_print import create_folder
 
 
 
-def create_service_file(project_path, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, singular_first_camel, columns):
+def create_service_file(
+    project_path, 
+    project_name,
+    singular_name, 
+    plural_name, 
+    singular_name_kebab, 
+    plural_name_kebab, 
+    singular_name_snake, 
+    plural_name_snake, 
+    singular_first_camel, 
+    columns
+):
     """
         Genera dinámicamente el archivo de servicios {singular_name}Service.js con nombres adaptados.
         """
@@ -25,7 +36,7 @@ def create_service_file(project_path, singular_name, plural_name, singular_name_
  */
 export const get{plural_name} = async () => {{
     try {{
-        const token = localStorage.getItem("token_portuarios");
+        const token = localStorage.getItem("token_{project_name}");
         if (!token) {{
             console.warn("No hay token disponible en localStorage");
             return [];
@@ -51,7 +62,7 @@ export const get{plural_name} = async () => {{
  */
 export const get{singular_name}ById = async (id) => {{
     try {{
-        const token = localStorage.getItem("token_portuarios");
+        const token = localStorage.getItem("token_{project_name}");
         if (!token) return null;
 
         const response = await api(`{plural_name_kebab}/show/${{id}}`, "GET", null, token);
@@ -67,7 +78,7 @@ export const get{singular_name}ById = async (id) => {{
  */
 export const create{singular_name} = async (data) => {{
     try {{
-        const token = localStorage.getItem("token_portuarios");
+        const token = localStorage.getItem("token_{project_name}");
         if (!token) {{
             console.warn("No hay token disponible en localStorage");
             return null;
@@ -92,7 +103,7 @@ export const create{singular_name} = async (data) => {{
  */
 export const update{singular_name} = async (id, data) => {{
     try {{
-        const token = localStorage.getItem("token_portuarios");
+        const token = localStorage.getItem("token_{project_name}");
         if (!token) return null;
 
         const response = await api(`{plural_name_kebab}/update/${{id}}`, "PUT", data, token);
@@ -108,7 +119,7 @@ export const update{singular_name} = async (id, data) => {{
  */
 export const delete{singular_name} = async (id) => {{
     try {{
-        const token = localStorage.getItem("token_portuarios");
+        const token = localStorage.getItem("token_{project_name}");
         if (!token) return null;
 
         const response = await api(`{plural_name_kebab}/delete/${{id}}`, "DELETE", null, token);

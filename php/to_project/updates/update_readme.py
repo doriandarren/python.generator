@@ -28,19 +28,23 @@ def update_readme(full_path):
 ```sh
 
 composer install
-
 php artisan key:generate
-
 php artisan config:clear
-
 php artisan migrate  
 
-// Lang
+## Lang
 php artisan lang:publish
 
-
-/* Seeder */
+## Seeder
 php artisan migrate:fresh --seed
+php artisan db:seed
+php artisan db:seed --class=UserSeeder
+
+## Start Server
+php artisan serve
+
+## Jobs
+php artisan queue:work
 
 
 ```
