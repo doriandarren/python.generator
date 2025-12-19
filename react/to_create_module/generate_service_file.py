@@ -30,107 +30,112 @@ def create_service_file(
 
     # Contenido del archivo JS con nombres dinámicos
     content = f"""import {{ api }} from "../../../api/api";
+import {{ buildURL }} from "../../../helpers/helperURL";
 
 /**
  * List
  */
-export const get{plural_name} = async () => {{
-    try {{
-        const token = localStorage.getItem("token_{project_name}");
-        if (!token) {{
-            console.warn("No hay token disponible en localStorage");
-            return [];
-        }}
-
-        const response = await api("{plural_name_kebab}/list", "GET", null, token);
-
-        // Verificar si la API devuelve datos válidos
-        if (!response || typeof response !== "object") {{
-            console.error("Respuesta no válida de la API:", response);
-            return [];
-        }}
-
-        return response;
-    }} catch (error) {{
-        console.error("Error al obtener los registros:", error);
-        return [];
+export const get{plural_name} = async (filters = {{}}) => {{
+  try {{
+    const token = localStorage.getItem("token_{project_name}");
+    if (!token) {{
+      console.warn("No hay token disponible en localStorage");
+      return [];
     }}
+
+    const url = buildURL("{plural_name_kebab}/list", filters);
+
+    const response = await api(url, "GET", null, token);
+
+    if (!response || typeof response !== "object") {{
+      console.error("Respuesta no válida de la API:", response);
+      return [];
+    }}
+
+    return response;
+  }} catch (error) {{
+    console.error("Error al obtener los registros:", error);
+    return [];
+  }}
 }};
 
 /**
  * Show
  */
 export const get{singular_name}ById = async (id) => {{
-    try {{
-        const token = localStorage.getItem("token_{project_name}");
-        if (!token) return null;
+  try {{
+    const token = localStorage.getItem("token_{project_name}");
+    if (!token) return null;
 
-        const response = await api(`{plural_name_kebab}/show/${{id}}`, "GET", null, token);
-        return response;
-    }} catch (error) {{
-        console.error("Error al obtener el registro:", error);
-        return null;
-    }}
+    const response = await api(`{plural_name_kebab}/show/${{id}}`, "GET", null, token);
+    return response;
+  }} catch (error) {{
+    console.error("Error al obtener el registro:", error);
+    return null;
+  }}
 }};
 
 /**
  * Store
  */
 export const create{singular_name} = async (data) => {{
-    try {{
-        const token = localStorage.getItem("token_{project_name}");
-        if (!token) {{
-            console.warn("No hay token disponible en localStorage");
-            return null;
-        }}
-
-        const response = await api("{plural_name_kebab}/store", "POST", data, token);
-
-        if (!response || typeof response !== "object") {{
-            console.error("Error en la respuesta de la API:", response);
-            return null;
-        }}
-
-        return response;
-    }} catch (error) {{
-        console.error("Error al enviar los datos:", error);
-        return null;
+  try {{
+    const token = localStorage.getItem("token_{project_name}");
+    if (!token) {{
+      console.warn("No hay token disponible en localStorage");
+      return null;
     }}
+
+    const response = await api("{plural_name_kebab}/store", "POST", data, token);
+
+    if (!response || typeof response !== "object") {{
+      console.error("Error en la respuesta de la API:", response);
+      return null;
+    }}
+
+    return response;
+  }} catch (error) {{
+    console.error("Error al enviar los datos:", error);
+    return null;
+  }}
 }};
 
 /**
  * Update
  */
 export const update{singular_name} = async (id, data) => {{
-    try {{
-        const token = localStorage.getItem("token_{project_name}");
-        if (!token) return null;
+  try {{
+    const token = localStorage.getItem("token_{project_name}");
+    if (!token) return null;
 
-        const response = await api(`{plural_name_kebab}/update/${{id}}`, "PUT", data, token);
-        return response;
-    }} catch (error) {{
-        console.error("Error al actualizar el registro:", error);
-        return null;
-    }}
+    const response = await api(`{plural_name_kebab}/update/${{id}}`, "PUT", data, token);
+    return response;
+  }} catch (error) {{
+    console.error("Error al actualizar el registro:", error);
+    return null;
+  }}
 }};
 
 /**
  * Delete
  */
 export const delete{singular_name} = async (id) => {{
-    try {{
-        const token = localStorage.getItem("token_{project_name}");
-        if (!token) return null;
+  try {{
+    const token = localStorage.getItem("token_{project_name}");
+    if (!token) return null;
 
-        const response = await api(`{plural_name_kebab}/delete/${{id}}`, "DELETE", null, token);
-        return response;
-    }} catch (error) {{
-        console.error("Error al eliminar el registro:", error);
-        return null;
-    }}
+    const response = await api(`{plural_name_kebab}/delete/${{id}}`, "DELETE", null, token);
+    return response;
+  }} catch (error) {{
+    console.error("Error al eliminar el registro:", error);
+    return null;
+  }}
 }};
 """
 
+    
+    
+    
     # Crear el archivo y escribir el contenido
     try:
         with open(file_path, "w") as file:
