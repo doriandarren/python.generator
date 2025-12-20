@@ -30,7 +30,7 @@ from react.to_create_project.role_permissions.generate_helper_role_menu_access i
 
 
 
-def start_project():
+def start_project_react():
     # Ruta predeterminada
     # default_path = "/Users/dorian/ReactProjects"
 

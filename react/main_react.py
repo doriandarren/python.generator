@@ -1,26 +1,56 @@
-from helpers.helper_menu import menu_list, clear_screen
+import sys
+import os
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
 from helpers.helper_print import print_header
-from react.to_create_module_crud.start_module import start_module
-from react.to_create_project.start_project import start_project
+from helpers.helper_menu import menu_list, clear_screen
+from react.to_create_module_crud.start_module_react import start_module_react
+from react.to_create_module_single.start_module_single_react import start_module_single_react
+from react.to_create_project.start_project import start_project_react
 
 
 def main_react():
+    """Menú principal para generar código (proyectos / módulos)."""
+
     while True:
         clear_screen()
         print_header("REACT")
 
-        opt = menu_list(
+        str_input = menu_list(
             "¿Qué quieres crear?: ",
-            ["Proyecto", "Módulo", "Volver"]
-        ).strip().lower()
+            [
+                {"name": "Proyecto", "value": "project"},
+                {"name": "Módulo CRUD", "value": "crud"},
+                {"name": "Módulo SINGLE", "value": "single"},
+                {"name": "Volver", "value": "back"},
+            ]
+        )
 
-        if opt == "volver":
-            return
+        opt = str_input.strip().lower()
 
-        if opt == "proyecto":
-            start_project()
-        elif opt in ("módulo", "modulo"):
-            start_module()
+        print(f"Crear un: {str_input} ")
+
+        if opt == 'project':
+            start_project_react()
+            
+        elif opt == 'crud':
+            start_module_react()
+            
+        elif opt == 'crud':
+            start_module_single_react()
+            
+        elif opt == 'back':
+            print("\nVolviendo al menú anterior...\n")
+            break
+
         else:
-            print("Opción no válida.")
+            print("Opción no reconocida.")
 
+        
+
+
+if __name__ == "__main__":
+    main_react()
