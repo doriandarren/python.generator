@@ -34,13 +34,11 @@ pip3 install schedule                           # CronJobs
 
 ```
 
-
 ## Run
 
 ```sh
 python3 cli.py
 ```
-
 
 ## Libraries
 
@@ -49,14 +47,13 @@ python3 cli.py
 pip3 install questionary                 # Console / Terminal
 pip3 install colorama                    # Console / Terminal
 pip3 install requests                           # Conexion API
-pip3 install schedule  
+pip3 install schedule
 pip3 install mysql-connector-python
 pip3 install inflect
 
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
 
 ```
-
 
 ## Adicionales
 
@@ -67,6 +64,12 @@ python -m pip install Cython
 
 ```
 
+1. crear carpeta proyecto "xxx" y archivo "_ _ init _ _.py"
+2. crear main_xxx
+3. crear carpetas con sus respectivos archivos "_ _ init _ _.py":
 
+   - "to_create_module_crud"
+   - "to_create_project"
 
-carpeta_proyecto -> 
+4. crear dentro de la carpeta "to_create_project" el archivo: start_project_xxx.py
+4. crear dentro de la carpeta "to_create_module_crud" el archivo: start_module_xxx.py
