@@ -1,3 +1,4 @@
+from helpers.helper_menu import pause
 from helpers.helper_print import input_with_validation
 from php.to_create_project.batch_processes.generate_batch_processes import generate_batch_processes
 from php.to_create_project.dev.generate_execute_controller import generate_execute_controller
@@ -109,3 +110,5 @@ def start_project_php():
 
     # route api
     update_route_api_php(full_path)
+    
+    pause()
