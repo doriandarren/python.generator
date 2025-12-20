@@ -1,7 +1,7 @@
 from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
-from react.to_create_module_crud.generate_module_standard_react import generate_module_standard_react
+from react.to_create_module_crud.standard_module_crud_react import standard_module_crud_react
 
 
 def start_module():
@@ -28,5 +28,5 @@ def start_module():
     
     columns = parse_columns_input(input_columns)
     
-    generate_module_standard_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)
+    standard_module_crud_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)
 

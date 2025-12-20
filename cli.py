@@ -45,7 +45,7 @@ def start():
                 main_react_ts()
             case "react_native":
                 main_react_native()
-            case "react_native":
+            case "cpp":
                 main_cpp()
             case "salir" | None:
                 break
@@ -54,6 +54,8 @@ def start():
                 pass
 
     print("\nBye...")
+
+
 
 
 if __name__ == "__main__":

@@ -63,13 +63,3 @@ python -m pip install -U pip setuptools wheel
 python -m pip install Cython
 
 ```
-
-1. crear carpeta proyecto "xxx" y archivo "_ _ init _ _.py"
-2. crear main_xxx
-3. crear carpetas con sus respectivos archivos "_ _ init _ _.py":
-
-   - "to_create_module_crud"
-   - "to_create_project"
-
-4. crear dentro de la carpeta "to_create_project" el archivo: start_project_xxx.py
-4. crear dentro de la carpeta "to_create_module_crud" el archivo: start_module_xxx.py

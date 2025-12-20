@@ -1,6 +1,6 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN
-from react.to_create_module_crud.generate_module_standard_react import generate_module_standard_react
+from react.to_create_module_crud.standard_module_crud_react import standard_module_crud_react
 
 
 def generate_modules(full_path):
@@ -9,7 +9,7 @@ def generate_modules(full_path):
     """
 
     # Perfil
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "Profile",
         "Profiles",
@@ -24,7 +24,7 @@ def generate_modules(full_path):
 
 
     # User Status
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "UserStatus",
         "UserStatuses",
@@ -35,7 +35,7 @@ def generate_modules(full_path):
     )
 
     # User
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "User",
         "Users",
@@ -51,7 +51,7 @@ def generate_modules(full_path):
     )
 
     # Teams
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "Team",
         "Teams",
@@ -63,7 +63,7 @@ def generate_modules(full_path):
     )
 
     # System
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "System",
         "Systems",
@@ -76,7 +76,7 @@ def generate_modules(full_path):
     )
 
     # Quotes
-    generate_module_standard_react(
+    standard_module_crud_react(
         full_path,
         "Quote",
         "Quotes",

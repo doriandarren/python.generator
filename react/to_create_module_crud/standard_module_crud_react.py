@@ -10,7 +10,7 @@ from react.to_create_module_crud.generate_barrel_file import create_barrel_file
 from react.to_create_module_crud.generate_service_file import create_service_file
 
 
-def generate_module_standard_react(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
+def standard_module_crud_react(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
 
     # Input Default
     if input_menu_checkbox is None:

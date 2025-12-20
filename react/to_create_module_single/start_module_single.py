@@ -1,15 +1,14 @@
 from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
+from react.to_create_module_single.standard_module_single_react import standard_module_single_react
 
 
 def start_module_single():
 
     opt = [
         ("Route", "route"),
-        ("List", "list"),
-        ("Create", "create"),
-        ("Edit", "edit"),
+        ("Página", "single_page"),
         ("Barril", "barrel"),
         ("Service", "service"),
     ]
@@ -24,4 +23,4 @@ def start_module_single():
     columns = parse_columns_input(input_columns)
 
     # TODO refactor
-    # generate_module_standard_X(project_path, singular_name, plural_name, columns, input_menu_checkbox)
+    standard_module_single_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)
