@@ -1,7 +1,8 @@
 import sys
 import os
 
-from react_native.start_react_native import start_react_native
+from react_native.main_react_native import main_react_native
+
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if BASE_DIR not in sys.path:
@@ -44,7 +45,7 @@ def start():
             case "react_ts":
                 start_react_ts()
             case "react_native":
-                start_react_native()
+                main_react_native()
             case "salir" | None:
                 break
             case _:
