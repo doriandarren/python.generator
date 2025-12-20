@@ -11,7 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ASSETS_DIR = os.path.join(HERE, "assets")
 
 
-def start_import_diagrams():
+def main_import_diagrams():
     clear_screen()
     print_header("IMPORT DIAGRAMS")
 

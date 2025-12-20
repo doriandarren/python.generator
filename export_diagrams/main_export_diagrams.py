@@ -66,7 +66,7 @@ def generate_diagrams(table, user_columns):
 
 
 
-def start_export_diagrams():
+def main_export_diagrams():
     
     clear_screen()
     print_header("EXPORT DIAGRAMS")
@@ -89,4 +89,4 @@ def start_export_diagrams():
     
     
 if __name__ == '__main__': 
-    start_export_diagrams()
+    main_export_diagrams()

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from main import generate
+from php.main_php import generate
 
 
 def process_inputs():

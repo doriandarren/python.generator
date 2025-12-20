@@ -4,7 +4,7 @@ from react.to_create_module_crud.start_module import start_module
 from react.to_create_project.start_project import start_project
 
 
-def start_react():
+def main_react():
     while True:
         clear_screen()
         print_header("REACT")
