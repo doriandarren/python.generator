@@ -9,8 +9,15 @@
    - "to_create_module_crud"
    - "to_create_project"
 
-4. crear dentro de la carpeta "to_create_project" el archivo: start_project_xxx.py
+3. crear dentro de la carpeta "to_create_project" el archivo: start_project_xxx.py
 4. crear dentro de la carpeta "to_create_module_crud" el archivo: start_module_xxx.py
+
+
+
+# Flujo del proyecto
+pymain -> pystart -> pystandard -> pyenerate
+
+
 ```
 
 # TODOS:
@@ -44,60 +51,3 @@ file_path = os.path.join(project_path, "")
         print(f"Error al crear el archivo {file_path}: {e}")
 
 
-
-
-"PyGenerator Main": {
-		"prefix": "pymain",
-		"body": [
-			"import sys",
-			"import os",
-			"",
-			"BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))",
-			"if BASE_DIR not in sys.path:",
-			"    sys.path.append(BASE_DIR)",
-			"",
-			"from helpers.helper_print import print_header",
-			"from helpers.helper_menu import menu_list, clear_screen",
-			"",
-			"",
-			"def ${TM_FILENAME_BASE}():",
-			"    \"\"\"Menú principal para generar código (proyectos / módulos).\"\"\"",
-			"",
-			"    while True:",
-			"        clear_screen()",
-			"        print_header(\"${TM_FILENAME_BASE}\")",
-			"",
-			"        str_input = menu_list(",
-			"            \"¿Qué quieres crear?: \",",
-			"            [",
-			"                {\"name\": \"Proyecto\", \"value\": \"project\"},",
-			"                {\"name\": \"Módulo CRUD\", \"value\": \"crud\"},",
-			"                {\"name\": \"Volver\", \"value\": \"back\"},",
-			"            ]",
-			"        )",
-			"",
-			"        opt = str_input.strip().lower()",
-			"",
-			"        print(f\"Crear un: {str_input} \")",
-			"",
-			"        if opt == 'project':",
-			"            pass",
-			"            # start_project_react()",
-			"            ",
-			"        elif opt == 'crud':",
-			"            pass",
-			"            # start_module_react()",
-			"            ",
-			"        elif opt == 'back':",
-			"            print(\"\\nVolviendo al menú anterior...\\n\")",
-			"            break",
-			"",
-			"        else:",
-			"            print(\"Opción no reconocida.\")",
-			"",
-			"",
-			"if __name__ == \"__main__\":",
-			"    ${TM_FILENAME_BASE}()"
-		],
-		"description": "Menú principal generador (proyectos y módulos)"
-	},
