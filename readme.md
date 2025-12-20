@@ -1,43 +1,5 @@
 ## Python Generator
 
-### Install
-
-```sh
-
-// Entorno virtual (https://flask.palletsprojects.com/en/3.0.x/installation/)
-- python3 -m venv .venv                     // MacOs
-- source .venv/bin/activate                  // MacOs
-- pip install --upgrade pip
-
-
-
-// Instala los requirimientos:
-pip freeze > requirements.txt     // Crear archivo requerimientos
-pip install -r requirements.txt   // Instalar requerimientos
-
-pip install pipreqs
-pipreqs . --force
-
-
-```
-
-### Instalar librerias
-
-```sh
-
-pip3 install questionary                 # Console / Terminal
-pip3 install colorama                    # Console / Terminal
-pip3 install requests                           # Conexion API
-pip3 install schedule  
-pip3 install mysql-connector-python
-pip3 install inflect
-
-pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
-
-```
-
-## Project
-
 ## Crear entorno virtual
 
 ```sh
@@ -69,7 +31,32 @@ pip3 install schedule                           # CronJobs
 
 ## Si no funciona VSCode:
 ( Cmd + Shift + P ) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
+
 ```
+
+
+## Run
+
+```sh
+python3 cli.py
+```
+
+
+## Libraries
+
+```sh
+
+pip3 install questionary                 # Console / Terminal
+pip3 install colorama                    # Console / Terminal
+pip3 install requests                           # Conexion API
+pip3 install schedule  
+pip3 install mysql-connector-python
+pip3 install inflect
+
+pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
+
+```
+
 
 ## Adicionales
 
@@ -80,3 +67,6 @@ python -m pip install Cython
 
 ```
 
+
+
+carpeta_proyecto -> 

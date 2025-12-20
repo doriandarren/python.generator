@@ -1,6 +1,7 @@
 import sys
 import os
 
+from cpp.start_cpp import start_cpp
 from react_native.start_react_native import start_react_native
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -28,6 +29,7 @@ def start():
             {"name": "React", "value": "react"},
             {"name": "React TS", "value": "react_ts"},
             {"name": "React Native", "value": "react_native"},
+            {"name": "CPP", "value": "cpp"},
             {"name": "Salir", "value": "salir"},
         ])
 
@@ -44,6 +46,8 @@ def start():
                 start_react_ts()
             case "react_native":
                 start_react_native()
+            case "react_native":
+                start_cpp()
             case "salir" | None:
                 break
             case _:
