@@ -8,7 +8,7 @@ if BASE_DIR not in sys.path:
 from helpers.helper_print import print_header
 from helpers.helper_menu import menu_list, clear_screen
 from php.to_module_crud.start_module_php import start_module_php
-from php.to_project.start_project_php import start_project_php
+from php.to_create_project.start_project_php import start_project_php
 
 
 def main_php():
