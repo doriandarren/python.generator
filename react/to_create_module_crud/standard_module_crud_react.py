@@ -91,5 +91,3 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
             singular_first_camel,
             columns,
         )
-    
-    pause()

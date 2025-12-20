@@ -31,19 +31,6 @@ from react.to_create_project.role_permissions.generate_helper_role_menu_access i
 
 
 def start_project_react():
-    # Ruta predeterminada
-    # default_path = "/Users/dorian/ReactProjects"
-
-    # project_name = input("Nombre del proyecto React: ")
-    # project_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip()
-
-    # # Si no se introduce una ruta, usar la predeterminada
-    # if not project_path:
-    #     project_path = default_path
-
-    # # Combinar la ruta y el nombre del proyecto
-    # full_path = f"{project_path}/{project_name}"
-    
     
     # Ruta predeterminada
     default_path = "/Users/dorian/ReactProjects"
@@ -117,4 +104,5 @@ def start_project_react():
     # Mensaje final
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
     print_message(f"Para empezar: cd {full_path} && npm run dev", CYAN)
+    
     pause()
