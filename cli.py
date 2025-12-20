@@ -1,6 +1,8 @@
 import sys
 import os
 
+from react_native.start_react_native import start_react_native
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
@@ -25,6 +27,7 @@ def start():
             {"name": "PHP", "value": "php"},
             {"name": "React", "value": "react"},
             {"name": "React TS", "value": "react_ts"},
+            {"name": "React Native", "value": "react_native"},
             {"name": "Salir", "value": "salir"},
         ])
 
@@ -39,6 +42,8 @@ def start():
                 start_react()
             case "react_ts":
                 start_react_ts()
+            case "react_native":
+                start_react_native()
             case "salir" | None:
                 break
             case _:
