@@ -1,5 +1,5 @@
 
-from php.to_module.create_model_file import generate_model_file
+from php.to_module_crud.create_model_file import generate_model_file
 from helpers.helper_print import input_with_validation, print_header
 
 

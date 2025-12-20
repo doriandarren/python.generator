@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from php.to_module.helpers.helper_migrate_php import php_column_line
+from php.to_module_crud.helpers.helper_migrate_php import php_column_line
 from .string_helpers import get_plural
 
 

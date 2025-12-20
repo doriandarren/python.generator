@@ -11,7 +11,7 @@ from react.to_create_module_crud.helpers.helper_list import (
 )
 
 
-def create_list_page(
+def generate_list_page(
     project_path,
     singular_name,
     plural_name,

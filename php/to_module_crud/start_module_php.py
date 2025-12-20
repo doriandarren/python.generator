@@ -1,10 +1,10 @@
 from helpers.helper_columns import parse_columns_input
 from helpers.helper_menu import menu_checkbox, pause
 from helpers.helper_print import input_with_validation
-from php.to_module.generate_module_standard_php import generate_module_standard_php
+from php.to_module_crud.standard_module_crud_php import standard_module_crud_php
 
 
-def start_module():
+def start_module_php():
 
     opt = [
         ("Modelo", "model"),
@@ -35,6 +35,6 @@ def start_module():
     
     columns = parse_columns_input(input_columns)
     
-    generate_module_standard_php(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)
+    standard_module_crud_php(namespace, full_path, singular_name, plural_name, columns, input_menu_checkbox)
     
     pause()

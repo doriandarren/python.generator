@@ -25,7 +25,7 @@ from php.to_project.updates.update_welcome_blade import update_welcome_blade
 from php.to_project.utilities.generate_utilities import generate_utilities
 
 
-def start_project():
+def start_project_php():
     # Ruta predeterminada
     default_path = "/Users/dorian/PhpstormProjects81"
 

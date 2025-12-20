@@ -2,7 +2,7 @@ import os
 from helpers.helper_menu import pause
 from helpers.helper_print import camel_to_kebab, camel_to_snake
 from helpers.helper_string import normalize_project_name
-from react.to_create_module_crud.generate_list_page import create_list_page
+from react.to_create_module_crud.generate_list_page import generate_list_page
 from react.to_create_module_crud.generate_routes import create_routes
 from react.to_create_module_crud.generate_create_page import create_create_page
 from react.to_create_module_crud.generate_edit_page import create_edit_page
@@ -35,7 +35,7 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
         create_routes(project_path, singular_name, plural_name_snake)
 
     if "list" in input_menu_checkbox:
-        create_list_page(
+        generate_list_page(
             project_path,
             singular_name,
             plural_name,

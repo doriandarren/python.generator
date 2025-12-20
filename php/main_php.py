@@ -7,8 +7,8 @@ if BASE_DIR not in sys.path:
 
 from helpers.helper_print import print_header
 from helpers.helper_menu import menu_list, clear_screen
-from php.to_module.start_module_php import start_module
-from php.to_project.start_project import start_project
+from php.to_module_crud.start_module_php import start_module_php
+from php.to_project.start_project_php import start_project_php
 
 
 def main_php():
@@ -28,10 +28,10 @@ def main_php():
         print(f"Crear un: {str_input} ")
 
         if opt.startswith('proyecto'):
-            start_project()
+            start_project_php()
 
         elif opt.startswith("módulo") or opt.startswith("modulo"):
-            start_module()
+            start_module_php()
 
         elif opt.startswith("<-") or opt.startswith("back"):
             # Volver al menú anterior (por ejemplo, menú general de lenguajes)
