@@ -1,18 +1,7 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN
 
-def generate_routes(
-        full_path,
-        project_name,
-        singular_name,
-        plural_name,
-        singular_name_kebab,
-        plural_name_kebab,
-        singular_name_snake,
-        plural_name_snake,
-        singular_first_camel,
-        columns,
-    ):
+def generate_routes(full_path, singular_name, plural_name_snake):
     """
     Genera el archivo
     """
