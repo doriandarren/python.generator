@@ -1,5 +1,4 @@
-from helpers.helper_columns import parse_columns_input
-from helpers.helper_menu import menu_checkbox, pause
+from helpers.helper_menu import pause
 from helpers.helper_print import input_with_validation
 
 
@@ -21,8 +20,6 @@ def start_project_cpp():
     ## TODO llamadas a los "generate_"
     # generate_by_command_line(full_path)
     
+    pause()
     
-    
-
-
     

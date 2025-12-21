@@ -27,17 +27,21 @@ from php.to_create_project.utilities.generate_utilities import generate_utilitie
 
 
 def start_project_php():
-    # Ruta predeterminada
+     # Defaults
     default_path = "/Users/dorian/PhpstormProjects81"
+    default_name = "app-1"
 
-    project_name = input_with_validation("Nombre del proyecto: ", None)
-    project_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip()
+    # Inputs
+    project_name = input_with_validation(
+        f"Nombre del proyecto (defecto: {default_name}): ",
+        default_name
+    )
+    project_path = input_with_validation(
+        f"Ruta del proyecto (defecto: {default_path}): ",
+        default_path
+    )
 
-    # Si no se introduce una ruta, usar la predeterminada
-    if not project_path:
-        project_path = default_path
-
-    # Combinar la ruta y el nombre del proyecto
+    # Split
     full_path = f"{project_path}/{project_name}"
 
 
@@ -111,4 +115,40 @@ def start_project_php():
     # route api
     update_route_api_php(full_path)
     
+    pause()
+    
+    
+    
+
+
+
+
+
+
+from helpers.helper_menu import pause
+from helpers.helper_print import input_with_validation
+
+
+def start_project_php():
+    
+    # Defaults
+    default_path = "/Users/dorian/ReactProjects"
+    default_name = "app-1"
+
+    # Inputs
+    project_name = input_with_validation(
+        f"Nombre del proyecto (defecto: {default_name}): ",
+        default_name
+    )
+    project_path = input_with_validation(
+        f"Ruta para crear el proyecto (defecto: {default_path}): ",
+        default_path
+    )
+
+    # Split
+    full_path = f"{project_path}/{project_name}"
+    
+    ## TODO llamadas a las funciones "generate_"
+    # generate_by_command_line(full_path)
+
     pause()
