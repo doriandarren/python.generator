@@ -28,6 +28,7 @@ def generate_single_page(
     singular_name_snake,
     plural_name_snake,
     singular_first_camel,
+    plural_first_camel,
     columns,
 ):
     """

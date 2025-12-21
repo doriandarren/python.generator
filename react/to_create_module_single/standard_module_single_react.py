@@ -29,7 +29,7 @@ def standard_module_single_react(full_path, singular_name, plural_name, columns,
     singular_first_camel = singular_name[:1].lower() + singular_name[1:]
     plural_first_camel = plural_name[:1].lower() + plural_name[1:]
 
-    # TODO refactor
+
     if "route" in input_menu_checkbox:
         generate_routes(full_path, singular_name, plural_name_snake)
 
@@ -44,6 +44,7 @@ def standard_module_single_react(full_path, singular_name, plural_name, columns,
             singular_name_snake,
             plural_name_snake,
             singular_first_camel,
+            plural_first_camel,
             columns,
         )
 
@@ -63,6 +64,7 @@ def standard_module_single_react(full_path, singular_name, plural_name, columns,
             singular_name_snake,
             plural_name_snake,
             singular_first_camel,
+            plural_first_camel,
             columns,
         )
     

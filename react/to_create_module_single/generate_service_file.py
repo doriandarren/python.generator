@@ -11,6 +11,7 @@ def generate_service_file(
         singular_name_snake,
         plural_name_snake,
         singular_first_camel,
+        plural_first_camel,
         columns,
     ):
     """
@@ -27,7 +28,7 @@ def generate_service_file(
 /**
  * List
  */
-export const get${plural_name} = async () => {{
+export const get{plural_name} = async () => {{
   try {{
     const token = localStorage.getItem("token_{project_name}");
     if (!token) {{
