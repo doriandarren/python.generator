@@ -12,8 +12,6 @@ from import_diagrams.main_import_diagrams import main_import_diagrams
 from react.main_react import main_react
 from react_ts.main_react_ts import main_react_ts
 from php.main_php import main_php
-from cpp.main_cpp import main_cpp
-from react_native.main_react_native import main_react_native
 
 
 def start():
@@ -43,10 +41,6 @@ def start():
                 main_react()
             case "react_ts":
                 main_react_ts()
-            case "react_native":
-                main_react_native()
-            case "cpp":
-                main_cpp()
             case "salir" | None:
                 break
             case _:
