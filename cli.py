@@ -25,8 +25,6 @@ def start():
             {"name": "PHP", "value": "php"},
             {"name": "React", "value": "react"},
             {"name": "React TS", "value": "react_ts"},
-            {"name": "React Native", "value": "react_native"},
-            {"name": "CPP", "value": "cpp"},
             {"name": "Salir", "value": "salir"},
         ])
 
