@@ -2,6 +2,7 @@ import os
 from helpers.helper_menu import pause
 from helpers.helper_print import camel_to_kebab, camel_to_snake
 from helpers.helper_string import normalize_project_name
+from react.to_create_module_single import generate_routes
 
 
 def standard_module_single_react(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
@@ -29,38 +30,38 @@ def standard_module_single_react(project_path, singular_name, plural_name, colum
     if "route" in input_menu_checkbox:
         generate_routes(project_path, singular_name, plural_name_snake)
 
-    if "single_page" in input_menu_checkbox:
-        generate_single_page(
-            project_path,
-            singular_name,
-            plural_name,
-            singular_name_kebab,
-            plural_name_kebab,
-            singular_name_snake,
-            plural_name_snake,
-            singular_first_camel,   # singular_name_camel
-            plural_first_camel,     # plural_name_camel
-            columns,
-        )
+    # if "single_page" in input_menu_checkbox:
+    #     generate_single_page(
+    #         project_path,
+    #         singular_name,
+    #         plural_name,
+    #         singular_name_kebab,
+    #         plural_name_kebab,
+    #         singular_name_snake,
+    #         plural_name_snake,
+    #         singular_first_camel,   # singular_name_camel
+    #         plural_first_camel,     # plural_name_camel
+    #         columns,
+    #     )
 
 
 
-    if "barrel" in input_menu_checkbox:
-        generate_barrel_file(project_path, singular_name, plural_name_snake)
+    # if "barrel" in input_menu_checkbox:
+    #     generate_barrel_file(project_path, singular_name, plural_name_snake)
 
-    if "service" in input_menu_checkbox:
-        generate_service_file(
-            project_path,
-            project_name,
-            singular_name,
-            plural_name,
-            singular_name_kebab,
-            plural_name_kebab,
-            singular_name_snake,
-            plural_name_snake,
-            singular_first_camel,
-            columns,
-        )
+    # if "service" in input_menu_checkbox:
+    #     generate_service_file(
+    #         project_path,
+    #         project_name,
+    #         singular_name,
+    #         plural_name,
+    #         singular_name_kebab,
+    #         plural_name_kebab,
+    #         singular_name_snake,
+    #         plural_name_snake,
+    #         singular_first_camel,
+    #         columns,
+    #     )
     
     pause()
 

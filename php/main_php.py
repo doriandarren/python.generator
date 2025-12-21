@@ -10,38 +10,38 @@ from helpers.helper_menu import menu_list, clear_screen
 from php.to_module_crud.start_module_php import start_module_php
 from php.to_create_project.start_project_php import start_project_php
 
-
 def main_php():
-    """Menú principal para generar código en PHP (proyectos / módulos)."""
+    """Menú principal para generar código (proyectos / módulos)."""
 
     while True:
         clear_screen()
-        print_header("PHP")
+        print_header("main_php")
 
         str_input = menu_list(
-            "¿Que quieres crear?: ",
-            ["Proyecto", "Modulo", "<-Back"]
+            "¿Qué quieres crear?: ",
+            [
+                {"name": "Proyecto", "value": "project"},
+                {"name": "Módulo CRUD", "value": "crud"},
+                {"name": "Volver", "value": "back"},
+            ]
         )
 
         opt = str_input.strip().lower()
 
         print(f"Crear un: {str_input} ")
 
-        if opt.startswith('proyecto'):
+        if opt == 'project':
             start_project_php()
-
-        elif opt.startswith("módulo") or opt.startswith("modulo"):
+            
+        elif opt == 'crud':
             start_module_php()
-
-        elif opt.startswith("<-") or opt.startswith("back"):
-            # Volver al menú anterior (por ejemplo, menú general de lenguajes)
+            
+        elif opt == 'back':
             print("\nVolviendo al menú anterior...\n")
             break
 
         else:
             print("Opción no reconocida.")
-
-        print("Bye...")
 
 
 if __name__ == "__main__":

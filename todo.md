@@ -15,7 +15,11 @@
 
 
 # Flujo del proyecto
-pymain -> pystart -> pystandard -> pyenerate
+## Para proyectos
+pymain -> pystart -> pystartproject -> pygenerate
+
+## Para modulos
+pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 
 
 ```
@@ -49,5 +53,3 @@ file_path = os.path.join(project_path, "")
         print(f"Archivo creado: {file_path}")
     except Exception as e:
         print(f"Error al crear el archivo {file_path}: {e}")
-
-

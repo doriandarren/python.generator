@@ -22,5 +22,4 @@ def start_module_single_react():
 
     columns = parse_columns_input(input_columns)
 
-    # TODO refactor
     standard_module_single_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)

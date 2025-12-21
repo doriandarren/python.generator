@@ -39,7 +39,7 @@ def main_react():
         elif opt == 'crud':
             start_module_react()
             
-        elif opt == 'crud':
+        elif opt == 'single':
             start_module_single_react()
             
         elif opt == 'back':
