@@ -35,6 +35,9 @@ pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 
 Copiar:
 
+
+
+
 "Python Def": {
 "prefix": "def",
 "body": [
