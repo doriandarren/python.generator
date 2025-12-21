@@ -1,5 +1,15 @@
 # Generator Project
 
+## Flujo del proyecto
+```sh
+## Para proyectos
+pymain -> pystart -> pystartproject -> pygenerate
+
+## Para modulos
+pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
+```
+
+
 # Pasos:
 
 ```sh
@@ -11,16 +21,6 @@
 
 3. crear dentro de la carpeta "to_create_project" el archivo: start_project_xxx.py
 4. crear dentro de la carpeta "to_create_module_crud" el archivo: start_module_xxx.py
-
-
-
-# Flujo del proyecto
-## Para proyectos
-pymain -> pystart -> pystartproject -> pygenerate
-
-## Para modulos
-pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
-
 
 ```
 
@@ -40,6 +40,7 @@ pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 
 
 
+Copiar:
 
 
 "Python Def": {
