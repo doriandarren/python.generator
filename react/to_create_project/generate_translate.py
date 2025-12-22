@@ -115,7 +115,8 @@ def create_locales_es(project_path):
   },
   "errors": {
     "error_internal": "Error Interno",
-    "error_process": "No se pudo procesar la solicitud"
+    "error_process": "No se pudo procesar la solicitud",
+    "error_downloading": "Error al descargar"
   },
   "setting_table": {
     "next_table": "Sig",
@@ -354,7 +355,8 @@ def create_locales_en(project_path):
   },
   "errors": {
     "error_internal": "Internal Error",
-    "error_process": "Error processing the information"
+    "error_process": "Error processing the information",
+    "error_downloading": "Error downloading"
   },
   "setting_table": {
     "next_table": "Next",

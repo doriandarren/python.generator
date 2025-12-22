@@ -23,6 +23,14 @@ def create_api_file(project_path):
     # Contenido de file
     content = """const API_URL = import.meta.env.VITE_API_URL;
 
+/**
+ * Single Api
+ * @param {*} endpoint 
+ * @param {*} method 
+ * @param {*} body 
+ * @param {*} token 
+ * @returns 
+ */
 export const api = async (endpoint, method = "GET", body = null, token = null) => {
   const headers = {
     "Content-Type": "application/json",
@@ -48,6 +56,33 @@ export const api = async (endpoint, method = "GET", body = null, token = null) =
     console.error("Error en la petición:", error);
     throw error;
   }
+};
+
+
+/**
+ * API Blob
+ * @param {*} endpoint 
+ * @param {*} method 
+ * @param {*} token 
+ * @returns 
+ */
+export const apiBlob = async (endpoint, method = "GET", token) => {
+  const baseUrl = import.meta.env.VITE_API_URL; // usa la misma base que tu api()
+  const url = `${baseUrl}${endpoint}`;
+
+  const res = await fetch(url, {
+    method,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || "download failed");
+  }
+
+  return await res.blob();
 };
 """
 

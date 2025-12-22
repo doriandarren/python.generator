@@ -46,6 +46,10 @@ php artisan serve
 ## Jobs
 php artisan queue:work
 
+## Supervisor:
+supervisorctl reread
+supervisorctl update
+supervisorctl restart all
 
 ```
 
