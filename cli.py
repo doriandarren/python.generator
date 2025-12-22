@@ -1,6 +1,8 @@
 import sys
 import os
 
+from python_django.main_python_django import main_python_django
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
@@ -25,6 +27,7 @@ def start():
             {"name": "PHP", "value": "php"},
             {"name": "React", "value": "react"},
             {"name": "React TS", "value": "react_ts"},
+            {"name": "Python Django", "value": "python_django"},
             {"name": "Salir", "value": "salir"},
         ])
 
@@ -39,6 +42,8 @@ def start():
                 main_react()
             case "react_ts":
                 main_react_ts()
+            case "python_django":
+                main_python_django()
             case "salir" | None:
                 break
             case _:
