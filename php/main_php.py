@@ -9,6 +9,7 @@ from helpers.helper_print import print_header
 from helpers.helper_menu import menu_list, clear_screen
 from php.to_module_crud.start_module_php import start_module_php
 from php.to_create_project.start_project_php import start_project_php
+from php.to_delete_module.start_module_delete_php import start_module_delete_php
 
 def main_php():
     """Menú principal para generar código (proyectos / módulos)."""
@@ -22,6 +23,7 @@ def main_php():
             [
                 {"name": "Proyecto", "value": "project"},
                 {"name": "Módulo CRUD", "value": "crud"},
+                {"name": "Borrar Módulo", "value": "module_delete"},
                 {"name": "Volver", "value": "back"},
             ]
         )
@@ -36,10 +38,13 @@ def main_php():
         elif opt == 'crud':
             start_module_php()
             
+        elif opt == 'module_delete':
+            start_module_delete_php()
+            
         elif opt == 'back':
             print("\nVolviendo al menú anterior...\n")
             break
-
+        
         else:
             print("Opción no reconocida.")
 

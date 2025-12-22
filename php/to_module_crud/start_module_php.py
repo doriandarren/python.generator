@@ -31,7 +31,6 @@ def start_module_php():
     input_columns = input_with_validation(
         "Columnas (separdo por espacio): ", "customer_id:fk name:string amount:float description has_active:boolean")
 
-    ##columns = [{"name": column} for column in input_columns.split()]
     
     columns = parse_columns_input(input_columns)
     
