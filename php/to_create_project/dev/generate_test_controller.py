@@ -38,65 +38,26 @@ use App\Repositories\BatchProcesses\Abilities\BatchAbilityAndGroupRepository;
 use App\Repositories\BatchProcesses\Abilities\BatchReloadDatabaseAbilitiesRepository;
 use App\Utilities\Exls\Exports\Example\ExampleExport;
 use App\Utilities\Helpers\HelperFile;
-use App\Utilities\Helpers\HelperMail;
 use App\Utilities\Messages\MessageChannel;
 use DateTime;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Knp\Snappy\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use setasign\Fpdi\Fpdi;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use stdClass;
 
 class TestController extends Controller
 {
+    
 
-
-    public function __invokeDISCORR()
+    public function __invoke()
     {
-        MessageChannel::send('Hola Mundo!!!!', 'Titulo');
+        echo "OK";
     }
-
-
-    /**
-     * Read Products
-     */
-    public function __invokeEEEWWWW()
-    {
-
-        $helper = new HelperFile();
-
-
-        //$handle = $helper->openFileToRead(public_path('files') . '/tarifas_dispositivos_globalfleet.csv');
-        $handle = $helper->openFileToRead(public_path('files') . '/e.csv');
-
-        $arrayData = array();
-
-        $i = 0;
-
-        while (!feof($handle)) {
-            $arrayData[$i] = fgets($handle);
-            $i++;
-        }
-
-
-        $i = 0;
-        while ($i < count($arrayData)) {
-
-            $line = explode(";", $arrayData[$i]);
-
-            if($line[1] != '') {
-
-                echo $description = $line[0] . ' ';
-                echo "<br>";
-
-            }
-
-            $i++;
-        }
-
-    }
-
-
 
 
 
@@ -107,10 +68,43 @@ class TestController extends Controller
      ******************************************/
 
 
+    public function __invokeDISCORD()
+    {
+
+        // ini_set('memory_limit', '-1');
+        // ini_set('max_execution_time', '0');
+        // set_time_limit(0);
+
+
+        MessageChannel::send('Hola Mundo!!!!', 'Titulo');
+        
+    }
+
+
+
+    /**
+     * Email
+     */
+    public function __invokeEMAIL()
+    {
+        try{
+
+            Mail::to('dorian.gonzalez@globaltank.eu')->send(new TestMail('Prueba de email', 'Mensaje de prueba.'));
+
+            echo "Email Sent.";
+
+        }catch (\Exception $e){
+            dd($e->getMessage());
+        }
+
+    }
+
+
+
     /**
      * Snappy
      */
-    public function __invoke()
+    public function __invokeSNAPPY()
     {
         $snappy = new Pdf();
 
@@ -133,15 +127,6 @@ class TestController extends Controller
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -177,37 +162,7 @@ class TestController extends Controller
         //dd("pasa");
 
     }
-
-
-
-
-    /**
-     * PDF Snappy
-     */
-    public function __invokeSnappy()
-    {
-        $snappy = new Pdf();
-
-        //$snappy->setBinary('/usr/local/bin/wkhtmltopdf');
-        $snappy->setBinary(base_path() . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
-
-
-        $html = '<h1>Bill</h1><p>You owe me money, dude.</p>';
-        $snappy->generateFromHtml($html, base_path('public') . '/files/test.pdf');
-
-
-        return new Response(
-            $snappy->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
-            )
-        );
-    }
-
-
-
+    
 
 
 
@@ -250,7 +205,44 @@ class TestController extends Controller
 
 
 
+    /**
+     * Read Products
+     */
+    public function __invokeREADFILE()
+    {
 
+        $helper = new HelperFile();
+
+
+        //$handle = $helper->openFileToRead(public_path('files') . '/tarifas_dispositivos_globalfleet.csv');
+        $handle = $helper->openFileToRead(public_path('files') . '/e.csv');
+
+        $arrayData = array();
+
+        $i = 0;
+
+        while (!feof($handle)) {
+            $arrayData[$i] = fgets($handle);
+            $i++;
+        }
+
+
+        $i = 0;
+        while ($i < count($arrayData)) {
+
+            $line = explode(";", $arrayData[$i]);
+
+            if($line[1] != '') {
+
+                echo $description = $line[0] . ' ';
+                echo "<br>";
+
+            }
+
+            $i++;
+        }
+
+    }
 
 
 
@@ -267,7 +259,7 @@ class TestController extends Controller
      *
      * @return void
      */
-    public function __invokeABBB()
+    public function __invokeABILITIES()
     {
 
         // No borrar sirve para actualizar las Abilities de la DB
@@ -276,6 +268,10 @@ class TestController extends Controller
 
         // Recarga las abilidades de los usuarios
         (new BatchReloadDatabaseAbilitiesRepository())->__invoke();
+
+
+        // Solamente para borrar abilities que no existan
+        // (new BatchDeleteAbilityGroupsRepository())->__invoke('prepaid_contract_companies'); // nombre del grupo
 
         echo "OK Bash Abilities";
 
@@ -484,7 +480,7 @@ class TestController extends Controller
      *********************************************************/
 
     // Crear para abstract class UserPermissions
-    public function __invoke(Request $request)
+    public function __invokeABILITIESPERMISION(Request $request)
     {
 
         $excludeTable = EnumExcludeTable::EXCLUDE_TABLE;
@@ -550,14 +546,13 @@ class TestController extends Controller
     /**
      * *******************************************************
      */
-     
-     
-     
+ 
 
 }
-
 """
 
+    
+    
     try:
         # Crear o sobrescribir el archivo con el contenido
         with open(file_path, "w") as f:
@@ -565,3 +560,12 @@ class TestController extends Controller
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+
+
+
+
+
+
