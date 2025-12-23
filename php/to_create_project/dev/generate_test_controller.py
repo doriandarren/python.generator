@@ -87,6 +87,9 @@ class TestController extends Controller
      */
     public function __invokeEMAIL()
     {
+        // Example: 
+        // php artisan make:mail TestMail
+        
         try{
 
             Mail::to('dorian.gonzalez@globaltank.eu')->send(new TestMail('Prueba de email', 'Mensaje de prueba.'));
