@@ -21,9 +21,9 @@ def start_module_delete_php():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
-    project_path = input_with_validation("Carpeta Proyecto (defecto es: /Users/dorian/ReactProjects/app-1): ", "/Users/dorian/ReactProjects/app-1")
-    namespace = input_with_validation("Namespace (ERP / API / INVOICES) ", "API")
-    singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", "AgendaUnloading")
+    project_path = input_with_validation("Carpeta Proyecto", "/Users/dorian/ReactProjects/app-1")
+    namespace = input_with_validation("Namespace (ERP / API / INVOICES)", "API")
+    singular_name = input_with_validation("Nombre singular", "AgendaUnloading")
 
     
 

@@ -30,6 +30,7 @@ def update_readme(full_path):
 composer install
 php artisan key:generate
 php artisan config:clear
+php artisan optimize:clear
 php artisan migrate  
 
 ## Lang
