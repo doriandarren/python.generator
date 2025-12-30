@@ -32,6 +32,7 @@ def standard_module_single_react(full_path, singular_name, plural_name, columns,
 
     if "route" in input_menu_checkbox:
         generate_routes(full_path, singular_name, plural_name_snake)
+        
 
     if "single_page" in input_menu_checkbox:
         generate_single_page(
@@ -69,4 +70,3 @@ def standard_module_single_react(full_path, singular_name, plural_name, columns,
         )
     
     pause()
-

@@ -35,11 +35,6 @@ def generate_single_page(
     Genera el archivo
     """
     
-    
-    print(plural_name_snake)
-    
-    pause()
-    
     folder_path = os.path.join(full_path, "src", "modules", plural_name_snake, "pages")
     file_path = os.path.join(folder_path, f"{singular_name}Page.jsx")
     

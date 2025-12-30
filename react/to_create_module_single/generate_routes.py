@@ -12,7 +12,7 @@ def generate_routes(full_path, singular_name, plural_name_snake):
     os.makedirs(folder_path, exist_ok=True)
 
     content = f'''import {{ Route, Routes }} from "react-router";
-import {{ {singular_name}Page, {singular_name}CreatePage, {singular_name}EditPage }} from "../pages";
+import {{ {singular_name}Page }} from "../pages";
 
 export const {singular_name}Routes = () => {{
   return (

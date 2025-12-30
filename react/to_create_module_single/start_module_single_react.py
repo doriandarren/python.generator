@@ -22,5 +22,6 @@ def start_module_single_react():
     input_columns = input_with_validation("Columnas (separdo por espacio)", "user_id:fk name age:integer description")
 
     columns = parse_columns_input(input_columns)
-
+    
     standard_module_single_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)
+    

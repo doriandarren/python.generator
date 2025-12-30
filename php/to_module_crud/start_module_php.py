@@ -23,8 +23,9 @@ def start_module_php():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
-    ##full_path = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/app-1")
-    full_path = input_with_validation("Proyecto", "/Users/dorian/PhpstormProjects81/docker-laravel-84/projects/services.avanzaoil.eu")
+    ## full_path = input_with_validation("Proyecto ", "/Users/dorian/PhpstormProjects81/app-1")
+    ## full_path = input_with_validation("Proyecto", "/Users/dorian/PhpstormProjects81/docker-laravel-84/projects/services.avanzaoil.eu")
+    full_path = input_with_validation("Proyecto", "/Users/dorian/PhpstormProjects81/docker-laravel-84/projects/api.truckwashvilamalla.eu")
     namespace = input_with_validation("Namespace (ERP / API / INVOICES)", "EFIDATA")
     singular_name = input_with_validation("Nombre singular", "AgendaUnloading")
     plural_name = input_with_validation("Nombre plural", "AgendaUnloadings")
