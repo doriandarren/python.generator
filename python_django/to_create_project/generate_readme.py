@@ -51,6 +51,39 @@ pip3 install schedule                           # CronJobs
 ## Si no funciona VSCode:
 ( Cmd + Shift + P ) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
 ```
+
+# Docker
+
+```sh
+
+## levantar con Docker:
+docker compose up -d
+
+## Opcional:
+docker compose down -v      ## Borra la BD
+docker compose up -d        ## Se levanta de nuevo
+
+```
+
+
+## Django
+
+```sh
+
+## BY PROJECT
+django-admin startproject nombre_proyecto       # Crear PROJECT
+django-admin startproject nombre_proyecto .     # Crear PROJECT - No crea carpeta duplicada
+
+## BY APP
+python3 manage.py startapp nombre_app           # Crear app
+
+python manage.py migrate
+
+python3 manage.py runserver                     # Levantar el servidor
+python3 manage.py runserver 8001
+
+```
+
 '''
 
     try:

@@ -1,7 +1,28 @@
 import os
-from helpers.helper_print import print_message, GREEN, CYAN
+from helpers.helper_print import print_message, GREEN, CYAN, run_command
 
 
+
+def generate_postgres(full_path, project_name_format, venv_python):
+    """
+    Genera el archivo
+    """
+    install_dependencies(full_path, venv_python)
+    generate_docker_file(full_path, project_name_format)
+    
+    ## TODO falat configuracion de postgres
+        
+
+
+
+
+def install_dependencies(full_path, venv_python):
+    print_message("Instalando dependencias en el venv...", CYAN)
+    run_command(f'"{venv_python}" -m pip install "psycopg[binary]"', cwd=full_path)
+    print_message("Dependencias instaladas correctamente.", GREEN)
+    
+    
+    
 
 def generate_docker_file(full_path, project_name_format):
     """
@@ -36,3 +57,6 @@ volumes:
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+    

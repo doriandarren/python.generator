@@ -1,11 +1,13 @@
 from helpers.helper_menu import pause
 from helpers.helper_print import input_with_validation
 from helpers.helper_string import normalize_project_name
+from python_django.helpers.helper_virtual_env import get_venv_python
 from python_django.to_create_project.generate_by_command_line import generate_by_command_line
-from python_django.to_create_project.generate_docker_file import generate_docker_file
+from python_django.to_create_project.generate_django import generate_django
 from python_django.to_create_project.generate_env import generate_env
 from python_django.to_create_project.generate_gitignore import generate_gitignore
 from python_django.to_create_project.generate_passenger_wsgi import generate_passenger_wsgi
+from python_django.to_create_project.generate_postgres import generate_postgres
 from python_django.to_create_project.generate_readme import generate_readme
 from python_django.to_create_project.generate_todo_md import generate_todo_md
 
@@ -37,16 +39,23 @@ def start_project_python_django():
     
     project_name_format = normalize_project_name(project_name)
     
-    ## TODO llamadas a las funciones "generate_"
-    generate_by_command_line(full_path, project_name)
+    # Crear el proyecto
+    generate_by_command_line(full_path, project_name_format, app_name)
+    
+    venv_python = get_venv_python(full_path)
+    
     
     generate_env(full_path, project_name_format)
-    
     generate_gitignore(full_path)
-    
-    generate_docker_file(full_path, project_name_format)
-    
     generate_passenger_wsgi(full_path, app_name)
+    
+    # Django
+    generate_django(full_path, project_name_format, app_name, venv_python)
+    
+    # DB
+    generate_postgres(full_path, project_name_format, venv_python)
+    
+    
     
     generate_readme(full_path, project_name)
     
