@@ -23,7 +23,7 @@ def generate_readme(full_path, project_name):
 
 ## Entorno virtual Windows
 - py -m venv .venv                      # Windows
-- .\.venv\Scripts\activate                           # Windows
+- .\.venv\Scripts\\activate                           # Windows
 - py -m pip install --upgrade pip      # Windows
 - deactivate                                    # Desactivar
 - py -m pip xxx                                 # Usar este comando para intrucciones

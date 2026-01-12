@@ -1,19 +1,17 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN, run_command
+from python_django.helpers.helper_file import helper_add_import, helper_replace_block
 
 
 
-def generate_postgres(full_path, project_name_format, venv_python):
+def generate_postgres(full_path, project_name_format, app_name, venv_python):
     """
     Genera el archivo
     """
     install_dependencies(full_path, venv_python)
-    generate_docker_file(full_path, project_name_format)
+    generate_docker_file(full_path, project_name_format)    
+    replace_settings(full_path, project_name_format, app_name)
     
-    ## TODO falat configuracion de postgres
-        
-
-
 
 
 def install_dependencies(full_path, venv_python):
@@ -59,4 +57,25 @@ volumes:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
 
 
+
+def replace_settings(full_path, project_name_format, app_name):
     
+    new_databases = f'''
+DATABASES = {{
+    "default": {{
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME", "{project_name_format}_db"),
+        "USER": os.getenv("DB_USER", "{project_name_format}_user"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "{project_name_format}_pass"),
+        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+        "PORT": os.getenv("DB_PORT", "5432"),
+    }}
+}}
+    '''
+
+    relative_path = f"{app_name}/settings.py"
+    
+    ok = helper_add_import(full_path, relative_path, "import os")
+    ok = helper_replace_block(full_path, relative_path, "DATABASES", new_databases)    
+
+    print_message(f"Archivo settings.py Reemplazado: {ok}", GREEN)

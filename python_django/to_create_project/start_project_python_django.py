@@ -2,6 +2,7 @@ from helpers.helper_menu import pause
 from helpers.helper_print import input_with_validation
 from helpers.helper_string import normalize_project_name
 from python_django.helpers.helper_virtual_env import get_venv_python
+from python_django.to_create_project.generate_api_doc import generate_api_doc
 from python_django.to_create_project.generate_by_command_line import generate_by_command_line
 from python_django.to_create_project.generate_django import generate_django
 from python_django.to_create_project.generate_env import generate_env
@@ -17,20 +18,20 @@ def start_project_python_django():
     # Defaults
     default_path = "/Users/dorian/PythonProjects"
     default_project_name = "app1.com"
-    default_app_name = "app"
+    default_app_name = "main"
 
     # Inputs
     project_name = input_with_validation(
-        f"Nombre del proyecto (defecto: {default_project_name}): ",
+        f"Nombre del proyecto",
         default_project_name
     )
     project_path = input_with_validation(
-        f"Ruta del proyecto (defecto: {default_path}): ",
+        f"Ruta del proyecto",
         default_path
     )
     
     app_name = input_with_validation(
-        f"Nombre de la APP (defecto: {default_app_name}): ",
+        f"Nombre de la aplicación principal",
         default_app_name
     )
 
@@ -42,24 +43,26 @@ def start_project_python_django():
     # Crear el proyecto
     generate_by_command_line(full_path, project_name_format, app_name)
     
-    venv_python = get_venv_python(full_path)
-    
-    
+    # Generar archivos
     generate_env(full_path, project_name_format)
     generate_gitignore(full_path)
     generate_passenger_wsgi(full_path, app_name)
+    generate_readme(full_path, project_name)
+    generate_todo_md(full_path, project_name)
+    
+    
+    # Load virtualenv
+    venv_python = get_venv_python(full_path)
     
     # Django
     generate_django(full_path, project_name_format, app_name, venv_python)
     
     # DB
-    generate_postgres(full_path, project_name_format, venv_python)
+    generate_postgres(full_path, project_name_format, app_name, venv_python)
     
     
+    generate_api_doc(full_path, project_name_format, app_name, venv_python)
     
-    generate_readme(full_path, project_name)
-    
-    generate_todo_md(full_path, project_name)
     
     
 
