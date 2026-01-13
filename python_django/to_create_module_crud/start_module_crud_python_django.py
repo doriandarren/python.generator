@@ -16,7 +16,7 @@ def start_module_crud_python_django():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
-    project_path = input_with_validation("Carpeta Proyecto (defecto es: /Users/dorian/ReactProjects/app-1): ", "/Users/dorian/ReactProjects/app-1")
+    full_path = input_with_validation("Carpeta Proyecto (defecto es: /Users/dorian/ReactProjects/app-1): ", "/Users/dorian/ReactProjects/app-1")
     singular_name = input_with_validation("Nombre singular (AgendaUnloading): ", "AgendaUnloading")
     plural_name = input_with_validation("Nombre plural (AgendaUnloadings): ", "AgendaUnloadings")
     input_columns = input_with_validation("Columnas: ", "user_id:fk name age:integer description")
@@ -24,6 +24,6 @@ def start_module_crud_python_django():
     columns = parse_columns_input(input_columns)
 
     # TODO refactor
-    # generate_module_standard_XXX(project_path, singular_name, plural_name, columns, input_menu_checkbox)
+    # standard_module_crud_XXX(full_path, singular_name, plural_name, columns, input_menu_checkbox)
 
     pause()

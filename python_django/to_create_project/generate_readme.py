@@ -21,6 +21,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 
 python3 manage.py createsuperuser
+
 ```
 
 ## Crear entorno virtual
@@ -32,9 +33,9 @@ python3 manage.py createsuperuser
 - deactive                                      # Desactivar entorno
 
 ## Entorno virtual Windows
-- py -m venv .venv                      # Windows
-- .\.venv\Scripts\\activate                           # Windows
-- py -m pip install --upgrade pip      # Windows
+- py -m venv .venv                              # Windows
+- .\.venv\Scripts\\activate                     # Windows
+- py -m pip install --upgrade pip               # Windows
 - deactivate                                    # Desactivar
 - py -m pip xxx                                 # Usar este comando para intrucciones
 
@@ -46,7 +47,7 @@ pip3 install --upgrade pip
 pip3 freeze > requirements.txt                  # Crear archivo requerimientos -> Respaldo / Export
 pip3 install -r requirements.txt                # Instalar requerimientos Restore / Import
 
-# Si No se tiene el archivo: requirements.txt
+## Si No se tiene el archivo: requirements.txt
 pip install pipreqs                             # Install
 pipreqs . --force                               # Ejecutar
 
@@ -70,8 +71,8 @@ pip3 install schedule                           # CronJobs
 docker compose up -d
 
 ## Opcional:
-docker compose down -v      ## Borra la BD
-docker compose up -d        ## Se levanta de nuevo
+docker compose down -v                          ## Borra la BD
+docker compose up -d                            ## Se levanta de nuevo
 
 ```
 
@@ -92,6 +93,14 @@ python manage.py migrate
 python3 manage.py runserver                     # Levantar el servidor
 python3 manage.py runserver 8001
 
+```
+
+# CronJobs
+
+```sh
+python3 manage.py crontab add                   ## Agregar los jobs instalados
+python3 manage.py crontab show                  ## Ver los jobs instalados
+python3 manage.py crontab remove                ## Quitar todos los jobs de django-crontab
 ```
 
 '''

@@ -1,6 +1,6 @@
 import os
 from helpers.helper_print import print_message, GREEN, CYAN, run_command
-from python_django.helpers.helper_file import helper_add_import, helper_replace_block
+from python_django.helpers.helper_file import helper_add_import, helper_append_content, helper_replace_block
 
 
 
@@ -76,6 +76,19 @@ DATABASES = {{
     relative_path = f"{app_name}/settings.py"
     
     ok = helper_add_import(full_path, relative_path, "import os")
-    ok = helper_replace_block(full_path, relative_path, "DATABASES", new_databases)    
+    ok = helper_replace_block(full_path, relative_path, "DATABASES", new_databases)
+    
+    
+    
+    str = """\n# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'"""
+    
+    helper_append_content(
+        full_path,
+        f"{app_name}/settings.py", 
+        str
+    )
+    
 
     print_message(f"Archivo settings.py Reemplazado: {ok}", GREEN)

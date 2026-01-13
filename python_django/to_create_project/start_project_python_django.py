@@ -4,6 +4,8 @@ from helpers.helper_string import normalize_project_name
 from python_django.helpers.helper_virtual_env import get_venv_python
 from python_django.to_create_project.generate_api_doc import generate_api_doc
 from python_django.to_create_project.generate_by_command_line import generate_by_command_line
+from python_django.to_create_project.generate_cors import generate_cors
+from python_django.to_create_project.generate_cron import generate_cron
 from python_django.to_create_project.generate_django import generate_django
 from python_django.to_create_project.generate_env import generate_env
 from python_django.to_create_project.generate_gitignore import generate_gitignore
@@ -11,6 +13,7 @@ from python_django.to_create_project.generate_passenger_wsgi import generate_pas
 from python_django.to_create_project.generate_postgres import generate_postgres
 from python_django.to_create_project.generate_readme import generate_readme
 from python_django.to_create_project.generate_simplejwt import generate_simplejwt
+from python_django.to_create_project.generate_static_files import generate_static_files
 from python_django.to_create_project.generate_todo_md import generate_todo_md
 
 
@@ -55,8 +58,13 @@ def start_project_python_django():
     # Load virtualenv
     venv_python = get_venv_python(full_path)
     
+    
+    
     # Django
     generate_django(full_path, project_name_format, app_name, venv_python)
+    
+    # Folder uploads
+    generate_static_files(full_path, app_name)
     
     # DB
     generate_postgres(full_path, project_name_format, app_name, venv_python)
@@ -65,7 +73,16 @@ def start_project_python_django():
     generate_api_doc(full_path, project_name_format, app_name, venv_python)
     
     
+    ## TODO crear users app
+    ## TODO Pendiente de agregar en la ruta de users para la validacion
     generate_simplejwt(full_path, project_name_format, app_name, venv_python)
+    
+    
+    generate_cors(full_path, project_name_format, app_name, venv_python)
+    
+    generate_cron(full_path, project_name_format, app_name, venv_python)
+    
+    
     
 
     pause()
