@@ -13,6 +13,16 @@ def generate_readme(full_path, project_name):
 
     content = f'''## {project_name}
 
+
+## Ejecutar
+
+```sh
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+python3 manage.py createsuperuser
+```
+
 ## Crear entorno virtual
 
 ```sh

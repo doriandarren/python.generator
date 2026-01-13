@@ -15,9 +15,6 @@ def generate_api_doc(full_path, project_name_format, app_name, venv_python):
     update_urls(full_path, project_name_format, app_name)
     
     
-    
-    
-    
 
 def install_django(full_path, venv_python):
     print_message("Instalando drf-yasg...", CYAN)
