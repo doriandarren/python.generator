@@ -10,6 +10,7 @@ from python_django.to_create_project.generate_gitignore import generate_gitignor
 from python_django.to_create_project.generate_passenger_wsgi import generate_passenger_wsgi
 from python_django.to_create_project.generate_postgres import generate_postgres
 from python_django.to_create_project.generate_readme import generate_readme
+from python_django.to_create_project.generate_simplejwt import generate_simplejwt
 from python_django.to_create_project.generate_todo_md import generate_todo_md
 
 
@@ -64,6 +65,7 @@ def start_project_python_django():
     generate_api_doc(full_path, project_name_format, app_name, venv_python)
     
     
+    generate_simplejwt(full_path, project_name_format, app_name, venv_python)
     
 
     pause()
