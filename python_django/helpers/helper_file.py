@@ -167,9 +167,12 @@ def helper_add_import(full_path, relative_path, import_line):
 ##############
 ## Use by call
 ##############
-def helper_append_content(full_path, relative_path, content_to_append: str, add_newline=True):
+def helper_append_content(full_path, relative_path, content_to_append: str, add_newline=True, end_line=None):
     """
-    Añade una línea/bloque al final del archivo SOLO si no existe ya.
+    Añade una línea/bloque al archivo SOLO si no existe ya.
+
+    - end_line=None -> escribe al final del archivo
+    - end_line=3 -> inserta en la línea 3 (línea 3 humana, 1-based)
     """
     file_path = get_file_path(full_path, relative_path)
 
@@ -184,19 +187,43 @@ def helper_append_content(full_path, relative_path, content_to_append: str, add_
     if content_to_append.strip() in content:
         return False
 
-    # Asegurar salto de línea antes
-    final_content = content
-    if add_newline and final_content and not final_content.endswith("\n"):
-        final_content += "\n"
+    # Caso 1: si end_line es None -> al final
+    if end_line is None:
+        final_content = content
 
-    final_content += content_to_append
+        # Asegurar salto de línea antes
+        if add_newline and final_content and not final_content.endswith("\n"):
+            final_content += "\n"
 
-    # Asegurar salto de línea después
-    if add_newline and not final_content.endswith("\n"):
-        final_content += "\n"
+        final_content += content_to_append
 
-    write_file(file_path, final_content)
+        # Asegurar salto de línea después
+        if add_newline and not final_content.endswith("\n"):
+            final_content += "\n"
+
+        write_file(file_path, final_content)
+        return True
+
+    # Caso 2: insertar en una línea específica
+    lines = content.splitlines(True)  # mantiene \n
+
+    # end_line es 1-based -> convertir a índice 0-based
+    insert_index = max(0, int(end_line) - 1)
+
+    # Si la línea es mayor que el archivo, insertamos al final
+    if insert_index > len(lines):
+        insert_index = len(lines)
+
+    text_to_insert = content_to_append
+
+    if add_newline and not text_to_insert.endswith("\n"):
+        text_to_insert += "\n"
+
+    lines.insert(insert_index, text_to_insert)
+
+    write_file(file_path, "".join(lines))
     return True
+
 
 
 

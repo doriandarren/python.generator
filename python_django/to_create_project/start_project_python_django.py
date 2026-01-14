@@ -48,7 +48,6 @@ def start_project_python_django():
     generate_by_command_line(full_path, project_name_format, app_name)
     
     # Generar archivos
-    generate_env(full_path, project_name_format)
     generate_gitignore(full_path)
     generate_passenger_wsgi(full_path, app_name)
     generate_readme(full_path, project_name)
@@ -62,6 +61,11 @@ def start_project_python_django():
     
     # Django
     generate_django(full_path, project_name_format, app_name, venv_python)
+    
+    
+    # Env
+    generate_env(full_path, project_name_format, app_name, venv_python)
+    
     
     # Folder uploads
     generate_static_files(full_path, app_name)
