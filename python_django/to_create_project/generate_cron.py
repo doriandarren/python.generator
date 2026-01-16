@@ -8,6 +8,7 @@ def generate_cron(full_path, project_name_format, app_name, venv_python):
     """
     install_cron(full_path, venv_python)
     update_settings(full_path, project_name_format, app_name)
+    create_file_init(full_path)
     create_core_cron(full_path)
 
 
@@ -65,3 +66,25 @@ def hello_cron():
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+
+def create_file_init(full_path):
+    """
+    Genera el archivo init
+    """
+    folder_path = os.path.join(full_path, "core", "cron")
+    file_path = os.path.join(folder_path, "__init__.py")
+
+    os.makedirs(folder_path, exist_ok=True)
+
+    content = f''''''
+
+    try:
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+

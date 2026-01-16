@@ -351,3 +351,4 @@ def helper_update_line(full_path, relative_path, old_line: str, new_line: str):
         write_file(file_path, "".join(lines))
 
     return replaced
+

@@ -2,6 +2,10 @@ from helpers.helper_menu import pause
 from helpers.helper_print import input_with_validation
 from helpers.helper_string import normalize_project_name
 from python_django.helpers.helper_virtual_env import get_venv_python
+from python_django.to_create_project.core.generate_core_file_init import generate_code_file_init
+from python_django.to_create_project.core.generate_file_helpers import generate_file_helpers
+from python_django.to_create_project.core.generate_http import generate_http
+from python_django.to_create_project.core.generate_message_channel import generate_message_channel
 from python_django.to_create_project.generate_api_doc import generate_api_doc
 from python_django.to_create_project.generate_by_command_line import generate_by_command_line
 from python_django.to_create_project.generate_cors import generate_cors
@@ -81,10 +85,16 @@ def start_project_python_django():
     ## TODO Pendiente de agregar en la ruta de users para la validacion
     generate_simplejwt(full_path, project_name_format, app_name, venv_python)
     
+    generate_code_file_init(full_path)
     
     generate_cors(full_path, project_name_format, app_name, venv_python)
     
+    
+    # Core Files
     generate_cron(full_path, project_name_format, app_name, venv_python)
+    generate_file_helpers(full_path)
+    generate_http(full_path)
+    generate_message_channel(full_path)
     
     
     

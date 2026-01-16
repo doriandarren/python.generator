@@ -26,12 +26,17 @@ pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 
 # TODOS:
 
++ Crear Python Django:
+- crear los modulos
+
+
+
 - En PHP: cuando se crea un proyecto, se tiene que cambiar en el ".env" y en el ".env.example" lo siguientes: "LOG_CHANNEL=daily"
 - en el archivo para API de postman hay que agregar en el Dev: el "execute"
 - En PHP: revisar el plural cambiar a inflect por que agrega una "s" al final de la palabra de las migraciones cuando es fk
 
 - Crear React_TS
-- Crear Python
+
 
 Copiar:
 
