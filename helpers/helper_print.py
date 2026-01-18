@@ -31,6 +31,40 @@ def run_command(command, cwd=None):
 
 
 
+
+def run_command_debug(command, cwd=None):
+    """Ejecuta un comando y muestra stdout/stderr SIEMPRE."""
+    print_message(f"RUN: {command}", CYAN)
+
+    result = subprocess.run(
+        command,
+        shell=True,
+        cwd=cwd,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+
+    print_message(f"RETURN CODE: {result.returncode}", CYAN)
+
+    print_message("----- STDOUT -----", CYAN)
+    print(result.stdout or "(vacío)")
+
+    print_message("----- STDERR -----", RED)
+    print(result.stderr or "(vacío)")
+
+    if result.returncode != 0:
+        # No lances excepción todavía si quieres ver el error sin romper el programa:
+        raise subprocess.CalledProcessError(result.returncode, command, result.stdout, result.stderr)
+
+    return result.stdout
+
+
+
+
+
+
+
 def create_folder(path):
     """Crea una carpeta si no existe."""
     if not os.path.exists(path):

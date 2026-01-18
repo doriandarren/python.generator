@@ -2,13 +2,16 @@ import os
 from helpers.helper_menu import pause
 from helpers.helper_print import camel_to_kebab, camel_to_snake
 from helpers.helper_string import normalize_project_name
+from helpers.helpers import dd
+from python_django.helpers.helper_virtual_env import get_venv_python
+from python_django.to_create_module_crud.generate_app import generate_app
 
 
 def standard_module_crud_python_django(full_path, singular_name, plural_name, columns, input_menu_checkbox=None):
 
     # Input Default
     if input_menu_checkbox is None:
-        input_menu_checkbox = ["route", "list", "create", "edit", "barrel", "service"]
+        input_menu_checkbox = ["app", "route", "list", "create", "edit", "barrel", "service"]
 
     # Convertir nombres
     singular_name_kebab = camel_to_kebab(singular_name)
@@ -24,6 +27,52 @@ def standard_module_crud_python_django(full_path, singular_name, plural_name, co
     # Camel (para services)
     singular_first_camel = singular_name[:1].lower() + singular_name[1:]
     plural_first_camel = plural_name[:1].lower() + plural_name[1:]
+    
+    
+    # Load virtualenv
+    venv_python = get_venv_python(full_path)
+    
+    
+    manage_py_path = os.path.join(full_path, "manage.py")
+    
+    
+    # print(f"Crear un: {venv_python} ")
+    # dd(manage_py_path)
+    
+    
+    
+    if "app" in input_menu_checkbox:
+        generate_app(
+            full_path,
+            singular_name,
+            plural_name,
+            singular_name_kebab,
+            plural_name_kebab,
+            singular_name_snake,
+            plural_name_snake,
+            singular_first_camel,
+            plural_first_camel,
+            columns,
+            venv_python,
+            manage_py_path
+        )
+    
+
+
+    # if "list" in input_menu_checkbox:
+    #     generate_model(
+    #         full_path,
+    #         singular_name,
+    #         plural_name,
+    #         singular_name_kebab,
+    #         plural_name_kebab,
+    #         singular_name_snake,
+    #         plural_name_snake,
+    #         singular_first_camel,
+    #         plural_first_camel,
+    #         columns,
+    #     )
+
 
     # TODO refactor
     # if "route" in input_menu_checkbox:

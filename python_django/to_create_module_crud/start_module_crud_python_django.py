@@ -7,6 +7,7 @@ from python_django.to_create_module_crud.standard_module_crud_python_django impo
 def start_module_crud_python_django():
 
     opt = [
+        ("App", "app"),
         ("Route", "route"),
         ("List", "list"),
         ("Create", "create"),

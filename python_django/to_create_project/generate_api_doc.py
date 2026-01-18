@@ -23,12 +23,12 @@ def install_django(full_path, venv_python):
     
 
 def update_settings(full_path, app_name):
-    helper_update_list(
-        full_path, 
-        f"{app_name}/settings.py", 
-        "INSTALLED_APPS", 
-        f"'django.contrib.staticfiles',       # required for serving swagger ui's css/js files"
-    )
+    # helper_update_list(
+    #     full_path, 
+    #     f"{app_name}/settings.py", 
+    #     "INSTALLED_APPS", 
+    #     f"'django.contrib.staticfiles',       # required for serving swagger ui's css/js files"
+    # )
     
     helper_update_list(
         full_path, 

@@ -61,22 +61,25 @@ volumes:
 def replace_settings(full_path, project_name_format, app_name):
     
     new_databases = f'''
-DATABASES = {{
-    "default": {{
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "{project_name_format}_db"),
-        "USER": os.getenv("DB_USER", "{project_name_format}_user"),
-        "PASSWORD": os.getenv("DB_PASSWORD", "{project_name_format}_pass"),
-        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", "5432"),
-    }}
-}}
+#####################################
+# Uncomment to use PostgreSQL
+#####################################
+#DATABASES = {{
+#    "default": {{
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": os.getenv("DB_NAME", "{project_name_format}_db"),
+#        "USER": os.getenv("DB_USER", "{project_name_format}_user"),
+#        "PASSWORD": os.getenv("DB_PASSWORD", "{project_name_format}_pass"),
+#        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+#        "PORT": os.getenv("DB_PORT", "5432"),
+#    }}
+#}}
     '''
 
     relative_path = f"{app_name}/settings.py"
     
     ok = helper_add_import(full_path, relative_path, "import os")
-    ok = helper_replace_block(full_path, relative_path, "DATABASES", new_databases)
+    ok = helper_append_content(full_path, relative_path, content_to_append=new_databases, end_line=84)
     
     
     
