@@ -25,7 +25,7 @@ def generate_app(
 
 def install_app(full_path, plural_name_snake, manage_py_path, venv_python):
     print_message("Instalando app...", CYAN)
-    run_command_debug(f'"{venv_python}" manage.py startapp holapp', cwd=full_path)
+    run_command_debug(f'"{venv_python}" manage.py startapp {plural_name_snake}', cwd=full_path)
     print_message("App instalada correctamente.", GREEN)
     
     
