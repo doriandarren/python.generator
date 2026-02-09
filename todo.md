@@ -26,8 +26,21 @@ pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 
 # TODOS:
 
+
+PYTHON: 
+
+- las cors: 'corsheaders.middleware.CorsMiddleware',                            # required for cors,
+va encima de: 'django.middleware.common.CommonMiddleware',
+
+
+
 + Crear Python Django:
 - crear los modulos
+
+
+
+
+
 
 
 
