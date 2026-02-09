@@ -9,7 +9,7 @@ from helpers.helper_print import print_header
 from helpers.helper_menu import menu_list, clear_screen
 from react.to_create_module_crud.start_module_react import start_module_react
 from react.to_create_module_single.start_module_single_react import start_module_single_react
-from react.to_create_project.start_project import start_project_react
+from react.to_create_project.start_project_react import start_project_react
 
 
 def main_react():
@@ -52,5 +52,5 @@ def main_react():
         
 
 
-if __name__ == "__main__":
-    main_react()
+# if __name__ == "__main__":
+#     main_react()

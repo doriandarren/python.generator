@@ -1,6 +1,6 @@
 import os
 from helpers.helper_menu import pause
-from helpers.helper_print import RED, dd, print_message, GREEN, CYAN
+from helpers.helper_print import RED, dd, print_message, GREEN, CYAN, input_with_validation
 from react.to_create_project.components.generate_components import generate_components
 from react.to_create_project.generate_modules import generate_modules
 from react.to_create_project.generate_react_router import generate_react_router
@@ -27,24 +27,27 @@ from react.to_create_project.role_permissions.generate_helper_role_menu_access i
 
 
 
-
-
-
 def start_project_react():
     
-    # Ruta predeterminada
+    # Defaults
     default_path = "/Users/dorian/ReactProjects"
+    default_name = "app1.com"
 
-    project_name = input("Nombre del proyecto React (default: app-1): ").strip() or "app-1"
-    base_path = input(f"Ruta para crear el proyecto (por defecto: {default_path}): ").strip() or default_path
+    # Inputs
+    project_name = input_with_validation(
+        f"Nombre del proyecto",
+        default_name
+    )
+    project_path = input_with_validation(
+        f"Ruta del proyecto",
+        default_path
+    )
 
-    if not project_name:
-        print_message("El nombre del proyecto no puede estar vacío.", RED)
-        return
-
-    full_path = os.path.join(base_path, project_name)
+    # Join Full Path
+    full_path = f"{project_path}/{project_name}"
     
     
+
     generate_by_command_line(full_path)
     generate_styles(full_path) 
     generate_images(full_path) 
@@ -105,4 +108,6 @@ def start_project_react():
     print_message(f"¡Proyecto React creado exitosamente en {full_path}!", GREEN)
     print_message(f"Para empezar: cd {full_path} && npm run dev", CYAN)
     
+
+
     pause()
