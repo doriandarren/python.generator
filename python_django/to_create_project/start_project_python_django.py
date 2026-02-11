@@ -3,6 +3,7 @@ from helpers.helper_print import input_with_validation
 from helpers.helper_string import normalize_project_name
 from python_django.helpers.helper_virtual_env import get_venv_python
 from python_django.to_create_project.core.generate_core_file_init import generate_code_file_init
+from python_django.to_create_project.core.generate_core_models import generate_core_models
 from python_django.to_create_project.core.generate_file_helpers import generate_file_helpers
 from python_django.to_create_project.core.generate_http import generate_http
 from python_django.to_create_project.core.generate_message_channel import generate_message_channel
@@ -95,6 +96,7 @@ def start_project_python_django():
     generate_file_helpers(full_path)
     generate_http(full_path)
     generate_message_channel(full_path)
+    generate_core_models(full_path)
     
     
     
