@@ -116,7 +116,6 @@ import { startRestoreSession } from "../store/auth/thunks";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { PreloaderMain } from "../components/Preloader/PreloaderMain";
-import { UserRoutes } from "../modules/users/routes/UserRoutes";
 import { ProfileRoutes } from "../modules/profiles/routes/ProfileRoutes";
 //******* Routes Fake **********
 import { TeamRoutes } from "../modules/teams/routes/TeamRoutes";
@@ -149,7 +148,6 @@ export const AppRouter = () => {
       {/* Private Routes */}
       <Route path="/admin/*" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="dashboard/*" element={<DashboardRoutes />} />
-        <Route path="users/*" element={<UserRoutes />} />
         <Route path="profiles/*" element={<ProfileRoutes />} />
         //******* Routes Fake **********
         <Route path="teams/*" element={<TeamRoutes />} />
