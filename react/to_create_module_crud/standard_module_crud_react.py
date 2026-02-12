@@ -10,7 +10,7 @@ from react.to_create_module_crud.generate_barrel_file import create_barrel_file
 from react.to_create_module_crud.generate_service_file import create_service_file
 
 
-def standard_module_crud_react(project_path, singular_name, plural_name, columns, input_menu_checkbox=None):
+def standard_module_crud_react(full_path, singular_name, plural_name, columns, input_menu_checkbox=None):
 
     # Input Default
     if input_menu_checkbox is None:
@@ -23,7 +23,7 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
     plural_name_snake = camel_to_snake(plural_name)
     
     ## Project Name
-    temp_name = os.path.basename(project_path.rstrip(os.sep))
+    temp_name = os.path.basename(full_path.rstrip(os.sep))
     project_name = normalize_project_name(temp_name)
     
 
@@ -32,11 +32,11 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
     plural_first_camel = plural_name[:1].lower() + plural_name[1:]
 
     if "route" in input_menu_checkbox:
-        create_routes(project_path, singular_name, plural_name_snake)
+        create_routes(full_path, singular_name, plural_name_snake)
 
     if "list" in input_menu_checkbox:
         generate_list_page(
-            project_path,
+            full_path,
             singular_name,
             plural_name,
             singular_name_kebab,
@@ -49,7 +49,7 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
 
     if "create" in input_menu_checkbox:
         create_create_page(
-            project_path,
+            full_path,
             singular_name,
             plural_name,
             singular_name_kebab,
@@ -63,7 +63,7 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
 
     if "edit" in input_menu_checkbox:
         create_edit_page(
-            project_path,
+            full_path,
             singular_name,
             plural_name,
             singular_name_kebab,
@@ -76,11 +76,11 @@ def standard_module_crud_react(project_path, singular_name, plural_name, columns
         )
 
     if "barrel" in input_menu_checkbox:
-        create_barrel_file(project_path, singular_name, plural_name_snake)
+        create_barrel_file(full_path, singular_name, plural_name_snake)
 
     if "service" in input_menu_checkbox:
         create_service_file(
-            project_path,
+            full_path,
             project_name,
             singular_name,
             plural_name,

@@ -16,17 +16,17 @@ def start_module_react():
     ]
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
-
-    # project_path = input_with_validation("Carpeta Proyecto (defecto es: /Users/dorian/ReactProjects/app-1): ", "/Users/dorian/ReactProjects")
-    project_path = input_with_validation(
-        "Carpeta Proyecto", 
-        "/Users/dorian/ReactProjects/Avanza/prices.avanzaoil.eu"
-    )
-    singular_name = input_with_validation("Nombre singular", "AgendaUnloading")
-    plural_name = input_with_validation("Nombre plural ", "AgendaUnloadings")
-    input_columns = input_with_validation("Columnas (separdo por espacio)", "user_id:fk name age:integer description")
     
+    # default_path = "/Users/dorian/ReactProjects/app-1"
+    default_path = "/Users/dorian/ReactProjects/GlobalFleet/erp.globalfleet.es"
+
+    fullt_path = input_with_validation("Carpeta Proyecto", default_path)
+    singular_name = input_with_validation("Nombre singular", "AgendaUnloading")
+    plural_name = input_with_validation("Nombre plural", "AgendaUnloadings")
+    input_columns = input_with_validation("Columnas: ", "user_id:fk name age:integer description")
+
     columns = parse_columns_input(input_columns)
     
-    standard_module_crud_react(project_path, singular_name, plural_name, columns, input_menu_checkbox)
-
+    standard_module_crud_react(fullt_path, singular_name, plural_name, columns, input_menu_checkbox)
+    
+    pause()
