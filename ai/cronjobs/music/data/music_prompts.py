@@ -1,4 +1,4 @@
-music_prompts = [
+MUSIC_PROMPTS = [
     "relaxed lo-fi hip hop with jazzy chords, soft bass and tape noise",
     "warm lo-fi beats with soft piano melodies, vinyl crackle, calming atmosphere",
     "chillhop groove with smooth trumpet, dusty drums, and deep laid-back bass",

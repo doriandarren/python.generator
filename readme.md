@@ -1,10 +1,13 @@
 ## Python Generator
 
-## Ejecutar cron:
+## Ejecutar music CRON:
 
 ```sh
+python3 run.py music
 
-python -m ai.cronjobs.music.cronjob_music
+// OR
+
+python -m ai.cronjobs.music.cronjob_music           ## Antiguo
 
 ```
 

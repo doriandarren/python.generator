@@ -32,10 +32,14 @@ def generate_docker_file(full_path, project_name_format):
 
     os.makedirs(folder_path, exist_ok=True)
 
-    content = f'''services:
-  db:
-    image: postgres:16-alpine
+    content = f'''## docker compose down    --> Eliminar los contenedores
+## docker compose up -d   --> Levantar los contenedores
+name: {project_name_format}_posgrest
+services:
+  postgres:
+    image: postgres:16
     container_name: {project_name_format}_postgres
+    restart: on-failure
     environment:
       POSTGRES_DB: {project_name_format}_db
       POSTGRES_USER: {project_name_format}_user

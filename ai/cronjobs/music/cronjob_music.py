@@ -2,8 +2,10 @@ import schedule
 import time
 import requests
 import random
+from datetime import datetime
 
-from ai.cronjobs.music.data import music_prompts
+from ai.cronjobs.music.data.music_prompts import MUSIC_PROMPTS
+
 
 ## Music Long
 URL_MUSIC = "http://192.168.1.103:7890/music"
@@ -12,7 +14,8 @@ URL_CONTINUE = "http://192.168.1.103:7890/music-loop-from-wav"
 
 def my_cron(prompt: str, duration: int):
 
-    print("Ejecutando...")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{now}] Request. Wait...")
 
     audio_music_path = ''
 
@@ -28,7 +31,8 @@ def my_cron(prompt: str, duration: int):
 
         data = response.json()
 
-        print(f"Data: {data}")
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{now}] Response: {data}")
 
         full_music_path = data["audio_path"]
         audio_music_path = full_music_path.split("/")[-1]
@@ -51,28 +55,24 @@ def my_cron(prompt: str, duration: int):
         print(f"Error: ")
 
 
-# schedule.every(15).minutes.do(
-#     my_cron,
-#     "relaxed lo-fi hip hop with jazzy chords, soft bass and tape noise",
-#     60
-# )
 
-
-schedule.every(15).minutes.do(
-    lambda: my_cron(
-        random.choice(music_prompts),
-        60
+def main():
+    
+    ## First cron
+    ##my_cron(random.choice(MUSIC_PROMPTS), 60)
+    
+    schedule.every(15).minutes.do(
+        lambda: my_cron(
+            random.choice(MUSIC_PROMPTS),
+            60
+        )
     )
-)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
 
-
-# if __name__ == '__main__':
-#     my_cron(
-#         "relaxed lo-fi hip hop with jazzy chords, soft bass and tape noise",
-#         60  # 60
-#     )
+if __name__ == "__main__":
+    main()
