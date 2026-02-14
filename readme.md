@@ -1,5 +1,14 @@
 ## Python Generator
 
+## Ejecutar cron:
+
+```sh
+
+python -m ai.cronjobs.music.cronjob_music
+
+```
+
+
 ## Crear entorno virtual
 
 ```sh

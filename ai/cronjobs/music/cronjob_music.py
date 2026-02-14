@@ -1,13 +1,12 @@
 import schedule
 import time
 import requests
-from types import SimpleNamespace
-from data.lofi_prompts import lofi_prompts
 import random
 
+from ai.cronjobs.music.data import music_prompts
 
+## Music Long
 URL_MUSIC = "http://192.168.1.103:7890/music"
-# URL_SEAMLESS = "http://192.168.1.103:7890/music-loop-seamless"
 URL_CONTINUE = "http://192.168.1.103:7890/music-loop-from-wav"
 
 
@@ -61,7 +60,7 @@ def my_cron(prompt: str, duration: int):
 
 schedule.every(15).minutes.do(
     lambda: my_cron(
-        random.choice(lofi_prompts),
+        random.choice(music_prompts),
         60
     )
 )
