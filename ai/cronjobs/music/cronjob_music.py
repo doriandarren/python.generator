@@ -58,9 +58,6 @@ def my_cron(prompt: str, duration: int):
 
 def main():
     
-    ## First cron
-    ##my_cron(random.choice(MUSIC_PROMPTS), 60)
-    
     schedule.every(15).minutes.do(
         lambda: my_cron(
             random.choice(MUSIC_PROMPTS),

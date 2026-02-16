@@ -6,7 +6,7 @@ from importlib import import_module
 COMMANDS = {
     # nombre_comando: ruta_del_módulo
     "music": "ai.cronjobs.music.cronjob_music",
-    "music": "ai.cronjobs.music.cronjob_music",
+    "model_3d": "ai.cronjobs.model_3d.cronjob_model_3d",
     # aquí puedes añadir más cronjobs:
     # "emails": "ai.cronjobs.emails.cronjob_emails",
 }
