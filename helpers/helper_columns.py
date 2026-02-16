@@ -5,7 +5,7 @@ def parse_columns_input(input_columns: str):
     en una lista de diccionarios bien formados.
     """
 
-    allowed_types = {"string", "integer", "float", "decimal", "boolean", "fk"}
+    allowed_types = {"string", "integer", "float", "decimal", "boolean", "fk", "date", "datetime", "email", "timestamp"}
 
     columns = []
 

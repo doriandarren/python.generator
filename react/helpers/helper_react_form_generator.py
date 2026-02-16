@@ -98,7 +98,7 @@ def input_for(col: dict) -> str:
                 }}
                 error={errors.__NAME__?.message}
                 getLabel={(item) =>
-                  `${item?.name ?? ""}`.trim()
+                  `${item?.name ?? "AAAA"}-`.trim()
                 }
                 onChange={(value) => __ON_CHANGE__(value)}
               />
