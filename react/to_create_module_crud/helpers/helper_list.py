@@ -35,13 +35,12 @@ def build_filter_blocks(column_names):
 
         block = f"""
           <div className="md:col-span-{span}">
-            <label className="block text-sm font-medium mb-1">{{t("{clean_name(name)}")}}</label>
             <input
               type="text"
               value={{q{pascal}}}
               onChange={{(e) => setQ{pascal}(e.target.value)}}
-              className="w-full border border-gray-300 rounded-lg p-2"
-              placeholder={{t("{ph_key}")}}
+              className="w-full border border-gray-300 rounded-lg p-2 bg-white"
+              placeholder={{t("{clean_name(name)}")}}
             />
           </div>""".strip()
 
@@ -55,8 +54,8 @@ def build_render_filters_fn(column_names):
     blocks = build_filter_blocks(column_names)
 
     return f"""
-      <div className="border border-gray-100 shadow-sm rounded-xl px-4 py-4 mb-5">
-        <div className="mb-4 grid grid-cols-1 md:grid-cols-12 gap-3">
+      <div className="border border-gray-200 shadow-sm rounded-xl px-4 py-4 mb-5 bg-gray-200/30">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
 {blocks}
           <div className="md:col-span-2 flex items-end">
             <ThemedButton variant="warning" type="button" onClick={{resetFilters}} className="w-full">

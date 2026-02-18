@@ -44,7 +44,7 @@ def to_yup_schema_for(col_type: str, required: bool) -> str:
         'yup.string().email(t("form.email"))' if T == "EMAIL" else
         'yup.string()' if T == "UUID" else
         'yup.mixed()' if T in ("JSON", "FK") else
-        'yup.string()'
+        'yup.string(t("form.required"))'
     )
 
     # base += required ? '.required(...)' : '.nullable()'
