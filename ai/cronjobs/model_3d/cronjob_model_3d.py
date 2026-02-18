@@ -9,7 +9,7 @@ from ai.cronjobs.model_3d.data.prompts import MODEL_PROMPTS
 
 URL = "http://192.168.1.103:7861/generate"
 
-def my_cron(prompt: str, duration: int):
+def my_cron(title: str, prompt: str, duration: int):
     
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{now}] Request. Wait...")
@@ -19,6 +19,7 @@ def my_cron(prompt: str, duration: int):
         print(f"Prompt: {prompt}")
         
         payload = {
+            "title": title,
             "prompt": prompt,
             "seed": 0
         }
@@ -39,12 +40,16 @@ def my_cron(prompt: str, duration: int):
 
 def main():
     
-    schedule.every(10).minutes.do(
-        lambda: my_cron(
-            random.choice(MODEL_PROMPTS),
+    def job():
+        asset = random.choice(MODEL_PROMPTS)
+
+        my_cron(
+            asset["title"],
+            asset["prompt"],
             60
         )
-    )
+
+    schedule.every(1).minutes.do(job)
 
     while True:
         schedule.run_pending()
