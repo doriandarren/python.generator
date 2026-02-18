@@ -372,7 +372,7 @@ export const SessionLayout = ({ children }) => {
           </div>
         </div>
 
-        <main className="py-10">
+        <main className="py-10 mb-20">
           <div className="px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn animate__faster">
             {children}
           </div>
