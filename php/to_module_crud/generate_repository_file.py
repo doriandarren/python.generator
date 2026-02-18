@@ -46,11 +46,23 @@ class {singular_name}Repository
     * List by Admin
     * @return mixed
     */
-    public function list(): mixed
+    public function list(array $filters = []): mixed
     {{
-        return {singular_name}::latest()
-                            ->limit(EnumApiSetup::QUERY_LIMIT)
-                            ->get();
+        $q = {singular_name}::with(self::WITH);
+        
+"""
+
+    for column in column_names:
+        repository_content += f"""        // Filter by {column}
+        if (!empty($filters['{column}'])) {{
+            ${column} = trim($filters['{column}']);
+            $q->where('{column}', 'LIKE', '%' . ${column} . '%');
+        }}
+
+"""
+    repository_content += f"""        return $q->latest()
+            ->limit(EnumApiSetup::QUERY_LIMIT)
+            ->get();
     }}
     
     
@@ -58,11 +70,23 @@ class {singular_name}Repository
     * List by Manager
     * @return mixed
     */
-    public function listByRoleManager(): mixed
+    public function listByRoleManager(array $filters = []): mixed
     {{
-        return {singular_name}::latest()
-                            ->limit(EnumApiSetup::QUERY_LIMIT)
-                            ->get();
+        $q = {singular_name}::with(self::WITH);
+        
+"""
+
+    for column in column_names:
+        repository_content += f"""        // Filter by {column}
+        if (!empty($filters['{column}'])) {{
+            ${column} = trim($filters['{column}']);
+            $q->where('{column}', 'LIKE', '%' . ${column} . '%');
+        }}
+
+"""
+    repository_content += f"""        return $q->latest()
+            ->limit(EnumApiSetup::QUERY_LIMIT)
+            ->get();
     }}
     
     
@@ -70,11 +94,23 @@ class {singular_name}Repository
     * List by User
     * @return mixed
     */
-    public function listByRoleUser(): mixed
+    public function listByRoleUser(array $filters = []): mixed
     {{
-        return {singular_name}::latest()
-                            ->limit(EnumApiSetup::QUERY_LIMIT)
-                            ->get();
+        $q = {singular_name}::with(self::WITH);
+        
+"""
+
+    for column in column_names:
+        repository_content += f"""        // Filter by {column}
+        if (!empty($filters['{column}'])) {{
+            ${column} = trim($filters['{column}']);
+            $q->where('{column}', 'LIKE', '%' . ${column} . '%');
+        }}
+
+"""
+    repository_content += f"""        return $q->latest()
+            ->limit(EnumApiSetup::QUERY_LIMIT)
+            ->get();
     }}
 
 

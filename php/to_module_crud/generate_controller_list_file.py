@@ -15,7 +15,20 @@ def create_controllers_structure(base_ruta, path_model):
     return controllers_folder_path
 
 
-def generate_controller_list_file(base_ruta, namespace, path_model, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake):
+
+def formatColumnQuery(columns):
+    # Obtener los nombres de las columnas dinámicamente
+    column_names = [column["name"] for column in columns]
+
+    filters_lines = ""
+    for col in column_names:
+        filters_lines += f"            '{col}' => $request->query('{col}'),\n"
+
+    return filters_lines
+
+
+
+def generate_controller_list_file(base_ruta, namespace, path_model, singular_name, plural_name, singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns):
     """
     Genera un archivo de controlador PHP basado en los nombres proporcionados y crea la estructura app/path_model dentro de base_ruta.
     """
@@ -54,12 +67,20 @@ class {singular_name}ListController extends Controller
     */
     public function __invoke(Request $request): JsonResponse
     {{
+        
+        $filters = [
+{formatColumnQuery(columns)}            // opcional paginación:
+            'per_page' => $request->integer('per_page'),
+        ];
+
+        $data = [];
+        
         if ($this->isAdmin(Auth::user()->roles)) {{
-            $data = $this->repository->list();
+            $data = $this->repository->list($filters);
         }} elseif ($this->isManager(Auth::user()->roles)) {{
-            $data = $this->repository->listByRoleManager();
-        }} else {{
-            $data = $this->repository->listByRoleUser();
+            $data = $this->repository->listByRoleManager($filters);
+        }} elseif ($this->isUser(Auth::user()->roles)) {{
+            $data = $this->repository->listByRoleUser($filters);
         }}
         
         return $this->respondWithData('{plural_name} list', $data);

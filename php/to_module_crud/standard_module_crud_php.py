@@ -47,7 +47,7 @@ def standard_module_crud_php(namespace, ruta, singular_name, plural_name, column
 
         if "controller_list" in input_menu_checkbox:
             generate_controller_list_file(ruta, namespace, path_controller, singular_name, plural_name,
-                                          singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake)
+                                          singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
 
         if "controller_show" in input_menu_checkbox:
             generate_controller_show_file(
