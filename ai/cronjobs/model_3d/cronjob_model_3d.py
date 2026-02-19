@@ -49,7 +49,7 @@ def main():
             60
         )
 
-    schedule.every(1).minutes.do(job)
+    schedule.every(10).minutes.do(job)
 
     while True:
         schedule.run_pending()
