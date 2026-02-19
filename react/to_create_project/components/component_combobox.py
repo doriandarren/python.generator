@@ -25,6 +25,7 @@ import { useState } from "react";
 
 export default function ThemedComboBox({
   label = "Select an option",
+  placeholder = "",
   options = [],
   selected,
   setSelected,
@@ -44,7 +45,9 @@ export default function ThemedComboBox({
 
   return (
     <div>
-      <label className="block text-gray-700">{label}</label>
+      {label && (
+        <label className="block text-gray-700">{label}</label>
+      )}
       <Combobox
         autoComplete="off"
         value={selected}
@@ -59,6 +62,7 @@ export default function ThemedComboBox({
           <ComboboxInput
             disabled={disabled}
             autoComplete="off"
+            placeholder={!selected ? placeholder : undefined}
             className={classNames(
               "block w-full rounded-md bg-white py-2.5 pr-12 pl-3 text-base text-gray-900 outline-1 placeholder:text-gray-400 sm:text-sm",
               {
