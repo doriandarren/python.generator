@@ -3,6 +3,7 @@ from gen.helpers.helper_print import print_message, GREEN, CYAN
 
 
 
+
 def generate_code_file_init(full_path):
     """
     Genera el archivo init
