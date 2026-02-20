@@ -1,0 +1,636 @@
+import os
+from gen.helpers.helper_print import print_message, GREEN, CYAN, run_command
+
+
+
+
+
+def create_folder(path):
+    """Crea una carpeta si no existe."""
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print(f"Carpeta creada: {path}")
+
+
+
+def generate_translate(full_path):
+    setup_i18n(full_path)
+    create_i18n(full_path)
+    update_file_main(full_path)
+    
+    
+    create_locales_en(full_path)
+    create_locales_es(full_path)
+
+
+
+
+def setup_i18n(full_path):
+    """Instala ClassNames."""
+    print_message("Instalando i18n...", CYAN)
+    run_command("npm install i18next react-i18next i18next-http-backend i18next-browser-languagedetector", cwd=full_path)
+    print_message("i18n instalado correctamente.", GREEN)
+
+
+
+def create_i18n(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    pages_dir = os.path.join(project_path, "src")
+    file_path = os.path.join(pages_dir, "i18n.js")
+
+    # Crear la carpeta pages si no existe
+    create_folder(pages_dir)
+
+    # Contenido del archivo
+    home_page_content = """import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import HttpBackend from "i18next-http-backend";
+
+const storedLang = localStorage.getItem("i18nextLng") || "es"
+
+i18n
+    .use(HttpBackend)
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+        lng: storedLang,
+        fallbackLng: "es",
+        debug: false,
+        interpolation: {
+            escapeValue: false,
+        },
+            detection: {
+            order: ["querystring", "cookie", "localStorage", "navigator"],
+            caches: ["cookie"],
+        },
+    })
+
+export default i18n;
+"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(home_page_content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+def create_locales_es(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    pages_dir = os.path.join(project_path, "public", "locales", "es")
+    file_path = os.path.join(pages_dir, "translation.json")
+
+    # Crear la carpeta pages si no existe
+    create_folder(pages_dir)
+
+    # Contenido del archivo
+    content = r"""{
+  "welcome": "Bievendido!",
+  "languages": {
+    "en": "EN",
+    "es": "ES"
+  },
+  "message": {
+    "are_you_sure": "¿Estás seguro?",
+    "record_saved": "Registro guardado",
+    "record_deleted": "Registro eliminado",
+    "record_updated": "Registro actualizado",
+    "record_generated": "Registro creado",
+    "invoice_in_process": "Facturación en proceso",
+    "ok": "Aceptar",
+    "download_file": "Descargar archivo",
+    "download_files": "Descargar archivos",
+    "file_downloaded": "Archivo descargado",
+    "files_downloaded": "Archivos descargados",
+    "no_records_found": "No hay registros para mostrar"
+  },
+  "errors": {
+    "error_internal": "Error Interno",
+    "error_process": "No se pudo procesar la solicitud",
+    "error_downloading": "Error al descargar"
+  },
+  "setting_table": {
+    "next_table": "Sig",
+    "prev_table": "Prev",
+    "rows_per_page": "Páginas",
+    "of": "de",
+    "search": "Buscar"
+  },
+  "form": {
+    "required": "Requerido",
+    "select": "Seleccione",
+    "number": "Número",
+    "must_be_positive": "Mayor a cero",
+    "start_must_be_before_end": "La fecha de inicio debe ser anterior o igual a la fecha fin."
+  },
+  "menu": {
+    "contact": "Contacto",
+    "about": "¿Quienes somos?"
+  },
+  "login_page": {
+    "title": "Bienvend@ a Site",
+    "subtitle": "Plataforma Site Facturas.",
+    "email_placeholder": "Correo electrónico",
+    "password_placeholder": "Contraseña",
+    "remember": "Recuérdame",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "sign_in": "Acceder",
+    "remember_me": "Recuerdame",
+    "forgot_password": "Olvidaste la contraseña?",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "btn_login": "Acceder",
+    "register": "Registrarse",
+    "or_continue_with": "Continuar con",
+    "terms_txt1": "Al acceder estás de acuerdo con nuestros ",
+    "terms_txt2": "Términos y Condiciones",
+    "terms_txt3": "y nuestra",
+    "terms_txt4": "Política de Privacidad",
+    "credential_error": "Claves de acceso no válidas"
+  },
+  "months": {
+    "01": "Enero",
+    "02": "Febrero",
+    "03": "Marzo",
+    "04": "Abril",
+    "05": "Mayo",
+    "06": "Junio",
+    "07": "Julio",
+    "08": "Agosto",
+    "09": "Septiembre",
+    "10": "Octubre",
+    "11": "Noviembre",
+    "12": "Diciembre"
+  },
+  "title": "Título",
+  "config": "Configuración",
+  "privacity_polices": "Políticas de Privacidad",
+  "link_interest": "Enlaces de interés",
+  "select": "Seleccione",
+  "login": "Login",
+  "coockies": "Cookies",
+  "page_not_found": "Página no encontrada",
+  "actions": "Acciones",
+  "created": "Creado",
+  "deleted": "Eliminado",
+  "updated": "Actualizado",
+  "update": "Actualizar",
+  "dashboard": "Inicio",
+  "logout": "Cerrar sesión",
+  "profile": "Perfil",
+  "resources": "Recursos",
+  "home": "Inicio",
+  "search": "Buscar",
+  "next": "Siguiente",
+  "back": "Anterior",
+  "show": "Mostrar",
+  "no_results_found": "No se encontraron resultados.",
+  "loading": "Cargando...",
+  "clear_filters": "Limpiar",
+  "save": "Guardar",
+  "add": "Nuevo",
+  "edit": "Editar",
+  "cancel": "Cancelar",
+  "delete": "Borrar",
+  "name": "Nombre",
+  "yes": "Sí",
+  "no": "No",
+  "yesterday": "Ayer",
+  "today": "Hoy",
+  "month": "Mes",
+  "year": "Año",
+  "insert": "Agregar",
+  "setting": "Configuración",
+  "settings": "Configuraciones",
+  "log": "Registro",
+  "logs": "Registros",
+  "average_15_days": "Media 15 días",
+  "average_30_days": "Media 30 días",
+  "average_3_months": "Media 3 meses",
+  "last_week": "Última semana",
+  "error": "Error al procesar la información",
+  "code": "Código",
+  "address": "Dirección",
+  "cif": "Código identificación fiscal",
+  "email": "Correo electrónico",
+  "website": "Sitio web",
+  "phone": "Teléfono",
+  "code_zip": "Código postal",
+  "project_id": "Proyecto Id",
+  "projects": "Proyectos",
+  "hours": "Horas",
+  "invoice_at": "Fecha factura",
+  "customer_id": "Cliente",
+  "invoices": "Facturas",
+  "invoice": "Factura",
+  "company_id": "Compañia Id",
+  "company_name": "Razón social",
+  "companies": "Compañias",
+  "customer": "Cliente",
+  "customers": "Clientes",
+  "number": "Número",
+  "date": "Fecha",
+  "invoice_id": "Factura Id",
+  "invoice_header_id": "Factura cabecera Id",
+  "invoice_headers": "Facturas",
+  "vat": "IVA",
+  "unit_prices": "Precio unidad",
+  "project_hours": "Horas proyecto",
+  "total": "Total",
+  "description": "Descripción",
+  "project_hour_id": "Hora proyecto Id",
+  "own_company_id": "Compañias propias Id",
+  "own_companies": "Compañias propias",
+  "total_hours": "Horas Totales",
+  "current_hours": "Horas Actuales",
+  "started_at": "Fecha Inicio",
+  "finished_at": "Fecha Finalizado",
+  "country_id": "País",
+  "tax": "NIF",
+  "state": "Estado",
+  "municipality": "Municipio",
+  "zip_code": "Codigo Postal",
+  "is_generated": "Está Generado",
+  "invoice_counter_id": "Serie",
+  "invoice_lines": "Factura lineas",
+  "due_date": "Fecha de Vencimiento",
+  "vat_quote": "IVA",
+  "total_without_vat": "Total sin IVA",
+  "total_with_vat": "Total con IVA",
+  "has_paid": "Pagada",
+  "providers": "Proveedores",
+  "products": "Productos",
+  "product": "Producto",
+  "services": "Servicios",
+  "service": "Servicio",
+  "invoice_counters": "Contadores",
+  "amount_without_vat": "Importe sin IVA",
+  "amount_with_vat": "Importe con IVA",
+  "counter": "Contador",
+  "serial": "Serial",
+  "purchase_price_without_vat": "Precio de compra sin IVA",
+  "sale_price_without_vat": "Precio de venta sin IVA",
+  "invoiced_at": "Facturado",
+  "path": "Ruta",
+  "processed_at": "Procesado",
+  "ims_invoice_headers": "Ficheros IMS",
+  "provider_id": "Proveedor",
+  "plate": "Matrícula",
+  "customer_devices": "Dispositivos",
+  "rental_price_without_vat": "Alquiler sin IVA",
+  "provider_rental_price_without_vat": "Alquiler Prov. sin IVA",
+  "installed_at": "Fecha de Instalación",
+  "sim": "SIM",
+  "file": "Archivo",
+  "files": "Archivos",
+  "field": "Campo",
+  "fields": "Campos",
+  "no_file_selected": "Ningún archivo seleccionado",
+  "remittance_types": "Tipos de Remesas",
+  "remittance_type": "Tipo de Remesa",
+  "remittance_type_id": "Remesa",
+  "invoice_date": "Fecha de factura",
+  "invoice_due_date": "Fecha de Vencimiento",
+  "vat_type": "Tipo de IVA",
+  "invoice_counter": "Contador",
+  "unit_nb": "Cantidad",
+  "customer_data": "Datos",
+  "customer_invoices": "Facturación cliente",
+  "customers_invoices": "Facturas",
+  "bank_account": " Cuenta bancaria",
+  "bank_name": "Nombre del banco",
+  "account_holder": "Titular de la cuenta",
+  "due_date_by_days": "A cuantos días",
+  "due_date_days": "Vencimiento el día",
+  "customer_code": "Código de cliente",
+  "team": "Equipo",
+  "teams": "Equipos",
+  "details": "Detalles",
+  "detail": "Detalle",
+  "status": "Status",
+  "statuses": "Statuses",
+  "type": "Tipo",
+  "types": "Tipos",
+  "is_exempt": "Exento IVA",
+  "service_activated": "Servicio activado",
+  "services_activated": "Servicios activados",
+  "country": "País",
+  "countries": "Paises",
+  "system": "Sistema",
+  "systems": "Sistemas",
+  "quote": "Cuota",
+  "quotes": "Cuotas"
+}"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+def create_locales_en(project_path):
+    """
+    Genera el archivo
+    """
+    # Define la ruta del archivo
+    pages_dir = os.path.join(project_path, "public", "locales", "en")
+    file_path = os.path.join(pages_dir, "translation.json")
+
+    # Crear la carpeta pages si no existe
+    create_folder(pages_dir)
+
+    # Contenido del archivo
+
+    content = r"""{
+  "welcome": "Welcome!",
+  "languages": {
+    "en": "EN",
+    "es": "ES"
+  },
+  "message": {
+    "are_you_sure": "Are you sure?",
+    "record_saved": "Record saved",
+    "record_deleted": "Record deleted",
+    "record_updated": "Record updated",
+    "invoice_in_process": "Invoice in process",
+    "ok": "Ok",
+    "download_file": "Download file",
+    "download_files": "Download files",
+    "file_downloaded": "File downloaded",
+    "files_downloaded": "Files downloaded",
+    "no_records_found": "No records found"
+  },
+  "errors": {
+    "error_internal": "Internal Error",
+    "error_process": "Error processing the information",
+    "error_downloading": "Error downloading"
+  },
+  "setting_table": {
+    "next_table": "Next",
+    "prev_table": "Prev",
+    "rows_per_page": "Pages",
+    "of": "of",
+    "search": "Search"
+  },
+  "form": {
+    "required": "Required",
+    "select": "Select",
+    "number": "Number",
+    "must_be_positive": "Must be positive",
+    "start_must_be_before_end": "The start date must be before or equal to the end date."
+  },
+  "menu": {
+    "contact": "Contact",
+    "about": "About"
+  },
+  "login_page": {
+    "title": "Welcome to Site",
+    "subtitle": "Site Invoices Platform.",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "remember": "Remember me",
+    "email": "Email",
+    "password": "Password",
+    "sign_in": "Sign in",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot your password?",
+    "forgot": "Forgot your password?",
+    "btn_login": "Sign in",
+    "register": "Create account",
+    "or_continue_with": "Continue with",
+    "terms_txt1": "By signing in, you agree to our ",
+    "terms_txt2": "Terms and Conditions",
+    "terms_txt3": " and our ",
+    "terms_txt4": "Privacy Policy",
+    "credential_error": "Invalid credentials"
+  },
+  "months": {
+    "01": "January",
+    "02": "February",
+    "03": "March",
+    "04": "April",
+    "05": "May",
+    "06": "June",
+    "07": "July",
+    "08": "August",
+    "09": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "title": "Title",
+  "config": "Settings",
+  "privacity_polices": "Privacy Policies",
+  "link_interest": "Useful links",
+  "select": "Select",
+  "login": "Login",
+  "coockies": "Cookies",
+  "page_not_found": "Page not found",
+  "actions": "Actions",
+  "created": "Created",
+  "deleted": "Deleted",
+  "updated": "Updated",
+  "update": "Update",
+  "dashboard": "Home",
+  "logout": "Log out",
+  "profile": "Your profile",
+  "resources": "Resources",
+  "home": "Home",
+  "search": "Search",
+  "next": "Next",
+  "back": "Back",
+  "show": "Show",
+  "no_results_found": "No results found.",
+  "loading": "Loading...",
+  "clear_filters": "Clear",
+  "save": "Save",
+  "add": "New",
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "name": "Name",
+  "yes": "Yes",
+  "no": "No",
+  "yesterday": "Yesterday",
+  "today": "Today",
+  "month": "Month",
+  "year": "Year",
+  "insert": "Add",
+  "setting": "Setting",
+  "settings": "Settings",
+  "log": "Log",
+  "logs": "Logs",
+  "average_15_days": "Average 15 days",
+  "average_30_days": "Average 30 days",
+  "average_3_months": "Average 3 months",
+  "last_week": "Last week",
+  "error": "Error processing the information",
+  "code": "Code",
+  "address": "Address",
+  "cif": "Tax Identification Code",
+  "email": "Email",
+  "website": "Website",
+  "phone": "Phone",
+  "code_zip": "Zip Code",
+  "project_id": "Project Id",
+  "projects": "Projects",
+  "hours": "Hours",
+  "invoice_at": "Invoice Date",
+  "customer_id": "Customer",
+  "invoices": "Invoices",
+  "invoice": "Invoice",
+  "company_id": "Company Id",
+  "company_name": "Company Name",
+  "companies": "Companies",
+  "customer": "Customer",
+  "customers": "Customers",
+  "number": "Number",
+  "date": "Date",
+  "invoice_id": "Invoice Id",
+  "invoice_header_id": "Invoice Header Id",
+  "invoice_headers": "Invoices",
+  "vat": "VAT",
+  "unit_prices": "Unit Price",
+  "project_hours": "Project Hours",
+  "total": "Total",
+  "description": "Description",
+  "project_hour_id": "Project Hour Id",
+  "own_company_id": "Own Company Id",
+  "own_companies": "Own Companies",
+  "total_hours": "Total Hours",
+  "current_hours": "Current Hours",
+  "started_at": "Start Date",
+  "finished_at": "End Date",
+  "country_id": "Country",
+  "tax": "Tax ID",
+  "state": "State",
+  "municipality": "Municipality",
+  "zip_code": "Zip Code",
+  "is_generated": "Is Generated",
+  "invoice_counter_id": "Series",
+  "invoice_lines": "Invoice Lines",
+  "due_date": "Due Date",
+  "vat_quote": "VAT",
+  "total_without_vat": "Total without VAT",
+  "total_with_vat": "Total with VAT",
+  "has_paid": "Paid",
+  "providers": "Providers",
+  "products": "Products",
+  "product": "Product",
+  "services": "Services",
+  "service": "Service",
+  "invoice_counters": "Counters",
+  "amount_without_vat": "Amount without VAT",
+  "amount_with_vat": "Amount with VAT",
+  "counter": "Counter",
+  "serial": "Serial",
+  "purchase_price_without_vat": "Purchase Price without VAT",
+  "sale_price_without_vat": "Sale Price without VAT",
+  "invoiced_at": "Invoiced",
+  "path": "Path",
+  "processed_at": "Processed",
+  "ims_invoice_headers": "IMS Files",
+  "provider_id": "Provider",
+  "plate": "Plate",
+  "customer_devices": "Devices",
+  "rental_price_without_vat": "Rental without VAT",
+  "provider_rental_price_without_vat": "Provider Rental without VAT",
+  "installed_at": "Installation Date",
+  "sim": "SIM",
+  "file": "File",
+  "files": "Files",
+  "field": "Field",
+  "fields": "Fields",
+  "no_file_selected": "No file selected",
+  "remittance_types": "Remittance Types",
+  "remittance_type": "Remittance Type",
+  "remittance_type_id": "Remittance",
+  "invoice_date": "Invoice Date",
+  "invoice_due_date": "Due Date",
+  "vat_type": "VAT Type",
+  "invoice_counter": "Counter",
+  "unit_nb": "Quantity",
+  "customer_data": "Data",
+  "customer_invoices": "Customer Billing",
+  "customers_invoices": "Invoices",
+  "bank_account": "Bank Account",
+  "bank_name": "Bank Name",
+  "account_holder": "Account Holder",
+  "due_date_by_days": "Due in Days",
+  "due_date_days": "Due Date",
+  "customer_code": "Customer Code",
+  "team": "Team",
+  "teams": "Teams",
+  "details": "Details",
+  "detail": "Detail",
+  "status": "Status",
+  "statuses": "Statuses",
+  "type": "Type",
+  "types": "Types",
+  "is_exempt": "Exempt",
+  "service_activated": "Service activated",
+  "services_activated": "Activated Services",
+  "country": "Country",
+  "countries": "Countries",
+  "system": "System",
+  "systems": "Systems",
+  "quote": "Quote",
+  "quotes": "Quotes"
+}"""
+
+    # Crear el archivo y escribir el contenido
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        print(f"Archivo creado: {file_path}")
+    except Exception as e:
+        print(f"Error al crear el archivo {file_path}: {e}")
+
+
+
+def update_file_main(full_path):
+    """
+    Actualiza el archivo src/main.jsx
+    """
+    main_jsx_path = os.path.join(full_path, "src", "main.jsx")
+
+    # Verificar si el archivo existe
+    if not os.path.exists(main_jsx_path):
+        print_message(f"Error: {main_jsx_path} no existe.", CYAN)
+        return
+
+    try:
+
+        # Leer el contenido del archivo
+        with open(main_jsx_path, "r") as f:
+            content = f.read()
+
+
+        # Reemplazos
+        content = content.replace(
+            "import { createRoot } from 'react-dom/client'",
+            "import { createRoot } from \'react-dom/client\';\nimport \'./i18n\';"
+        )
+
+        # Escribir el contenido actualizado
+        with open(main_jsx_path, "w") as f:
+            f.write(content)
+
+        print_message("main.jsx configurado correctamente.", GREEN)
+
+    except Exception as e:
+        print_message(f"Error al actualizar {main_jsx_path}: {e}", CYAN)
+
+
