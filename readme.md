@@ -31,6 +31,7 @@ pip3 install --upgrade pip
 
 
 ## Instala los requerimientos:
+pip3 list
 pip3 freeze > requirements.txt                  # Crear archivo requerimientos
 pip3 install -r requirements.txt                # Instalar requerimientos
 
@@ -60,8 +61,12 @@ pip3 install questionary                 # Console / Terminal
 pip3 install colorama                    # Console / Terminal
 pip3 install requests                           # Conexion API
 pip3 install schedule
-pip3 install mysql-connector-python
 pip3 install inflect
+pip install pymysql                                       ## Desinstalar cualquier error reintalar
+
+pip install sqlalchemy psycopg2-binary alembic python-dotenv
+
+
 
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
 
