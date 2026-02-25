@@ -5,6 +5,8 @@ from gen.helpers.helper_print import print_message, GREEN, CYAN, run_command
 def generate_helpers(full_path):
     create_helper_date(full_path)
     create_helper_file(full_path)
+    create_helper_string(full_path)
+    create_helper_amount(full_path)
 
 
 
@@ -760,4 +762,227 @@ class HelperFile
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+
+def create_helper_string(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "app", "Utilities", "Helpers")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "HelperString.php")
+
+    # Contenido por defecto
+    content = """<?php
+
+namespace App\Utilities\Helpers;
+
+class HelperString
+{
+
+    /**
+     * Elimina todos los espacios en blanco de un string.
+     */
+    public static function removeWhiteSpace($value): string
+    {
+        if (is_null($value) || trim((string) $value) === '') {
+            return '';
+        }
+
+        return preg_replace('/\s+/', '', (string) $value);
+    }
+
+
+
+
+    /**
+     * @param $string
+     * @return string
+     */
+    public static function clearStr($string)
+    {
+        // 1. Eliminar comillas simples
+        $string = str_replace("'", "", $string);
+
+        // 2. Eliminar caracteres especiales (excepto letras, números y espacios)
+        $string = preg_replace('/[^A-Za-z0-9\s]/u', '', $string);
+
+        // 3. Opcional: quitar espacios múltiples
+        $string = preg_replace('/\s+/', ' ', $string);
+
+        // 4. Opcional: quitar espacios al principio y final
+        return trim($string);
+    }
+
+
+
+
+    /**
+     * Replace space white
+     * EX: FERCO-TRANS&LOG S.L. (TW) -> FERCO_TRANS_LOG_SL_TW
+     *
+     * @param $string
+     * @return string
+     */
+    public static function formatForWeb($string)
+    {
+        // 1. Reemplazar & por espacio para separar palabras
+        $string = str_replace('&', ' ', $string);
+
+        // 2. Reemplazar guiones por espacio también para unificar
+        $string = str_replace('-', ' ', $string);
+
+        // 3. Eliminar caracteres que no sean letras, números o espacio
+        $string = preg_replace('/[^A-Za-z0-9 ]/', '', $string);
+
+        // 4. Reemplazar múltiples espacios por uno solo
+        $string = preg_replace('/\s+/', ' ', $string);
+
+        // 5. Reemplazar espacios por guiones bajos
+        $string = str_replace(' ', '_', trim($string));
+
+        // 6. Convertir a mayúsculas
+        return strtoupper($string);
+    }
+
+
+}
+   
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
+
+
+
+def create_helper_amount(full_path):
+    """
+    Genera un archivo
+
+    Args:
+        full_path (str): Ruta completa del proyecto.
+    """
+    styles_path = os.path.join(full_path, "app", "Utilities", "Helpers")
+
+    # Crear la carpeta si no existe
+    if not os.path.exists(styles_path):
+        os.makedirs(styles_path)
+        print_message(f"Carpeta creada: {styles_path}", GREEN)
+
+    # Ruta completa del archivo
+    file_path = os.path.join(styles_path, "HelperAmount.php")
+
+    # Contenido por defecto
+    content = """<?php
+
+namespace App\Utilities\Helpers;
+
+class HelperAmount
+{
+
+    /**
+     * Calculate VAT (iva)
+     * @param $amount
+     * @param int $vat
+     * @return float
+     */
+    public static function getVat($amount, $vat)
+    {
+        $vatConvert = 1 + ($vat/100);
+        $amountWithVat = round(($amount / $vatConvert), 2);
+        return round(($amount - $amountWithVat), 2);
+    }
+
+
+    /**
+     * Remove original VAT (iva)
+     *
+     * @param $amount
+     * @param $vat_type
+     * @param int $precision
+     * @return float
+     */
+    public static function removeVat($amount, $vat_type, $precision = 2)
+    {
+        $vatConvert = 1 + ($vat_type/100);
+        return round($amount / $vatConvert, $precision);
+    }
+
+
+    /**     * Add original VAT (iva)
+     * @param $amount
+     * @param $vat_type
+     * @return float
+     */
+    public static function addVat($amount, $vat_type)
+    {
+        $vatConvert = 1 + ($vat_type/100);
+        return round(($amount* $vatConvert),2);
+    }
+
+
+    /**
+     * @param $payable_days
+     * @param $rental_price_without_vat
+     * @return float
+     */
+    public static function calculatePaymentDays($payable_days, $rental_price_without_vat): float
+    {
+        $priceDay = (floatval($rental_price_without_vat) / 30);
+        $total = $priceDay * $payable_days;
+        return round($total, 2);
+    }
+
+
+
+    /**
+     * Convert to VAT. EX: 21.00 -> 1.21
+     * @param $vat
+     * @return float
+     */
+    public static function convertToVat($vat): float
+    {
+        return round(1 + (floatval($vat) / 100), 4);
+    }
+
+
+
+    /**
+     * Convert to VAT. EX: 21.00 -> 0.21
+     * @param $vat
+     * @return float
+     */
+    public static function convertToZeroVat($vat): float
+    {
+        return round(floatval($vat) / 100, 4);
+    }
+
+}
+"""
+
+    try:
+        # Crear o sobrescribir el archivo con el contenido
+        with open(file_path, "w") as f:
+            f.write(content)
+        print_message(f"Archivo generado: {file_path}", GREEN)
+    except Exception as e:
+        print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
 
