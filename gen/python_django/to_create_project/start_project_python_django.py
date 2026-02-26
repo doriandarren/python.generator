@@ -14,6 +14,7 @@ from gen.python_django.to_create_project.generate_cron import generate_cron
 from gen.python_django.to_create_project.generate_django import generate_django
 from gen.python_django.to_create_project.generate_env import generate_env
 from gen.python_django.to_create_project.generate_gitignore import generate_gitignore
+from gen.python_django.to_create_project.generate_page_home import generate_page_home
 from gen.python_django.to_create_project.generate_passenger_wsgi import generate_passenger_wsgi
 from gen.python_django.to_create_project.generate_postgres import generate_postgres
 from gen.python_django.to_create_project.generate_readme import generate_readme
@@ -98,6 +99,8 @@ def start_project_python_django():
     generate_message_channel(full_path)
     generate_core_models(full_path)
     
+    
+    generate_page_home(full_path, project_name_format, app_name)
     
     
 

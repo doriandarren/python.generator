@@ -70,13 +70,40 @@ pip install sqlalchemy psycopg2-binary alembic python-dotenv
 
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
 
-```
-
-## Adicionales
-
-```sh
 
 python -m pip install -U pip setuptools wheel
 python -m pip install Cython
 
 ```
+
+
+
+## Django
+
+```sh
+pip3 install django
+
+django-admin shell                              # Shell de django
+
+## BY PROJECT
+django-admin startproject nombre_proyecto       # Crear PROJECT
+django-admin startproject nombre_proyecto .     # Crear PROJECT - No crea carpeta duplicada
+
+## BY APP
+python3 manage.py startapp nombre_app           # Crear app
+
+python manage.py migrate
+
+
+# Crear el superuser
+python3 manage.py createsuperuser
+
+python3 manage.py runserver                     # Levantar el servidor
+python3 manage.py runserver 8001
+
+
+
+```
+
+
+

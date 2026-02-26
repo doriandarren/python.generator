@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenida</title>
+
+    <!-- Tailwind CDN (rápido para dev) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+    <main class="mx-auto flex min-h-screen max-w-5xl items-center px-6 py-12">
+      <section class="w-full">
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-4 py-2 text-sm text-slate-300">
+          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+          Django está corriendo en local
+        </div>
+
+        <h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
+          Bienvenida 👋
+        </h1>
+
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-300">
+          Tu proyecto está listo. Desde aquí puedes ir al admin, ver la documentación Swagger o Redoc,
+          y empezar a integrar tu carpeta <span class="font-mono text-slate-200">gen/</span>.
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+          <a href="/swagger/"
+             class="group rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-sm transition hover:border-slate-700 hover:bg-slate-900">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-medium">Swagger</h2>
+              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-400">Explora endpoints y prueba la API.</p>
+          </a>
+
+          <a href="/redoc/"
+             class="group rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-sm transition hover:border-slate-700 hover:bg-slate-900">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-medium">Redoc</h2>
+              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-400">Documentación más limpia y ordenada.</p>
+          </a>
+
+          <a href="/admin/"
+             class="group rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-sm transition hover:border-slate-700 hover:bg-slate-900">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-medium">Admin</h2>
+              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-400">Gestiona el panel de administración.</p>
+          </a>
+        </div>
+
+        <footer class="mt-10 text-sm text-slate-500">
+          <span class="font-mono">localhost:8000</span> · Tailwind CDN · Home template
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
