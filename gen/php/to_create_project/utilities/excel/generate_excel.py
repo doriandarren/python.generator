@@ -8,6 +8,7 @@ def generate_excel(full_path):
     create_example_export_per_sheet(full_path)
 
 
+
 def create_example_export(full_path):
     """
     Genera un archivo

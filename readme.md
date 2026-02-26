@@ -62,10 +62,10 @@ pip3 install colorama                    # Console / Terminal
 pip3 install requests                           # Conexion API
 pip3 install schedule
 pip3 install inflect
+
+
 pip install pymysql                                       ## Desinstalar cualquier error reintalar
-
 pip install sqlalchemy psycopg2-binary alembic python-dotenv
-
 
 
 pip uninstall mysql-connector-python    ## Desinstalar cualquier error reintalar
