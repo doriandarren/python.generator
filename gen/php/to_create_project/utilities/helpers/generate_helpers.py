@@ -784,7 +784,7 @@ def create_helper_string(full_path):
     file_path = os.path.join(styles_path, "HelperString.php")
 
     # Contenido por defecto
-    content = """<?php
+    content = r"""<?php
 
 namespace App\Utilities\Helpers;
 
@@ -890,7 +890,7 @@ def create_helper_amount(full_path):
     file_path = os.path.join(styles_path, "HelperAmount.php")
 
     # Contenido por defecto
-    content = """<?php
+    content = r"""<?php
 
 namespace App\Utilities\Helpers;
 
