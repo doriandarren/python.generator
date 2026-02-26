@@ -1,0 +1,19 @@
+## docker compose down    --> Eliminar los contenedores
+## docker compose up -d   --> Levantar los contenedores
+name: generator_posgrest
+services:
+  postgres:
+    image: postgres:16
+    container_name: generator_postgres
+    restart: on-failure
+    environment:
+      POSTGRES_DB: generator_db
+      POSTGRES_USER: generator_user
+      POSTGRES_PASSWORD: generator_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
