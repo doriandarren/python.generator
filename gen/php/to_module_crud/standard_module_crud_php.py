@@ -78,7 +78,7 @@ def standard_module_crud_php(namespace, ruta, singular_name, plural_name, column
                                     singular_name_kebab, plural_name_kebab, singular_name_snake, plural_name_snake, columns)
 
         if "seeder" in input_menu_checkbox:
-            generate_seeder_file(ruta, path_seeder, singular_name, plural_name,
+            generate_seeder_file(ruta, namespace, path_seeder, singular_name, plural_name,
                                  singular_name_snake, plural_name_snake, columns)
 
         if "factory" in input_menu_checkbox:

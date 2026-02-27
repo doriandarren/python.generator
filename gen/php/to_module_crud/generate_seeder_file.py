@@ -16,7 +16,7 @@ def create_seeder_structure(base_ruta, path_seeder):
     return seeder_folder_path
 
 
-def generate_seeder_file(base_ruta, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
+def generate_seeder_file(base_ruta, namespace, path_seeder, singular_name, plural_name, singular_name_snake, plural_name_snake, columns):
     """
     Genera un archivo de seeder PHP basado en los nombres proporcionados y crea la estructura settings/migrations/sedeers dentro de base_ruta.
     """
@@ -36,7 +36,7 @@ def generate_seeder_file(base_ruta, path_seeder, singular_name, plural_name, sin
 namespace Database\\Seeders;
 
 use Illuminate\\Database\\Seeder;
-use App\\Models\\{plural_name}\\{singular_name};
+use App\\Models\\{namespace}\\{plural_name}\\{singular_name};
 
 class {singular_name}Seeder extends Seeder
 {{

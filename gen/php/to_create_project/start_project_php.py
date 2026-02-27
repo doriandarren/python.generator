@@ -29,8 +29,6 @@ from gen.helpers.helper_print import input_with_validation
 
 
 
-
-
 def start_project_php():
      # Defaults
     default_path = "/Users/dorian/PhpstormProjects81"
@@ -122,6 +120,3 @@ def start_project_php():
     
     pause()
     
-    
-    
-
