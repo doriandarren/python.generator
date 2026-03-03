@@ -7,13 +7,9 @@ from gen.python_django.to_create_module_crud.standard_module_crud_python_django 
 def start_module_crud_python_django():
 
     opt = [
-        ("App", "app"),
-        ("Route", "route"),
-        ("List", "list"),
-        ("Create", "create"),
-        ("Edit", "edit"),
-        ("Barril", "barrel"),
-        ("Service", "service"),
+        ("API - Route", "api_route"),
+        ("API - Serializer", "api_serializer"),
+        ("API - Viewset", "api_wiewset"),
     ]
     
     full_path_default = "/Users/dorian/PythonProjects/app1.com"

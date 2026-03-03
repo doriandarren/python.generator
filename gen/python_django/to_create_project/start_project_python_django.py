@@ -102,6 +102,7 @@ def start_project_python_django():
     
     generate_page_home(full_path, project_name_format, app_name)
     
+    ##generate_module(full_path, project_name_format, app_name)
     
 
     pause()

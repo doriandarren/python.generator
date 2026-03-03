@@ -32,30 +32,15 @@ def standard_module_crud_python_django(full_path, singular_name, plural_name, co
     # Load virtualenv
     venv_python = get_venv_python(full_path)
     
-    
     manage_py_path = os.path.join(full_path, "manage.py")
     
+    generate_app(
+        full_path,
+        plural_name_snake,
+        venv_python,
+        manage_py_path
+    )
     
-    # print(f"Crear un: {venv_python} ")
-    # dd(manage_py_path)
-    
-    
-    
-    if "app" in input_menu_checkbox:
-        generate_app(
-            full_path,
-            singular_name,
-            plural_name,
-            singular_name_kebab,
-            plural_name_kebab,
-            singular_name_snake,
-            plural_name_snake,
-            singular_first_camel,
-            plural_first_camel,
-            columns,
-            venv_python,
-            manage_py_path
-        )
     
 
 
@@ -139,3 +124,6 @@ def standard_module_crud_python_django(full_path, singular_name, plural_name, co
     #     )
     
     pause()
+    
+    
+    

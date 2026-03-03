@@ -140,7 +140,7 @@ __FILTERS_OBJECT__
         <div className="sm:flex sm:items-center">
           <div className="mt-4 sm:mt-0 sm:flex-none">
             <ThemedButton type="button" onClick={onAddClick}>
-              {t("add")}
+              {t("new")}
             </ThemedButton>
           </div>
         </div>

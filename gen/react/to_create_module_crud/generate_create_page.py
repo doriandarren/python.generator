@@ -140,7 +140,7 @@ export const __SINGULAR__CreatePage = () => {
   return (
     <SessionLayout>
 
-      <ThemedText type="h2">{t("add")}</ThemedText>
+      <ThemedText type="h2">{t("new")}</ThemedText>
 
       <ThemedCard>
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 gap-6">
