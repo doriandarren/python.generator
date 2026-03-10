@@ -5,9 +5,10 @@ from gen.helpers.helper_string import normalize_project_name
 from gen.helpers.helpers import dd
 from gen.python_django.helpers.helper_virtual_env import get_venv_python
 from gen.python_django.to_create_module_crud.generate_app import generate_app
+from gen.python_django.to_create_module_crud.update_installed_apps import update_installed_apps
 
 
-def standard_module_crud_python_django(full_path, singular_name, plural_name, columns, input_menu_checkbox=None):
+def standard_module_crud_python_django(full_path, app_main, singular_name, plural_name, columns, input_menu_checkbox=None):
 
     # Input Default
     if input_menu_checkbox is None:
@@ -31,8 +32,11 @@ def standard_module_crud_python_django(full_path, singular_name, plural_name, co
     
     # Load virtualenv
     venv_python = get_venv_python(full_path)
-    
     manage_py_path = os.path.join(full_path, "manage.py")
+    
+    
+    update_installed_apps(full_path, app_main, plural_name_snake, manage_py_path, venv_python)
+    
     
     generate_app(
         full_path,

@@ -1,5 +1,14 @@
 ## Python Generator
 
+
+## Run
+
+```sh
+python3 cli.py
+```
+
+
+
 ## Ejecutar music CRON:
 
 ```sh
@@ -47,11 +56,6 @@ pip3 install schedule                           # CronJobs
 
 ```
 
-## Run
-
-```sh
-python3 cli.py
-```
 
 ## Libraries
 
@@ -83,14 +87,15 @@ python -m pip install Cython
 ```sh
 pip3 install django
 
-django-admin shell                              # Shell de django
+django-admin shell                                      # Shell de django
 
 ## BY PROJECT
-django-admin startproject nombre_proyecto       # Crear PROJECT
-django-admin startproject nombre_proyecto .     # Crear PROJECT - No crea carpeta duplicada
+django-admin startproject nombre_proyecto               # Crear PROJECT
+django-admin startproject nombre_proyecto .             # Crear PROJECT - No crea carpeta duplicada
 
 ## BY APP
-python3 manage.py startapp nombre_app           # Crear app
+python3 manage.py startapp nombre_app                   # Crear app
+python3 manage.py startapp companies apps/companies
 
 python manage.py migrate
 
@@ -98,12 +103,17 @@ python manage.py migrate
 # Crear el superuser
 python3 manage.py createsuperuser
 
-python3 manage.py runserver                     # Levantar el servidor
+python3 manage.py runserver                             # Levantar el servidor
 python3 manage.py runserver 8001
 
-
-
 ```
+
+
+
+
+
+
+
 
 
 
