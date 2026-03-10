@@ -2,6 +2,35 @@
 import os
 
 
+
+## ---------------------------------------
+## ---- NEW
+## ---------------------------------------
+
+def create_init_file(path):
+    """
+    Garantiza que una carpeta sea un paquete Python.
+    Si no existe __init__.py, lo crea.
+
+    :param path: Ruta de la carpeta
+    """
+
+    os.makedirs(path, exist_ok=True)
+
+    init_file = os.path.join(path, "__init__.py")
+
+    if not os.path.exists(init_file):
+        with open(init_file, "w", encoding="utf-8") as f:
+            f.write("")
+
+
+
+
+
+
+
+
+
 ## ---------------------------------------
 ## ---- Replace CONTENT
 ## ---------------------------------------

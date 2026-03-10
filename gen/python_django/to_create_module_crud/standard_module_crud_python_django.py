@@ -4,6 +4,9 @@ from gen.helpers.helper_print import camel_to_kebab, camel_to_snake
 from gen.helpers.helper_string import normalize_project_name
 from gen.helpers.helpers import dd
 from gen.python_django.helpers.helper_virtual_env import get_venv_python
+from gen.python_django.to_create_module_crud.generate_api_route import generate_api_route
+from gen.python_django.to_create_module_crud.generate_api_serializer import generate_api_serializer
+from gen.python_django.to_create_module_crud.generate_api_viewset import generate_api_viewset
 from gen.python_django.to_create_module_crud.generate_app import generate_app
 from gen.python_django.to_create_module_crud.update_installed_apps import update_installed_apps
 
@@ -12,7 +15,7 @@ def standard_module_crud_python_django(full_path, app_main, singular_name, plura
 
     # Input Default
     if input_menu_checkbox is None:
-        input_menu_checkbox = ["app", "route", "list", "create", "edit", "barrel", "service"]
+        input_menu_checkbox = ["api_route", "api_serializer", "api_wiewset"]
 
     # Convertir nombres
     singular_name_kebab = camel_to_kebab(singular_name)
@@ -35,9 +38,17 @@ def standard_module_crud_python_django(full_path, app_main, singular_name, plura
     manage_py_path = os.path.join(full_path, "manage.py")
     
     
-    update_installed_apps(full_path, app_main, plural_name_snake, manage_py_path, venv_python)
+    # Update installed apps
+    update_installed_apps(
+        full_path, 
+        app_main, 
+        plural_name_snake,
+        manage_py_path, 
+        venv_python
+    )
     
     
+    # Generate app
     generate_app(
         full_path,
         plural_name_snake,
@@ -45,89 +56,56 @@ def standard_module_crud_python_django(full_path, app_main, singular_name, plura
         manage_py_path
     )
     
+
     
 
-
-    # if "list" in input_menu_checkbox:
-    #     generate_model(
-    #         full_path,
-    #         singular_name,
-    #         plural_name,
-    #         singular_name_kebab,
-    #         plural_name_kebab,
-    #         singular_name_snake,
-    #         plural_name_snake,
-    #         singular_first_camel,
-    #         plural_first_camel,
-    #         columns,
-    #     )
-
-
-    # TODO refactor
-    # if "route" in input_menu_checkbox:
-    #     create_routes(full_path, singular_name, plural_name_snake)
-
-    # if "list" in input_menu_checkbox:
-    #     generate_list_page(
-    #         full_path,
-    #         singular_name,
-    #         plural_name,
-    #         singular_name_kebab,
-    #         plural_name_kebab,
-    #         singular_name_snake,
-    #         plural_name_snake,
-    #         singular_first_camel,
-    #         plural_first_camel,
-    #         columns,
-    #     )
-
-    # if "create" in input_menu_checkbox:
-    #     generate_create_page(
-    #         full_path,
-    #         singular_name,
-    #         plural_name,
-    #         singular_name_kebab,
-    #         plural_name_kebab,
-    #         singular_name_snake,
-    #         plural_name_snake,
-    #         singular_first_camel,
-    #         plural_first_camel,
-    #         columns,
-    #     )
-
-    # if "edit" in input_menu_checkbox:
-    #     generate_edit_page(
-    #         full_path,
-    #         singular_name,
-    #         plural_name,
-    #         singular_name_kebab,
-    #         plural_name_kebab,
-    #         singular_name_snake,
-    #         plural_name_snake,
-    #         singular_first_camel,
-    #         plural_first_camel,
-    #         columns,
-    #     )
-
-    # if "barrel" in input_menu_checkbox:
-    #     generate_barrel_file(full_path, singular_name, plural_name_snake)
-
-    # if "service" in input_menu_checkbox:
-    #     generate_service_file(
-    #         full_path,
-    #         project_name,
-    #         singular_name,
-    #         plural_name,
-    #         singular_name_kebab,
-    #         plural_name_kebab,
-    #         singular_name_snake,
-    #         plural_name_snake,
-    #         singular_first_camel,
-    #         plural_first_camel,
-    #         columns,
-    #     )
+    if "api_route" in input_menu_checkbox:
+        generate_api_route(
+            full_path,
+            project_name,
+            singular_name,
+            plural_name,
+            singular_name_kebab,
+            plural_name_kebab,
+            singular_name_snake,
+            plural_name_snake,
+            singular_first_camel,
+            plural_first_camel,
+            columns,
+        )
+        
     
-    pause()
+        
+    if "api_serializer" in input_menu_checkbox:
+        generate_api_serializer(
+            full_path,
+            project_name,
+            singular_name,
+            plural_name,
+            singular_name_kebab,
+            plural_name_kebab,
+            singular_name_snake,
+            plural_name_snake,
+            singular_first_camel,
+            plural_first_camel,
+            columns,
+        )
+        
     
+    
+    if "api_wiewset" in input_menu_checkbox:
+        generate_api_viewset(
+            full_path,
+            project_name,
+            singular_name,
+            plural_name,
+            singular_name_kebab,
+            plural_name_kebab,
+            singular_name_snake,
+            plural_name_snake,
+            singular_first_camel,
+            plural_first_camel,
+            columns,
+        )
     
     

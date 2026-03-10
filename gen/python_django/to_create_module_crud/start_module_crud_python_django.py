@@ -22,7 +22,7 @@ def start_module_crud_python_django():
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
 
     full_path = input_with_validation("Carpeta Proyecto", full_path_default)
-    app_main = input_with_validation("App principal", app_main_default)
+    app_main = input_with_validation("Nombre App principal", app_main_default)
     singular_name = input_with_validation("Nombre singular", singular_name_default)
     plural_name = input_with_validation("Nombre plural", plural_name_default)
     input_columns = input_with_validation("Columnas", columns_default)
