@@ -224,10 +224,18 @@ class {singular_name}Repository
     # Agregar los `@param` dinámicos para cada columna
     for column in column_names:
         repository_content += f"    * @param ${column}\n"
+        
+    param_content = ""
+    
+    for column in column_names:
+        param_content += f"        ${column},\n"
+    
 
     repository_content += f"""    * @return {singular_name}
     */
-    public function set{singular_name}({', '.join([f'${column}' for column in column_names])}): {singular_name}
+    public function set{singular_name}(
+{param_content}
+    ): {singular_name}
     {{
         $obj = new {singular_name}();
 """

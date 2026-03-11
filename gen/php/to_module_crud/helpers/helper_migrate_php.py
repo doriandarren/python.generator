@@ -29,11 +29,22 @@ def php_column_line(col: dict) -> str:
         return f"                $table->float('{name}')->nullable();\n"
 
     if t == "decimal":
-        # default Laravel-friendly
         return f"                $table->decimal('{name}', 13, 2)->nullable();\n"
 
     if t == "boolean":
         return f"                $table->boolean('{name}')->nullable();\n"
+    
+    if t == "date":
+        return f"                $table->date('{name}')->nullable();\n"
+    
+    if t == "datetime":
+        return f"                $table->datetime('{name}')->nullable();\n"
+    
+    if t == "time":
+        return f"                $table->time('{name}')->nullable();\n"
+    
+    if t == "timestamp":
+        return f"                $table->timestamp('{name}')->nullable();\n"
 
     # Fallback seguro
     return f"                $table->string('{name}')->nullable();\n"
