@@ -4,7 +4,7 @@ from gen.helpers.helper_print import print_message, GREEN, CYAN
 
 
 
-def generate_shared_postman_collections(full_path):
+def generate_shared_postman_collections(full_path, project_name):
     """
     Genera un archivo
 
@@ -19,14 +19,14 @@ def generate_shared_postman_collections(full_path):
         print_message(f"Carpeta creada: {styles_path}", GREEN)
 
     # Ruta completa del archivo
-    file_path = os.path.join(styles_path, "API.postman.collection.json")
+    file_path = os.path.join(styles_path, "API-" + project_name + ".postman.collection.json")
 
     # Contenido por defecto
     content = r"""{
 	"info": {
 		"_postman_id": "c45bcd65-d68b-4fbe-a0b6-b87a5632cbff",
 		"name": "API",
-		"description": "Api Rest Full para GlobalFleet\n\nApi URL:\n\n[https://apistaging.globaltank.eu/api/](https://apistaging.globaltank.eu/api/)\n\nEstructura principales de ENDPOINT para la gestión:\n\n- base_url/list\n- base_url/list-paginate\n- base_url/list/paginate?filter=cosoltrans\n- base_url/show/id\n- base_url/store\n- base_url/update\n- base_url/destroy",
+		"description": "Api Rest Full \n\nApi URL:\n\n[https://{project_name}/api/](https://{project_name}/api/)\n\nEstructura principales de ENDPOINT para la gestión:\n\n- base_url/list\n- base_url/list-paginate\n- base_url/list/paginate?filter=cosoltrans\n- base_url/show/id\n- base_url/store\n- base_url/update\n- base_url/destroy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5599797",
 		"_collection_link": "https://warped-satellite-11290.postman.co/workspace/GlobalFleet~ae865b4b-fd0c-416a-bcd9-0c9108578f23/collection/5599797-c45bcd65-d68b-4fbe-a0b6-b87a5632cbff?action=share&source=collection_link&creator=5599797"
@@ -254,6 +254,40 @@ def generate_shared_postman_collections(full_path):
 							],
 							"path": [
 								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboards",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_api}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}dashboards/list",
+							"host": [
+								"{{base_url}}dashboards"
+							],
+							"path": [
+								"list"
 							]
 						}
 					},

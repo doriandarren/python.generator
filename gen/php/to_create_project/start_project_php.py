@@ -111,7 +111,7 @@ def start_project_php():
 
 
     # Postaman
-    generate_shared_postman_collections(full_path)
+    generate_shared_postman_collections(full_path, project_name)
 
 
     # Exceptions
