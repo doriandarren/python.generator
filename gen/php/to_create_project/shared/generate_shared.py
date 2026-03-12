@@ -131,3 +131,5 @@ def generate_shared(full_path):
     generate_ability_groups_table(full_path)
     generate_roles_table(full_path)
     generate_countries_table(full_path)
+    
+    

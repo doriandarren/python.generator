@@ -1,6 +1,7 @@
 from gen.helpers.helper_menu import pause
 from gen.helpers.helper_print import input_with_validation
 from gen.php.to_create_project.batch_processes.generate_batch_processes import generate_batch_processes
+from gen.php.to_create_project.dashboards.generate_dashboard import generate_dashboard
 from gen.php.to_create_project.dev.generate_execute_controller import generate_execute_controller
 from gen.php.to_create_project.dev.generate_route_test import generate_route_test
 from gen.php.to_create_project.dev.generate_test_controller import generate_test_controller
@@ -78,6 +79,9 @@ def start_project_php():
 
     # Shared
     generate_shared(full_path)
+    
+    # Dashboards
+    generate_dashboard(full_path)
 
 
     # Utilities
@@ -107,7 +111,7 @@ def start_project_php():
 
 
     # Postaman
-    generate_shared_postman_collections(full_path) ## TODO Pending
+    generate_shared_postman_collections(full_path)
 
 
     # Exceptions

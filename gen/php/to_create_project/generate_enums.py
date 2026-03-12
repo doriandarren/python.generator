@@ -315,9 +315,9 @@ class EnumAbilityGroups
 
 
     /**
-     * Role Manager
+     * Role Default
      */
-    const ABILITIES_GROUP_BY_MANAGER = [
+    const ABILITIES_GROUP_DEFAULT = [
         [
             'name' => 'ability_groups',
             'abilities' => [
@@ -368,135 +368,45 @@ class EnumAbilityGroups
                 EnumAbilitySuffix::DESTROY,
             ],
         ],
+        [
+            'name' => 'dashboards',
+            'abilities' => [
+                EnumAbilitySuffix::LIST,
+                EnumAbilitySuffix::SHOW,
+                EnumAbilitySuffix::STORE,
+                EnumAbilitySuffix::UPDATE,
+                EnumAbilitySuffix::DESTROY,
+            ],
+        ],
 
         //TODO agregar los demás
 
     ];
-
 
 
 
     /**
-     * Role MANGER
+     * Manager
      */
-    const ABILITIES_GROUP_BY_USER = [
-        [
-            'name' => 'ability_groups',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'ability_user',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'users',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'user_statuses',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'role_user',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-
-        //TODO agregar los demás
-
-    ];
-
-
-
+    const ABILITIES_GROUP_BY_MANAGER = self::ABILITIES_GROUP_DEFAULT;
 
 
     /**
-     * Role ERP
+     * User
      */
-    const ABILITIES_GROUP_BY_ERP = [
-        [
-            'name' => 'ability_groups',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'ability_user',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'users',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'user_statuses',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
-        [
-            'name' => 'role_user',
-            'abilities' => [
-                EnumAbilitySuffix::LIST,
-                EnumAbilitySuffix::SHOW,
-                EnumAbilitySuffix::STORE,
-                EnumAbilitySuffix::UPDATE,
-                EnumAbilitySuffix::DESTROY,
-            ],
-        ],
+    const ABILITIES_GROUP_BY_USER = self::ABILITIES_GROUP_DEFAULT;
 
-        //TODO agregar los demás
 
-    ];
+    /**
+     * ERP
+     */
+    const ABILITIES_GROUP_BY_ERP = self::ABILITIES_GROUP_DEFAULT;
+
+
+    /**
+     * Administration
+     */
+    const ABILITIES_GROUP_BY_ADMINISTRATION = self::ABILITIES_GROUP_DEFAULT;
 
 }
 """
