@@ -470,7 +470,10 @@ export const formatNumber = (
 
   if (isNaN(numericValue)) return "";
 
-  const formatted = numericValue.toLocaleString("es-ES", options);
+  const formatted = new Intl.NumberFormat("es-ES", {
+    useGrouping: true,
+    ...options,
+  }).format(numericValue);
 
   return withCurrency ? `${formatted} €` : formatted;
 };

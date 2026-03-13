@@ -151,6 +151,7 @@ class DashboardRepository
     public function start()
     {
         // TODO implement
+        return [];
     }
 
     /**
@@ -159,6 +160,7 @@ class DashboardRepository
     public function startByRoleManager()
     {
         // TODO implement
+        return [];
     }
 
 
@@ -169,6 +171,7 @@ class DashboardRepository
     public function startByRoleUser()
     {
         // TODO implement
+        return [];
     }
 
 }

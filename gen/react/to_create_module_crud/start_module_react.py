@@ -17,8 +17,8 @@ def start_module_react():
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
     
-    # default_path = "/Users/dorian/ReactProjects/app-1"
-    default_path = "/Users/dorian/ReactProjects/GlobalFleet/erp.globalfleet.es"
+    default_path = "/Users/dorian/ReactProjects/app1.com"
+    # default_path = "/Users/dorian/ReactProjects/GlobalFleet/erp.globalfleet.es"
 
     fullt_path = input_with_validation("Carpeta Proyecto", default_path)
     singular_name = input_with_validation("Nombre singular", "AgendaUnloading")

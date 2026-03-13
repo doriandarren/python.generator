@@ -68,6 +68,7 @@ def update_route(full_path):
 Route::prefix(EnumApiSetup::API_VERSION )->group(function () {
     // Auth
     require base_path('routes/API/auth.php');
+    require base_path('routes/API/dashboards.php');
     
     // Shared
     require base_path('routes/SHARED/abilities.php');
