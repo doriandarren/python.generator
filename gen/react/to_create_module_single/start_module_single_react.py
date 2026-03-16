@@ -14,9 +14,12 @@ def start_module_single_react():
     ]
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)
+    
+    # default_path = "/Users/dorian/ReactProjects/app1.com"
+    # default_path = "/Users/dorian/ReactProjects/GlobalFleet/erp.globalfleet.es"
+    default_path = "/Users/dorian/ReactProjects/Avanza/prices.avanzaoil.eu"
 
-    #project_path = input_with_validation("Carpeta Proyecto", "/Users/dorian/ReactProjects/app-1")
-    project_path = input_with_validation("Carpeta Proyecto", "/Users/dorian/ReactProjects/Truckwash/office.truckwashvilamalla.eu")
+    project_path = input_with_validation("Carpeta Proyecto", default_path)
     singular_name = input_with_validation("Nombre singular", "AgendaUnloading")
     plural_name = input_with_validation("Nombre plural", "AgendaUnloadings")
     input_columns = input_with_validation("Columnas (separdo por espacio)", "user_id:fk name age:integer description")
