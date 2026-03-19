@@ -1,13 +1,10 @@
 ## Python Generator
 
-
 ## Run
 
 ```sh
 python3 cli.py
 ```
-
-
 
 ## Ejecutar music CRON:
 
@@ -19,7 +16,6 @@ python3 run.py music
 python -m ai.cronjobs.music.cronjob_music           ## Antiguo
 
 ```
-
 
 ## Crear entorno virtual
 
@@ -56,7 +52,6 @@ pip3 install schedule                           # CronJobs
 
 ```
 
-
 ## Libraries
 
 ```sh
@@ -79,8 +74,6 @@ python -m pip install -U pip setuptools wheel
 python -m pip install Cython
 
 ```
-
-
 
 ## Django
 
@@ -108,12 +101,15 @@ python3 manage.py runserver 8001
 
 ```
 
+# Django - django_crontab
 
+```sh
+## En settings.py y Tener el archivo core/cron/hello_cron.py:
+CRONJOBS = [
+    ('*/1 * * * *', 'core.cron.hello_cron'),
+]
 
+python manage.py crontab add
+python manage.py crontab show
 
-
-
-
-
-
-
+```

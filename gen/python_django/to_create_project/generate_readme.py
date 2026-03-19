@@ -95,12 +95,22 @@ python3 manage.py runserver 8001
 
 ```
 
-# CronJobs
+# Django - django_crontab
 
 ```sh
+
+## En settings.py y Tener el archivo core/cron/hello_cron.py:
+CRONJOBS = [
+    ('*/1 * * * *', 'core.cron.hello_cron'),
+]
+
+## Comandos
 python3 manage.py crontab add                   ## Agregar los jobs instalados
 python3 manage.py crontab show                  ## Ver los jobs instalados
 python3 manage.py crontab remove                ## Quitar todos los jobs de django-crontab
+
+python3 manage.py crontab run <PID>             ## Ejecutar manualmente los jobs
+
 ```
 
 '''

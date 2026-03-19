@@ -174,6 +174,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 # CronJobs
 CRONJOBS = [
-    ("*/1 * * * *", "core.cron.hello_cron"),                      # cada minuto (para probar)
+    ("*/1 * * * *", "core.cron.cron.hello_cron"),                      # cada minuto (para probar)
 ]
     
