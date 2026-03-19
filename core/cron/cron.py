@@ -13,8 +13,8 @@ def hello_cron():
         title="CRON",
     )
     
-    log_path = Path("/Users/dorian/PythonProjects/python.generator/cron_test.log")
-    with log_path.open("a", encoding="utf-8") as f:
-        f.write(f"[CRON] hello_cron ejecutado: {now}\n")
+    # log_path = Path("/Users/dorian/PythonProjects/python.generator/cron_test.log")
+    # with log_path.open("a", encoding="utf-8") as f:
+    #     f.write(f"[CRON] hello_cron ejecutado: {now}\n")
     
     print(f"[CRON] hello_cron ejecutado: {now}")
