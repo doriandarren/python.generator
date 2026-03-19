@@ -31,8 +31,8 @@ def generate_api_route(
 from apps.{plural_name_snake}.api.views import {singular_name}ApiViewSet
 
 # Add urls.py:
-# from apps.{plural_name_snake}.api.router import router_{plural_name_snake}
-# path('api/v1/', include(router_{plural_name_snake}.urls))
+# from apps.{plural_name_snake}.api.router import router_{singular_name_snake}
+# path('api/v1/', include(router_{singular_name_snake}.urls))
 
 
 # example

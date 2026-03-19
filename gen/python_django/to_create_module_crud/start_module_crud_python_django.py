@@ -12,11 +12,16 @@ def start_module_crud_python_django():
         ("API - Viewset", "api_wiewset"),
     ]
     
-    full_path_default = "/Users/dorian/PythonProjects/app1.com"
+    #full_path_default = "/Users/dorian/PythonProjects/app1.com"
+    full_path_default = "/Users/dorian/PythonProjects/python.generator"
+    
+    
+    
+    app_main_default = "main"
+    
     singular_name_default = "AgendaUnloading"
     plural_name_default = "AgendaUnloadings"
     columns_default = "user_id:fk name age:integer description"
-    app_main_default = "main"
     
 
     input_menu_checkbox = menu_checkbox("Componentes: ", opt)

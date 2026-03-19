@@ -63,7 +63,7 @@ def create_file_init(full_path):
     """
     Genera el archivo init
     """
-    folder_path = os.path.join(full_path, "core", "hmodelss")
+    folder_path = os.path.join(full_path, "core", "models")
     file_path = os.path.join(folder_path, "__init__.py")
 
     os.makedirs(folder_path, exist_ok=True)

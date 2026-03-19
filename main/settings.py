@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'drf_yasg',                         # required for serving swagger,
     'corsheaders',                      # required for cors,
     'django_crontab',                   # required for cronjobs,
+    'apps.devs',                         # Module,
 ]
 
 MIDDLEWARE = [
