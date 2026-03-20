@@ -7,7 +7,7 @@ import os
 ## ---- NEW
 ## ---------------------------------------
 
-def create_init_file(path):
+def helper_create_init_file(path):
     """
     Garantiza que una carpeta sea un paquete Python.
     Si no existe __init__.py, lo crea.

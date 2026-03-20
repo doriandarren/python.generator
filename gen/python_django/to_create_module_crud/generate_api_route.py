@@ -1,5 +1,5 @@
 import os
-from gen.python_django.helpers.helper_file import create_init_file
+from gen.python_django.helpers.helper_file import helper_create_init_file
 from helpers.helper_print import print_message, GREEN, CYAN
 
 
@@ -25,7 +25,7 @@ def generate_api_route(
 
     os.makedirs(folder_path, exist_ok=True)
     
-    create_init_file(folder_path)
+    helper_create_init_file(folder_path)
 
     content = f'''from rest_framework.routers import DefaultRouter
 from apps.{plural_name_snake}.api.views import {singular_name}ApiViewSet

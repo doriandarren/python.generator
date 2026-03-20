@@ -1,6 +1,8 @@
 import os
-from gen.python_django.helpers.helper_file import create_init_file
+from gen.python_django.helpers.helper_file import helper_create_init_file
 from helpers.helper_print import print_message, GREEN, CYAN
+
+
 
 
 
@@ -45,8 +47,7 @@ def create_init_file(full_path, plural_name_snake):
     apps_path = os.path.join(full_path, "apps", plural_name_snake, "services")
     os.makedirs(apps_path, exist_ok=True)
 
-    create_init_file(apps_path) 
-
+    helper_create_init_file(apps_path) 
 
 
 
@@ -68,12 +69,80 @@ def create_file(
     """
 
     folder_path = os.path.join(full_path, "apps", plural_name_snake, "services")
-    file_path = os.path.join(folder_path, singular_name_snake + "service_2.py")
+    file_path = os.path.join(folder_path, singular_name_snake + "_service.py")
 
     os.makedirs(folder_path, exist_ok=True)
 
-    content = f'''
-    ## TODO Content
+    content = f'''from apps.{plural_name_snake}.models import {singular_name}
+
+class {singular_name}Service:
+
+    def list(self):
+        return {singular_name}.objects.all()
+
+
+    def show(self, id):
+        return {singular_name}.objects.filter(id=id).first()
+
+
+    def store(self, model: {singular_name}):
+        model.save()
+        return model
+
+
+    def update(self, id, data: dict):
+        model = self.show(id)
+
+        if not model:
+            return None
+'''
+
+    for column in columns:
+        column_name = column["name"]
+        content += f'''
+        if "{column_name}" in data:
+            model.{column_name} = data["{column_name}"]
+            
+        '''
+
+
+    content += '''
+        model.save()
+        return model
+
+
+    def destroy(self, id) -> bool:
+        model = self.show(id)
+
+        if not model:
+            return False
+
+        model.delete()
+        return True
+'''
+
+    content += f'''
+
+
+    def set_{singular_name_snake}(
+        self,'''
+
+    for column in columns:
+        column_name = column["name"]
+        content += f'''
+        {column_name},'''
+
+    content += f'''
+    ) -> {singular_name}:
+        model = {singular_name}()
+'''
+
+    for column in columns:
+        column_name = column["name"]
+        content += f'        model.{column_name} = {column_name}\n'
+
+    content += '''
+        return model
 '''
 
     try:
@@ -82,3 +151,4 @@ def create_file(
         print_message(f"Archivo generado: {file_path}", GREEN)
     except Exception as e:
         print_message(f"Error al generar el archivo {file_path}: {e}", CYAN)
+
