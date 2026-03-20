@@ -21,5 +21,5 @@ class AiTextGeneration(models.Model):
         verbose_name_plural = "AiTextGenerations"
 
     def __str__(self):
-        return str(self.id)
+        return f"{self.model_name} - {self.user_id}"
     

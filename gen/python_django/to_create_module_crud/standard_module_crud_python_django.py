@@ -7,6 +7,7 @@ from gen.python_django.helpers.helper_virtual_env import get_venv_python
 from gen.python_django.to_create_module_crud.generate_api_model import generate_api_model
 from gen.python_django.to_create_module_crud.generate_api_route import generate_api_route
 from gen.python_django.to_create_module_crud.generate_api_serializer import generate_api_serializer
+from gen.python_django.to_create_module_crud.generate_api_service import generate_api_service
 from gen.python_django.to_create_module_crud.generate_api_viewset import generate_api_viewset
 from gen.python_django.to_create_module_crud.generate_app import generate_app
 from gen.python_django.to_create_module_crud.update_installed_apps import update_installed_apps
@@ -112,6 +113,22 @@ def standard_module_crud_python_django(full_path, app_main, singular_name, plura
         
     if "api_model" in input_menu_checkbox:
         generate_api_model(
+            full_path,
+            project_name,
+            singular_name,
+            plural_name,
+            singular_name_kebab,
+            plural_name_kebab,
+            singular_name_snake,
+            plural_name_snake,
+            singular_first_camel,
+            plural_first_camel,
+            columns,
+        )
+        
+        
+    if "api_service" in input_menu_checkbox:
+        generate_api_service(
             full_path,
             project_name,
             singular_name,
