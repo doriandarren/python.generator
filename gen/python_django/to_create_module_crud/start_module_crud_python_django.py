@@ -10,6 +10,7 @@ def start_module_crud_python_django():
         ("API - Route", "api_route"),
         ("API - Serializer", "api_serializer"),
         ("API - Viewset", "api_wiewset"),
+        ("API - Model", "api_model"),
     ]
     
     #full_path_default = "/Users/dorian/PythonProjects/app1.com"
@@ -33,7 +34,6 @@ def start_module_crud_python_django():
     input_columns = input_with_validation("Columnas", columns_default)
 
     columns = parse_columns_input(input_columns)
-    
     
     standard_module_crud_python_django(full_path, app_main, singular_name, plural_name, columns, input_menu_checkbox)
 

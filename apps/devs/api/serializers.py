@@ -7,4 +7,4 @@ class devSerializer(ModelSerializer):
     class Meta:
         model = Dev
         ## fields = "__all__"
-        fields = ['id', 'a']
+        fields = ['id', 'user_id','name','age','description']

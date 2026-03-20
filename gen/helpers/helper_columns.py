@@ -24,12 +24,13 @@ def parse_columns_input(input_columns: str):
             "is_fk": col_type == "fk",
         }
 
-        # Si es FK, inferimos la tabla relacionada por defecto
         if col["is_fk"]:
             base = name
             if base.endswith("_id"):
-                base = base[:-3]  # quitar '_id'
-            col["related_table"] = base + "s"  # muy estilo Laravel
+                base = base[:-3]
+
+            col["related_table"] = base + "s"
+            col["related_model"] = base.capitalize()
 
         columns.append(col)
 
