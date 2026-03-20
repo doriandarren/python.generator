@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',                      # required for cors,
     'django_crontab',                   # required for cronjobs,
     'apps.devs',                         # Module,
+    'apps.ai_text_generations',                         # Module,
 ]
 
 MIDDLEWARE = [

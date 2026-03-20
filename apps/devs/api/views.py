@@ -38,7 +38,7 @@ class DevApiViewSet(ModelViewSet):
             )
 
 
-            print(response["message"]["content"])
+            ## print(response["message"]["content"])
 
 
             return Response({
