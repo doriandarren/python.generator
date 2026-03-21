@@ -3,11 +3,6 @@ from gen.python_django.helpers.helper_file import helper_create_init_file
 from helpers.helper_print import print_message, GREEN, CYAN
 
 
-
-
-
-
-
 def generate_api_service(
         full_path,
         project_name,
