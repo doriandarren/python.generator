@@ -22,8 +22,8 @@ class DevApiViewSet(ModelViewSet):
     
     
 
-    @action(detail=False, methods=['get'], url_path='test-in')
-    def invoke_in(self, request):
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
 
         try:
             payload = {
@@ -48,31 +48,46 @@ class DevApiViewSet(ModelViewSet):
             )
 
 
+            req_messages = payload.get("messages") or []
+            
+           
+            
+            response_message = response.get("message", "").get("content", "")
+            response_done = response.get("done", "")
+            response_done_reason = response.get("done_reason", "")
+            response_total_duration = response.get("total_duration", "")
+            response_load_duration = response.get("load_duration", "")
+            response_prompt_eval_count = response.get("prompt_eval_count", "")
+            response_prompt_eval_duration = response.get("prompt_eval_duration", "")
+            response_eval_count = response.get("eval_count", "")
+            response_eval_duration = response.get("eval_duration", "")
+            
+
 
             ai_text_generation = self.service.set_ai_text_generation(
                 str(request.user.id) if request.user.is_authenticated else "anonymous",
                 payload.get("model", ""),
-                "mensaje sistema",
-                "mensaje usuario",
-                "respuesta",
-                "true",
-                "stop",
-                "123",
-                "45",
-                "10",
-                "20",
-                "30",
-                "40",
+                req_messages[0].get("content", "") if len(req_messages) > 0 else "",
+                req_messages[1].get("content", "") if len(req_messages) > 0 else "",
+                response_message,
+                response_done,
+                response_done_reason,
+                response_total_duration,
+                response_load_duration,
+                response_prompt_eval_count,
+                response_prompt_eval_duration,
+                response_eval_count,
+                response_eval_duration,
             )
             
-            print(type(ai_text_generation))
+            self.service.store(ai_text_generation)
             
             
-            ## print(response["message"]["content"])
-
-
+            serialize = aiTextGenerationSerializer(ai_text_generation)
+            
             return Response({
-                'message': response,
+                'response': response,
+                'data': serialize.data
             }, status=status.HTTP_200_OK)
 
 
@@ -83,42 +98,3 @@ class DevApiViewSet(ModelViewSet):
             )
 
 
-
-
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
-        try:
-            
-            ai_text_generation = self.service.set_ai_text_generation(
-                "anonymous",
-                "model",
-                "mensaje sistema",
-                "mensaje usuario",
-                "respuesta",
-                "true",
-                "stop",
-                "123",
-                "45",
-                "10",
-                "20",
-                "30",
-                "40",
-            )
-            
-            print(type(ai_text_generation.model_name))
-            
-            ## Serializar un objeto
-            serialize = aiTextGenerationSerializer(ai_text_generation, many=True)
-            
-            response = {
-                "message": "OK",
-                "data": serialize.data
-            }
-            return Response({
-                'message': response,
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )

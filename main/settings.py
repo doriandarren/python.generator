@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_crontab',                   # required for cronjobs,
     'apps.devs',                         # Module,
     'apps.ai_text_generations',                         # Module,
+    'apps.ai_text_generation_prompts',                         # Module,
 ]
 
 MIDDLEWARE = [

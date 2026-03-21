@@ -1,7 +1,9 @@
 from django.db import models
 
+from core.models.models import BaseModel
+
 # Create your models here.
-class AiTextGeneration(models.Model):
+class AiTextGeneration(BaseModel):
     user_id = models.CharField(max_length=255)
     model_name = models.CharField(max_length=255)
     system_message = models.CharField(max_length=255)

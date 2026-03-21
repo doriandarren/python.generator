@@ -74,7 +74,9 @@ def generate_api_model(
     
     
 
-    str = f"""class {singular_name}(models.Model):
+    str = f"""from core.models.models import BaseModel
+    
+class {singular_name}(BaseModel):
 {fields_str if fields else "    pass"}
 
     class Meta:
