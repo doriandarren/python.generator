@@ -108,7 +108,7 @@ class DevApiViewSet(ModelViewSet):
             print(type(ai_text_generation.model_name))
             
             ## Serializar un objeto
-            serialize = aiTextGenerationSerializer(ai_text_generation)
+            serialize = aiTextGenerationSerializer(ai_text_generation, many=True)
             
             response = {
                 "message": "OK",
