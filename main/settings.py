@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     'drf_yasg',                         # required for serving swagger,
     'corsheaders',                      # required for cors,
     'django_crontab',                   # required for cronjobs,
+    'apps.users',                         # Module,
     'apps.devs',                         # Module,
     'apps.ai_text_generations',                         # Module,
     'apps.ai_text_generation_prompts',                         # Module,
-    'apps.agenda_unloadings',                         # Module,
 ]
 
 MIDDLEWARE = [
@@ -159,6 +159,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# USERS
+AUTH_USER_MODEL = 'users.User'
+
+
 # Simple JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -180,5 +185,3 @@ CRONJOBS = [
     ("*/1 * * * *", "core.cron.cron.hello_cron"),                      # cada minuto (para probar)
 ]
 
-# USERS
-AUTH_USER_MODEL = 'users.User'
