@@ -33,7 +33,7 @@ def start_module_crud_python_django():
     singular_name = input_with_validation("Nombre singular", singular_name_default)
     plural_name = input_with_validation("Nombre plural", plural_name_default)
     input_columns = input_with_validation("Columnas", columns_default)
-
+    
     columns = parse_columns_input(input_columns)
     
     standard_module_crud_python_django(full_path, app_main, singular_name, plural_name, columns, input_menu_checkbox)

@@ -30,6 +30,23 @@ pymain -> pystart -> pystartmodule -> pystandard -> pygenerate
 [{'name': 'user_id', 'type': 'fk', 'is_fk': True, 'related_table': 'users', 'related_model': 'User'}, {'name': 'name', 'type': 'string', 'is_fk': False}, {'name': 'age', 'type': 'integer', 'is_fk': False}, {'name': 'description', 'type': 'string', 'is_fk': False}]
 ```
 
+
+# Ejemplo: CRUD 
+
+```sh
+
+/Users/dorian/PythonProjects/python.generator 
+main 
+AgendaUnloading 
+AgendaUnloadings 
+[{'name': 'user_id', 'type': 'fk', 'is_fk': True, 'related_table': 'users', 'related_model': 'User'}, {'name': 'name', 'type': 'string', 'is_fk': False}, {'name': 'age', 'type': 'integer', 'is_fk': False}, {'name': 'description', 'type': 'string', 'is_fk': False}] 
+['api_route', 'api_serializer', 'api_wiewset', 'api_model', 'api_service']
+
+```
+
+
+
+
 # TODOS:
 
 PYTHON:

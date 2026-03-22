@@ -21,6 +21,7 @@ from gen.python_django.to_create_project.generate_readme import generate_readme
 from gen.python_django.to_create_project.generate_simplejwt import generate_simplejwt
 from gen.python_django.to_create_project.generate_static_files import generate_static_files
 from gen.python_django.to_create_project.generate_todo_md import generate_todo_md
+from gen.python_django.to_create_project.modules.generate_module_users import generate_module_users
 
 
 def start_project_python_django():
@@ -82,9 +83,6 @@ def start_project_python_django():
     
     generate_api_doc(full_path, project_name_format, app_name, venv_python)
     
-    
-    ## TODO crear users app
-    ## TODO Pendiente de agregar en la ruta de users para la validacion
     generate_simplejwt(full_path, project_name_format, app_name, venv_python)
     
     generate_code_file_init(full_path)
@@ -102,7 +100,9 @@ def start_project_python_django():
     
     generate_page_home(full_path, project_name_format, app_name)
     
-    ##generate_module(full_path, project_name_format, app_name)
+    
+    ## TODO crear users app
+    generate_module_users(full_path, project_name_format, app_name)
     
 
     pause()

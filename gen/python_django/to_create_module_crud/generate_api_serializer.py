@@ -24,10 +24,15 @@ def generate_api_serializer(
 
     os.makedirs(folder_path, exist_ok=True)
     
+    format_cols = ""
+    for index, col in enumerate(columns):
+        if index == len(columns) - 1:
+            format_cols += f"            '{col['name']}',"
+        else:
+            format_cols += f"            '{col['name']}',\n"
     
-    format_cols = ",".join(f"'{col["name"]}'" for col in columns)
-
-      
+    # format_cols = ",\n".join(f"'{col["name"]}'" for col in columns)
+    
 
     content = f'''from rest_framework.serializers import ModelSerializer
 from apps.{plural_name_snake}.models import {singular_name}
@@ -38,7 +43,14 @@ class {singular_first_camel}Serializer(ModelSerializer):
     class Meta:
         model = {singular_name}
         ## fields = "__all__"
-        fields = ['id', {format_cols}]
+        fields = [
+            'id', 
+{format_cols}
+            'created_at',
+            'updated_at',
+            'created_by',
+            'updated_by',
+        ]
 '''
 
     try:

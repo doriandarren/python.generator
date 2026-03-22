@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.devs',                         # Module,
     'apps.ai_text_generations',                         # Module,
     'apps.ai_text_generation_prompts',                         # Module,
+    'apps.agenda_unloadings',                         # Module,
 ]
 
 MIDDLEWARE = [
@@ -178,4 +179,6 @@ CORS_ALLOW_CREDENTIALS = True
 CRONJOBS = [
     ("*/1 * * * *", "core.cron.cron.hello_cron"),                      # cada minuto (para probar)
 ]
-    
+
+# USERS
+AUTH_USER_MODEL = 'users.User'
