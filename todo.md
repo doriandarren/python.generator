@@ -58,9 +58,3 @@ Aquí está una continuación:\n\nAños después, la inteligencia artificial emo
 
 
 
-
-
-odio para dariana, cuenta y no te gusta
-- seguido 
-gym para ella
-

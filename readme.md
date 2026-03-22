@@ -113,3 +113,14 @@ python manage.py crontab add
 python manage.py crontab show
 
 ```
+
+# Error: python manage.py makemigrations
+
+```sh
+
+## Error cuando se agrega el created_at al modelo:
+opc: 1
+>>> timezone.now()
+
+
+```

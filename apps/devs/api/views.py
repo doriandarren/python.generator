@@ -22,8 +22,8 @@ class DevApiViewSet(ModelViewSet):
     
     
 
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
+    @action(detail=False, methods=['get'], url_path='test-in')
+    def invoke_in(self, request):
 
         try:
             payload = {
@@ -98,3 +98,21 @@ class DevApiViewSet(ModelViewSet):
             )
 
 
+
+
+
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
+        try:
+            
+            response = {
+                "message": "OK"
+            }
+            return Response({
+                'message': response,
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
