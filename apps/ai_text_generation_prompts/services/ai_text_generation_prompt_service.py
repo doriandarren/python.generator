@@ -10,6 +10,10 @@ class AiTextGenerationPromptService:
         return AiTextGenerationPrompt.objects.filter(id=id).first()
 
 
+    def findByIsProcessed(self, is_processed=False):
+        return AiTextGenerationPrompt.objects.filter(is_processed=is_processed).first()
+
+
     def store(self, model: AiTextGenerationPrompt):
         model.save()
         return model
