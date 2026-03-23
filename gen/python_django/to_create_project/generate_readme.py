@@ -13,7 +13,6 @@ def generate_readme(full_path, project_name):
 
     content = f'''## {project_name}
 
-
 ## Script para ejecutar el proyecto
 
 ```sh
@@ -62,7 +61,7 @@ pip3 install schedule                           # CronJobs
 ( Cmd + Shift + P ) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
 ```
 
-# Docker
+## Docker
 
 ```sh
 
@@ -94,7 +93,7 @@ python3 manage.py runserver 8001
 
 ```
 
-# Django - django_crontab
+## Django - django_crontab
 
 ```sh
 
@@ -110,6 +109,24 @@ python3 manage.py crontab remove                ## Quitar todos los jobs de djan
 
 python3 manage.py crontab run <PID>             ## Ejecutar manualmente los jobs
 
+```
+
+## Error: python manage.py makemigrations
+
+```sh
+
+## Error cuando se agrega el created_at al modelo:
+opc: 1
+>>> timezone.now()
+
+```
+
+## Eliminar Migraciones de Django (Parecido a rollback)
+
+```sh
+cd ruta/de/tu/proyecto
+find ./apps -path "*/migrations/*.py" -not -name "__init__.py"
+find ./apps -path "*/migrations/*.pyc"
 ```
 
 '''

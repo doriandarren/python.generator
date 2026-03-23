@@ -6,6 +6,15 @@
 python3 cli.py
 ```
 
+## Script para ejecutar el proyecto
+
+```sh
+python3 manage.py makemigrations                # Migraciones
+python3 manage.py migrate                       # Aplicar migraciones
+python3 manage.py createsuperuser               # Crear superuser
+python3 manage.py runserver                     # Ejecutar servidor
+```
+
 ## Ejecutar music CRON:
 
 ```sh
@@ -93,7 +102,7 @@ python3 manage.py startapp companies apps/companies
 python manage.py migrate
 
 
-# Crear el superuser
+## Crear el superuser
 python3 manage.py createsuperuser
 
 python3 manage.py runserver                             # Levantar el servidor
@@ -101,7 +110,7 @@ python3 manage.py runserver 8001
 
 ```
 
-# Django - django_crontab
+## Django - django_crontab
 
 ```sh
 ## En settings.py y Tener el archivo core/cron/hello_cron.py:
@@ -114,7 +123,7 @@ python manage.py crontab show
 
 ```
 
-# Error: python manage.py makemigrations
+## Error: python manage.py makemigrations
 
 ```sh
 
@@ -124,9 +133,15 @@ opc: 1
 
 ```
 
+## Eliminar Migraciones de Django
 
+```sh
+cd ruta/de/tu/proyecto
+find ./apps -path "*/migrations/*.py" -not -name "__init__.py"
+find ./apps -path "*/migrations/*.pyc"
+```
 
-# Prompt
+## Prompt
 
 ```sh
 

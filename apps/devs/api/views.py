@@ -22,8 +22,8 @@ class DevApiViewSet(ModelViewSet):
     
     
 
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
+    @action(detail=False, methods=['get'], url_path='test_')
+    def invoke_(self, request):
 
         try:
             
@@ -119,8 +119,8 @@ class DevApiViewSet(ModelViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test__')
-    def invoke__(self, request):
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
         try:
             
             
