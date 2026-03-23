@@ -96,8 +96,6 @@ class DevApiViewSet(ModelViewSet):
             
             serialize = aiTextGenerationSerializer(ai_text_generation)
             
-            
-            
             self.service_prompt.update(
                 prompt.id,
                 {
