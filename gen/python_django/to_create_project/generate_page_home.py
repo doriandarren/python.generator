@@ -52,7 +52,7 @@ def create_file_html(full_path):
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bienvenida</title>
+    <title>Bienvenido</title>
 
     <!-- Tailwind CDN (rápido para dev) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -67,7 +67,7 @@ def create_file_html(full_path):
         </div>
 
         <h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-          Bienvenida 👋
+          Bienvenido 👋
         </h1>
 
         <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-300">

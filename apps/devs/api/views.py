@@ -5,9 +5,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
 
 
+from apps.ai_text_generation_prompts.data.data_prompt import get_data_prompts
+from apps.ai_text_generation_prompts.services.ai_text_generation_prompt_service import AiTextGenerationPromptService
 from apps.ai_text_generations.api.serializers import aiTextGenerationSerializer
 from apps.ai_text_generations.services.ai_text_generation_service import AiTextGenerationService
 from core.http.api_request import ApiRequest
+from gen.helpers.helpers import dd
 
 api_ollama = ApiRequest("http://192.168.1.100:11434/")
 
@@ -19,11 +22,12 @@ class DevApiViewSet(ModelViewSet):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.service = AiTextGenerationService()
+        self.service_prompt = AiTextGenerationPromptService()
     
     
 
-    @action(detail=False, methods=['get'], url_path='test-in')
-    def invoke_in(self, request):
+    @action(detail=False, methods=['get'], url_path='test--l')
+    def invoke__(self, request):
 
         try:
             payload = {
@@ -106,6 +110,27 @@ class DevApiViewSet(ModelViewSet):
         try:
             
             
+            for payload in get_data_prompts():
+                
+                ## Buscar por system_message y user_message
+                ai_text_generation_prompt = self.service_prompt.list().filter(
+                    system_message=payload.get("system_message", ""),
+                    user_message=payload.get("user_message", ""),
+                ).first()
+                
+                if ai_text_generation_prompt:
+                    continue
+                
+                ai_text_generation_prompt = self.service_prompt.set_ai_text_generation_prompt(
+                    payload.get("system_role", ""),
+                    payload.get("system_message", ""),
+                    payload.get("user_role", ""),
+                    payload.get("user_message", ""),
+                    False,
+                )
+                
+                self.service_prompt.store(ai_text_generation_prompt)
+                
             
             response = {
                 "message": "OK"

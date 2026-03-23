@@ -1,0 +1,73 @@
+def get_data_prompts():
+    return [
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que escribe historias cortas, claras y bien conectadas entre sí.",
+            "user_role": "user",
+            "user_message": "Comienza una historia sobre una noche extraña en la que una luz aparece en el cielo sobre un pequeño pueblo.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que continúa historias manteniendo la coherencia con lo anterior.",
+            "user_role": "user",
+            "user_message": "Continúa la historia: los habitantes del pueblo observan la luz con miedo, pero una joven llamada Alba decide acercarse al bosque de donde parece venir.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que desarrolla historias de misterio y ciencia ficción de forma progresiva.",
+            "user_role": "user",
+            "user_message": "Sigue la historia: Alba encuentra una nave parcialmente oculta entre los árboles y escucha un sonido suave en su interior.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que escribe escenas con tensión y curiosidad.",
+            "user_role": "user",
+            "user_message": "Continúa la historia: dentro de la nave, Alba descubre a un ser herido que intenta comunicarse con ella sin hablar.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que mantiene la continuidad narrativa y el desarrollo emocional de los personajes.",
+            "user_role": "user",
+            "user_message": "Sigue la historia: Alba decide ayudar al ser extraño mientras fuera del bosque comienzan a escucharse voces de personas que se acercan.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que añade giros narrativos interesantes sin romper la coherencia.",
+            "user_role": "user",
+            "user_message": "Continúa la historia: el ser le muestra a Alba un recuerdo de su planeta y le hace entender que no vino a invadir, sino a pedir ayuda.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que escribe historias con tensión creciente y decisiones difíciles.",
+            "user_role": "user",
+            "user_message": "Sigue la historia: Alba debe decidir rápidamente si esconder al visitante o entregarlo a las autoridades del pueblo que ya están llegando.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que profundiza en conflictos morales y emocionales.",
+            "user_role": "user",
+            "user_message": "Continúa la historia: Alba elige proteger al visitante, pero eso provoca sospechas entre los vecinos, incluido su propio hermano.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que prepara el clímax de una historia de forma intensa y bien hilada.",
+            "user_role": "user",
+            "user_message": "Sigue la historia: mientras intentan reparar la nave, el cielo vuelve a iluminarse y aparece una segunda presencia desconocida sobre el pueblo.",
+            "is_processed": False,
+        },
+        {
+            "system_role": "system",
+            "system_message": "Eres un asistente creativo que cierra historias de forma emotiva, clara e impactante.",
+            "user_role": "user",
+            "user_message": "Finaliza la historia: Alba descubre quién está detrás de la segunda presencia y toma una decisión que cambiará para siempre la relación entre los humanos y los visitantes.",
+            "is_processed": False,
+        },
+    ]

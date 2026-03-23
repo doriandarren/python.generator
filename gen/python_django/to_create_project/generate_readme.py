@@ -14,14 +14,13 @@ def generate_readme(full_path, project_name):
     content = f'''## {project_name}
 
 
-## Ejecutar
+## Script para ejecutar el proyecto
 
 ```sh
-python3 manage.py makemigrations
-python3 manage.py migrate
-
-python3 manage.py createsuperuser
-
+python3 manage.py makemigrations                # Migraciones
+python3 manage.py migrate                       # Aplicar migraciones
+python3 manage.py createsuperuser               # Crear superuser
+python3 manage.py runserver                     # Ejecutar servidor
 ```
 
 ## Crear entorno virtual
