@@ -40,6 +40,20 @@ class ApiRequest:
         )
         r.raise_for_status()
         return r.json()
+    
+    def get_binary(self, path: str, params: dict | None = None) -> bytes:
+        headers = self._headers()
+        headers.pop("Content-Type", None)
+        headers["Accept"] = "*/*"
+
+        r = requests.get(
+            self._url(path),
+            params=params,
+            headers=headers,
+            timeout=self.timeout,
+        )
+        r.raise_for_status()
+        return r.content
 
     def post(self, path: str, payload: dict) -> dict:
         r = requests.post(
