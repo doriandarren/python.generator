@@ -42,7 +42,7 @@ def create_project(full_path: str):
 
     print_message("Creando el proyecto React con Vite...", CYAN)
     run_command(
-        f"npm create vite@latest {project_name} -- --template react --yes",
+        f"printf 'n\\n' | npx create-vite@latest {project_name} --template react",
         cwd=project_dir
     )
 
