@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',                   # required for DRF,
-    'drf_yasg',                         # required for serving swagger,
-    'corsheaders',                      # required for cors,
-    'django_crontab',                   # required for cronjobs,
-    'apps.users',                         # Module,
-    'apps.devs',                         # Module,
-    'apps.ai_text_generations',                         # Module,
-    'apps.ai_text_generation_prompts',                         # Module,
+    'rest_framework',                               # required for DRF,
+    'drf_yasg',                                     # required for serving swagger,
+    'corsheaders',                                  # required for cors,
+    'django_crontab',                               # required for cronjobs,
+    'apps.users',                                   # Module,
+    'apps.devs',                                    # Module,
+    'apps.scheduler',                               # Module,
+    'apps.ai_text_generations',                     # Module,
+    'apps.ai_text_generation_prompts',              # Module,
 ]
 
 MIDDLEWARE = [
@@ -183,6 +184,6 @@ CORS_ALLOW_CREDENTIALS = True
 # CronJobs
 CRONJOBS = [
     #("*/1 * * * *", "core.cron.cron.start"),                      # cada minuto (para probar)
-    ("*/1 * * * *", "apps.devs.cron.run_generation.start"),                      # cada minuto (para probar)
+    #("*/5 * * * *", "apps.devs.cron.run_generation.start"),                      # cada minuto (para probar)
 ]
 

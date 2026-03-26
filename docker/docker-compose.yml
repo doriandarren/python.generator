@@ -1,19 +1,15 @@
-## docker compose down    --> Eliminar los contenedores
-## docker compose up -d   --> Levantar los contenedores
-name: generator_posgrest
-services:
-  postgres:
-    image: postgres:16
-    container_name: generator_postgres
-    restart: on-failure
-    environment:
-      POSTGRES_DB: generator_db
-      POSTGRES_USER: generator_user
-      POSTGRES_PASSWORD: generator_pass
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+name: generator_django
 
-volumes:
-  pgdata:
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: generator_app
+    restart: on-failure
+    working_dir: /app
+    volumes:
+      - ../:/app
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000

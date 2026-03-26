@@ -117,3 +117,33 @@ cd ruta/de/tu/proyecto
 find ./apps -path "*/migrations/*.py" -not -name "__init__.py"
 find ./apps -path "*/migrations/*.pyc"
 ```
+
+
+
+
+# crear cron (scheduler)
+
+```sh
+
+python3 manage.py startapp scheduler apps/scheduler
+
+agregar INSTALLED_APPS:
+
+'apps.scheduler',
+
+y en apps.py:
+class SchedulerConfig(AppConfig):
+    name = 'apps.scheduler'
+
+
+
+- crear carpetas y archivo __init__.py:
+management -> commands -> run_scheduler.py
+
+jobs -> ai_generation_job.py
+
+services -> scheduler_service.py
+
+
+
+```
