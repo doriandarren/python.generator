@@ -182,6 +182,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 # CronJobs
 CRONJOBS = [
-    ("*/1 * * * *", "core.cron.cron.hello_cron"),                      # cada minuto (para probar)
+    #("*/1 * * * *", "core.cron.cron.start"),                      # cada minuto (para probar)
+    ("*/1 * * * *", "apps.devs.cron.run_generation.start"),                      # cada minuto (para probar)
 ]
 

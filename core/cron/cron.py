@@ -1,15 +1,13 @@
 from pathlib import Path
-
 from django.utils import timezone
-
 from core.messages.message_channel import MessageChannel
 
-def hello_cron():
+def start():
     
     now = timezone.now()
     
     MessageChannel.send(
-        text=f"hello_cron ejecutado: {timezone.now()}",
+        text=f"hello_cron ejecutado: {now}",
         title="CRON",
     )
     
@@ -17,4 +15,4 @@ def hello_cron():
     # with log_path.open("a", encoding="utf-8") as f:
     #     f.write(f"[CRON] hello_cron ejecutado: {now}\n")
     
-    print(f"[CRON] hello_cron ejecutado: {now}")
+    ##print(f"[CRON] hello_cron ejecutado: {now}")
