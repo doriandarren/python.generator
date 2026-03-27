@@ -3,6 +3,11 @@
 ```sh
 docker compose down             --> Eliminar los contenedores
 docker compose up -d --build    --> Levantar los contenedores
+
+
+docker compose down --volumes --remove-orphans
+docker compose build --no-cache
+docker compose up
 ```
 
 
@@ -10,4 +15,5 @@ docker compose up -d --build    --> Levantar los contenedores
 
 ```sh
 docker exec -it generator_app bash
+docker exec -it generator_scheduler bash
 ```

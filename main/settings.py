@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'rest_framework',                               # required for DRF,
     'drf_yasg',                                     # required for serving swagger,
     'corsheaders',                                  # required for cors,
-    'django_crontab',                               # required for cronjobs,
     'apps.users',                                   # Module,
     'apps.devs',                                    # Module,
     'apps.scheduler',                               # Module,
@@ -181,9 +182,22 @@ SIMPLE_JWT = {
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-# CronJobs
-CRONJOBS = [
-    #("*/1 * * * *", "core.cron.cron.start"),                      # cada minuto (para probar)
-    #("*/5 * * * *", "apps.devs.cron.run_generation.start"),                      # cada minuto (para probar)
-]
+# Celery
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_TIMEZONE = "Europe/Madrid"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
 
+
+
+CELERY_BEAT_SCHEDULE = {
+#     "hello-every-minute": {
+#         "task": "apps.devs.tasks.hello_task",
+#         "schedule": crontab(minute="*"),
+#     },
+    "hello-every-5-minutes": {
+        "task": "apps.devs.tasks.start",
+        "schedule": crontab(minute="*/5"),
+    },
+}

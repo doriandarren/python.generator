@@ -15,6 +15,7 @@ from apps.ai_text_generations.api.serializers import aiTextGenerationSerializer
 from apps.ai_text_generations.services.ai_text_generation_service import AiTextGenerationService
 from apps.devs.cron.run_generation import start
 from apps.devs.services.ai_generation_service import AIGenerationService
+
 from core.http.api_request import ApiRequest
 from core.messages.message_channel import MessageChannel
 
@@ -146,8 +147,6 @@ class DevApiViewSet(ModelViewSet):
     @action(detail=False, methods=['get'], url_path='test')
     def invoke(self, request):
         try:
-            
-            start()
             
             response = {
                 "message": "OK"

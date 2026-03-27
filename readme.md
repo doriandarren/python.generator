@@ -121,29 +121,66 @@ find ./apps -path "*/migrations/*.pyc"
 
 
 
-# crear cron (scheduler)
+# Celery y django-celery-beat
 
 ```sh
 
-python3 manage.py startapp scheduler apps/scheduler
+# Instalar
+brew install redis
 
-agregar INSTALLED_APPS:
+# Iniciar el servicio queda siempre
+brew services start redis 
 
-'apps.scheduler',
-
-y en apps.py:
-class SchedulerConfig(AppConfig):
-    name = 'apps.scheduler'
-
+# Verificar
+redis-cli ping
 
 
-- crear carpetas y archivo __init__.py:
-management -> commands -> run_scheduler.py
 
-jobs -> ai_generation_job.py
 
-services -> scheduler_service.py
+pip install celery django-celery-beat redis
 
+
+
+
+- Archivo settings.py:
+
+INSTALLED_APPS = [
+    # ...
+    "django_celery_beat",
+]
+
+python3 manage.py migrate
+
+
+- Crear celery_app/celery.py y copiar: __init__.py y celery.py
+
+
+- En settings.py:
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_TIMEZONE = "Europe/Madrid"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+
+
+
+- Cuando Celery arranca con -A, necesita saber dónde está la app (Manualmente):
+
+celery -A celery_app worker -l info
+celery -A celery_app beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+python manage.py runserver
+
+- Crear el archivo: start_dev.sh y permisos:
+chmod +x start_dev.sh
+
+# Arrancar:
+./start_dev.sh
+
+# Logs:
+cat logs/django.log
+cat logs/celery_worker.log
+cat logs/celery_beat.log
 
 
 ```

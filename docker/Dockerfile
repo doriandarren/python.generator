@@ -18,6 +18,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-COPY docker/cron/generator-cron /etc/cron.d/generator-cron
+COPY docker/cron/root-crontab /etc/cron.d/root-crontab
 
-RUN chmod 0644 /etc/cron.d/generator-cron && crontab /etc/cron.d/generator-cron
+RUN sed -i 's/\r$//' /etc/cron.d/root-crontab && \
+    printf '\n' >> /etc/cron.d/root-crontab && \
+    chmod 0644 /etc/cron.d/root-crontab && \
+    crontab /etc/cron.d/root-crontab && \
+    touch /var/log/app_scheduler.log
+
+EXPOSE 8000
