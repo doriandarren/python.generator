@@ -171,11 +171,11 @@ celery -A celery_app worker -l info
 celery -A celery_app beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 python manage.py runserver
 
-- Crear el archivo: start_dev.sh y permisos:
-chmod +x start_dev.sh
+- Crear el archivo: start_celery.sh y permisos:
+chmod +x start_celery.sh
 
 # Arrancar:
-./start_dev.sh
+./start_delery.sh
 
 # Logs:
 cat logs/django.log
