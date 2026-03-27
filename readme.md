@@ -137,8 +137,8 @@ redis-cli ping
 
 
 
-pip install celery django-celery-beat redis
 
+pip install celery django-celery-beat redis
 
 
 
