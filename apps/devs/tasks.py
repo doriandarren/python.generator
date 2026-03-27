@@ -1,7 +1,7 @@
 import random
 import time
 from celery import shared_task
-from apps.ai_text_generation_prompts.services.ai_text_generation_prompt_service import AiTextGenerationPromptService
+from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
 from core.messages.message_channel import MessageChannel
 
@@ -9,7 +9,7 @@ from core.messages.message_channel import MessageChannel
 @shared_task
 def start():
     
-    service_prompt = AiTextGenerationPromptService()
+    service_prompt = AiPromptGenerationService()
     service_generation = AIGenerationService()
     
     

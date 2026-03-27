@@ -1,14 +1,12 @@
 from django.db import models
 
-from core.models.models import BaseModel
-
 # Create your models here.
+from core.models.models import BaseModel
+    
 class AiTextGeneration(BaseModel):
-    user_id = models.CharField(max_length=255)
+    ai_prompt_generation = models.ForeignKey("ai_prompt_generations.AiPromptGeneration", on_delete=models.CASCADE, related_name="ai_text_generations")
     model_name = models.CharField(max_length=255)
-    system_message = models.CharField(max_length=255)
-    user_message = models.CharField(max_length=255)
-    response_message = models.CharField(max_length=255)
+    response_message = models.TextField()
     response_done = models.CharField(max_length=255)
     response_done_reason = models.CharField(max_length=255)
     response_total_duration = models.CharField(max_length=255)

@@ -43,14 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_beat',                           # required for celery beat,
+    'django_celery_beat',                           # required for celery beat
     'rest_framework',                               # required for DRF,
     'drf_yasg',                                     # required for serving swagger,
     'corsheaders',                                  # required for cors,
     'apps.users',                                   # Module,
     'apps.devs',                                    # Module,
+    'apps.ai_prompt_generations',                   # Module,
     'apps.ai_text_generations',                     # Module,
-    'apps.ai_text_generation_prompts',              # Module,
+    'apps.ai_image_generations',                    # Module,
+    'apps.ai_image_generations',                         # Module,
 ]
 
 MIDDLEWARE = [
@@ -188,15 +190,14 @@ CELERY_TIMEZONE = "Europe/Madrid"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
-
-
-CELERY_BEAT_SCHEDULE = {
+# Celery Beat Schedule
+# CELERY_BEAT_SCHEDULE = {
 #     "hello-every-minute": {
-#         "task": "apps.devs.tasks.hello_task",
+#         "task": "apps.devs.tasks.start",
 #         "schedule": crontab(minute="*"),
 #     },
-    "hello-every-5-minutes": {
-        "task": "apps.devs.tasks.start",
-        "schedule": crontab(minute="*/5"),
-    },
-}
+#     "hello-every-5-minutes": {
+#         "task": "apps.devs.tasks.start",
+#         "schedule": crontab(minute="*/5"),
+#     },
+# }

@@ -1,8 +1,8 @@
 import base64
 import random
-
-from apps.ai_text_generation_prompts.services.ai_text_generation_prompt_service import AiTextGenerationPromptService
+from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.ai_text_generations.services.ai_text_generation_service import AiTextGenerationService
+
 from core.http.api_request import ApiRequest
 from core.messages.message_channel import MessageChannel
 
@@ -15,9 +15,8 @@ api_confyui = ApiRequest("http://192.168.1.100:8188/")
 class AIGenerationService:
    
     def __init__(self):
-        self.service_text_generation_prompt = AiTextGenerationPromptService()
+        self.service_prompt_generation = AiPromptGenerationService()
         self.service_text_generation = AiTextGenerationService()
-        self.service_text_generation_prompt = AiTextGenerationPromptService()
    
 
     def get_comfyui_text(self, prompt):
@@ -87,13 +86,23 @@ class AIGenerationService:
 
 
     def get_comfyui_image(self, prompt):
+        
+        client_id = f"postman-mac-001"
+        seed = random.randint(1, 999999999)
+        filename_prefix = f"postman_test_{seed}"
+        width = 1024
+        height = 1024
+        
+        clip_text_encode = "blurry, low quality, distorted, bad anatomy, deformed, ugly"
+        
+        
         payload = {
-            "client_id": "postman-mac-001",
+            "client_id": client_id,
             "prompt": {
                 "3": {
                     "class_type": "KSampler",
                     "inputs": {
-                        "seed": random.randint(1, 999999999),
+                        "seed": seed,
                         "steps": 20,
                         "cfg": 7,
                         "sampler_name": "euler",
@@ -114,8 +123,8 @@ class AIGenerationService:
                 "5": {
                     "class_type": "EmptyLatentImage",
                     "inputs": {
-                        "width": 1024,
-                        "height": 1024,
+                        "width": width,
+                        "height": height,
                         "batch_size": 1
                     }
                 },
@@ -129,7 +138,7 @@ class AIGenerationService:
                 "7": {
                     "class_type": "CLIPTextEncode",
                     "inputs": {
-                        "text": "blurry, low quality, distorted, bad anatomy, deformed, ugly",
+                        "text": clip_text_encode,
                         "clip": ["4", 1]
                     }
                 },
@@ -143,7 +152,7 @@ class AIGenerationService:
                 "9": {
                     "class_type": "SaveImage",
                     "inputs": {
-                        "filename_prefix": "postman_test",
+                        "filename_prefix": filename_prefix,
                         "images": ["8", 0]
                     }
                 }

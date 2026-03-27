@@ -9,11 +9,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
-from apps.ai_text_generation_prompts.data.data_prompt import get_data_prompts
-from apps.ai_text_generation_prompts.services.ai_text_generation_prompt_service import AiTextGenerationPromptService
-from apps.ai_text_generations.api.serializers import aiTextGenerationSerializer
-from apps.ai_text_generations.services.ai_text_generation_service import AiTextGenerationService
-from apps.devs.cron.run_generation import start
+from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
+from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
 
 from core.http.api_request import ApiRequest
@@ -28,7 +25,7 @@ class DevApiViewSet(ModelViewSet):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.service_prompt = AiTextGenerationPromptService()
+        self.service_prompt = AiPromptGenerationService()
         self.service_generation = AIGenerationService()
 
 
@@ -47,11 +44,13 @@ class DevApiViewSet(ModelViewSet):
                 if ai_text_generation_prompt:
                     continue
 
-                ai_text_generation_prompt = self.service_prompt.set_ai_text_generation_prompt(
+                ai_text_generation_prompt = self.service_prompt.set_ai_prompt_generation(
                     payload.get("system_role", ""),
                     payload.get("system_message", ""),
                     payload.get("user_role", ""),
                     payload.get("user_message", ""),
+                    False,
+                    False,
                     False,
                 )
 
@@ -72,8 +71,8 @@ class DevApiViewSet(ModelViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test-bk')
-    def invoke__BK(self, request):  
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):  
         try:
             
             # prompt = self.service_prompt.findByIsProcessed()
@@ -100,13 +99,14 @@ class DevApiViewSet(ModelViewSet):
             
             
             
+            
             # 2.-
-            # prompt_id = self.get_comfyui_image(prompt)
-            # if not prompt_id:
-            #     return Response(
-            #         {"error": "No se pudo obtener el prompt_id"},
-            #         status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            #     )
+            prompt_id = self.get_comfyui_image(prompt)
+            if not prompt_id:
+                return Response(
+                    {"error": "No se pudo obtener el prompt_id"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
          
                    
             # 3.-
@@ -134,22 +134,6 @@ class DevApiViewSet(ModelViewSet):
                 # "prompt_id": prompt_id,
                 # "outputs": outputs,
                 # "image_base64": image_base64
-            }
-            return Response(response, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
-
-
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
-        try:
-            
-            response = {
-                "message": "OK"
             }
             return Response(response, status=status.HTTP_200_OK)
         except Exception as e:

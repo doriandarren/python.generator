@@ -21,20 +21,12 @@ class AiTextGenerationService:
         if not model:
             return None
 
-        if "user_id" in data:
-            model.user_id = data["user_id"]
+        if "ai_prompt_generation_id" in data:
+            model.ai_prompt_generation_id = data["ai_prompt_generation_id"]
             
         
         if "model_name" in data:
             model.model_name = data["model_name"]
-            
-        
-        if "system_message" in data:
-            model.system_message = data["system_message"]
-            
-        
-        if "user_message" in data:
-            model.user_message = data["user_message"]
             
         
         if "response_message" in data:
@@ -90,10 +82,8 @@ class AiTextGenerationService:
 
     def set_ai_text_generation(
         self,
-        user_id,
+        ai_prompt_generation_id,
         model_name,
-        system_message,
-        user_message,
         response_message,
         response_done,
         response_done_reason,
@@ -105,10 +95,8 @@ class AiTextGenerationService:
         response_eval_duration,
     ) -> AiTextGeneration:
         model = AiTextGeneration()
-        model.user_id = user_id
+        model.ai_prompt_generation_id = ai_prompt_generation_id
         model.model_name = model_name
-        model.system_message = system_message
-        model.user_message = user_message
         model.response_message = response_message
         model.response_done = response_done
         model.response_done_reason = response_done_reason

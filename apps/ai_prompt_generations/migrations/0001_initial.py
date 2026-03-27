@@ -10,35 +10,30 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('ai_prompt_generations', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AiTextGeneration',
+            name='AiPromptGeneration',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('deleted_at', models.DateTimeField(blank=True, null=True)),
-                ('model_name', models.CharField(max_length=255)),
-                ('response_message', models.TextField()),
-                ('response_done', models.CharField(max_length=255)),
-                ('response_done_reason', models.CharField(max_length=255)),
-                ('response_total_duration', models.CharField(max_length=255)),
-                ('response_load_duration', models.CharField(max_length=255)),
-                ('response_prompt_eval_count', models.CharField(max_length=255)),
-                ('response_prompt_eval_duration', models.CharField(max_length=255)),
-                ('response_eval_count', models.CharField(max_length=255)),
-                ('response_eval_duration', models.CharField(max_length=255)),
-                ('ai_prompt_generation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ai_text_generations', to='ai_prompt_generations.aipromptgeneration')),
+                ('system_role', models.CharField(max_length=255)),
+                ('system_message', models.CharField(max_length=255)),
+                ('user_role', models.CharField(max_length=255)),
+                ('user_message', models.CharField(max_length=255)),
+                ('is_text_processed', models.BooleanField(default=False)),
+                ('is_image_processed', models.BooleanField(default=False)),
+                ('is_video_processed', models.BooleanField(default=False)),
                 ('created_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_created', to=settings.AUTH_USER_MODEL)),
                 ('updated_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_updated', to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'verbose_name': 'AiTextGeneration',
-                'verbose_name_plural': 'AiTextGenerations',
+                'verbose_name': 'AiPromptGeneration',
+                'verbose_name_plural': 'AiPromptGenerations',
             },
         ),
     ]

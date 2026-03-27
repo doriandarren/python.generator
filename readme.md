@@ -87,18 +87,6 @@ python3 manage.py runserver 8001
 
 ```
 
-## Django - django_crontab
-
-```sh
-## En settings.py y Tener el archivo core/cron/hello_cron.py:
-CRONJOBS = [
-    ('*/1 * * * *', 'core.cron.hello_cron'),
-]
-
-python manage.py crontab add
-python manage.py crontab show
-
-```
 
 ## Error: python manage.py makemigrations
 

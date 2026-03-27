@@ -1,20 +1,16 @@
-from apps.ai_text_generation_prompts.models import AiTextGenerationPrompt
+from apps.ai_prompt_generations.models import AiPromptGeneration
 
-class AiTextGenerationPromptService:
+class AiPromptGenerationService:
 
     def list(self):
-        return AiTextGenerationPrompt.objects.all()
+        return AiPromptGeneration.objects.all()
 
 
     def show(self, id):
-        return AiTextGenerationPrompt.objects.filter(id=id).first()
+        return AiPromptGeneration.objects.filter(id=id).first()
 
 
-    def findByIsProcessed(self, is_processed=False):
-        return AiTextGenerationPrompt.objects.filter(is_processed=is_processed).first()
-
-
-    def store(self, model: AiTextGenerationPrompt):
+    def store(self, model: AiPromptGeneration):
         model.save()
         return model
 
@@ -41,8 +37,16 @@ class AiTextGenerationPromptService:
             model.user_message = data["user_message"]
             
         
-        if "is_processed" in data:
-            model.is_processed = data["is_processed"]
+        if "is_text_processed" in data:
+            model.is_text_processed = data["is_text_processed"]
+            
+        
+        if "is_image_processed" in data:
+            model.is_image_processed = data["is_image_processed"]
+            
+        
+        if "is_video_processed" in data:
+            model.is_video_processed = data["is_video_processed"]
             
         
         model.save()
@@ -60,19 +64,23 @@ class AiTextGenerationPromptService:
 
 
 
-    def set_ai_text_generation_prompt(
+    def set_ai_prompt_generation(
         self,
         system_role,
         system_message,
         user_role,
         user_message,
-        is_processed,
-    ) -> AiTextGenerationPrompt:
-        model = AiTextGenerationPrompt()
+        is_text_processed=False,
+        is_image_processed=False,
+        is_video_processed=False,
+    ) -> AiPromptGeneration:
+        model = AiPromptGeneration()
         model.system_role = system_role
         model.system_message = system_message
         model.user_role = user_role
         model.user_message = user_message
-        model.is_processed = is_processed
+        model.is_text_processed = is_text_processed
+        model.is_image_processed = is_image_processed
+        model.is_video_processed = is_video_processed
 
         return model
