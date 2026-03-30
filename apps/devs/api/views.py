@@ -29,8 +29,8 @@ class DevApiViewSet(ModelViewSet):
         self.service_generation = AIGenerationService()
 
 
-    @action(detail=False, methods=['get'], url_path='test__')
-    def invoke__(self, request):
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
         try:
 
             for payload in get_data_prompts():
@@ -71,8 +71,8 @@ class DevApiViewSet(ModelViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):  
+    @action(detail=False, methods=['get'], url_path='test__')
+    def invoke__(self, request):  
         try:
             
             # prompt = self.service_prompt.findByIsProcessed()

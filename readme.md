@@ -1,29 +1,12 @@
 ## Python Generator
 
-## Run
-
-```sh
-python3 cli.py
-```
-
-## Script para ejecutar el proyecto
+## Script para iniciar el proyecto
 
 ```sh
 python3 manage.py makemigrations                # Migraciones
 python3 manage.py migrate                       # Aplicar migraciones
-python3 manage.py createsuperuser               # Crear superuser
+python3 manage.py seed_user                     # Crear superuser
 python3 manage.py runserver                     # Ejecutar servidor
-```
-
-## Ejecutar music CRON:
-
-```sh
-python3 run.py music
-
-// OR
-
-python -m ai.cronjobs.music.cronjob_music           ## Antiguo
-
 ```
 
 ## Crear entorno virtual
@@ -80,10 +63,24 @@ python manage.py migrate
 
 
 ## Crear el superuser
-python3 manage.py createsuperuser
+python3 manage.py seed_user                             # Seeder
+python3 manage.py createsuperuser                       # Consola Crear superuser
+
+
 
 python3 manage.py runserver                             # Levantar el servidor
 python3 manage.py runserver 8001
+
+```
+
+
+## Commands
+
+```sh
+python3 manage.py seed_user                     # Crear superuser
+
+python3 manage.py clear_migrations --dry-run     # Muestra las migraciones
+python3 manage.py clear_migrations               # Elimina las migraciones
 
 ```
 
