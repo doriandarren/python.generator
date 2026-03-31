@@ -6,13 +6,14 @@ from urllib.parse import urlencode
 
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
 from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
 
+from apps.devs.services.send_mail_service import SendMailService
 from core.http.api_request import ApiRequest
 from core.messages.message_channel import MessageChannel
 
@@ -20,7 +21,7 @@ from core.messages.message_channel import MessageChannel
 
 
 
-class DevApiViewSet(ModelViewSet):
+class DevApiViewSet(ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def __init__(self, **kwargs):
@@ -29,8 +30,39 @@ class DevApiViewSet(ModelViewSet):
         self.service_generation = AIGenerationService()
 
 
+    
     @action(detail=False, methods=['get'], url_path='test')
     def invoke(self, request):
+        ''' Envio de correo de prueba.'''
+        try:
+            
+            mail_service = SendMailService(
+                subject="Correo Prueba",
+                to_emails=["doriandarren1@gmail.com"],
+            )
+            
+            mail_service.send_html_mail(
+                title="Correo de prueba",
+                body="Hola,\n\nEste es un correo de prueba.\n\nGracias por tu tiempo."
+            )
+            
+            
+            response = {
+                "message": "OK"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
+
+
+
+
+    @action(detail=False, methods=['get'], url_path='test____')
+    def invoke_sss(self, request):
         try:
 
             for payload in get_data_prompts():
