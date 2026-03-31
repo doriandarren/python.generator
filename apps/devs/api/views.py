@@ -1,9 +1,9 @@
 import base64
-from math import e
 import time
 import random
 from urllib.parse import urlencode
 
+from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -13,7 +13,8 @@ from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
 
-from apps.devs.services.send_mail_service import SendMailService
+from apps.devs.services.pdf_service import PdfService
+from apps.devs.services.mail_service import MailService
 from core.http.api_request import ApiRequest
 from core.messages.message_channel import MessageChannel
 
@@ -30,13 +31,60 @@ class DevApiViewSet(ViewSet):
         self.service_generation = AIGenerationService()
 
 
+    @action(detail=False, methods=['get'], url_path='test_pdf')
+    def invoke_pdf(self, request):
+        """
+            Generación de PDF de prueba.
+        """
+        try:
+            
+            ## - Generar PDF y descargarlo
+            
+            # pdf_service = CreatePdfService()
+            # pdf_bytes = pdf_service.generate_pdf({
+            #     "title": "PDF de prueba",
+            #     "body": "Hola, este es un PDF generado desde Django con wkhtmltopdf.",
+            # })
+            # response = HttpResponse(pdf_bytes, content_type="application/pdf")
+            # response["Content-Disposition"] = 'attachment; filename="prueba.pdf"'
+            # return response
+        
+        
+            ## - Guardar PDF en carpeta uploads/pdfs
+            
+            pdf_service = PdfService(
+                template_html="pdfs/test_pdf.html"
+            )
+
+            file_path = pdf_service.save(
+                filename="prueba.pdf",
+                context={
+                    "title": "PDF guardado",
+                    "body": "Hola, este PDF se ha guardado en la carpeta uploads/pdfs.",
+                }
+            )
+            
+            response = {
+                "message": "PDF generado y guardado correctamente",
+                "file_path": file_path,
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+
     
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
+    @action(detail=False, methods=['get'], url_path='test_email')
+    def invoke_email(self, request):
         ''' Envio de correo de prueba.'''
         try:
             
-            mail_service = SendMailService(
+            mail_service = MailService(
                 subject="Correo Prueba",
                 to_emails=["doriandarren1@gmail.com"],
             )

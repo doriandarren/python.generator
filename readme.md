@@ -105,6 +105,14 @@ find ./apps -path "*/migrations/*.pyc"
 
 
 
+## Libraries
+
+```sh
+pip install pdfkit                              # Crear PDF
+```
+
+
+
 
 # Celery y django-celery-beat
 
