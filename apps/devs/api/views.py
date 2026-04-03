@@ -29,6 +29,7 @@ class DevApiViewSet(ViewSet):
         super().__init__(**kwargs)
         self.service_prompt = AiPromptGenerationService()
         self.service_generation = AIGenerationService()
+        
 
 
     @action(detail=False, methods=['get'], url_path='test_pdf')
@@ -109,8 +110,8 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test____')
-    def invoke_sss(self, request):
+    @action(detail=False, methods=['get'], url_path='test__prompts')
+    def invoke__prompts(self, request):
         try:
 
             for payload in get_data_prompts():
@@ -151,8 +152,8 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test__')
-    def invoke__(self, request):  
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):  
         try:
             
             # prompt = self.service_prompt.findByIsProcessed()
@@ -171,6 +172,7 @@ class DevApiViewSet(ViewSet):
             
             ai_text_generation = self.service_generation.get_comfyui_text(prompt)
             
+            print(ai_text_generation.id)
             
             MessageChannel.send(
                 text=f"invoke ejecutado: {time.time()}",
@@ -180,13 +182,15 @@ class DevApiViewSet(ViewSet):
             
             
             
-            # 2.-
-            prompt_id = self.get_comfyui_image(prompt)
-            if not prompt_id:
+            ## 2.-
+            image_prompt_id = self.service_generation.get_comfyui_image(prompt)
+            if not image_prompt_id:
                 return Response(
-                    {"error": "No se pudo obtener el prompt_id"},
+                    {"error": "No se pudo obtener el image_prompt_id"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
+                
+            
          
                    
             # 3.-
@@ -211,7 +215,7 @@ class DevApiViewSet(ViewSet):
                 "message": "OK",
                 ##"text_generation": aiTextGenerationSerializer(ai_text_generation).data,
                 "ai_text_generation": ai_text_generation.id,
-                # "prompt_id": prompt_id,
+                "image_prompt_id": image_prompt_id,
                 # "outputs": outputs,
                 # "image_base64": image_base64
             }

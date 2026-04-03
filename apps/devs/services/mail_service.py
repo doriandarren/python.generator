@@ -3,7 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 
-class SendMailService:
+class MailService:
 
     def __init__(self, subject, to_emails, from_email=None):
         self.subject = subject

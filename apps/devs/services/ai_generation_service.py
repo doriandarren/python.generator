@@ -41,8 +41,6 @@ class AIGenerationService:
                 payload=payload
             )
 
-            req_messages = payload.get("messages") or []
-
             response_message = response.get("message", {}).get("content", "")
             response_done = response.get("done", "")
             response_done_reason = response.get("done_reason", "")
@@ -52,12 +50,12 @@ class AIGenerationService:
             response_prompt_eval_duration = response.get("prompt_eval_duration", "")
             response_eval_count = response.get("eval_count", "")
             response_eval_duration = response.get("eval_duration", "")
+            
+            
 
             ai_text_generation = self.service_text_generation.set_ai_text_generation(
                 1,
                 payload.get("model", ""),
-                req_messages[0].get("content", "") if len(req_messages) > 0 else "",
-                req_messages[1].get("content", "") if len(req_messages) > 0 else "",
                 response_message,
                 response_done,
                 response_done_reason,
@@ -70,7 +68,7 @@ class AIGenerationService:
             )
 
             ai_text_generation_new = self.service_text_generation.store(ai_text_generation)
-            self.service_text_generation_prompt.update(prompt.id, {"is_processed": True,})
+            self.service_prompt_generation.update(prompt.id, {"is_processed": True,})
 
             ##return aiTextGenerationSerializer(ai_text_generation)
             return ai_text_generation_new
@@ -92,7 +90,6 @@ class AIGenerationService:
         filename_prefix = f"postman_test_{seed}"
         width = 1024
         height = 1024
-        
         clip_text_encode = "blurry, low quality, distorted, bad anatomy, deformed, ugly"
         
         
@@ -160,9 +157,14 @@ class AIGenerationService:
         }
         response_prompt = api_confyui.post("/prompt", payload)
         
-        prompt_id = response_prompt.get("prompt_id", "")
+        image_prompt_id = response_prompt.get("prompt_id", "")
         
-        return prompt_id
+        
+        ## TODO guardar en DB
+        
+        
+        
+        return image_prompt_id
 
 
 
