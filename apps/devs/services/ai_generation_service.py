@@ -1,5 +1,7 @@
 import base64
 import random
+import time
+from apps.ai_image_generations.services.ai_image_generation_service import AiImageGenerationService
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.ai_text_generations.services.ai_text_generation_service import AiTextGenerationService
 
@@ -17,6 +19,7 @@ class AIGenerationService:
     def __init__(self):
         self.service_prompt_generation = AiPromptGenerationService()
         self.service_text_generation = AiTextGenerationService()
+        self.service_image_generation = AiImageGenerationService()
    
 
     def get_comfyui_text(self, prompt):
@@ -155,6 +158,7 @@ class AIGenerationService:
                 }
             }
         }
+        
         response_prompt = api_confyui.post("/prompt", payload)
         
         image_prompt_id = response_prompt.get("prompt_id", "")
@@ -162,13 +166,68 @@ class AIGenerationService:
         
         ## TODO guardar en DB
         
+        image_image_generation_obj = self.service_image_generation.set_ai_image_generation(
+            ai_prompt_generation_id=prompt.id,
+            comfyui_prompt_id=image_prompt_id,
+            comfyui_output_path=f"outputs/{filename_prefix}",
+            mime_type="image/png",
+            width=width,
+            height=height,
+            image_url=""
+        )
+        
+        image_image_generation = self.service_image_generation.store(image_image_generation_obj)
         
         
-        return image_prompt_id
+        return image_image_generation
 
 
 
 
+    def get_comfyui_image_history(self, comfyui_prompt_id):
+        try:
+            for _ in range(30):
+                response_history = api_confyui.get(path=f"history/{comfyui_prompt_id}")
+
+                if not response_history:
+                    time.sleep(1)
+                    continue
+
+                data = response_history.get(comfyui_prompt_id)
+
+                if not data:
+                    time.sleep(1)
+                    continue
+                
+                # 🔥 comprobar si ya terminó
+                status = data.get("status", {})
+                completed = status.get("completed", False)
+
+                if not completed:
+                    time.sleep(1)
+                    continue
+
+                # 🔥 ahora sí leer outputs
+                outputs = data.get("outputs", {})
+
+                if outputs:
+                    return outputs
+                    
+                    
+            return None
+
+        except Exception as e:
+            MessageChannel.send(
+                text=f"Error en get_comfyui_image_history: {str(e)}",
+                title="AIGenerationService",
+                is_error=True
+            )
+            return None
+   
+   
+   
+   
+   
    
     def get_comfyui_image_base64(self, outputs):
         try:

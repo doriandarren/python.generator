@@ -154,6 +154,8 @@ class DevApiViewSet(ViewSet):
 
     @action(detail=False, methods=['get'], url_path='test')
     def invoke(self, request):  
+        
+        
         try:
             
             # prompt = self.service_prompt.findByIsProcessed()
@@ -183,10 +185,10 @@ class DevApiViewSet(ViewSet):
             
             
             ## 2.-
-            image_prompt_id = self.service_generation.get_comfyui_image(prompt)
-            if not image_prompt_id:
+            image_image_generation = self.service_generation.get_comfyui_image(prompt)
+            if not image_image_generation:
                 return Response(
-                    {"error": "No se pudo obtener el image_prompt_id"},
+                    {"error": "No se pudo obtener el image_image_generation"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
                 
@@ -194,29 +196,18 @@ class DevApiViewSet(ViewSet):
          
                    
             # 3.-
-            # response_history = {}
-            # outputs = {}
-            # image_base64 = ""
+            ## image_image_generation.comfyui_prompt_id
+            comfyui_prompt_id = '69a2442e-fd71-44b2-a0c1-d8142d213eb1'
+            image_outputs = self.service_generation.get_comfyui_image_history(comfyui_prompt_id)
             
-            # for _ in range(30):
-            #     response_history = api_confyui.get(f"/history/{prompt_id}")
-                
-            #     if response_history and response_history.get(prompt_id):
-            #         data = response_history.get(prompt_id, {})
-            #         outputs = data.get("outputs", {})
-            #         if outputs:
-            #             image_base64 = self.get_comfyui_image_base64(outputs)
-            #             break
-                
-            #     time.sleep(1)
             
             
             response = {
-                "message": "OK",
                 ##"text_generation": aiTextGenerationSerializer(ai_text_generation).data,
-                "ai_text_generation": ai_text_generation.id,
-                "image_prompt_id": image_prompt_id,
-                # "outputs": outputs,
+                "message": "OK",
+                "ai_text_generation_id": ai_text_generation.id,
+                "image_image_generation_id": image_image_generation.id,
+                "image_outputs": image_outputs,
                 # "image_base64": image_base64
             }
             return Response(response, status=status.HTTP_200_OK)
