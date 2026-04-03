@@ -8,7 +8,7 @@ class ApiRequest:
         self,
         base_url: str,
         token: Optional[str] = None,
-        timeout: int = 300,
+        timeout: int = 900,
     ):
         self.base_url = base_url.rstrip("/")
         self.token = token

@@ -191,16 +191,16 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
 # Celery Beat Schedule
-# CELERY_BEAT_SCHEDULE = {
-#     "hello-every-minute": {
-#         "task": "apps.devs.tasks.start",
-#         "schedule": crontab(minute="*"),
-#     },
-#     "hello-every-5-minutes": {
-#         "task": "apps.devs.tasks.start",
-#         "schedule": crontab(minute="*/5"),
-#     },
-# }
+CELERY_BEAT_SCHEDULE = {
+    "start-10-minutes": {
+        "task": "apps.devs.tasks.start",
+        "schedule": crontab(minute="*/10"),
+    },
+    "start2-20-minutes": {
+        "task": "apps.devs.tasks.start2",
+        "schedule": crontab(minute="*/20"),
+    },
+}
 
 
 

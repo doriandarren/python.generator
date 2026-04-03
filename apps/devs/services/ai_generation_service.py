@@ -1,4 +1,5 @@
-import base64
+import os
+from django.conf import settings
 import random
 import time
 from apps.ai_image_generations.services.ai_image_generation_service import AiImageGenerationService
@@ -71,7 +72,7 @@ class AIGenerationService:
             )
 
             ai_text_generation_new = self.service_text_generation.store(ai_text_generation)
-            self.service_prompt_generation.update(prompt.id, {"is_processed": True,})
+            self.service_prompt_generation.update(prompt.id, {"is_text_processed": True,})
 
             ##return aiTextGenerationSerializer(ai_text_generation)
             return ai_text_generation_new
@@ -178,13 +179,14 @@ class AIGenerationService:
         
         image_image_generation = self.service_image_generation.store(image_image_generation_obj)
         
+        self.service_prompt_generation.update(prompt.id, {"is_image_processed": True,})
+        
         
         return image_image_generation
 
 
 
-
-    def get_comfyui_image_history(self, comfyui_prompt_id):
+    def get_comfyui_image_history(self, comfyui_prompt_id, image_generation):
         try:
             for _ in range(30):
                 response_history = api_confyui.get(path=f"history/{comfyui_prompt_id}")
@@ -198,8 +200,7 @@ class AIGenerationService:
                 if not data:
                     time.sleep(1)
                     continue
-                
-                # 🔥 comprobar si ya terminó
+
                 status = data.get("status", {})
                 completed = status.get("completed", False)
 
@@ -207,13 +208,26 @@ class AIGenerationService:
                     time.sleep(1)
                     continue
 
-                # 🔥 ahora sí leer outputs
                 outputs = data.get("outputs", {})
-
+                
                 if outputs:
-                    return outputs
-                    
-                    
+                    for node_id, node_data in outputs.items():
+                        images = node_data.get("images", [])
+
+                        for image in images:
+                            filename = image.get("filename", "")
+
+                            if filename:
+                                
+                                # Actualizar el registro de image_generation con la URL de la imagen
+                                self.service_image_generation.update(image_generation.id, {
+                                    "image_url": f"uploads/ai_images/{filename}"
+                                })
+                                
+                                return filename
+
+                time.sleep(1)
+
             return None
 
         except Exception as e:
@@ -225,34 +239,56 @@ class AIGenerationService:
             return None
    
    
-   
-   
-   
-   
-    def get_comfyui_image_base64(self, outputs):
-        try:
-            if not outputs:
-                return ""
-            
-            for node_id, node_data in outputs.items():
-                images = node_data.get("images", [])
-                if images:
-                    image = images[0]
-                    
-                    params = {
-                        "filename": image.get("filename", ""),
-                        "subfolder": image.get("subfolder", ""),
-                        "type": image.get("type", ""),
-                    }
-                                        
-                    
-                    image_bytes = api_confyui.get_binary("view", params=params)
 
-                    if image_bytes:
-                        return base64.b64encode(image_bytes).decode("utf-8")
-                    
-            return ""
-        
-        except Exception:
-            return ""
+
+
+
+    def get_comfyui_image_download(self, filename, subfolder="", image_type="output"):
+        try:
+            if not filename:
+                return None
+
+            upload_dir = os.path.join(settings.MEDIA_ROOT, "ai_images")
+            os.makedirs(upload_dir, exist_ok=True)
+
+            params = {
+                "filename": filename,
+                "subfolder": subfolder,
+                "type": image_type,
+            }
+
+            image_bytes = api_confyui.get_binary("view", params=params)
+
+            if not image_bytes:
+                return None
+
+            file_path = os.path.join(upload_dir, filename)
+
+            with open(file_path, "wb") as file:
+                file.write(image_bytes)
+
+            relative_path = os.path.join("ai_images", filename).replace("\\", "/")
+
+            comfyui_url = (
+                f"http://192.168.1.100:8188/view"
+                f"?filename={filename}&subfolder={subfolder}&type={image_type}"
+            )
+
+            local_url = f"{settings.MEDIA_URL}{relative_path}"
+
+            return {
+                "filename": filename,
+                "relative_path": relative_path,
+                "file_path": file_path,
+                "local_url": local_url,
+                "comfyui_url": comfyui_url,
+            }
+
+        except Exception as e:
+            MessageChannel.send(
+                text=f"Error en get_comfyui_image_download: {str(e)}",
+                title="AIGenerationService",
+                is_error=True
+            )
+            return None
 

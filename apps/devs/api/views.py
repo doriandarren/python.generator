@@ -153,28 +153,35 @@ class DevApiViewSet(ViewSet):
 
 
     @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):  
+    def invoke(self, request):
         
         
         try:
             
             # prompt = self.service_prompt.findByIsProcessed()
             
-            # 1.-
             prompts = self.service_prompt.list()
             prompt = prompts[random.randint(0, len(prompts)-1)]
             
-            if not prompt:
-                return Response(
-                    {
-                        "message": "No prompt found"
-                    },
-                    status=status.HTTP_400_BAD_REQUEST
-                )
             
+            # 1.- 
             ai_text_generation = self.service_generation.get_comfyui_text(prompt)
             
-            print(ai_text_generation.id)
+            
+            ## 2.-
+            image_generation = self.service_generation.get_comfyui_image(prompt)
+            
+                   
+            # 3.-
+            ##comfyui_prompt_id = '69a2442e-fd71-44b2-a0c1-d8142d213eb1'
+            comfyui_prompt_id = image_generation.comfyui_prompt_id
+            filename = self.service_generation.get_comfyui_image_history(comfyui_prompt_id, image_generation)
+            
+        
+            
+            # 4.- 
+            image_download = self.service_generation.get_comfyui_image_download(filename)
+            
             
             MessageChannel.send(
                 text=f"invoke ejecutado: {time.time()}",
@@ -182,35 +189,16 @@ class DevApiViewSet(ViewSet):
             )
             
             
-            
-            
-            ## 2.-
-            image_image_generation = self.service_generation.get_comfyui_image(prompt)
-            if not image_image_generation:
-                return Response(
-                    {"error": "No se pudo obtener el image_image_generation"},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
-                
-            
-         
-                   
-            # 3.-
-            ## image_image_generation.comfyui_prompt_id
-            comfyui_prompt_id = '69a2442e-fd71-44b2-a0c1-d8142d213eb1'
-            image_outputs = self.service_generation.get_comfyui_image_history(comfyui_prompt_id)
-            
-            
-            
             response = {
                 ##"text_generation": aiTextGenerationSerializer(ai_text_generation).data,
                 "message": "OK",
                 "ai_text_generation_id": ai_text_generation.id,
-                "image_image_generation_id": image_image_generation.id,
-                "image_outputs": image_outputs,
-                # "image_base64": image_base64
+                "image_generation_id": image_generation.id,
+                "image_download": image_download
             }
+            
             return Response(response, status=status.HTTP_200_OK)
+        
         except Exception as e:
             return Response(
                 {"error": str(e)},

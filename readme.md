@@ -168,7 +168,7 @@ python manage.py runserver
 chmod +x start_celery.sh
 
 # Arrancar:
-./start_delery.sh
+./start_celery.sh
 
 # Logs:
 cat logs/django.log

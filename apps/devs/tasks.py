@@ -1,6 +1,7 @@
 import random
 import time
 from celery import shared_task
+from django.tasks import task
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
 from core.messages.message_channel import MessageChannel
@@ -33,16 +34,8 @@ def start():
     try: 
         
         prompts = service_prompt.list()
-
-        if len(prompts) == 0:
-            MessageChannel.send(
-                text="No hay prompts disponibles",
-                title="CRON",
-                is_error=True
-            )
-            return
-
         prompt = prompts[random.randint(0, len(prompts) - 1)]
+        
 
         ai_text_generation = service_generation.get_comfyui_text(prompt)
 
@@ -62,7 +55,50 @@ def start():
     except Exception as e:
         MessageChannel.send(
             text=f"error: {str(e)}",
+            title="CRON ERROR TEXT GENERATION",
+            is_error=True
+        )
+        
+    
+    return "ok"
+
+
+
+@shared_task
+def start2():
+    service_prompt = AiPromptGenerationService()
+    service_generation = AIGenerationService()
+    
+    try: 
+        
+        prompts = service_prompt.list()
+        prompt = prompts[random.randint(0, len(prompts) - 1)]
+
+        
+        ## 2.-
+        image_generation = service_generation.get_comfyui_image(prompt)
+        
+                
+        # 3.-
+        ##comfyui_prompt_id = '69a2442e-fd71-44b2-a0c1-d8142d213eb1'
+        comfyui_prompt_id = image_generation.comfyui_prompt_id
+        filename = service_generation.get_comfyui_image_history(comfyui_prompt_id, image_generation)
+        
+    
+        
+        # 4.- 
+        image_download = service_generation.get_comfyui_image_download(filename)
+        
+
+        MessageChannel.send(
+            text=f"invoke ejecutado: {time.time()} | ai_image_generation_id={image_generation.id}",
             title="CRON",
+        )
+
+    except Exception as e:
+        MessageChannel.send(
+            text=f"error: {str(e)}",
+            title="CRON ERROR IMAGE GENERATION",
             is_error=True
         )
         
