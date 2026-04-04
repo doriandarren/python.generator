@@ -58,7 +58,7 @@ class AIGenerationService:
             
 
             ai_text_generation = self.service_text_generation.set_ai_text_generation(
-                1,
+                prompt.id,
                 payload.get("model", ""),
                 response_message,
                 response_done,

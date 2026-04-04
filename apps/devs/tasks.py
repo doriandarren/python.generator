@@ -33,8 +33,9 @@ def start():
     
     try: 
         
-        prompts = service_prompt.list()
-        prompt = prompts[random.randint(0, len(prompts) - 1)]
+        prompt = service_prompt.findByIsProcessed()
+        # prompts = service_prompt.list()
+        # prompt = prompts[random.randint(0, len(prompts) - 1)]
         
 
         ai_text_generation = service_generation.get_comfyui_text(prompt)
@@ -71,8 +72,10 @@ def start2():
     
     try: 
         
-        prompts = service_prompt.list()
-        prompt = prompts[random.randint(0, len(prompts) - 1)]
+        prompt = service_prompt.findByIsProcessed()
+        
+        # prompts = service_prompt.list()
+        # prompt = prompts[random.randint(0, len(prompts) - 1)]
 
         
         ## 2.-

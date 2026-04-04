@@ -1,3 +1,17 @@
+# Prompts
+
+
+```sh
+
+
+
+```
+
+
+
+
+
+
 ## Tables:
 
 📄 Table: ai_prompt_generations - AiPromptGeneration - AiPromptGenerations
