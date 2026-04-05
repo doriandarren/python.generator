@@ -9,14 +9,15 @@ class AiPromptGenerationService:
     def show(self, id):
         return AiPromptGeneration.objects.filter(id=id).first()
 
-
     def findByIsTextProcessed(self):
         return AiPromptGeneration.objects.filter(is_text_processed=False).first()
 
 
     def findByIsImageProcessed(self):
         return AiPromptGeneration.objects.filter(is_image_processed=False).first()
-    
+
+
+
 
     def store(self, model: AiPromptGeneration):
         model.save()
@@ -29,6 +30,10 @@ class AiPromptGenerationService:
         if not model:
             return None
 
+        if "ai_prompt_category_id" in data:
+            model.ai_prompt_category_id = data["ai_prompt_category_id"]
+            
+        
         if "system_role" in data:
             model.system_role = data["system_role"]
             
@@ -74,15 +79,17 @@ class AiPromptGenerationService:
 
     def set_ai_prompt_generation(
         self,
+        ai_prompt_category_id,
         system_role,
         system_message,
         user_role,
         user_message,
-        is_text_processed=False,
-        is_image_processed=False,
-        is_video_processed=False,
+        is_text_processed,
+        is_image_processed,
+        is_video_processed,
     ) -> AiPromptGeneration:
         model = AiPromptGeneration()
+        model.ai_prompt_category_id = ai_prompt_category_id
         model.system_role = system_role
         model.system_message = system_message
         model.user_role = user_role

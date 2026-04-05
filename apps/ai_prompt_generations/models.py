@@ -4,6 +4,7 @@ from django.db import models
 from core.models.models import BaseModel
     
 class AiPromptGeneration(BaseModel):
+    ai_prompt_category = models.ForeignKey("ai_prompt_categories.AiPromptCategory", on_delete=models.CASCADE, related_name="ai_prompt_generations")
     system_role = models.CharField(max_length=255)
     system_message = models.CharField(max_length=255)
     user_role = models.CharField(max_length=255)

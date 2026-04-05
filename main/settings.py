@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.ai_prompt_generations',                   # Module,
     'apps.ai_text_generations',                     # Module,
     'apps.ai_image_generations',                         # Module,
+    'apps.ai_prompt_categories',                         # Module,
 ]
 
 MIDDLEWARE = [

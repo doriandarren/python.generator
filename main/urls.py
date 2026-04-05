@@ -22,6 +22,10 @@ from django.urls import re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from apps.ai_prompt_categories.api.router import router_ai_prompt_category
+from apps.ai_prompt_categories.api.router import router_ai_prompt_category
+from apps.ai_prompt_generations.api.router import router_ai_prompt_generation
+from apps.ai_prompt_categories.api.router import router_ai_prompt_category
 
 from apps.devs.api.router import router_dev
 
@@ -50,6 +54,9 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     
     # Dev
-    path('api/v1/', include(router_dev.urls))
-    
+    path('api/v1/', include(router_dev.urls)),
+    # AiPromptCategories,
+    path('api/v1/', include(router_ai_prompt_category.urls)),
+    # AiPromptGenerations,
+    path('api/v1/', include(router_ai_prompt_generation.urls)),
 ]

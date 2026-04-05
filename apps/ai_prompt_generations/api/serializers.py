@@ -2,13 +2,14 @@ from rest_framework.serializers import ModelSerializer
 from apps.ai_prompt_generations.models import AiPromptGeneration
 
 
-class aiPromptGenerationSerializer(ModelSerializer):
+class AiPromptGenerationSerializer(ModelSerializer):
 
     class Meta:
         model = AiPromptGeneration
         ## fields = "__all__"
         fields = [
             'id', 
+            'ai_prompt_category_id',
             'system_role',
             'system_message',
             'user_role',

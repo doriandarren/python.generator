@@ -113,7 +113,7 @@ class DevApiViewSet(ViewSet):
     @action(detail=False, methods=['get'], url_path='test')
     def invoke(self, request):
         try:
-
+            
             for payload in get_data_prompts():
 
                 # Buscar por system_message y user_message
@@ -126,6 +126,7 @@ class DevApiViewSet(ViewSet):
                     continue
 
                 ai_text_generation_prompt = self.service_prompt.set_ai_prompt_generation(
+                    1, # ai_prompt_category_id
                     payload.get("system_role", ""),
                     payload.get("system_message", ""),
                     payload.get("user_role", ""),

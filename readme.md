@@ -6,6 +6,7 @@
 python3 manage.py makemigrations                # Migraciones
 python3 manage.py migrate                       # Aplicar migraciones
 python3 manage.py seed_user                     # Crear superuser
+python3 manage.py seed_default                  # Crear Prompts
 python3 manage.py runserver                     # Ejecutar servidor
 ```
 
