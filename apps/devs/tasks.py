@@ -33,7 +33,7 @@ def start():
     
     try: 
         
-        prompt = service_prompt.findByIsProcessed()
+        prompt = service_prompt.findByIsTextProcessed()
         # prompts = service_prompt.list()
         # prompt = prompts[random.randint(0, len(prompts) - 1)]
         
@@ -72,7 +72,7 @@ def start2():
     
     try: 
         
-        prompt = service_prompt.findByIsProcessed()
+        prompt = service_prompt.findByIsImageProcessed()
         
         # prompts = service_prompt.list()
         # prompt = prompts[random.randint(0, len(prompts) - 1)]

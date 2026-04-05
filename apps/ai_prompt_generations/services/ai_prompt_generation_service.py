@@ -10,9 +10,13 @@ class AiPromptGenerationService:
         return AiPromptGeneration.objects.filter(id=id).first()
 
 
-    def findByIsProcessed(self):
+    def findByIsTextProcessed(self):
         return AiPromptGeneration.objects.filter(is_text_processed=False).first()
 
+
+    def findByIsImageProcessed(self):
+        return AiPromptGeneration.objects.filter(is_image_processed=False).first()
+    
 
     def store(self, model: AiPromptGeneration):
         model.save()

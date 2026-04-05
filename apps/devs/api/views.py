@@ -110,8 +110,8 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test_p')
-    def invoke_p(self, request):
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
         try:
 
             for payload in get_data_prompts():
