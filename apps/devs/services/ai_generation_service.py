@@ -187,8 +187,15 @@ class AIGenerationService:
 
 
     def get_comfyui_image_history(self, comfyui_prompt_id, image_generation):
-        try:
-            for _ in range(30):
+        try:            
+            
+            MessageChannel.send(
+                text=f"Buscando historial de imagen en ComfyUI: {comfyui_prompt_id}",
+                title="AIGenerationService",
+            )
+            
+            for _ in range(80):
+                
                 response_history = api_confyui.get(path=f"history/{comfyui_prompt_id}")
 
                 if not response_history:
@@ -218,6 +225,7 @@ class AIGenerationService:
                             filename = image.get("filename", "")
 
                             if filename:
+                                
                                 
                                 # Actualizar el registro de image_generation con la URL de la imagen
                                 self.service_image_generation.update(image_generation.id, {

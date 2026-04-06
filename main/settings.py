@@ -195,11 +195,11 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_BEAT_SCHEDULE = {
     "start-10-minutes": {
         "task": "apps.devs.tasks.start",
-        "schedule": crontab(minute="*/10"),
+        "schedule": crontab(minute="*/30"),
     },
     "start2-20-minutes": {
         "task": "apps.devs.tasks.start2",
-        "schedule": crontab(minute="*/20"),
+        "schedule": crontab(minute="*/5"),
     },
 }
 
@@ -215,3 +215,33 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 EMAIL_TIMEOUT = int(os.getenv("EMAIL_TIMEOUT", 30))
+
+
+## Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "ERROR",
+            "class": "core.logs.logging_handlers.DailyFileHandler",
+            "log_dir": os.path.join(BASE_DIR, "logs"),
+            "prefix": "django_log",
+            "formatter": "verbose",
+            "encoding": "utf-8",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    },
+}

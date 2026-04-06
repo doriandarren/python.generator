@@ -110,8 +110,8 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
+    @action(detail=False, methods=['get'], url_path='test__prompts')
+    def invoke__prompts(self, request):
         try:
             
             for payload in get_data_prompts():
@@ -153,8 +153,8 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test_cron')
-    def invoke_cronn(self, request):
+    @action(detail=False, methods=['get'], url_path='test____')
+    def invoke____(self, request):
         
         
         try:
@@ -165,22 +165,22 @@ class DevApiViewSet(ViewSet):
             
             
             # 1.- 
-            ai_text_generation = self.service_generation.get_comfyui_text(prompt)
+            # ai_text_generation = self.service_generation.get_comfyui_text(prompt)
             
             
             ## 2.-
-            # image_generation = self.service_generation.get_comfyui_image(prompt)
+            image_generation = self.service_generation.get_comfyui_image(prompt)
             
                    
             # # 3.-
             # ##comfyui_prompt_id = '69a2442e-fd71-44b2-a0c1-d8142d213eb1'
-            # comfyui_prompt_id = image_generation.comfyui_prompt_id
-            # filename = self.service_generation.get_comfyui_image_history(comfyui_prompt_id, image_generation)
+            comfyui_prompt_id = image_generation.comfyui_prompt_id
+            filename = self.service_generation.get_comfyui_image_history(comfyui_prompt_id, image_generation)
             
         
             
             # # 4.- 
-            # image_download = self.service_generation.get_comfyui_image_download(filename)
+            image_download = self.service_generation.get_comfyui_image_download(filename)
             
             
             MessageChannel.send(
@@ -192,13 +192,36 @@ class DevApiViewSet(ViewSet):
             response = {
                 ##"text_generation": aiTextGenerationSerializer(ai_text_generation).data,
                 "message": "OK",
-                "ai_text_generation_id": ai_text_generation.id,
-                # "image_generation_id": image_generation.id,
-                # "image_download": image_download
+                # "ai_text_generation_id": ai_text_generation.id,
+                "image_generation_id": image_generation.id,
+                "image_download": image_download
             }
             
             return Response(response, status=status.HTTP_200_OK)
         
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+            
+            
+            
+    @action(detail=False, methods=['get'], url_path='test')
+    def invoke(self, request):
+        
+        
+        x = 1 / 0
+        
+        
+        try:
+            
+            
+            
+            response = {
+                "message": "OK"
+            }
+            return Response(response, status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {"error": str(e)},
