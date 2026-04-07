@@ -26,6 +26,8 @@ from apps.ai_prompt_categories.api.router import router_ai_prompt_category
 from apps.ai_prompt_categories.api.router import router_ai_prompt_category
 from apps.ai_prompt_generations.api.router import router_ai_prompt_generation
 from apps.ai_prompt_categories.api.router import router_ai_prompt_category
+from django.conf import settings
+from django.conf.urls.static import static
 
 from apps.devs.api.router import router_dev
 
@@ -59,4 +61,7 @@ urlpatterns = [
     path('api/v1/', include(router_ai_prompt_category.urls)),
     # AiPromptGenerations,
     path('api/v1/', include(router_ai_prompt_generation.urls)),
-]
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

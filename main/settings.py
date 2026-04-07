@@ -154,9 +154,10 @@ APP_NAME = os.getenv("APP_NAME", "splytin")
 APP_ENV = os.getenv("APP_ENV", "local")
 MESSAGE_CHANNEL_URL = os.getenv("MESSAGE_CHANNEL_URL")
     
+# Media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
     
 
 # Default primary key field type
