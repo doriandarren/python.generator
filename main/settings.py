@@ -217,6 +217,7 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 EMAIL_TIMEOUT = int(os.getenv("EMAIL_TIMEOUT", 30))
 
 
+
 ## Logging
 LOGGING = {
     "version": 1,
@@ -230,7 +231,7 @@ LOGGING = {
     "handlers": {
         "file": {
             "level": "ERROR",
-            "class": "core.logs.logging_handlers.DailyFileHandler",
+            "class": "core.custom_logging.logging_handlers.DailyFileHandler",
             "log_dir": os.path.join(BASE_DIR, "logs"),
             "prefix": "django_log",
             "formatter": "verbose",
