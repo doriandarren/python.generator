@@ -25,19 +25,19 @@ python3 manage.py runserver                     # Ejecutar servidor
 - deactivate                                    # Desactivar
 
 ## Actualizar
-pip3 install --upgrade pip
+pip install --upgrade pip
 
 
 ## Instala los requerimientos:
-pip3 list
-pip3 freeze > requirements.txt                  # Crear archivo requerimientos
-pip3 install -r requirements.txt                # Instalar requerimientos
+pip list
+pip freeze > requirements.txt                  # Crear archivo requerimientos
+pip install -r requirements.txt                # Instalar requerimientos
 
 
 ## Instalar paquetes
-pip3 freeze                                     # Ver Paquetes instalados
-pip3 install requests                           # Conexion API
-pip3 install schedule                           # CronJobs
+pip freeze                                     # Ver Paquetes instalados
+pip install requests                           # Conexion API
+pip install schedule                           # CronJobs
 
 
 ## Si no funciona VSCode:
@@ -48,7 +48,7 @@ pip3 install schedule                           # CronJobs
 ## Django
 
 ```sh
-pip3 install django
+pip install django
 
 django-admin shell                                      # Shell de django
 
