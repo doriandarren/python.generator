@@ -3,8 +3,22 @@
 ## Script para iniciar el proyecto
 
 ```sh
+
+python3 -m venv .venv
+source .venv/bin/activate 
+pip install --upgrade pip
+pip install -r requirements.txt
+
+Crear raíz del proyecto: 
+- Archivo .env
+- Carpeta logs
+- Carpeta media
+
+
+python3 manage.py check                         # Comprobar dependencias
 python3 manage.py makemigrations                # Migraciones
 python3 manage.py migrate                       # Aplicar migraciones
+python3 manage.py collectstatic --noinput       # Recopilar archivos estáticos
 python3 manage.py seed_user                     # Crear superuser
 python3 manage.py seed_default                  # Crear Prompts
 python3 manage.py runserver                     # Ejecutar servidor
