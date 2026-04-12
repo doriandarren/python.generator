@@ -22,6 +22,7 @@ python3 manage.py collectstatic --noinput       # Recopilar archivos estáticos
 python3 manage.py seed_user                     # Crear superuser
 python3 manage.py seed_default                  # Crear Prompts
 python3 manage.py runserver                     # Ejecutar servidor
+python3 manage.py runserver 0.0.0.0:8000        # Ejecutar servidor
 ```
 
 ## Crear entorno virtual
