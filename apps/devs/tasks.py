@@ -37,6 +37,8 @@ def start():
         # prompts = service_prompt.list()
         # prompt = prompts[random.randint(0, len(prompts) - 1)]
         
+        if not prompt:
+            return
 
         ai_text_generation = service_generation.get_comfyui_text(prompt)
 
@@ -77,6 +79,8 @@ def start2():
         # prompts = service_prompt.list()
         # prompt = prompts[random.randint(0, len(prompts) - 1)]
 
+        if not prompt:
+            return
         
         ## 2.-
         image_generation = service_generation.get_comfyui_image(prompt)
