@@ -193,3 +193,53 @@ cat logs/celery_beat.log
 
 
 ```
+
+
+
+
+
+# En ubuntu desktop: Guniocorn
+
+```sh
+python -m pip install gunicorn                              ## Instalar
+gunicorn --bind 0.0.0.0:8000 passenger_wsgi:application     ## levantar el servidor
+
+
+## Reinicar para efectos de cambios
+Cuando cambies código:
+sudo systemctl restart python-generator
+sudo systemctl status python-generator
+
+```
+
+# En ubuntu desktop: Celery y django-celery-beat
+
+```sh
+
+sudo apt update
+sudo apt install redis-server
+
+
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+
+- sudo nano /etc/systemd/system/python-generator-celery.service              # Ver archivo Celery
+
+- sudo nano /etc/systemd/system/python-generator-celery-beat.service         # Ver archivo Celery Beat
+
+
+sudo systemctl daemon-reload
+
+sudo systemctl start python-generator-celery
+sudo systemctl start python-generator-celery-beat
+
+sudo systemctl enable python-generator-celery
+sudo systemctl enable python-generator-celery-beat
+
+
+sudo systemctl restart python-generator-celery
+sudo systemctl restart python-generator-celery-beat
+```
+
+
+
