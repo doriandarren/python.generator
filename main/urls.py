@@ -29,8 +29,6 @@ from apps.ai_prompt_categories.api.router import router_ai_prompt_category
 from django.conf import settings
 from django.conf.urls.static import static
 
-from apps.devs.api.router import router_dev
-
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -55,8 +53,8 @@ urlpatterns = [
     # Home
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     
-    # Dev
-    path('api/v1/', include(router_dev.urls)),
+    # Devs,
+    path('api/v1/', include('apps.devs.api.router')),
     # AiPromptCategories,
     path('api/v1/', include(router_ai_prompt_category.urls)),
     # AiPromptGenerations,

@@ -1,9 +1,11 @@
+{% load static %}
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bienvenida</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <title>Bienvenido</title>
 
     <!-- Tailwind CDN (rápido para dev) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +24,7 @@
         </div>
 
         <h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-          Bienvenida 👋
+          Bienvenido 👋
         </h1>
 
         <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-300">
@@ -82,8 +84,7 @@
         </div>
 
         <footer class="mt-10 text-sm text-slate-500">
-          <span class="font-mono">localhost:8000</span> · Tailwind CDN · Home
-          template
+          <span class="font-mono">localhost:8000</span> · Tailwind CDN · Home template
         </footer>
       </section>
     </main>

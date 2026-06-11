@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 from apps.devs.api.views import DevApiViewSet
 
@@ -7,11 +8,16 @@ from apps.devs.api.views import DevApiViewSet
 
 
 # example
-router_dev = DefaultRouter()
+# router_dev = DefaultRouter()
 
-# examples
-router_dev.register(
-    prefix='devs',
-    basename='devs',
-    viewset=DevApiViewSet
-)
+# # examples
+# router_dev.register(
+#     prefix='devs',
+#     basename='devs',
+#     viewset=DevApiViewSet
+# )
+
+
+urlpatterns = [
+    path("dev/test/", DevApiViewSet.as_view(), name="dev-test"),
+]

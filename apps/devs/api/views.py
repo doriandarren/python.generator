@@ -1,28 +1,23 @@
-import base64
 import time
 import random
-from urllib.parse import urlencode
 
-from django.http import HttpResponse
+from core.api.api_response import BaseAPIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
 from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
-
 from apps.devs.services.pdf_service import PdfService
 from apps.devs.services.mail_service import MailService
-from core.http.api_request import ApiRequest
 from core.messages.message_channel import MessageChannel
 
 
 
 
 
-class DevApiViewSet(ViewSet):
+class DevApiViewSet(BaseAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def __init__(self, **kwargs):
@@ -32,7 +27,7 @@ class DevApiViewSet(ViewSet):
         
 
 
-    @action(detail=False, methods=['get'], url_path='test_pdf')
+    ##@action(detail=False, methods=['get'], url_path='test_pdf')
     def invoke_pdf(self, request):
         """
             Generación de PDF de prueba.
@@ -80,7 +75,7 @@ class DevApiViewSet(ViewSet):
 
 
     
-    @action(detail=False, methods=['get'], url_path='test_email')
+    ##@action(detail=False, methods=['get'], url_path='test_email')
     def invoke_email(self, request):
         ''' Envio de correo de prueba.'''
         try:
@@ -110,7 +105,7 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test__prompts')
+    ##@action(detail=False, methods=['get'], url_path='test__prompts')
     def invoke__prompts(self, request):
         try:
             
@@ -153,7 +148,7 @@ class DevApiViewSet(ViewSet):
 
 
 
-    @action(detail=False, methods=['get'], url_path='test____')
+    ##@action(detail=False, methods=['get'], url_path='test____')
     def invoke____(self, request):
         
         
@@ -207,12 +202,10 @@ class DevApiViewSet(ViewSet):
             
             
             
-    @action(detail=False, methods=['get'], url_path='test')
+    ##@action(detail=False, methods=['get'], url_path='test')
     def invoke(self, request):
         
-        
-        x = 1 / 0
-        
+    
         
         try:
             

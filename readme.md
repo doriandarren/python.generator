@@ -4,6 +4,16 @@
 
 ```sh
 
+## Conda:
+conda create -n python_generator python=3.13
+conda activate python_generator
+conda deactivate
+conda env list
+python -m pip install -r requirements.txt
+conda env remove -n python_generator
+
+
+## Venv
 python3 -m venv .venv
 source .venv/bin/activate 
 pip install --upgrade pip
@@ -240,6 +250,3 @@ sudo systemctl enable python-generator-celery-beat
 sudo systemctl restart python-generator-celery
 sudo systemctl restart python-generator-celery-beat
 ```
-
-
-
