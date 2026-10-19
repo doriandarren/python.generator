@@ -4,7 +4,6 @@ import random
 from core.api.api_response import BaseAPIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.decorators import action
 from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
 from apps.ai_prompt_generations.services.ai_prompt_generation_service import AiPromptGenerationService
 from apps.devs.services.ai_generation_service import AIGenerationService
@@ -61,12 +60,12 @@ class DevSet(BaseAPIView):
                 "message": "PDF generado y guardado correctamente",
                 "file_path": file_path,
             }
-            return Response(response, status=status.HTTP_200_OK)
-        
+            return self.respond_with_data(message=response)
+                        
         except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            return self.respond_with_error(
+                message=str(e),
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
     
@@ -88,11 +87,12 @@ class DevSet(BaseAPIView):
             response = {
                 "message": "OK"
             }
-            return Response(response, status=status.HTTP_200_OK)
+            return self.respond_with_data(message=response)
+                        
         except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            return self.respond_with_error(
+                message=str(e),
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
     
 
@@ -126,13 +126,12 @@ class DevSet(BaseAPIView):
             response = {
                 "message": "OK"
             }
-            return Response({
-                'message': response,
-            }, status=status.HTTP_200_OK)
+            return self.respond_with_data(message=response)
+                        
         except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            return self.respond_with_error(
+                message=str(e),
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
 
@@ -179,12 +178,12 @@ class DevSet(BaseAPIView):
                 "image_download": image_download
             }
             
-            return Response(response, status=status.HTTP_200_OK)
-        
+            return self.respond_with_data(message=response)
+                        
         except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            return self.respond_with_error(
+                message=str(e),
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
       
 
