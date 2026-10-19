@@ -3,7 +3,6 @@ import random
 
 from core.api.api_response import BaseAPIView
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
 from apps.ai_prompt_generations.data.data_prompt import get_data_prompts
@@ -17,7 +16,7 @@ from core.messages.message_channel import MessageChannel
 
 
 
-class DevApiViewSet(BaseAPIView):
+class DevSet(BaseAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def __init__(self, **kwargs):
@@ -26,8 +25,6 @@ class DevApiViewSet(BaseAPIView):
         self.service_generation = AIGenerationService()
         
 
-
-    ##@action(detail=False, methods=['get'], url_path='test_pdf')
     def invoke_pdf(self, request):
         """
             Generación de PDF de prueba.
@@ -72,10 +69,7 @@ class DevApiViewSet(BaseAPIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-
-
     
-    ##@action(detail=False, methods=['get'], url_path='test_email')
     def invoke_email(self, request):
         ''' Envio de correo de prueba.'''
         try:
@@ -102,10 +96,6 @@ class DevApiViewSet(BaseAPIView):
             )
     
 
-
-
-
-    ##@action(detail=False, methods=['get'], url_path='test__prompts')
     def invoke__prompts(self, request):
         try:
             
@@ -146,9 +136,6 @@ class DevApiViewSet(BaseAPIView):
             )
 
 
-
-
-    ##@action(detail=False, methods=['get'], url_path='test____')
     def invoke____(self, request):
         
         
@@ -188,7 +175,7 @@ class DevApiViewSet(BaseAPIView):
                 ##"text_generation": aiTextGenerationSerializer(ai_text_generation).data,
                 "message": "OK",
                 # "ai_text_generation_id": ai_text_generation.id,
-                "image_generation_id": image_generation.id,
+                #"image_generation_id": image_generation.id,
                 "image_download": image_download
             }
             
@@ -199,24 +186,114 @@ class DevApiViewSet(BaseAPIView):
                 {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+      
+
+
+
+      
             
-            
-            
-    ##@action(detail=False, methods=['get'], url_path='test')
-    def invoke(self, request):
-        
+class DevApiViewSet(BaseAPIView):    
+    def get(self, request):
+        return self.invoke(request)   
     
+
+    def invoke(self, request):
+        """ Message Channel """
         
+        MessageChannel.send("hola mundo")
+        
+        return self.respond_with_data(
+            message="Send"
+        )
+        
+            
+    
+    
+    def invoke___(self, request):
+        """ EMAIL TEST 
+            Envio de correo de prueba
+        """
         try:
             
+            mail_service = MailService(
+                subject="Correo Prueba",
+                to_emails=["doriandarren1@gmail.com"],
+            )
             
+            mail_service.send_html_mail(
+                title="Correo de prueba",
+                body="Hola,\n\nEste es un correo de prueba.\n\nGracias por tu tiempo."
+            )
+            
+            return self.respond_with_data(
+                message="Correo enviado correctamente"
+            )
+            
+        except Exception as e:
+            return self.respond_with_error(
+                message=str(e),
+            )
+    
+    
+    def _______invoke(self, request):
+            """
+                Generación de PDF de prueba.
+            """
+            try:
+                
+                ## - Generar PDF y descargarlo
+                
+                # pdf_service = CreatePdfService()
+                # pdf_bytes = pdf_service.generate_pdf({
+                #     "title": "PDF de prueba",
+                #     "body": "Hola, este es un PDF generado desde Django con wkhtmltopdf.",
+                # })
+                # response = HttpResponse(pdf_bytes, content_type="application/pdf")
+                # response["Content-Disposition"] = 'attachment; filename="prueba.pdf"'
+                # return response
+            
+            
+                ## - Guardar PDF en carpeta uploads/pdfs
+                
+                pdf_service = PdfService(
+                    template_html="pdfs/test_pdf.html"
+                )
+    
+                file_path = pdf_service.save(
+                    filename="prueba.pdf",
+                    context={
+                        "title": "PDF guardado",
+                        "body": "Hola, este PDF se ha guardado en la carpeta uploads/pdfs.",
+                    }
+                )
+                
+                response = {
+                    "message": "PDF generado y guardado correctamente",
+                    "file_path": file_path,
+                }
+                return self.respond_with_data(message=response)
+            
+            except Exception as e:
+                return self.respond_with_error(
+                    message=str(e),
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+    
+        
+    
+    
+    
+    def ____invoke(self, request):
+        
+        try:
             
             response = {
                 "message": "OK"
             }
-            return Response(response, status=status.HTTP_200_OK)
+            return self.respond_with_data(message=response)
         except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            return self.respond_with_error(
+                message=str(e),
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+

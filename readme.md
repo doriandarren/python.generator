@@ -4,71 +4,51 @@
 
 ```sh
 
-## Conda:
-conda create -n python_generator python=3.13
-conda activate python_generator
-conda deactivate
-conda env list
-python -m pip install -r requirements.txt
-conda env remove -n python_generator
 
+## Script para ejecutar el proyecto
 
-## Venv
+```sh
+## Crear el entorno - Venv
 python3 -m venv .venv
 source .venv/bin/activate 
-pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 
-Crear raíz del proyecto: 
-- Archivo .env
+# Crear raíz del proyecto: 
+- Archivo .env -> chmod 600 /var/www/vhosts/app1.com/api.app1.com/.env
 - Carpeta logs
 - Carpeta media
 
 
-python3 manage.py check                         # Comprobar dependencias
-python3 manage.py makemigrations                # Migraciones
-python3 manage.py migrate                       # Aplicar migraciones
-python3 manage.py collectstatic --noinput       # Recopilar archivos estáticos
-python3 manage.py seed_user                     # Crear superuser
-python3 manage.py seed_default                  # Crear Prompts
-python3 manage.py runserver                     # Ejecutar servidor
-python3 manage.py runserver 0.0.0.0:8000        # Ejecutar servidor
+python manage.py check                         # Comprobar dependencias
+python manage.py makemigrations                # Migraciones
+python manage.py migrate                       # Aplicar migraciones
+python manage.py collectstatic --noinput       # Recopilar archivos estáticos
+python manage.py seed_user                     # Crear superuser
+python manage.py seed_default                  # Crear Prompts
+python manage.py runserver                     # Ejecutar servidor
+python manage.py runserver 0.0.0.0:8000        # Ejecutar servidor
 ```
 
-## Crear entorno virtual
+## Crear entorno virtual Venv
 
 ```sh
-## Entorno virtual MacOs
-- python3 -m venv .venv
-- source .venv/bin/activate                     # Activar entorno
-- deactive                                      # Desactivar entorno
-
-## Entorno virtual Windows
-- python3.exe -m venv venv                      # Windows
-- .\venv\bin\activate                           # Windows
-- python3.exe -m pip install --upgrade pip      # Windows
-- deactivate                                    # Desactivar
-
-## Actualizar
-pip install --upgrade pip
-
-
 ## Instala los requerimientos:
-pip list
-pip freeze > requirements.txt                  # Crear archivo requerimientos
-pip install -r requirements.txt                # Instalar requerimientos
+python -m pip freeze > requirements.txt          # Crear archivo requerimientos -> Respaldo / Export
+python -m pip install -r requirements.txt        # Instalar requerimientos Restore / Import
 
+## Si no se tiene el archivo: requirements.txt
+python -m pip install pipreqs                    # Install
+pipreqs . --force                                # Ejecutar
 
 ## Instalar paquetes
-pip freeze                                     # Ver Paquetes instalados
-pip install requests                           # Conexion API
-pip install schedule                           # CronJobs
-
+python -m pip freeze                            # Ver Paquetes instalados
 
 ## Si no funciona VSCode:
-( Cmd + Shift + P ) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
-
+(Cmd + Shift + P) -> luego "Python: Select Interpreter" elegir ".venv/bin/python"
 ```
+
+
 
 ## Django
 
@@ -82,20 +62,18 @@ django-admin startproject nombre_proyecto               # Crear PROJECT
 django-admin startproject nombre_proyecto .             # Crear PROJECT - No crea carpeta duplicada
 
 ## BY APP
-python3 manage.py startapp nombre_app                   # Crear app
-python3 manage.py startapp companies apps/companies
+python manage.py startapp nombre_app                   # Crear app
+python manage.py startapp companies apps/companies
 
 python manage.py migrate
 
 
 ## Crear el superuser
-python3 manage.py seed_user                             # Seeder
-python3 manage.py createsuperuser                       # Consola Crear superuser
+python manage.py seed_user                             # Seeder
+python manage.py createsuperuser                       # Consola Crear superuser
 
-
-
-python3 manage.py runserver                             # Levantar el servidor
-python3 manage.py runserver 8001
+python manage.py runserver                             # Levantar el servidor
+python manage.py runserver 8001
 
 ```
 

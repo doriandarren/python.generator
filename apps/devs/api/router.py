@@ -19,5 +19,5 @@ from apps.devs.api.views import DevApiViewSet
 
 
 urlpatterns = [
-    path("dev/test/", DevApiViewSet.as_view(), name="dev-test"),
+    path("devs/test/", DevApiViewSet.as_view(), name="dev-test"),
 ]

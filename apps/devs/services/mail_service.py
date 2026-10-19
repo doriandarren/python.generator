@@ -19,11 +19,10 @@ class MailService:
 
         msg = EmailMultiAlternatives(
             subject=self.subject,
-            body="",
+            body=body,
             from_email=self.from_email,
             to=self.to_emails,
         )
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
-
-        return True
+        return msg.send()
+    
