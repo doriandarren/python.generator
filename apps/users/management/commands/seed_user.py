@@ -1,15 +1,28 @@
-from django.core.management.base import BaseCommand
+import os
+from dotenv import load_dotenv
+from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth import get_user_model
+
+load_dotenv()
 
 
 class Command(BaseCommand):
     help = "Crea o actualiza usuarios por defecto"
 
     def handle(self, *args, **kwargs):
+        
+        
+        password = os.getenv("SEED_USER_PASSWORD")
+
+        if not password:
+            raise CommandError(
+                "La variable SEED_USER_PASSWORD no está configurada."
+            )
+        
         self.create_user(
             username="admin",
             email="admin@splytin.com",
-            password="Tailandia2026",
+            password=password,
             is_staff=True,
             is_superuser=True,
         )
@@ -17,7 +30,7 @@ class Command(BaseCommand):
         self.create_user(
             username="manager",
             email="manager@splytin.com",
-            password="Tailandia2026",
+            password=password,
             is_staff=True,
             is_superuser=False,
         )
@@ -25,10 +38,13 @@ class Command(BaseCommand):
         self.create_user(
             username="user",
             email="user@splytin.com",
-            password="Tailandia2026",
+            password=password,
             is_staff=True,
             is_superuser=False,
         )
+        
+        
+    
 
     def create_user(self, username, email, password, is_staff=False, is_superuser=False):
         User = get_user_model()
