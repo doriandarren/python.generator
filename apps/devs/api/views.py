@@ -1,6 +1,8 @@
 import time
 import random
 
+from apps.ai_prompt_categories.api.serializers import AiPromptCategorySerializer
+from apps.ai_prompt_categories.services.ai_prompt_category_service import AiPromptCategoryService
 from core.api.api_response import BaseAPIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -191,12 +193,39 @@ class DevSet(BaseAPIView):
 
       
             
-class DevApiViewSet(BaseAPIView):    
+class DevApiViewSet(BaseAPIView):  
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # self.service_prompt = AiPromptGenerationService()
+        # self.service_generation = AIGenerationService()
+        self.service_categories = AiPromptCategoryService()
+        
+        
+      
     def get(self, request):
         return self.invoke(request)   
     
-
+    
     def invoke(self, request):
+        
+        ## List 
+        # categories = self.service_categories.list()
+        # serializer = AiPromptCategorySerializer(categories, many=True)
+        
+        ## Show
+        category = self.service_categories.show(1)
+        serializer = AiPromptCategorySerializer(category)
+        
+        
+    
+        return self.respond_with_data(message="Ok", data=serializer.data)
+        
+    
+    
+    
+
+    def invoke_____(self, request):
         """ Message Channel """
         
         MessageChannel.send("hola mundo")

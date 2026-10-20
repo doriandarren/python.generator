@@ -7,7 +7,12 @@ class AiPromptCategoryService:
 
 
     def show(self, id):
-        return AiPromptCategory.objects.filter(id=id).first()
+        return (
+            AiPromptCategory.objects
+            .prefetch_related("ai_prompt_generations")
+            .filter(id=id)
+            .first()
+        )
 
 
     def store(self, model: AiPromptCategory):

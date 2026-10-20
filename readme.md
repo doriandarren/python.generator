@@ -81,10 +81,10 @@ python manage.py runserver 8001
 ## Commands
 
 ```sh
-python3 manage.py seed_user                     # Crear superuser
+python manage.py seed_user                     # Crear superuser
 
-python3 manage.py clear_migrations --dry-run     # Muestra las migraciones
-python3 manage.py clear_migrations               # Elimina las migraciones
+python manage.py clear_migrations --dry-run     # Muestra las migraciones
+python manage.py clear_migrations               # Elimina las migraciones
 
 ```
 

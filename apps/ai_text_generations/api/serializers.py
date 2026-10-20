@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer
 from apps.ai_text_generations.models import AiTextGeneration
 
 
-class aiTextGenerationSerializer(ModelSerializer):
+class AiTextGenerationSerializer(ModelSerializer):
 
     class Meta:
         model = AiTextGeneration

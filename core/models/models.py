@@ -2,37 +2,38 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-# Para usar en los Objeto:
-# objects → solo devuelve registros no eliminados
-# all_objects → devuelve todos, incluidos los soft deleted
-# delete() → hace soft delete automáticamente
-# hard_delete() → borra físicamente de la base de datos
-# restore() → recupera un registro borrado lógicamente
-# is_deleted → te dice si está eliminado
-#
-# Ejemplos de Usos:
-# example = Example.objects.get(id=1)
-# example.delete()                                        # Esto no lo elimina físicamente, solo pone deleted_at
-# example.restore()                                       # Restaurar
-# example.hard_delete()                                   # Eliminar fisicamente
-#
-# Consultas
-# Example.objects.all()                                   # Solo activos
-# Example.all_objects.all()                               # Todos
-# Example.all_objects.filter(deleted_at__isnull=False)    # Solo eliminados
+
+# QuerySet personalizado para controlar eliminaciones masivas
+class SoftDeleteQuerySet(models.QuerySet):
+
+    def delete(self):
+        # Eliminación lógica de múltiples registros
+        return self.update(
+            deleted_at=timezone.now(),
+            updated_at=timezone.now()
+        )
+
+    def hard_delete(self):
+        # Eliminación física de múltiples registros
+        return super().delete()
 
 
-class ActiveManager(models.Manager):
+# Manager: solo registros activos
+class ActiveManager(models.Manager.from_queryset(SoftDeleteQuerySet)):
+
     def get_queryset(self):
-        return super().get_queryset().filter(deleted_at__isnull=True)
+        return super().get_queryset().filter(
+            deleted_at__isnull=True
+        )
 
 
-class AllObjectsManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset()
+# Manager: todos los registros, incluidos los eliminados
+class AllObjectsManager(models.Manager.from_queryset(SoftDeleteQuerySet)):
+    pass
 
 
 class BaseModel(models.Model):
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -67,19 +68,29 @@ class BaseModel(models.Model):
 
     def soft_delete(self, user=None):
         self.deleted_at = timezone.now()
+
         if user:
             self.updated_by = user
-        self.save(update_fields=["deleted_at", "updated_by", "updated_at"])
+
+        self.save(update_fields=[
+            "deleted_at", "updated_by", "updated_at"
+        ])
 
     def restore(self, user=None):
         self.deleted_at = None
+
         if user:
             self.updated_by = user
-        self.save(update_fields=["deleted_at", "updated_by", "updated_at"])
+
+        self.save(update_fields=[
+            "deleted_at", "updated_by", "updated_at"
+        ])
 
     def delete(self, using=None, keep_parents=False):
-        self.deleted_at = timezone.now()
-        self.save(update_fields=["deleted_at", "updated_at"])
+        self.soft_delete()
 
     def hard_delete(self, using=None, keep_parents=False):
-        super().delete(using=using, keep_parents=keep_parents)
+        return super().delete(
+            using=using,
+            keep_parents=keep_parents
+        )

@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer
 from apps.ai_image_generations.models import AiImageGeneration
 
 
-class aiImageGenerationSerializer(ModelSerializer):
+class AiImageGenerationSerializer(ModelSerializer):
 
     class Meta:
         model = AiImageGeneration
